@@ -7,10 +7,12 @@ import argparse
 from mips.Utils import *
 from mips.GlobalConfig import GlobalConfig, printQuietless, printVerbose
 from mips.FileSplitFormat import FileSplitFormat, FileSectionType
+from mips.MipsSection import Section
 from mips.MipsText import Text
 from mips.MipsData import Data
 from mips.MipsRodata import Rodata
 from mips.MipsBss import Bss
+from mips.MipsFunction import Function
 from mips.MipsContext import Context
 
 
@@ -169,6 +171,107 @@ def writeSection(x):
 
     return path
 
+def writeSplitedFunction(path: str, func: Function, rodataFileList: List[Tuple[str, Rodata]], context: Context):
+    os.makedirs(path, exist_ok=True)
+    with open(os.path.join(path, func.name) + ".s", "w") as f:
+        rodata_stuff = []
+        rodataLen = 0
+        firstRodata = None
+        for _, rodata in rodataFileList:
+            if len(rodata_stuff) > 0:
+                # We already have the rodata for this function. Stop searching
+                break
+
+            # Skip the file if there's nothing in this file refenced by the current function
+            intersection = func.referencedVRams & rodata.symbolsVRams
+            if len(intersection) == 0:
+                continue
+
+            sortedSymbolVRams = sorted(rodata.symbolsVRams)
+
+            for vram in sorted(intersection):
+                nextVramIndex = sortedSymbolVRams.index(vram) + 1
+                nextVram = float("inf") if nextVramIndex >= len(sortedSymbolVRams) else sortedSymbolVRams[nextVramIndex]
+
+                rodataSymbol = context.getGenericSymbol(vram, False)
+                assert rodataSymbol is not None
+                # We only care for rodata that's used once
+                if rodataSymbol.referenceCounter != 1:
+                    break
+
+                j = 0
+                while j < len(rodata.words):
+                    rodataVram = rodata.getVramOffset(j*4)
+                    if rodataVram < vram:
+                        j += 1
+                        continue
+                    if rodataVram >= nextVram:
+                        break
+
+                    if firstRodata is None:
+                        firstRodata = rodata.vRamStart
+
+                    nthRodata, skip = rodata.getNthWord(j)
+                    rodata_stuff.append(nthRodata)
+                    rodata_stuff.append("\n")
+                    j += skip
+                    j += 1
+                    rodataLen += 1
+
+                rodata_stuff.append("\n")
+
+        if len(rodata_stuff) > 0:
+            # Write the rodata
+            f.write(".late_rodata\n")
+            if rodataLen / len(func.instructions) > 1/3:
+                align = 4
+                if firstRodata is not None:
+                    if firstRodata % 8 == 0:
+                        align = 8
+                f.write(f".late_rodata_alignment {align}\n")
+            for x in rodata_stuff:
+                f.write(x)
+
+            f.write("\n.text\n")
+
+        # Write the function
+        f.write(func.disassemble())
+
+def writeOtherRodata(path: str, rodataFileList: List[Tuple[str, Rodata]], context: Context):
+    for _, rodata in rodataFileList:
+        rodataPath = os.path.join(path, rodata.filename)
+        os.makedirs(rodataPath, exist_ok=True)
+        sortedSymbolVRams = sorted(rodata.symbolsVRams)
+
+        for vram in sortedSymbolVRams:
+            nextVramIndex = sortedSymbolVRams.index(vram) + 1
+            nextVram = float("inf") if nextVramIndex >= len(sortedSymbolVRams) else sortedSymbolVRams[nextVramIndex]
+
+            rodataSymbol = context.getGenericSymbol(vram, False)
+            assert rodataSymbol is not None
+            if rodataSymbol.referenceCounter == 1:
+                continue
+
+            rodataSymbolPath = os.path.join(rodataPath, rodataSymbol.name) + ".s"
+            # print(rodataSymbolPath, rodataSymbol.referenceCounter)
+
+            with open(rodataSymbolPath, "w") as f:
+                f.write(".rdata\n")
+                j = 0
+                while j < len(rodata.words):
+                    rodataVram = rodata.getVramOffset(j*4)
+                    if rodataVram < vram:
+                        j += 1
+                        continue
+                    if rodataVram >= nextVram:
+                        break
+
+                    nthRodata, skip = rodata.getNthWord(j)
+                    f.write(nthRodata)
+                    f.write("\n")
+                    j += skip
+                    j += 1
+
 
 def disassemblerMain():
     description = "General purpose N64-mips disassembler"
@@ -182,6 +285,8 @@ def disassemblerMain():
     parser.add_argument("--start", help="", default="0")
     parser.add_argument("--end", help="",  default="0xFFFFFF")
     parser.add_argument("--vram", help="Set the VRAM address", default="-1")
+
+    parser.add_argument("--split-functions", help="Enables the function and rodata splitter. Expects a path to place the splited functions", metavar="PATH")
 
     parser.add_argument("--save-context", help="Saves the context to a file. The provided filename will be suffixed with the corresponding version.", metavar="FILENAME")
 
@@ -248,12 +353,17 @@ def disassemblerMain():
     array_of_bytes = readFileAsBytearray(args.binary)
     input_name = os.path.splitext(os.path.split(args.binary)[1])[0]
 
-    processedFiles = []
+    processedFiles = {
+        FileSectionType.Text: [],
+        FileSectionType.Data: [],
+        FileSectionType.Rodata: [],
+        FileSectionType.Bss: [],
+    }
     lenLastLine = 80
 
     if args.file_splits is None:
         f =  simpleDisasmFile(array_of_bytes, args.output, int(args.start, 16), int(args.end, 16), int(args.vram, 16), context, False, GlobalConfig.DISASSEMBLE_RSP, newStuffSuffix)
-        processedFiles.append((args.output, f))
+        processedFiles[FileSectionType.Text].append((args.output, f))
     else:
         splits = FileSplitFormat(args.file_splits)
 
@@ -291,7 +401,7 @@ def disassemblerMain():
                 exit(1)
             printVerbose(f"Reading '{fileName}'")
             f = modeCallback(array_of_bytes, f"{outputPath}/{fileName}", offset, nextOffset, vram, context, isHandwritten, isRsp, newStuffSuffix)
-            processedFiles.append((f"{outputPath}/{fileName}", f))
+            processedFiles[section].append((f"{outputPath}/{fileName}", f))
 
             printQuietless(lenLastLine*" " + "\r", end="")
             progressStr = f" Analyzing: {i/splitsCount:%}. File: {fileName}\r"
@@ -304,27 +414,41 @@ def disassemblerMain():
     processedFilesCount = len(processedFiles)
     if args.nuke_pointers:
         printVerbose("Nuking pointers...")
-        for i, (path, f) in enumerate(processedFiles):
-            printVerbose(f"Nuking pointers of {path}")
+        i = 0
+        for section, filesInSection in processedFiles.items():
+            for path, f in filesInSection:
+                printVerbose(f"Nuking pointers of {path}")
+                printQuietless(lenLastLine*" " + "\r", end="")
+                progressStr = f" Nuking pointers: {i/processedFilesCount:%}. File: {path}\r"
+                lenLastLine = max(len(progressStr), lenLastLine)
+                printQuietless(progressStr, end="")
+
+                f.removePointers()
+                i += 1
+
+    printVerbose("Writing files...")
+    i = 0
+    for section, filesInSection in processedFiles.items():
+        for path, f in filesInSection:
+            printVerbose(f"Writing {path}")
             printQuietless(lenLastLine*" " + "\r", end="")
-            progressStr = f" Nuking pointers: {i/processedFilesCount:%}. File: {path}\r"
+            progressStr = f" Writing: {i/processedFilesCount:%}. File: {path}\r"
             lenLastLine = max(len(progressStr), lenLastLine)
             printQuietless(progressStr, end="")
 
-            f.removePointers()
+            if path == "-":
+                printQuietless()
 
-    printVerbose("Writing files...")
-    for i, (path, f) in enumerate(processedFiles):
-        printVerbose(f"Writing {path}")
-        printQuietless(lenLastLine*" " + "\r", end="")
-        progressStr = f" Writing: {i/processedFilesCount:%}. File: {path}\r"
-        lenLastLine = max(len(progressStr), lenLastLine)
-        printQuietless(progressStr, end="")
+            writeSection((path, f))
+            i += 1
 
-        if path == "-":
-            printQuietless()
-
-        writeSection((path, f))
+    printVerbose("Spliting functions")
+    if args.split_functions is not None:
+        for path, f in processedFiles[FileSectionType.Text]:
+            file: Text = f
+            for func in file.functions:
+                writeSplitedFunction(os.path.join(args.split_functions, file.filename), func, processedFiles[FileSectionType.Rodata], context)
+        writeOtherRodata(args.split_functions, processedFiles[FileSectionType.Rodata], context)
 
     if args.save_context is not None:
         head, tail = os.path.split(args.save_context)

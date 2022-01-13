@@ -38,7 +38,7 @@ class Rodata(Section):
 
                 if partOfJumpTable:
                     if w not in self.context.jumpTablesLabels:
-                        self.context.jumpTablesLabels[w] = f"L{toHex(w, 8)[2:]}"
+                        self.context.addJumpTableLabel(w, f"L{w:08X}")
                 elif currentVram in self.context.newPointersInData:
                     if self.context.getAnySymbol(currentVram) is None:
                         contextSym = ContextSymbol(currentVram, "D_" + toHex(currentVram, 8)[2:])
@@ -104,10 +104,12 @@ class Rodata(Section):
             if auxLabel is None:
                 auxLabel = self.context.getGenericSymbol(currentVram, tryPlusOffset=False)
             if auxLabel is not None:
-                label = "\nglabel " + auxLabel + "\n"
+                label = "\nglabel " + auxLabel.name + "\n"
 
             contextVar = self.context.getSymbol(currentVram, True, False)
             if contextVar is not None:
+                # Uncomment this line to force unknown rodata to be extracted as strings
+                # isAsciz = True
                 type = contextVar.type
                 if type in ("f32", "Vec3f"):
                     # Filter out NaN and infinity
@@ -134,6 +136,8 @@ class Rodata(Section):
             value = qwordToDouble((w << 32) | otherHalf)
             rodataHex += toHex(otherHalf, 8)[2:]
             skip = 1
+        elif w in self.context.jumpTablesLabels:
+            value = self.context.jumpTablesLabels[w].name
         elif isAsciz:
             try:
                 decodedValue, rawStringSize = decodeString(self.bytes, 4*i)
@@ -142,12 +146,10 @@ class Rodata(Section):
                 value += "\n" + (24 * " ") + ".balign 4"
                 rodataHex = ""
                 skip = rawStringSize // 4
-            except UnicodeDecodeError:
+            except (UnicodeDecodeError, RuntimeError):
                 # Not a string
                 isAsciz = False
                 pass
-        elif w in self.context.jumpTablesLabels:
-            value = self.context.jumpTablesLabels[w]
 
         comment = ""
         if GlobalConfig.ASM_COMMENT:
