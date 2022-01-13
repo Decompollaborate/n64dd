@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:Decompollaborate/py-mips-disasm.git
+	branch = master
+	commit = a7afddd8623ed34c0f87e22689952b5c498dcc6a
+	parent = fee6aa811be044f55127c8409af29f0c03ee789e
+	method = merge
+	cmdver = 0.4.3
