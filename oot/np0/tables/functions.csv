@@ -1,0 +1,3 @@
+80000F30,DmaMgr_SendRequest1
+80002FF0,bzero
+801C5F64,n64dd_SetDiskVersion

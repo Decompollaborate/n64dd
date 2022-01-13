@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import argparse
 
-from tools.py_mips_disasm.mips.Utils import *
+from py_mips_disasm.mips.Utils import *
 
 from mips.MipsSplitEntry import readSplitsFromCsv
 
@@ -81,7 +81,9 @@ def split_fileSplits(game: str, seg: str):
 
     for version, sectionedDict in tablePerVersion.items():
         isFirst = True
-        with open(os.path.join(game, version, "tables", f"files_{seg}.csv"), "w") as f:
+        dstFolder = os.path.join(game, version, "tables")
+        os.makedirs(dstFolder, exist_ok=True)
+        with open(os.path.join(dstFolder, f"files_{seg}.csv"), "w") as f:
             for section, data in sectionedDict.items():
                 if isFirst:
                     isFirst = False
@@ -115,7 +117,9 @@ def split_functions(game: str):
             tablePerVersion[version].append(f"{vram},{funcName}\n")
 
     for version, lines in tablePerVersion.items():
-        with open(os.path.join(game, version, "tables", "functions.csv"), "w") as f:
+        dstFolder = os.path.join(game, version, "tables")
+        os.makedirs(dstFolder, exist_ok=True)
+        with open(os.path.join(dstFolder, "functions.csv"), "w") as f:
             f.writelines(lines)
 
 
@@ -143,7 +147,9 @@ def split_variables(game: str):
             tablePerVersion[version].append(f"{vram},{varName},{type},0x{size}\n")
 
     for version, lines in tablePerVersion.items():
-        with open(os.path.join(game, version, "tables", "variables.csv"), "w") as f:
+        dstFolder = os.path.join(game, version, "tables")
+        os.makedirs(dstFolder, exist_ok=True)
+        with open(os.path.join(dstFolder, "variables.csv"), "w") as f:
             f.writelines(lines)
 
 

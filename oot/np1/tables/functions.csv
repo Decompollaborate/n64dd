@@ -1,0 +1,5 @@
+80000F30,DmaMgr_SendRequest1
+80002FF0,bzero
+801C5FA4,n64dd_SetDiskVersion
+800052E0,__osDisableInt
+80005350,__osRestoreInt

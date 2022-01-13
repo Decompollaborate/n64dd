@@ -58,9 +58,9 @@ splitcsvs: $(CSV_FILES)
 
 #### Various Recipes ####
 $(BASE_DIR)/tables/%.csv: $(GAME)/tables/%.csv
-	./csvSplit.py $(GAME) $<
+	./tools/csvSplit.py $(GAME) $<
 $(BASE_DIR)/tables/files_%.csv: $(GAME)/tables/%.*.csv
-	./csvSplit.py $(GAME) $<
+	./tools/csvSplit.py $(GAME) $<
 
 
 
