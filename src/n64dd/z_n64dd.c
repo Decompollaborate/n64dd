@@ -18,8 +18,7 @@
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C6FD8.s")
 
-// asm processor complains
-//#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C7018.s")
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C7018.s")
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C7064.s")
 
