@@ -82,6 +82,6 @@ s32 osEPiWriteIo(OSPiHandle* pihandle, u32 devAddr, u32 data);
 void osStartThread(OSThread* arg0);
 void __osSetHWIntrRoutine(s32 idx, OSMesgQueue* queue, OSMesg msg);
 
-OSPiHandle* osDriveRomInit(void)
+OSPiHandle* osDriveRomInit(void);
 
 #endif
