@@ -142,13 +142,13 @@ def readFilelists():
     FILE_NAMES["OOT"]["GATEWAY"] = FILE_NAMES["OOT"]["IQS"]
 
     # MM
-    FILE_NAMES["MM"]["NJ0"] = readFile("mm/filelists/filelist_mm_jp_1.0.txt")
-    FILE_NAMES["MM"]["NEK"] = readFile("mm/filelists/filelist_mm_usa_demo.txt")
-    FILE_NAMES["MM"]["NE0"] = readFile("mm/filelists/filelist_mm_usa.txt")
-    FILE_NAMES["MM"]["NPD"] = readFile("mm/filelists/filelist_mm_pal_dbg.txt")
-    FILE_NAMES["MM"]["CE0"] = readFile("mm/filelists/filelist_mm_usa_gc.txt")
-    FILE_NAMES["MM"]["CP0"] = readFile("mm/filelists/filelist_mm_pal_gc.txt")
-    FILE_NAMES["MM"]["CJ0"] = readFile("mm/filelists/filelist_mm_jp_gc.txt")
+    # FILE_NAMES["MM"]["NJ0"] = readFile("mm/filelists/filelist_mm_jp_1.0.txt")
+    # FILE_NAMES["MM"]["NEK"] = readFile("mm/filelists/filelist_mm_usa_demo.txt")
+    # FILE_NAMES["MM"]["NE0"] = readFile("mm/filelists/filelist_mm_usa.txt")
+    # FILE_NAMES["MM"]["NPD"] = readFile("mm/filelists/filelist_mm_pal_dbg.txt")
+    # FILE_NAMES["MM"]["CE0"] = readFile("mm/filelists/filelist_mm_usa_gc.txt")
+    # FILE_NAMES["MM"]["CP0"] = readFile("mm/filelists/filelist_mm_pal_gc.txt")
+    # FILE_NAMES["MM"]["CJ0"] = readFile("mm/filelists/filelist_mm_jp_gc.txt")
 
     FILE_NAMES["MM"]["NJ1"]  = FILE_NAMES["MM"]["NJ0"]
     FILE_NAMES["MM"]["NP0"] = FILE_NAMES["MM"]["NPD"]

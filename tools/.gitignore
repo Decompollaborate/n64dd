@@ -1,0 +1,10 @@
+# Output files
+*.exe
+elf2rom
+makeromfs
+mkdmadata
+mkldscript
+vtxdis
+yaz0
+
+graphovl/
