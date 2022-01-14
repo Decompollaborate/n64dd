@@ -31,11 +31,8 @@
 extern s32 (*D_801D2E54)(s32);
 
 s32 func_801C8F1C(UNK_TYPE arg0) {
-    s32 (*temp_v0)(s32);
-
-    temp_v0 = D_801D2E54;
-    if (temp_v0 != 0) {
-        return temp_v0(arg0);
+    if (D_801D2E54 != 0) {
+        return D_801D2E54(arg0);
     }
     return 1;
 }

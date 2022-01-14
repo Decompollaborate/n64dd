@@ -27,12 +27,12 @@ typedef enum {
 // void osSyncPrintfThreadContext(OSThread* t);
 // void osSyncPrintfStackTrace(OSThread* t, u32 flags);
 void StackCheck_Init(StackEntry* entry, void* stackTop, void* stackBottom, u32 initValue, s32 minSpace, const char* name);
-// void Sleep_Cycles(OSTime time);
-// void Sleep_Nsec(u32 nsec);
+void Sleep_Cycles(OSTime time);
+void Sleep_Nsec(u32 nsec);
 void Sleep_Usec(u32 usec);
-// void Sleep_Msec(u32 ms);
-// void Sleep_Sec(u32 sec);
-// void __osPiCreateAccessQueue(void);
+void Sleep_Msec(u32 ms);
+void Sleep_Sec(u32 sec);
+void __osPiCreateAccessQueue(void);
 void __osPiGetAccess(void);
 void __osPiRelAccess(void);
 s32 osSendMesg(OSMesgQueue* mq, OSMesg msg, s32 flags);
@@ -80,7 +80,6 @@ void __osRestoreInt(OSIntMask im);
 s32 osEPiReadIo(OSPiHandle* pihandle, u32 devAddr, u32* data);
 s32 osEPiWriteIo(OSPiHandle* pihandle, u32 devAddr, u32 data);
 void osStartThread(OSThread* arg0);
-void __osSetHWIntrRoutine(s32 idx, OSMesgQueue* queue, OSMesg msg);
 
 OSPiHandle* osDriveRomInit(void);
 

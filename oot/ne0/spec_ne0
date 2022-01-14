@@ -173,7 +173,7 @@ beginseg
     compress
     address 0x801C6E80
 
-    include "oot/ne0/build/src/n64dd/z_n64dd.o"
+    include "oot/ne0/build/src/n64dd_O2_g3/z_n64dd.o"
     pad_text
     include "oot/ne0/build/src/n64dd/n64dd_801C8000.o"
     include "oot/ne0/build/src/n64dd_O2_g3/n64dd_801C8940.o"
