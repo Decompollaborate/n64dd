@@ -218,7 +218,10 @@ beginseg
     include "oot/ne0/build/asm/text/n64dd/n64dd_801CE2A0.text.o"
     include "oot/ne0/build/asm/text/n64dd/n64dd_801CE340.text.o"
     include "oot/ne0/build/asm/text/n64dd/n64dd_801CE590.text.o"
-    include "oot/ne0/build/asm/text/n64dd/n64dd_801CE630.text.o"
+
+//    include "oot/ne0/build/asm/text/n64dd/n64dd_801CE630.text.o"
+    include "oot/ne0/build/src/n64dd/n64dd_801CE630.o"
+
     include "oot/ne0/build/asm/text/n64dd/n64dd_801CE680.text.o"
     include "oot/ne0/build/asm/text/n64dd/n64dd_801CE7E0.text.o"
     include "oot/ne0/build/asm/text/n64dd/n64dd_801CE900.text.o"
@@ -248,7 +251,8 @@ beginseg
     include "oot/ne0/build/asm/text/n64dd/n64dd_801CE340.text.o"
 
     include "oot/ne0/build/src/n64dd/n64dd_801CE590.o"
-    include "oot/ne0/build/src/n64dd/n64dd_801CE630.o"
+*/
+/*
     include "oot/ne0/build/src/n64dd/n64dd_801CE680.o"
     include "oot/ne0/build/src/n64dd/n64dd_801CE7E0.o"
     include "oot/ne0/build/src/n64dd/n64dd_801CE900.o"
