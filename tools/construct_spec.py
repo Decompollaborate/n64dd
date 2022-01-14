@@ -12,7 +12,7 @@ def fprintf(file, *args, **kwargs):
     printf(*args, file=file, **kwargs)
 
 
-def constructSpec(dmadataFile, outFile):
+def constructSpec(dmadataFile, version, outFile):
     with open(dmadataFile, "r") as f:
         dmadata = list(csv.reader(f))
         # dmaTable = []
@@ -35,7 +35,7 @@ def constructSpec(dmadataFile, outFile):
                 print("    romalign 0x1000", file=outFile)
 
 
-            print("    include \"build/baserom/" + entry[0] + ".o\"", file=outFile )
+            print(f"    include \"oot/{version}/build/baserom/" + entry[0] + ".o\"", file=outFile )
             print("endseg", file=outFile)
             print("", file=outFile)
             i += 1
@@ -45,14 +45,15 @@ def main():
 
     parser = argparse.ArgumentParser(description=description, formatter_class=argparse.RawTextHelpFormatter)
     parser.add_argument("dmadataFile", help="dmadata file to read")
+    parser.add_argument("version", help="Version.")
     parser.add_argument("--outFile", help="File to write to", default=sys.stdout)
     args = parser.parse_args()
 
     if args.outFile != sys.stdout:
         with open(args.outFile, "w") as f:
-            constructSpec(args.dmadataFile, f)
+            constructSpec(args.dmadataFile, args.version, f)
     else:
-        constructSpec(args.dmadataFile, args.outFile)
+        constructSpec(args.dmadataFile, args.version, args.outFile)
 
 
 if __name__ == "__main__":

@@ -207,7 +207,7 @@ def ExtractFunc(i):
     if versionName == "":
         print(f"Skipping {i} because it doesn't have a name.")
         return
-    filename = os.path.join(Basedir, Edition, "baserom", versionName)
+    filename = os.path.join(Basedir, Edition, "baserom", versionName) + ".bin"
     entryOffset = FILE_TABLE_OFFSET[Game][Version] + 16 * i
 
     virtStart = read_uint32_be(entryOffset + 0)
