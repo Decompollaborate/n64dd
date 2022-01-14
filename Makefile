@@ -105,13 +105,9 @@ setup:
 	./extract_baserom.py $(GAME) $(VERSION)
 
 ## Assembly generation
-disasm: $(DISASM_TARGETS)
-	@echo "Disassembly done!"
-
-
-
-disasm: splitcsvs
+disasm: splitcsvs $(DISASM_TARGETS)
 	./tools/automators/gen_undefined_syms.py --version $(VERSION) > $(BASE_DIR)/undefined_syms_$(VERSION).txt
+	@echo "Disassembly done!"
 
 splitcsvs: $(CSV_FILES)
 
