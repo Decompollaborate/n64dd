@@ -8,6 +8,8 @@ from py_mips_disasm.mips.Utils import *
 
 from mips.MipsSplitEntry import readSplitsFromCsv
 
+VERSIONS_WHITE_LIST = {"ner", "ne0", "ne1", "np0", "ne2", "np1"}
+
 def split_fileSplits(game: str, seg: str):
     sections = ["text", "data", "rodata", "bss"]
 
@@ -80,6 +82,8 @@ def split_fileSplits(game: str, seg: str):
                 del sectionedDict[currentSection][-1]
 
     for version, sectionedDict in tablePerVersion.items():
+        if version not in VERSIONS_WHITE_LIST:
+            continue
         isFirst = True
         dstFolder = os.path.join(game, version, "tables")
         os.makedirs(dstFolder, exist_ok=True)
@@ -117,6 +121,8 @@ def split_functions(game: str):
             tablePerVersion[version].append(f"{vram},{funcName}\n")
 
     for version, lines in tablePerVersion.items():
+        if version not in VERSIONS_WHITE_LIST:
+            continue
         dstFolder = os.path.join(game, version, "tables")
         os.makedirs(dstFolder, exist_ok=True)
         with open(os.path.join(dstFolder, "functions.csv"), "w") as f:
@@ -147,6 +153,8 @@ def split_variables(game: str):
             tablePerVersion[version].append(f"{vram},{varName},{type},0x{size}\n")
 
     for version, lines in tablePerVersion.items():
+        if version not in VERSIONS_WHITE_LIST:
+            continue
         dstFolder = os.path.join(game, version, "tables")
         os.makedirs(dstFolder, exist_ok=True)
         with open(os.path.join(dstFolder, "variables.csv"), "w") as f:
