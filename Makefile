@@ -86,7 +86,7 @@ all: uncompressed
 
 
 $(ROM): $(ELF)
-	$(ELF2ROM) -cic 6102 $< $@
+	$(ELF2ROM) -cic 6105 $< $@
 
 $(ELF): $(O_FILES) $(LDSCRIPT) $(BASE_DIR)/build/undefined_syms_$(VERSION).txt $(BASE_DIR)/build/libultra_syms.txt $(BASE_DIR)/build/hardware_regs.txt
 	$(LD) -T $(BASE_DIR)/build/undefined_syms_$(VERSION).txt -T $(BASE_DIR)/build/libultra_syms.txt -T $(BASE_DIR)/build/hardware_regs.txt -T $(LDSCRIPT) --no-check-sections --accept-unknown-input-arch --emit-relocs -Map $(BASE_DIR)/build/$(GAME)_$(VERSION).map -o $@
