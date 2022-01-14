@@ -4,6 +4,20 @@ import argparse
 import os.path
 from subprocess import check_call
 
+# Not actually macros, just look like them
+_GAME_DIR_TEMPLATE = "{game}"
+_VERSION_DIR_TEMPLATE = os.path.join(_GAME_DIR_TEMPLATE, "{version}")
+_ROM_NAME_TEMPLATE = "{game}_{version}_uncompressed.z64"
+_BASEROM_NAME_TEMPLATE = "baserom_" + _ROM_NAME_TEMPLATE
+_BUILT_MAP_RELPATH_TEMPLATE = os.path.join("build", "{game}_{version}.map")
+_EXPECTED_MAP_RELPATH_TEMPLATE = os.path.join("expected", _BUILT_MAP_RELPATH_TEMPLATE)
+
+# The ones you should actually use
+ROM_PATH_TEMPLATE = _ROM_NAME_TEMPLATE
+BASEROM_PATH_TEMPLATE = os.path.join(_GAME_DIR_TEMPLATE, _BASEROM_NAME_TEMPLATE)
+BUILT_MAP_PATH_TEMPLATE = os.path.join(_VERSION_DIR_TEMPLATE, _BUILT_MAP_RELPATH_TEMPLATE)
+EXPECTED_MAP_PATH_TEMPLATE = os.path.join(_VERSION_DIR_TEMPLATE, _EXPECTED_MAP_RELPATH_TEMPLATE)
+
 parser = argparse.ArgumentParser(
     description="Find the first difference(s) between the built ROM and the base ROM."
 )
@@ -27,18 +41,39 @@ parser.add_argument(
 parser.add_argument(
     "-m", "--make", help="run make before finding difference(s)", action="store_true"
 )
+parser.add_argument("--game", help="game folder to use", default="oot")
+parser.add_argument("--version", help="version to use", default="ne0")
 args = parser.parse_args()
+
+game_version = {
+    "game": args.game,
+    "version": args.version
+}
+
+# game = args.game
+# version = args.version
 
 diff_count = args.count
 
 if args.make:
     check_call(["make", "-j4", "COMPARE=0"])
 
-baseimg = f"oot/oot_ne0_uncompressed.z64"
-basemap = f"oot/ne0/expected/build/oot_ne0.map"
+baseimg = BASEROM_PATH_TEMPLATE.format(**game_version)
+basemap = EXPECTED_MAP_PATH_TEMPLATE.format(**game_version)
 
-myimg = f"oot_ne0_uncompressed.z64"
-mymap = f"oot/ne0/build/oot_ne0.map"
+myimg = ROM_PATH_TEMPLATE.format(**game_version)
+mymap = BUILT_MAP_PATH_TEMPLATE.format(**game_version)
+
+print(baseimg)
+print(basemap)
+print(myimg)
+print(mymap)
+
+# baseimg = f"oot/baserom_{}_{}_uncompressed.z64"
+# basemap = f"oot/ne0/expected/build/oot_ne0.map"
+
+# myimg = f"oot_ne0_uncompressed.z64"
+# mymap = f"oot/ne0/build/oot_ne0.map"
 
 if not os.path.isfile(baseimg):
     print(f"{baseimg} must exist.")
@@ -164,7 +199,7 @@ def map_diff():
             if min_ram is None or addr[0] < min_ram:
                 min_ram = addr[0]
                 found = (sym, addr[1], addr[2])
-    if min_ram is None:
+    if found is None:
         return False
     else:
         print(

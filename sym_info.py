@@ -3,6 +3,20 @@
 import argparse
 import os.path
 
+# Not actually macros, just look like them
+_GAME_DIR_TEMPLATE = "{game}"
+_VERSION_DIR_TEMPLATE = os.path.join(_GAME_DIR_TEMPLATE, "{version}")
+_ROM_NAME_TEMPLATE = "{game}_{version}_uncompressed.z64"
+_BASEROM_NAME_TEMPLATE = "baserom_" + _ROM_NAME_TEMPLATE
+_BUILT_MAP_RELPATH_TEMPLATE = os.path.join("build", "{game}_{version}.map")
+_EXPECTED_MAP_RELPATH_TEMPLATE = os.path.join("expected", _BUILT_MAP_RELPATH_TEMPLATE)
+
+# The ones you should actually use
+ROM_PATH_TEMPLATE = _ROM_NAME_TEMPLATE
+BASEROM_PATH_TEMPLATE = os.path.join(_GAME_DIR_TEMPLATE, _BASEROM_NAME_TEMPLATE)
+BUILT_MAP_PATH_TEMPLATE = os.path.join(_VERSION_DIR_TEMPLATE, _BUILT_MAP_RELPATH_TEMPLATE)
+EXPECTED_MAP_PATH_TEMPLATE = os.path.join(_VERSION_DIR_TEMPLATE, _EXPECTED_MAP_RELPATH_TEMPLATE)
+
 parser = argparse.ArgumentParser(
     description="Display various information about a symbol or address."
 )
@@ -19,11 +33,18 @@ parser.add_argument(
     action="store_true",
     help="use the map file in expected/build/ instead of build/"
 )
+parser.add_argument("--game", help="game folder to use", default="oot")
+parser.add_argument("--version", help="version to use", default="ne0")
 args = parser.parse_args()
 
-mymap = "build/mm.map"
+game_version = {
+    "game": args.game,
+    "version": args.version,
+}
+
+mymap = BUILT_MAP_PATH_TEMPLATE.format(**game_version)
 if args.use_expected:
-    mymap = f"expected/{mymap}"
+    mymap = EXPECTED_MAP_PATH_TEMPLATE.format(**game_version)
 
 if not os.path.isfile(mymap):
     print(f"{mymap} must exist.")
