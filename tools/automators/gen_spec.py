@@ -52,7 +52,10 @@ def main():
                     print("    // bss")
                 continue
 
-            print(f'    include "oot/{version}/build/{fold}/{n}/{filename}.{section}.o"')
+            if filename == "[PADDING]":
+                print("    pad_text")
+            else:
+                print(f'    include "oot/{version}/build/{fold}/{n}/{filename}.{section}.o"')
 
         print("endseg")
 
