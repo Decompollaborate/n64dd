@@ -1,5 +1,7 @@
 #include "n64dd.h"
 
+// There's a file split somewhere in this file, between (func_801CCD90, func_801CDE80)
+
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801CCD90/func_801CCD90.s")
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801CCD90/func_801CCE1C.s")
