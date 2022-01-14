@@ -171,7 +171,66 @@ endseg
 beginseg
     name "n64dd"
     compress
-    include "oot/ne0/build/baserom/n64dd.o"
+    address 0x801C6E80
+
+    // text
+    include "oot/ne0/build/asm/text/n64dd/z_n64dd.text.o"
+    pad_text
+    include "oot/ne0/build/asm/text/n64dd/n64dd_001180.text.o"
+    include "oot/ne0/build/asm/text/n64dd/n64dd_001AC0.text.o"
+    include "oot/ne0/build/asm/text/n64dd/n64dd_0025C0.text.o"
+    include "oot/ne0/build/asm/text/n64dd/n64dd_002CF0.text.o"
+    include "oot/ne0/build/asm/text/n64dd/n64dd_003230.text.o"
+    include "oot/ne0/build/asm/text/n64dd/n64dd_0038C0.text.o"
+    include "oot/ne0/build/asm/text/n64dd/n64dd_003950.text.o"
+    include "oot/ne0/build/asm/text/n64dd/n64dd_003DC0.text.o"
+    include "oot/ne0/build/asm/text/n64dd/n64dd_0047C0.text.o"
+    include "oot/ne0/build/asm/text/n64dd/n64dd_004E50.text.o"
+    include "oot/ne0/build/asm/text/n64dd/n64dd_004EB0.text.o"
+    include "oot/ne0/build/asm/text/n64dd/n64dd_005070.text.o"
+    include "oot/ne0/build/asm/text/n64dd/n64dd_0051C0.text.o"
+    include "oot/ne0/build/asm/text/n64dd/n64dd_005310.text.o"
+    include "oot/ne0/build/asm/text/n64dd/n64dd_005500.text.o"
+    include "oot/ne0/build/asm/text/n64dd/n64dd_005F10.text.o"
+    include "oot/ne0/build/asm/text/n64dd/n64dd_0072A0.text.o"
+    include "oot/ne0/build/asm/text/n64dd/n64dd_007370.text.o"
+    include "oot/ne0/build/asm/text/n64dd/n64dd_007420.text.o"
+    include "oot/ne0/build/asm/text/n64dd/n64dd_0074C0.text.o"
+    include "oot/ne0/build/asm/text/n64dd/n64dd_007710.text.o"
+    include "oot/ne0/build/asm/text/n64dd/n64dd_0077B0.text.o"
+    include "oot/ne0/build/asm/text/n64dd/n64dd_007800.text.o"
+    include "oot/ne0/build/asm/text/n64dd/n64dd_007960.text.o"
+    include "oot/ne0/build/asm/text/n64dd/n64dd_007A80.text.o"
+    include "oot/ne0/build/asm/text/n64dd/n64dd_007D20.text.o"
+    include "oot/ne0/build/asm/text/n64dd/n64dd_008230.text.o"
+    include "oot/ne0/build/asm/text/n64dd/n64dd_00B1C0.text.o"
+    include "oot/ne0/build/asm/text/n64dd/n64dd_00B2F0.text.o"
+    include "oot/ne0/build/asm/text/n64dd/n64dd_00B530.text.o"
+    include "oot/ne0/build/asm/text/n64dd/n64dd_00BE30.text.o"
+    include "oot/ne0/build/asm/text/n64dd/n64dd_00BED0.text.o"
+
+    // data
+    include "oot/ne0/build/asm/data/n64dd/z_n64dd.data.o"
+    include "oot/ne0/build/asm/data/n64dd/n64dd_001180.data.o"
+
+    // rodata
+    include "oot/ne0/build/asm/data/n64dd/z_n64dd.rodata.o"
+    include "oot/ne0/build/asm/data/n64dd/n64dd_001180.rodata.o"
+    include "oot/ne0/build/asm/data/n64dd/n64dd_001AC0.rodata.o"
+    include "oot/ne0/build/asm/data/n64dd/n64dd_120C0.rodata.o"
+    include "oot/ne0/build/asm/data/n64dd/n64dd_120F0.rodata.o"
+    include "oot/ne0/build/asm/data/n64dd/n64dd_003230.rodata.o"
+    include "oot/ne0/build/asm/data/n64dd/n64dd_003950.rodata.o"
+    include "oot/ne0/build/asm/data/n64dd/n64dd_0047C0.rodata.o"
+    include "oot/ne0/build/asm/data/n64dd/n64dd_005310.rodata.o"
+    include "oot/ne0/build/asm/data/n64dd/n64dd_005500.rodata.o"
+    include "oot/ne0/build/asm/data/n64dd/n64dd_12670.rodata.o"
+    include "oot/ne0/build/asm/data/n64dd/n64dd_12850.rodata.o"
+    include "oot/ne0/build/asm/data/n64dd/n64dd_005F10.rodata.o"
+    include "oot/ne0/build/asm/data/n64dd/n64dd_007D20.rodata.o"
+
+    // bss
+    include "oot/ne0/build/asm/data/n64dd/z_n64dd.bss.o"
 endseg
 
 beginseg

@@ -111,6 +111,7 @@ disasm: $(DISASM_TARGETS)
 
 
 disasm: splitcsvs
+	./tools/automators/gen_undefined_syms.py --version $(VERSION) > $(BASE_DIR)/undefined_syms_$(VERSION).txt
 
 splitcsvs: $(CSV_FILES)
 
