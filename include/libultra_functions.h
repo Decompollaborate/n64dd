@@ -3,126 +3,85 @@
 
 #include "ultra64.h"
 
+typedef struct StackEntry {
+    /* 0x00 */ struct StackEntry* next;
+    /* 0x04 */ struct StackEntry* prev;
+    /* 0x08 */ u32 head;
+    /* 0x0C */ u32 tail;
+    /* 0x10 */ u32 initValue;
+    /* 0x14 */ s32 minSpace;
+    /* 0x18 */ const char* name;
+} StackEntry; // size = 0x1C
+
+typedef enum {
+    STACK_STATUS_OK = 0,
+    STACK_STATUS_WARNING = 1,
+    STACK_STATUS_OVERFLOW = 2
+} StackStatus;
+
+
 // void bootproc(void);
 // void osSyncPrintf(const char* fmt, ...);
 // void osSyncPrintfFReg(s32 idx, f32* value);
 // void osSyncPrintfFPCR(u32 value);
 // void osSyncPrintfThreadContext(OSThread* t);
 // void osSyncPrintfStackTrace(OSThread* t, u32 flags);
-// void StackCheck_Init(StackEntry* entry, void* stackTop, void* stackBottom, u32 initValue, s32 minSpace, const char* name);
+void StackCheck_Init(StackEntry* entry, void* stackTop, void* stackBottom, u32 initValue, s32 minSpace, const char* name);
 // void Sleep_Cycles(OSTime time);
 // void Sleep_Nsec(u32 nsec);
-// void Sleep_Usec(u32 usec);
+void Sleep_Usec(u32 usec);
 // void Sleep_Msec(u32 ms);
 // void Sleep_Sec(u32 sec);
 // void __osPiCreateAccessQueue(void);
 void __osPiGetAccess(void);
 void __osPiRelAccess(void);
-// s32 osSendMesg(OSMesgQueue* mq, OSMesg msg, s32 flags);
-// void osStopThread(OSThread* t);
-// s32 osRecvMesg(OSMesgQueue* mq, OSMesg* msg, s32 flags);
+s32 osSendMesg(OSMesgQueue* mq, OSMesg msg, s32 flags);
+void osStopThread(OSThread* t);
+s32 osRecvMesg(OSMesgQueue* mq, OSMesg* msg, s32 flags);
 // long long __ull_rshift(unsigned long long left, unsigned long long right);
 // unsigned long long __ull_rem(unsigned long long left, unsigned long long right);
 // unsigned long long __ull_div(unsigned long long left, unsigned long long right);
 // void __ull_divremi(unsigned long long* quotient, unsigned long long* remainder, unsigned long long dividend, unsigned short divisor);
 // long long __ll_lshift(long long left, long long right);
 // long long __ll_rem(long long left, unsigned long long right);
-// long long __ll_div(long long left, long long right);
-// long long __ll_mul(long long left, long long right);
+long long __ll_div(long long left, long long right);
+long long __ll_mul(long long left, long long right);
 // void __ull_divremi(unsigned long long* quotient, unsigned long long* remainder, unsigned long long dividend, unsigned short divisor);
 // long long __ll_mod(long long left, long long right);
 // long long __ll_rshift(long long left, long long right);
 // void __osExceptionPreamble(void);
 // void __osExceptionPreamble(void);
 // void __osException(void);
-// void __osEnqueueThread(OSThread** param_1, OSThread* param_2);
-// OSThread* __osPopThread(OSThread** param_1);
-// void osDestroyThread(OSThread* puParm1);
-// void bzero(void* begin, s32 length);
-// void osCreateThread(OSThread* t, OSId id, void* entry, void* arg, void* sp, OSPri p);
-// void osWritebackDCache(void* vaddr, s32 nbytes);
+void __osEnqueueThread(OSThread** arg0, OSThread* arg1);
+OSThread* __osPopThread(OSThread** arg0);
+void osDestroyThread(OSThread* arg0);
+void bzero(void* begin, s32 length);
+void osCreateThread(OSThread* t, OSId id, void* entry, void* arg, void* sp, OSPri p);
+void osWritebackDCache(void* vaddr, s32 nbytes);
 // void osWritebackDCacheAll(void);
-// void* osViGetNextFramebuffer(void);
+void* osViGetNextFramebuffer(void);
 // uintptr_t osVirtualToPhysical(void* vaddr);
-// void osViBlack(u8 active);
-// OSIntMask osSetIntMask(OSIntMask im);
+void osViBlack(u8 active);
+OSIntMask osSetIntMask(OSIntMask im);
 // void osViSetMode(OSViMode* modep);
-// void osSetEventMesg(OSEvent e, OSMesgQueue* mq, OSMesg m);
-// s32 osEPiStartDma(OSPiHandle* pihandle, OSIoMesg* mb, s32 direction);
-// void osCreateMesgQueue(OSMesgQueue* mq, OSMesg* msq, s32 count);
-// void osInvalDCache(void* vaddr, size_t nbytes);
-// void osSetThreadPri(OSThread* t, OSPri pri);
-// OSPri osGetThreadPri(OSThread* t);
-// s32 __osEPiRawStartDma(OSPiHandle* handle, s32 direction, u32 cartAddr, void* dramAddr, size_t size);
-// OSTime osGetTime(void);
+void osSetEventMesg(OSEvent e, OSMesgQueue* mq, OSMesg m);
+s32 osEPiStartDma(OSPiHandle* pihandle, OSIoMesg* mb, s32 direction);
+void osCreateMesgQueue(OSMesgQueue* mq, OSMesg* msq, s32 count);
+void osInvalDCache(void* vaddr, size_t nbytes);
+void osSetThreadPri(OSThread* t, OSPri pri);
+OSPri osGetThreadPri(OSThread* t);
+s32 __osEPiRawStartDma(OSPiHandle* handle, s32 direction, u32 cartAddr, void* dramAddr, size_t size);
+OSTime osGetTime(void);
 // void __osSetCompare(u32 value);
-// void bcopy(void* __src, void* __dest, size_t __n);
-// OSIntMask __osDisableInt(void);
-// void __osRestoreInt(OSIntMask im);
+void bcopy(void* __src, void* __dest, size_t __n);
+OSIntMask __osDisableInt(void);
+void __osRestoreInt(OSIntMask im);
 // void __osViSwapContext(void);
-// s32 osEPiReadIo(OSPiHandle* pihandle, u32 devAddr, u32* data);
-// s32 osEPiWriteIo(OSPiHandle* pihandle, u32 devAddr, u32 data);
-// void osStartThread(OSThread* param_1);
-// void __osSetHWIntrRoutine(s32 idx, OSMesgQueue* queue, OSMesg msg);
-// void Item_DropCollectibleRandom(GlobalContext* globalCtx, Actor* fromActor, Vec3f* spawnPos, s16 params);
-// void EffectBlure_AddVertex(EffectBlure* this, Vec3f* p1, Vec3f* p2);
-// void* Effect_GetByIndex(s32 index);
-// void Effect_Add(GlobalContext* globalCtx, s32* pIndex, s32 type, u8 arg3, u8 arg4, void* initParams);
-// void Actor_SetScale(Actor* actor, f32 scale);
-// void Actor_UpdateBgCheckInfo(GlobalContext* globalCtx, Actor* actor, f32 wallCheckHeight, f32 wallCheckRadius, f32 ceilingCheckHeight, u32 flags);
-// Actor* Actor_Spawn(ActorContext* actorCtx, GlobalContext* globalCtx, s16 actorId, f32 posX, f32 posY, f32 posZ, s16 rotX, s16 rotY, s16 rotZ, s32 params);
-// Actor* Actor_SpawnAsChildAndCutscene(ActorContext* actorCtx, GlobalContext* globalCtx, s16 index, f32 x, f32 y, f32 z, s16 rotX, s16 rotY, s16 rotZ, s32 params, u32 cutscene, s32 arg11, Actor* parent);
-// Actor* Actor_SpawnAsChild(ActorContext* actorCtx, Actor* parent, GlobalContext* globalCtx, s16 actorId, f32 posX, f32 posY, f32 posZ, s16 rotX, s16 rotY, s16 rotZ, s32 params);
-// void Actor_SpawnTransitionActors(GlobalContext* globalCtx, ActorContext* actorCtx);
-// void Actor_SpawnBodyParts(Actor* actor, GlobalContext* globalCtx, s32 arg2, Gfx** dList);
-// void Actor_SpawnFloorDustRing(GlobalContext* globalCtx, Actor* actor, Vec3f* posXZ, f32 radius, s32 countMinusOne, f32 randAccelWeight, s16 scale, s16 scaleStep, u8 useLighting);
-// void Actor_SpawnIceEffects(GlobalContext* globalCtx, Actor* actor, Vec3f limbPos[], s32 limbPosCount, s32 effectsPerLimb, f32 scale, f32 scaleRange);
-// void Gfx_DrawDListOpa(GlobalContext* globalCtx, Gfx* dlist);
-// void Gfx_DrawDListXlu(GlobalContext* globalCtx, Gfx* dlist);
-// void DynaPoly_SetBgActorPrevTransform(GlobalContext* globalCtx, BgActor* bgActor);
-// s32 DynaPoly_SetBgActor(GlobalContext* globalCtx, DynaCollisionContext* dyna, Actor* actor, CollisionHeader* colHeader);
-// void DynaPoly_DeleteBgActor(GlobalContext* globalCtx, DynaCollisionContext* dyna, s32 bgId);
-// void CollisionHeader_GetVirtual(CollisionHeader* meshSegPtr, CollisionHeader** param_2);
-// void DynaPolyActor_Init(DynaPolyActor* dynaActor, s32 flags);
-// s32 Collider_InitCylinderDim(GlobalContext* globalCtx, Cylinder16* dim);
-// s32 Collider_InitCylinder(GlobalContext* globalCtx, ColliderCylinder* collider);
-// s32 Collider_DestroyCylinderDim(GlobalContext* globalCtx, Cylinder16* dim);
-// s32 Collider_DestroyCylinder(GlobalContext* globalCtx, ColliderCylinder* collider);
-// s32 Collider_SetCylinderDim(GlobalContext* globalCtx, Cylinder16* dim, Cylinder16* src);
-// s32 Collider_SetCylinderToActor(GlobalContext* globalCtx, ColliderCylinder* collider, ColliderCylinderInitToActor* src);
-// s32 Collider_SetCylinderType1(GlobalContext* globalCtx, ColliderCylinder* collider, Actor* actor, ColliderCylinderInitType1* src);
-// s32 Collider_SetCylinder(GlobalContext* globalCtx, ColliderCylinder* collider, Actor* actor, ColliderCylinderInit* src);
-// void Collider_SetCylinderPosition(ColliderCylinder* collider, Vec3s* pos);
-// s32 CollisionCheck_SetOC(GlobalContext* globalCtx, CollisionCheckContext* colCtxt, Collider* collider);
-// s32 CollisionCheck_SetOC_SAC(GlobalContext* globalCtx, CollisionCheckContext* colCtxt, Collider* collider, s32 index);
-// s32 CollisionCheck_SetOCLine(GlobalContext* globalCtx, CollisionCheckContext* colCtxt, OcLine* line);
-// void CollisionCheck_SetOCvsOC(GlobalContext* globalCtx, Collider* left, ColliderInfo* leftInfo, Vec3f* leftPos, Collider* right, ColliderInfo* rightInfo, Vec3f* rightPos, f32 overlap);
-// void Collider_UpdateCylinder(Actor* actor, ColliderCylinder* collider);
-// void Audio_PlaySoundAtPosition(GlobalContext* globalCtx, Vec3f* position, s32 param_3, u16 sfxId);
-// void* Lib_MemSet(void* buffer, s32 value, size_t size);
-// f32 Math_SmoothStepToF(f32* pValue, f32 target, f32 fraction, f32 step, f32 minStep);
-// void Lights_PointNoGlowSetInfo(LightInfo* info, s16 x, s16 y, s16 z, u8 r, u8 g, u8 b, s16 radius);
-// void Interface_ChangeAlpha(u16 param_1);
-// Gfx* Gfx_CallSetupDLImpl(Gfx* gfx, u32 i);
-// Gfx* Gfx_CallSetupDL(Gfx* gfx, u32 i);
-// void Gfx_CallSetupDLAtPtr(Gfx** gfxp, u32 i);
-// void SkelAnime_DrawFlexOpa(GlobalContext* globalCtx, void** skeleton, Vec3s* jointTable, s32 dListCount, OverrideLimbDrawOpa overrideLimbDraw, PostLimbDrawOpa postLimbDraw, Actor* actor);
-// void Sram_InitDebugSave(void);
-// void Sram_Alloc(GameState* gameState, SramContext* sramCtx);
-// void View_Init(View* view, GraphicsContext* gfxCtx);
-// s32 View_InitCameraQuake(View* view);
-// void GameState_InitArena(GameState* gameState, size_t size);
-// void GameState_Init(GameState* gameState, GameStateFunc gameStateInit, GraphicsContext* gfxCtx);
-// void __osDevMgrMain(void* arg);
-// // void viMgrMain(OSDevMgr* iParm1);
-// void PreNMI_Main(PreNMIContext* prenmiCtx);
-// void AnimatedMat_DrawMain(GlobalContext* globalCtx, AnimatedMaterial* matAnim, f32 alphaRatio, u32 step, u32 flags);
-// void Main(void* arg);
-// //void Slowly_Main(SlowlyTask* slowly);
-// Mtx* Matrix_NewMtx(GraphicsContext* gfxCtx);
-// f32 Rand_ZeroOne(void);
-// f32 Rand_ZeroOne_Variable(u32* param_1);
-// f32 __sinf(f32 __x);
+s32 osEPiReadIo(OSPiHandle* pihandle, u32 devAddr, u32* data);
+s32 osEPiWriteIo(OSPiHandle* pihandle, u32 devAddr, u32 data);
+void osStartThread(OSThread* arg0);
+void __osSetHWIntrRoutine(s32 idx, OSMesgQueue* queue, OSMesg msg);
 
+OSPiHandle* osDriveRomInit(void)
 
 #endif
