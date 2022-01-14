@@ -16,7 +16,7 @@ CPP_FLAGS = [
     "-Isrc",
     "-Iver/current/build/include",
     "-D_LANGUAGE_C",
-    "-DF3DEX_GBI_2",
+    # "-DF3DEX_GBI_2",
     "-D_MIPS_SZLONG=32",
     "-DSCRIPT(...)={}"
     "-D__attribute__(...)=",
