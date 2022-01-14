@@ -72,7 +72,7 @@ $(shell mkdir -p $(BASE_DIR)/baserom/ $(BASE_DIR)/asm/text $(BASE_DIR)/asm/data)
 $(shell mkdir -p $(BASE_DIR)/build/baserom $(foreach dir,$(ASM_DIRS),$(subst $(BASE_DIR)/,$(BASE_DIR)/build/,$(dir))))
 
 
-#### Main Targets ###
+#### Main Targets ####
 
 uncompressed: $(ROM)
 ifeq ($(COMPARE),1)
@@ -94,7 +94,7 @@ $(ELF): $(O_FILES) $(LDSCRIPT) $(BASE_DIR)/build/undefined_syms_$(VERSION).txt $
 
 #### Main commands ####
 
-## Cleaning ##
+## Cleaning
 clean:
 	$(RM) -rf $(BASE_DIR)/asm $(BASE_DIR)/context
 
@@ -111,18 +111,22 @@ disasm: splitcsvs $(DISASM_TARGETS)
 
 splitcsvs: $(CSV_FILES)
 
+
 #### Various Recipes ####
 
 $(BASE_DIR)/tables/%.csv: $(GAME)/tables/%.csv
 	./tools/csvSplit.py $(GAME) $<
+
 $(BASE_DIR)/tables/files_%.csv: $(GAME)/tables/%.*.csv
 	./tools/csvSplit.py $(GAME) $<
 
 ## Linker Scripts
 $(BASE_DIR)/build/undefined_syms_$(VERSION).txt: $(BASE_DIR)/undefined_syms_$(VERSION).txt
 	$(CPP) $(CPPFLAGS) $< > $@
+
 $(BASE_DIR)/build/libultra_syms.txt: libultra_syms.txt
 	$(CPP) $(CPPFLAGS) $< > $@
+
 $(BASE_DIR)/build/hardware_regs.txt: hardware_regs.txt
 	$(CPP) $(CPPFLAGS) $< > $@
 
@@ -130,11 +134,11 @@ $(LDSCRIPT): $(SPEC)
 	$(CPP) $(CPPFLAGS) $< > $(BASE_DIR)/build/spec_$(VERSION)
 	$(MKLDSCRIPT) $(BASE_DIR)/build/spec_$(VERSION) $@
 
-# Baserom
+## Baserom
 $(BASE_DIR)/build/baserom/%.o: $(BASE_DIR)/baserom/%.bin
 	$(OBJCOPY) -I binary -O elf32-big $< $@
 
-# Build assembly
+## Build assembly
 $(BASE_DIR)/build/asm/text/%.o: $(BASE_DIR)/asm/text/%.s
 	$(AS) $(ASFLAGS) $< -o $@
 
