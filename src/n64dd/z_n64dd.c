@@ -1,6 +1,12 @@
 #include "n64dd.h"
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C6E80.s")
+s32 func_801CE120(void);
+
+// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C6E80.s")
+// Might be u8, will need to examine code function
+s32 func_801C6E80(void) {
+    return func_801CE120();
+}
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C6EA0.s")
 
