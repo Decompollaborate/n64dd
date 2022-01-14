@@ -11,7 +11,7 @@ from typing import Dict, List
 import zlib
 
 
-ROM_FILE_NAME_V = '{}_{}.z64'
+ROM_FILE_NAME_V = 'baserom_{}_{}_uncompressed.z64'
 FILE_TABLE_OFFSET = {
     "OOT": {
         "NER":        0x07430, # a.k.a. NN0 RC

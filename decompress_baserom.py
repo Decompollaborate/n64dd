@@ -12,8 +12,8 @@ from fixbaserom import VERSIONS_MD5S
 FILE_TABLE_OFFSET = FILE_TABLE_OFFSETS["OOT"]["NE0"]
 # 0x1A500 # 0x1C110 for JP1.0, 0x1C050 for JP1.1, 0x24F60 for debug
 correct_str_hash = VERSIONS_MD5S["OOT"]["NE0"]
-BASEROM_PATH = path.join("oot", "oot_ne0.z64")
-UNCOMPRESSED_PATH = path.join("oot", "oot_ne0_uncompressed.z64")
+BASEROM_PATH = path.join("oot", "baserom_oot_ne0.z64")
+UNCOMPRESSED_PATH = path.join("oot", "baserom_oot_ne0_uncompressed.z64")
 
 
 def round_up(n,shift):
@@ -130,7 +130,7 @@ def decompress_rom(dmadata_addr, dmadata):
     decompressed.seek(dmadata_addr)
     decompressed.write(new_dmadata)
     # pad to size
-    padding_end = round_up(dmadata[-1][1], 14)
+    padding_end = round_up(dmadata[-1][1], 20)
     decompressed.seek(padding_end-1)
     decompressed.write(bytearray([0]))
     # re-calculate crc
@@ -200,7 +200,7 @@ if any([b != 0 for b in fileContent[FILE_TABLE_OFFSET + 0xAC:FILE_TABLE_OFFSET +
     print(f"{len(fileContent):X}")
 
 padding_start = round_up(dmadata[-1][1], 12)
-padding_end = round_up(dmadata[-1][1], 14)
+padding_end = round_up(dmadata[-1][1], 20)
 print(f"Padding from {padding_start:X} to {padding_end:X}...")
 for i in range(padding_start,padding_end):
     fileContent[i] = 0xFF

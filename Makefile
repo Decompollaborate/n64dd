@@ -101,6 +101,7 @@ clean:
 ## Extraction step
 setup:
 	$(MAKE) -C tools
+	./decompress_baserom.py $(GAME) $(VERSION)
 	./extract_baserom.py $(GAME) $(VERSION)
 
 ## Assembly generation
