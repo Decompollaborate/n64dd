@@ -90,6 +90,7 @@ tools/disasm/output/*
 tools/asmsplitter/asm/*
 tools/asmsplitter/c/*
 ctx.c
+*.c.m2c
 tools/*dSYM/
 graphs/
 

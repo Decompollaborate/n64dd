@@ -120,7 +120,13 @@ DISASM_TARGETS := $(DISASM_LIST:%=$(BASE_DIR)/asm/text/%/.disasm)
 $(shell mkdir -p $(BASE_DIR)/build/baserom $(foreach dir,$(ASM_DIRS),$(subst $(BASE_DIR)/,$(BASE_DIR)/build/,$(dir))))
 $(shell mkdir -p $(subst src/,$(BASE_DIR)/build/src/,$(SRC_DIRS)))
 
+
+# directory flags
+$(BASE_DIR)/build/src/n64dd_O2_g3/%.o: OPTFLAGS:= -O2 -g3
+
+# cc & asm-processor
 $(BASE_DIR)/build/src/%.o: CC := $(ASM_PROCESSOR) $(CC) -- $(AS) $(ASFLAGS) --
+
 
 #### Main Targets ####
 

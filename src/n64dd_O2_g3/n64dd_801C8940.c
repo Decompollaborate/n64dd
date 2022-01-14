@@ -28,7 +28,17 @@
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8940/func_801C8E70.s")
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8940/func_801C8F1C.s")
+extern s32 (*D_801D2E54)(s32);
+
+s32 func_801C8F1C(UNK_TYPE arg0) {
+    s32 (*temp_v0)(s32);
+
+    temp_v0 = D_801D2E54;
+    if (temp_v0 != 0) {
+        return temp_v0(arg0);
+    }
+    return 1;
+}
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8940/func_801C8F58.s")
 
