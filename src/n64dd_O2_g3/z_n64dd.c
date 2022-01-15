@@ -34,18 +34,24 @@ s32 func_801C6E80(void) {
 
 extern vu8 D_80121213;
 // #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C6FAC.s")
+// boolean
 s32 func_801C6FAC(void) {
     if (D_80121213 == 0) {
-        return 0;
+        return false;
     } else {
         D_80121213 = 0;
-        return 1;
+        return true;
     }
 }
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C6FD8.s")
+// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C6FD8.s")
+void func_801C6FD8(void) {
+    while (!func_801C6FAC()) {
+        Sleep_Usec(16666);
+    }
+}
 
-void Fault_AddHungupAndCrash(const char*, u32);
+// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C7018.s")
 // Adds a HungUpAndCrash
 void func_801C7018(void) {
     // u8* temp = D_80121213;

@@ -3,6 +3,7 @@
 
 #include "ultra64.h"
 #include "libultra_functions.h"
+#include "code_functions.h"
 #include "n64dd_functions.h"
 
 typedef struct {
