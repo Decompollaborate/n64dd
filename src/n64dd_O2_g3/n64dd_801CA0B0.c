@@ -2,7 +2,6 @@
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801CA0B0/func_801CA0B0.s")
 
-// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801CA0B0/func_801CA1D4.s")
 const u16 D_801D9390[0x10] = {
     1,
     0x1085,
@@ -20,10 +19,10 @@ const u16 D_801D9390[0x10] = {
     0xDEF7,
     0xEF7B,
     0xFFFF,
-}; /* const */
+};
 
-u16 func_801CA1D4(s32 arg0) {
-    return D_801D9390[arg0 & 0xF];
+u16 func_801CA1D4(u32 arg0) {
+    return D_801D9390[arg0 % ARRAY_COUNT(D_801D9390)];
 }
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801CA0B0/func_801CA1F0.s")
