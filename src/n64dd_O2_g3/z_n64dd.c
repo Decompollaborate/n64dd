@@ -65,9 +65,19 @@ void func_801C7018(void) {
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C7098.s")
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C70E4.s")
+// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C70E4.s")
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C70FC.s")
+extern s32 D_801D9DC8;
+
+s32 func_801C70E4(void) {
+    return D_801D9DC8 == 1;
+}
+
+// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C70FC.s")
+// Used by EnMag and FileChoose
+void func_801C70FC(void) {
+    func_801C70E4();
+}
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C711C.s")
 

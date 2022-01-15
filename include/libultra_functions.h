@@ -40,7 +40,7 @@ void osStopThread(OSThread* t);
 s32 osRecvMesg(OSMesgQueue* mq, OSMesg* msg, s32 flags);
 // long long __ull_rshift(unsigned long long left, unsigned long long right);
 // unsigned long long __ull_rem(unsigned long long left, unsigned long long right);
-// unsigned long long __ull_div(unsigned long long left, unsigned long long right);
+unsigned long long __ull_div(unsigned long long left, unsigned long long right);
 // void __ull_divremi(unsigned long long* quotient, unsigned long long* remainder, unsigned long long dividend, unsigned short divisor);
 // long long __ll_lshift(long long left, long long right);
 // long long __ll_rem(long long left, unsigned long long right);
