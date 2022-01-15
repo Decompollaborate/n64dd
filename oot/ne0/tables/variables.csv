@@ -1,2 +1,5 @@
 8011A5D0,gSaveContext,SaveContext,0x1428
 801D8E00,_string_n64dd_c,char,0x1
+80121210,gN64ddIsLoaded,u8,0x1
+8011BA00,gGameInfo,GameInfo*,0x4
+8012BAA0,gSystemArena,Arena,0x10

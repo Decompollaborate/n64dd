@@ -76,6 +76,10 @@
 80004480,osSetThreadPri
 80004560,osGetThreadPri
 800CD390,SystemHeap_Init
+800CDA20,SystemArena_Malloc
+800CDC14,SystemArena_Init
+800ACE90,IrqMgr_AddClient
+800ACF1C,IrqMgr_RemoveClient
 80001600,osDriveRomInit
 80001F70,osStopThread
 80003BE0,osViBlack
@@ -120,3 +124,9 @@
 80005800,osEPiWriteIo
 80006010,__osSetHWIntrRoutine
 80005EC0,osStartThread
+800AF734,Fault_AddHungupAndCrash
+800CE810,PrintUtils_VPrintf
+800CE844,PrintUtils_Printf
+800D1D00,_Printf
+800ACE60,func_800D31A0_Freeze
+80051B50,GameInfo_Init

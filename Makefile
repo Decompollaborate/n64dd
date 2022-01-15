@@ -108,6 +108,10 @@ O_FILES        := $(subst src/,$(BASE_DIR)/build/src/,$(C_FILES:.c=.o)) \
                   $(subst $(BASE_DIR)/,$(BASE_DIR)/build/,$(S_FILES:.s=.o)) \
                   $(subst $(BASE_DIR)/,$(BASE_DIR)/build/,$(BASEROM_FILES:.bin=.o))
 
+# Automatic dependency files
+# (Only asm_processor dependencies are handled for now)
+DEP_FILES := $(O_FILES:.o=.asmproc.d)
+
 DISASM_LIST    := $(shell cat $(GAME)/tables/disasm_list.txt) \
                   $(shell [ -f $(BASE_DIR)/tables/disasm_list.txt ] && cat $(BASE_DIR)/tables/disasm_list.txt)
 
@@ -222,3 +226,5 @@ $(BASE_DIR)/asm/text/%/.disasm: $(BASE_DIR)/baserom/%.bin $(BASE_DIR)/tables/var
 	$(RM) -rf $(BASE_DIR)/asm/text/$* $(BASE_DIR)/asm/data/$* $(BASE_DIR)/context/$*.txt
 	$(DISASSEMBLER) $< $(BASE_DIR)/asm/text/$* -q --data-output $(BASE_DIR)/asm/data/$* --split-functions $(BASE_DIR)/asm/functions/$* --variables $(BASE_DIR)/tables/variables.csv --functions $(BASE_DIR)/tables/functions.csv --constants $(GAME)/tables/constants.csv --file-splits $(BASE_DIR)/tables/files_$*.csv  --save-context $(BASE_DIR)/context/$*.txt --constants $(BASE_DIR)/tables/constants_$*.csv
 	@touch $@
+
+-include $(DEP_FILES)

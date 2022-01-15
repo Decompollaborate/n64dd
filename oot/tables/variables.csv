@@ -2,3 +2,6 @@ Variables,Type,Notes,ner,,ne0,,ne1,,np0,,ne2,,np1,,cjo,,cjm,,ceo,,cem,,cpo,,cpod
 ,,,VRAM,Size,VRAM,Size,VRAM,Size,VRAM,Size,VRAM,Size,VRAM,Size,VRAM,Size,VRAM,Size,VRAM,Size,VRAM,Size,VRAM,Size,VRAM,Size,VRAM,Size,VRAM,Size,VRAM,Size,VRAM,Size,VRAM,Size,VRAM,Size
 gSaveContext,SaveContext,,,,8011A5D0,1428,,,,,,,,,,,,,,,,,,,,,,,,,8015E660,1428,,,,,,
 _string_n64dd_c,char,,801D8B00,1,801D8E00,1,801D8FA0,1,801D6DC0,1,801D9680,1,801D6E00,1,,,,,,,,,,,,,,,,,,,,,,,,
+gN64ddIsLoaded,u8,,,,80121210,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+gGameInfo,GameInfo*,,,,8011BA00,4,,,,,,,,,,,,,,,,,,,,,,,,,8015FA90,4,,,,,,
+gSystemArena,Arena,,,,8012BAA0,10,,,,,,,,,,,,,,,,,,,,,,,,,80175610,24,,,,,,

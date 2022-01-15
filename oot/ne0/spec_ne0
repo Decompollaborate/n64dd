@@ -185,7 +185,7 @@ beginseg
 
     // include_readonly "oot/ne0/build/src/n64dd/n64dd_801CA0B0.o"
     include "oot/ne0/build/asm/text/n64dd/n64dd_801CA0B0.text.o"
-    include "oot/ne0/build/asm/data/n64dd/n64dd_801D9390.rodata.o"
+    include "oot/ne0/build/asm/data/n64dd/n64dd_801CA0B0.rodata.o"
 
     include "oot/ne0/build/src/n64dd/n64dd_801CA740.o"
     include "oot/ne0/build/src/n64dd/n64dd_801CA7D0.o"
@@ -193,7 +193,7 @@ beginseg
 
     // include "oot/ne0/build/src/n64dd/n64dd_801CB640.o"
     include "oot/ne0/build/asm/text/n64dd/n64dd_801CB640.text.o"
-    include "oot/ne0/build/asm/data/n64dd/n64dd_801D93C0.rodata.o"
+    include "oot/ne0/build/asm/data/n64dd/n64dd_801CB640.rodata.o"
 
     // Handwritten
     include "oot/ne0/build/asm/text/n64dd/n64dd_801CBCD0.text.o"
@@ -204,11 +204,11 @@ beginseg
 
     // include "oot/ne0/build/src/n64dd/n64dd_801CC190.o"
     include "oot/ne0/build/asm/text/n64dd/n64dd_801CC190.text.o"
-    include "oot/ne0/build/asm/data/n64dd/n64dd_801D9470.rodata.o"
+    include "oot/ne0/build/asm/data/n64dd/n64dd_801CC190.rodata.o"
 
     // include "oot/ne0/build/src/n64dd/n64dd_801CC380.o"
     include "oot/ne0/build/asm/text/n64dd/n64dd_801CC380.text.o"
-    include "oot/ne0/build/asm/data/n64dd/n64dd_801D9480.rodata.o"
+    include "oot/ne0/build/asm/data/n64dd/n64dd_801CC380.rodata.o"
 
     // include "oot/ne0/build/src/n64dd/n64dd_801CCD90.o"
     include "oot/ne0/build/asm/text/n64dd/n64dd_801CCD90.text.o"
