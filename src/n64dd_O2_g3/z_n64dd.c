@@ -45,18 +45,12 @@ s32 func_801C6FAC(void) {
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C6FD8.s")
 
-// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C7018.s")
-typedef struct {
-    u8 unk0;
-} struct_800AF734;
-
-// extern struct_800AF734 D_80121213;
-void func_800AF734(const char*, u32);
+void Fault_AddHungupAndCrash(const char*, u32);
 // Adds a HungUpAndCrash
 void func_801C7018(void) {
     // u8* temp = D_80121213;
     if (D_80121213 != 0) {
-        func_800AF734("../z_n64dd.c", 503);
+        Fault_AddHungupAndCrash("../z_n64dd.c", 503);
     }
     D_80121213 = 1;
 }
@@ -230,29 +224,26 @@ s32 func_801C7E80(void);
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C7E80.s")
 #endif
 
-#if 0
 void func_800AD51C(void);
-s32 func_801C7F24(void) {
-    ?* temp_v0;
-    void* temp_a0;
 
-    if (D_801D9D48 == 0) {
+s32 func_801C7F24(void) {
+    u32 temp_a0;
+    struct_801D9C30* temp_v0;
+
+    if (D_801D9D48.unk_00 == 0) {
         return -1;
     }
-    // function from code
+
+    // Function from code
     func_800AD51C();
-    temp_v0 = D_801D9D48;
-    temp_a0 = temp_v0->unk_8;
-    bzero(temp_a0, temp_v0->unk_C - temp_a0);
-    bzero(D_801D9D48, 0x118);
-    D_801D9D48 = NULL;
+
+    temp_v0 = D_801D9D48.unk_00;
+    temp_a0 = temp_v0->unk_008;
+    bzero(temp_a0, temp_v0->unk_00C - temp_a0);
+    bzero(D_801D9D48.unk_00, sizeof(struct_801D9C30));
+    D_801D9D48.unk_00 = NULL;
     return 0;
 }
-#else
-s32 func_801C7F24(void);
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C7F24.s")
-#endif
-
 void n64dd_SetDiskVersion(s32 arg0) {
     if (arg0 != 0) {
         if (D_801D9D48.unk_00 == 0) {
