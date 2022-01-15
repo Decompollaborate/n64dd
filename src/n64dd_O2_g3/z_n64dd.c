@@ -32,11 +32,34 @@ s32 func_801C6E80(void) {
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C6F78.s")
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C6FAC.s")
+extern vu8 D_80121213;
+// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C6FAC.s")
+s32 func_801C6FAC(void) {
+    if (D_80121213 == 0) {
+        return 0;
+    } else {
+        D_80121213 = 0;
+        return 1;
+    }
+}
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C6FD8.s")
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C7018.s")
+// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C7018.s")
+typedef struct {
+    u8 unk0;
+} struct_800AF734;
+
+// extern struct_800AF734 D_80121213;
+void func_800AF734(const char*, u32);
+// Adds a HungUpAndCrash
+void func_801C7018(void) {
+    // u8* temp = D_80121213;
+    if (D_80121213 != 0) {
+        func_800AF734("../z_n64dd.c", 503);
+    }
+    D_80121213 = 1;
+}
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C7064.s")
 
