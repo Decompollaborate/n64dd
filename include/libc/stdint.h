@@ -1,7 +1,7 @@
 #ifndef STDINT_H
 #define STDINT_H
 
-#include "PR/ultratypes.h"
+#include "ultra64/types.h"
 
 typedef s32 intptr_t;
 typedef u32 uintptr_t;
