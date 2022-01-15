@@ -130,3 +130,5 @@
 800D1D00,_Printf
 800ACE60,func_800D31A0_Freeze
 80051B50,GameInfo_Init
+800012A0,Locale_Init
+80001310,Locale_ResetRegion
