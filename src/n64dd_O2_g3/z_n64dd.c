@@ -1,5 +1,9 @@
 #include "n64dd.h"
 
+extern struct_801D9C30 D_801D9C30;
+
+extern struct_801D9D48 D_801D9D48;
+
 // data
 /*
 struct_801DC000* D_801D2E50 = &D_801DC000;
@@ -11,7 +15,6 @@ extern struct_801DC000* D_801D2E50;
 
 s32 func_801CE120(void);
 
-// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C6E80.s")
 // Might be u8, will need to examine code function
 s32 func_801C6E80(void) {
     return func_801CE120();
@@ -169,8 +172,70 @@ void func_801C7C1C(UNK_PTR arg0, s32 arg1, u32 arg2) {
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C7E78.s")
 
+UNK_PTR func_800AD4C0(UNK_PTR);
+
+#if 0
+s32 func_801C7E80(void) {
+    u32 sp24;
+    s32 sp20;
+    void* sp18;
+    ?* temp_a0;
+    ?* temp_v0;
+    s32 temp_a1;
+    u32 temp_a2;
+
+    if (D_801D9D48 != 0) {
+        return -1;
+    }
+    D_801D9D48 = &D_801D9C30;
+    func_801C7C1C(&D_801D9C30, 0x1060, 0x118U);
+    temp_v0 = D_801D9D48;
+    temp_a1 = temp_v0->unk_0;
+    temp_a0 = temp_v0->unk_8;
+    temp_a2 = temp_v0->unk_4 - temp_a1;
+    sp20 = temp_v0->unk_C - temp_a0;
+    sp18 = temp_a0 + temp_a2;
+    sp24 = temp_a2;
+    func_801C7C1C(temp_a0, temp_a1, temp_a2);
+    bzero(sp18, sp20 - temp_a2);
+    // Function from code
+    func_800AD4C0(D_801D9D48->unk_10);
+    return 0;
+}
+#else
+s32 func_801C7E80(void);
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C7E80.s")
+#endif
 
+#if 0
+void func_800AD51C(void);
+s32 func_801C7F24(void) {
+    ?* temp_v0;
+    void* temp_a0;
+
+    if (D_801D9D48 == 0) {
+        return -1;
+    }
+    // function from code
+    func_800AD51C();
+    temp_v0 = D_801D9D48;
+    temp_a0 = temp_v0->unk_8;
+    bzero(temp_a0, temp_v0->unk_C - temp_a0);
+    bzero(D_801D9D48, 0x118);
+    D_801D9D48 = NULL;
+    return 0;
+}
+#else
+s32 func_801C7F24(void);
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C7F24.s")
+#endif
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/n64dd_SetDiskVersion.s")
+void n64dd_SetDiskVersion(s32 arg0) {
+    if (arg0 != 0) {
+        if (D_801D9D48.unk_00 == 0) {
+            func_801C7E80();
+        }
+    } else if (D_801D9D48.unk_00 != 0) {
+        func_801C7F24();
+    }
+}
