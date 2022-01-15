@@ -112,13 +112,13 @@ s32 func_801C7BEC(s32 arg0) {
     return 0;
 }
 
-
+void func_801C7C1C(UNK_PTR arg0, s32 arg1, u32 arg2);
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C7C1C.s")
 
 extern u8 D_801D9DB8;
 extern u64 D_801D9DC0;
 #if 0
-void func_801C7C1C(UNK_PTR arg0, s32 arg1, u32 arg2) {
+void func_801C7C1C(void* arg0, s32 arg1, u32 arg2) {
     s32 sp5C;
     s32 sp58;
     s32 sp54;
@@ -127,11 +127,11 @@ void func_801C7C1C(UNK_PTR arg0, s32 arg1, u32 arg2) {
     s32 temp_s0;
     s32 temp_s1;
     s32 temp_v0;
+    s64 temp_ret_2;
     u32 temp_t7;
     u32 temp_v1;
     u32 temp_v1_2;
     u64 temp_ret;
-    u64 temp_ret_2;
     s32 phi_s0;
     s32 phi_s1;
     s32 phi_s1_2;
@@ -140,11 +140,7 @@ void func_801C7C1C(UNK_PTR arg0, s32 arg1, u32 arg2) {
     func_801C6FD8();
     func_801C6F30();
     D_801D9DB8 = 1;
-
-    //D_801D9DC0.unk_0 = 0;
-    //D_801D9DC0.unk_4 = 0U;
     D_801D9DC0 = 0;
-    
     func_801C7B48(arg1, &sp5C, &sp54);
     func_801C7B48(arg1 + arg2, &sp58, &sp50);
     sp4C = D_801D2E50;
@@ -177,13 +173,12 @@ void func_801C7C1C(UNK_PTR arg0, s32 arg1, u32 arg2) {
             bcopy(sp4C, ((func_801C7BEC(sp5C) + arg0) - sp54) + phi_s1_2, (u32) sp50);
         }
     }
-    //if ((D_801D9DC0.unk_0 != 0) || (D_801D9DC0.unk_4 != 0)) {
     if ((D_801D9DC0 != 0)) {
         temp_ret = osGetTime();
         temp_v1 = (u32) temp_ret;
         //temp_t7 = D_801D9DC0.unk_4;
-        //temp_ret_2 = __ll_mul((temp_ret - D_801D9DC0.unk_0) - (temp_v1 < temp_t7), temp_v1 - temp_t7, 0, 0x40);
-        temp_v1_2 = (u32) __ull_div(temp_ret_2, (u32) temp_ret_2, 0, 0xBB8);
+        //temp_ret_2 = __ll_mul(/* s64+0x0 */ ((temp_ret - D_801D9DC0.unk_0) - (temp_v1 < temp_t7)), /* s64+0x4 */ (temp_v1 - temp_t7), /* s64+0x0 */ 0, /* s64+0x4 */ 0x40);
+        temp_v1_2 = (u32) __ull_div(temp_ret_2, (u32) (u64) temp_ret_2, 0, 0xBB8);
         if ((0xF4240 - temp_v1_2) > 0) {
             Sleep_Usec(0xF4240 - temp_v1_2);
         }
@@ -197,32 +192,36 @@ void func_801C7C1C(UNK_PTR arg0, s32 arg1, u32 arg2) {
 
 UNK_PTR func_800AD4C0(UNK_PTR);
 
-#if 0
+#ifdef NON_MATCHING
 s32 func_801C7E80(void) {
-    u32 sp24;
+    int new_var;
+
     s32 sp20;
     void* sp18;
-    ?* temp_a0;
-    ?* temp_v0;
     s32 temp_a1;
+    struct_801D9C30* temp_v0;
     u32 temp_a2;
 
-    if (D_801D9D48 != 0) {
+    s32 new_var2;
+
+    if (D_801D9D48.unk_00 != 0) {
         return -1;
     }
-    D_801D9D48 = &D_801D9C30;
+    D_801D9D48.unk_00 = &D_801D9C30;
     func_801C7C1C(&D_801D9C30, 0x1060, 0x118U);
-    temp_v0 = D_801D9D48;
-    temp_a1 = temp_v0->unk_0;
-    temp_a0 = temp_v0->unk_8;
-    temp_a2 = temp_v0->unk_4 - temp_a1;
-    sp20 = temp_v0->unk_C - temp_a0;
-    sp18 = temp_a0 + temp_a2;
-    sp24 = temp_a2;
-    func_801C7C1C(temp_a0, temp_a1, temp_a2);
+    temp_v0 = D_801D9D48.unk_00;
+    //temp_a2 = temp_v0->unk_004 - temp_v0->unk_000;
+    //new_var = temp_v0->unk_004 - temp_v0->unk_000;
+    new_var2 = (u32)temp_v0->unk_000 & 0xFFFFFFFFFFFFFFFF;
+    new_var = temp_v0->unk_004 - new_var2;
+    temp_a2 = new_var;
+
+    sp20 = temp_v0->unk_00C - temp_v0->unk_008;
+    sp18 = temp_v0->unk_008 + temp_a2;
+    if (sp18 && sp18){}
+    func_801C7C1C(temp_v0->unk_008, temp_v0->unk_000, temp_a2);
     bzero(sp18, sp20 - temp_a2);
-    // Function from code
-    func_800AD4C0(D_801D9D48->unk_10);
+    func_800AD4C0(D_801D9D48.unk_00->unk_010);
     return 0;
 }
 #else

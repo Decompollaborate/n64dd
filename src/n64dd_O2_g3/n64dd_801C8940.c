@@ -24,6 +24,7 @@
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8940/func_801C8CEC.s")
 
+s32 func_801C8DC0(UNK_PTR arg0);
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8940/func_801C8DC0.s")
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8940/func_801C8E70.s")
@@ -51,6 +52,22 @@ s32 func_801C8F1C(UNK_TYPE arg0) {
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8940/func_801C9260.s")
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8940/func_801C9334.s")
+s32 func_801C9334(UNK_PTR arg0) {
+    while (true) {
+        u32 temp_v0 = func_801C8DC0(arg0);
+
+        if ((temp_v0 == 3) || (temp_v0 == 4) || (temp_v0 == 5)) {
+            return temp_v0;
+        }
+        // Fake match
+        if ((temp_v0  & 0xFFFFFFFFu) == 0) {
+            if (func_801C8F1C(arg0) != 0) {
+                return 0;
+            }
+            return 7;
+        }
+        if (1) {}
+    }
+}
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8940/func_801C93C4.s")
