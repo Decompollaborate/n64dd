@@ -139,11 +139,13 @@ s32 func_801C9B70(s32 arg0);
 
 extern s32 gCurrentRegion;
 
+// n64ddError_GetLanguage
 s32 func_801C9C48(void) {
     return gCurrentRegion == 1 ? LANGUAGE_JP : LANGUAGE_EN;
 }
 
 // #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9B70/func_801C9C74.s")
+// n64ddError_Memset
 void func_801C9C74(u8* dest, u8 value, u32 count) {
     while (count--) {
         *dest++ = value;
@@ -153,6 +155,7 @@ void func_801C9C74(u8* dest, u8 value, u32 count) {
 // "Error Number    " array
 extern char* D_801D2ED0[];
 
+// n64ddError_GetErrorHeader
 char* func_801C9CA4(void) {
     return D_801D2ED0[func_801C9C48()];
 }
@@ -161,8 +164,10 @@ char* func_801C9CA4(void) {
 void func_801C94F8(char*, u16);
 // s32 func_801C9B70(s32);
 
+// n64ddError_WriteNumberJP
+// Writes a 2-digit number to the char buffer provided
 // Character indices for numbers in the error code (EUC-JP)
-void func_801C9CD4(char* arg0, s32 number) {
+void func_801C9CD4(char* buf, s32 number) {
     s32 temp_v0 = func_801C9B70(number);
     u16 character;
 
@@ -172,23 +177,25 @@ void func_801C9CD4(char* arg0, s32 number) {
         character = '¡¡'; // Space, 0xA1A1
     }
 
-    func_801C94F8(arg0, character);
-    arg0 += 2;
-    func_801C94F8(arg0, ((temp_v0 & 0xF) + '£°')); // 0, 0xA380
+    func_801C94F8(buf, character);
+    buf += 2;
+    func_801C94F8(buf, ((temp_v0 & 0xF) + '£°')); // 0, 0xA380
 }
 
 // #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9B70/func_801C9D54.s")
+// n64ddError_WriteNumberEN
+// Writes a 2-digit number to the char buffer provided
 // Character indices for numbers in the error code (ASCII)
-void func_801C9D54(char* arg0, s32 number) {
+void func_801C9D54(char* buf, s32 number) {
     s32 temp_v0 = func_801C9B70(number);
 
     if (number >= 10) {
-        *arg0 = (temp_v0 >> 4) + '0';
+        *buf = (temp_v0 >> 4) + '0';
     } else {
-        *arg0 = ' ';
+        *buf = ' ';
     }
-    arg0++;
-    *arg0 = (temp_v0 & 0xF) + '0';
+    buf++;
+    *buf = (temp_v0 & 0xF) + '0';
 }
 
 // #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9B70/func_801C9DB8.s")
@@ -227,6 +234,7 @@ u8* func_801C9E28(s32 errorNum) {
 }
 
 // #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9B70/func_801C9EC0.s")
+// Clear somethhing
 u8* func_801C9EC0(void) {
     func_801C9C74(D_801E0F80, 0, 0x600);
     return D_801E0F80;
@@ -236,7 +244,7 @@ u8* func_801C9EC0(void) {
 extern const char* D_801D2EE0[2][8][4];
 
 // Prints 4 lines of the error message (?). arg2 is sumber of lines, arg1 the actual message.
-void func_801C9EF4(const char* arg0, s32 arg1, s32 arg2) {
+void func_801C9EF4(u8* arg0, s32 arg1, s32 arg2) {
     s32 i;
 
     for (i = 0; i < arg2; i++, arg0 += 0xA00) {
@@ -246,7 +254,7 @@ void func_801C9EF4(const char* arg0, s32 arg1, s32 arg2) {
 }
 
 // #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9B70/func_801C9F90.s")
-extern u8* D_801D3BE0[2][0xA00]; // Texture
+extern u8 D_801D3BE0[2][0x2800]; // Texture
 extern u8 D_801E1580[];
 u8* func_801C9FFC(void);
 
@@ -259,10 +267,8 @@ u8* func_801C9F90(s32 arg0) {
     return D_801E1580;
 }
 
-
-
 // #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9B70/func_801C9FFC.s")
-
+// Clear something
 u8* func_801C9FFC(void) {
     func_801C9C74(D_801E1580, 0, 0x2800);
     return D_801E1580;
@@ -279,6 +285,7 @@ u8* func_801CA030(s32 arg0) {
 }
 
 // #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9B70/func_801CA070.s")
+// Clear something
 u8* func_801CA070(void) {
     func_801C9C74(D_801E3D80, 0, 0x1400);
     return D_801E3D80;
