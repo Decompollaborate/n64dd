@@ -47,14 +47,13 @@ s32 func_801C6FAC(void) {
 // #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C6FD8.s")
 void func_801C6FD8(void) {
     while (!func_801C6FAC()) {
-        Sleep_Usec(16666);
+        Sleep_Usec(16666); // 100000 / 6
     }
 }
 
 // #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C7018.s")
-// Adds a HungUpAndCrash
+// Adds a HungupAndCrash
 void func_801C7018(void) {
-    // u8* temp = D_80121213;
     if (D_80121213 != 0) {
         Fault_AddHungupAndCrash("../z_n64dd.c", 503);
     }

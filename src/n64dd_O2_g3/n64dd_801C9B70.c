@@ -3,46 +3,77 @@
 #define LANGUAGE_JP 0
 #define LANGUAGE_EN 1
 
-// i4 texture, 192*16. Error 41
-extern u8 D_801D2FE0[2][192 * 16 / 2];
+// Segment-external
+extern s32 gCurrentRegion;
 
-s32 func_801C9B70(s32 arg0);
-// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9B70/func_801C9B70.s")
-s32 func_801C9B70(s32 arg0) {
-    s32 phi_a2;
-    s32 phi_v0 = 0;
-    s32 phi_v1 = 0;
-    s32 temp_hi;
-    s32 phi_a2_2;
+// From other files
+void func_801C94F8(char*, u16);
+void func_801C9A10(u8*, UNK_TYPE, const char*);
 
-    if (arg0 < 10) {
-        return arg0;
+// File-internal
+// All 3 of these are used in another file
+u8* func_801C9EC0(void);
+u8* func_801C9FFC(void);
+u8* func_801CA070();
+
+extern char* D_801D2ED0[]; // "Error Number    " array
+extern u8 D_801D2FE0[2][192 * 16 / 2]; // i4 textures, 192*16. Error 41
+extern const char* D_801D2EE0[2][8][4]; // Array of error message strings
+extern u8 D_801D3BE0[2][0x2800]; // Texture array
+
+// bss
+extern u8 D_801E0F80[];
+extern u8 D_801E1580[];
+extern u8 D_801E3D80[];
+
+
+/**
+ * @brief Converts a number in decimal to a hexadecimal number with the same digits, e.g. 1234 -> 0x1234.
+ *
+ * Will only work on nonnegative numbers.
+ *
+ * @param decNumber Number in decimal to convert, e.g. 1234
+ * @return s32 Hexadecimal number with the same digits as decNumber, e.g. 0x1234
+ */
+s32 func_801C9B70(s32 decNumber) {
+    s32 currPlaceValue;
+    s32 currExponent = 0;
+    s32 accumulatedHexDigits = 0;
+    s32 remainingDecDigits;
+
+    // Nothing to do if only one digit.
+    if (decNumber < 10) {
+        return decNumber;
     }
 
-    for (phi_a2 = 1; 10 * phi_a2 <= arg0; phi_a2 *= 10) {
-        phi_v0++;
+    // Find the place value / exponent of the most significant digit in decNumber.
+    for (currPlaceValue = 1; 10 * currPlaceValue <= decNumber; currPlaceValue *= 10) {
+        currExponent++;
     }
 
-    phi_a2_2 = arg0;
+    remainingDecDigits = decNumber;
 
-    while (phi_v0--) {
-        temp_hi = phi_a2_2 % phi_a2;
-        phi_v1 |= phi_a2_2 / phi_a2;
-        phi_v1 *= 0x10;
-        phi_a2_2 = temp_hi;
-        phi_a2 /= 10;
+    // Transfer the digits to hex one at a time.
+    while (currExponent--) {
+        // Place the most significant remaining digit at the end of the hex output.
+        accumulatedHexDigits |= remainingDecDigits / currPlaceValue;
+        accumulatedHexDigits *= 0x10;         // Shift left one hex digit.
+
+        remainingDecDigits %= currPlaceValue; // Remove most significant of the remaining digits.
+
+        currPlaceValue /= 10;
     }
-    return phi_v1 + phi_a2_2;
+
+    accumulatedHexDigits += remainingDecDigits; // Only one digit left in the remainingDecDigits.
+    return accumulatedHexDigits;
 }
 
-extern s32 gCurrentRegion;
 
 // n64ddError_GetLanguage
 s32 func_801C9C48(void) {
-    return gCurrentRegion == 1 ? LANGUAGE_JP : LANGUAGE_EN;
+    return (gCurrentRegion == 1) ? LANGUAGE_JP : LANGUAGE_EN;
 }
 
-// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9B70/func_801C9C74.s")
 // n64ddError_Memset
 void func_801C9C74(u8* dest, u8 value, u32 count) {
     while (count--) {
@@ -50,17 +81,12 @@ void func_801C9C74(u8* dest, u8 value, u32 count) {
     }
 }
 
-// "Error Number    " array
-extern char* D_801D2ED0[];
 
 // n64ddError_GetErrorHeader
 char* func_801C9CA4(void) {
     return D_801D2ED0[func_801C9C48()];
 }
 
-// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9B70/func_801C9CD4.s")
-void func_801C94F8(char*, u16);
-// s32 func_801C9B70(s32);
 
 // n64ddError_WriteNumberJP
 // Writes a 2-digit number to the char buffer provided
@@ -80,7 +106,6 @@ void func_801C9CD4(char* buf, s32 number) {
     func_801C94F8(buf, ((temp_v0 & 0xF) + '£°')); // 0, 0xA380
 }
 
-// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9B70/func_801C9D54.s")
 // n64ddError_WriteNumberEN
 // Writes a 2-digit number to the char buffer provided
 // Character indices for numbers in the error code (ASCII)
@@ -96,8 +121,6 @@ void func_801C9D54(char* buf, s32 number) {
     *buf = (temp_v0 & 0xF) + '0';
 }
 
-// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9B70/func_801C9DB8.s")
-void func_801C9A10(u8*, UNK_TYPE, const char*);
 
 void func_801C9DB8(u8* arg0, s32 errorNum) {
     char* errorString = func_801C9CA4();
@@ -112,9 +135,6 @@ void func_801C9DB8(u8* arg0, s32 errorNum) {
     func_801C9A10(arg0, 0xC0, errorString);
 }
 
-// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9B70/func_801C9E28.s")
-u8* func_801C9EC0(void);
-extern u8 D_801E0F80[];
 
 u8* func_801C9E28(s32 errorNum) {
     func_801C9EC0();
@@ -131,15 +151,12 @@ u8* func_801C9E28(s32 errorNum) {
     }
 }
 
-// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9B70/func_801C9EC0.s")
 // Clear somethhing
 u8* func_801C9EC0(void) {
     func_801C9C74(D_801E0F80, 0, 0x600);
     return D_801E0F80;
 }
 
-// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9B70/func_801C9EF4.s")
-extern const char* D_801D2EE0[2][8][4];
 
 // Prints 4 lines of the error message (?). arg2 is sumber of lines, arg1 the actual message.
 void func_801C9EF4(u8* arg0, s32 arg1, s32 arg2) {
@@ -151,11 +168,6 @@ void func_801C9EF4(u8* arg0, s32 arg1, s32 arg2) {
     }
 }
 
-// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9B70/func_801C9F90.s")
-extern u8 D_801D3BE0[2][0x2800]; // Texture
-extern u8 D_801E1580[];
-u8* func_801C9FFC(void);
-
 u8* func_801C9F90(s32 arg0) {
     func_801C9FFC();
     if (arg0 == 3) {
@@ -165,16 +177,11 @@ u8* func_801C9F90(s32 arg0) {
     return D_801E1580;
 }
 
-// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9B70/func_801C9FFC.s")
 // Clear something
 u8* func_801C9FFC(void) {
     func_801C9C74(D_801E1580, 0, 0x2800);
     return D_801E1580;
 }
-
-// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9B70/func_801CA030.s")
-u8* func_801CA070();
-extern u8 D_801E3D80[];
 
 u8* func_801CA030(s32 arg0) {
     func_801CA070();
@@ -182,7 +189,6 @@ u8* func_801CA030(s32 arg0) {
     return D_801E3D80;
 }
 
-// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9B70/func_801CA070.s")
 // Clear something
 u8* func_801CA070(void) {
     func_801C9C74(D_801E3D80, 0, 0x1400);
