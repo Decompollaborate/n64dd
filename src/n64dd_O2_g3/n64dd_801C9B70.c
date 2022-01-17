@@ -7,135 +7,33 @@
 extern u8 D_801D2FE0[2][192 * 16 / 2];
 
 s32 func_801C9B70(s32 arg0);
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9B70/func_801C9B70.s")
-// s32 func_801C9B70(s32 arg0) {
-//     s32 temp_hi;
-//     s32 temp_lo;
-//     s32 temp_v0;
-//     s32 temp_v1;
-//     s32 phi_a2;
-//     u32 phi_v0;
-//     s32 phi_v0_2;
-//     s32 phi_v1;
-//     s32 phi_a2_2;
-//     s32 phi_v0_3;
-//     s32 phi_v1_2;
-//     s32 phi_a2_3;
-//     s32 phi_a1;
+// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9B70/func_801C9B70.s")
+s32 func_801C9B70(s32 arg0) {
+    s32 phi_a2;
+    s32 phi_v0 = 0;
+    s32 phi_v1 = 0;
+    s32 temp_hi;
+    s32 phi_a2_2;
 
-//     // Real (?): phi_v0, phi_v1, phi_v0_3, phi_v1_2, phi_a2, from setting these literals
-//     // Not real (?):
-//     phi_v0 = 0;
-//     phi_v1 = 0;
-//     // phi_v0_3 = 0;
-//     phi_v1_2 = 0;
-//     if (arg0 < 10) {
-//         return arg0;
-//     }
+    if (arg0 < 10) {
+        return arg0;
+    }
 
-//     phi_a2 = 1;
-//     if (arg0 >= 10) {
-//         phi_a2 = 10;
-//         do {
-//             phi_v0++;
-//             // phi_v0 = phi_v0_3;
-//             phi_a2 *= 10;
-//         } while (phi_a2 <= arg0);
-//     }
+    for (phi_a2 = 1; 10 * phi_a2 <= arg0; phi_a2 *= 10) {
+        phi_v0++;
+    }
 
-//     // phi_v0--;
-//     phi_a2_3 = arg0;
+    phi_a2_2 = arg0;
 
-//     while (phi_v0--) {
-//         // phi_v0--;
-//         temp_hi = phi_a2_3 % phi_a2;
-//         phi_v1 |= phi_a2_3 / phi_a2;
-//         phi_v1 *= 0x10;
-//         phi_a2_2 = temp_hi;
-//         phi_a2 /= 10;
-//     }
-//     return phi_v1 + arg0;
-
-//     // phi_a1 = 1;
-//     // if (arg0 >= 0xA) {
-//     //     phi_a2 = 0xA;
-//     //     do {
-//     //         temp_lo = phi_a2 * 0xA;
-//     //         temp_v0 = phi_v0_3 + 1;
-//     //         phi_a2 = temp_lo;
-//     //         phi_v0 = temp_v0;
-//     //         phi_v0_3 = temp_v0;
-//     //         phi_a1 = phi_a2;
-//     //     } while (arg0 >= temp_lo);
-//     // }
-//     // phi_v0_2 = phi_v0 - 1;
-//     // phi_a2_2 = arg0;
-//     // phi_a2_3 = arg0;
-//     // if (phi_v0 != 0) {
-//     //     do {
-//     //         temp_hi = phi_a2_3 % phi_a1;
-//     //         temp_v1 = (phi_v1_2 | (phi_a2_3 / phi_a1)) * 0x10;
-//     //         phi_v0_2 += -1;
-//     //         phi_v1 = temp_v1;
-//     //         phi_a2_2 = temp_hi;
-//     //         phi_v1_2 = temp_v1;
-//     //         phi_a2_3 = temp_hi;
-//     //         phi_a1 = phi_a1 / 10;
-//     //     } while (phi_v0_2 != 0);
-//     // }
-//     // return phi_v1 + phi_a2_2;
-// }
-// s32 func_801C9B70(s32 arg0) {
-//     s32 temp_hi;
-//     s32 temp_lo;
-//     s32 temp_v0;
-//     s32 temp_v1;
-//     s32 phi_a2;
-//     s32 phi_v0;
-//     s32 phi_v0_2;
-//     s32 phi_v1;
-//     s32 phi_a2_2;
-//     s32 phi_v0_3;
-//     s32 phi_v1_2;
-//     s32 phi_a2_3;
-//     s32 phi_a1;
-
-//     phi_v0 = 0;
-//     phi_v1 = 0;
-//     phi_v0_3 = 0;
-//     phi_v1_2 = 0;
-//     if (arg0 < 0xA) {
-//         return arg0;
-//     }
-//     phi_a1 = 1;
-//     if (arg0 >= 0xA) {
-//         phi_a2 = 0xA;
-//         do {
-//             temp_lo = phi_a2 * 0xA;
-//             temp_v0 = phi_v0_3 + 1;
-//             phi_a2 = temp_lo;
-//             phi_v0 = temp_v0;
-//             phi_v0_3 = temp_v0;
-//             phi_a1 = phi_a2;
-//         } while (arg0 >= temp_lo);
-//     }
-//     phi_v0_2 = phi_v0 - 1;
-//     phi_a2_2 = arg0;
-//     phi_a2_3 = arg0;
-//     if (phi_v0 != 0) {
-//         do {
-//             temp_hi = phi_a2_3 % phi_a1;
-//             temp_v1 = (phi_v1_2 | (phi_a2_3 / phi_a1)) * 0x10;
-//             phi_v0_2 += -1;
-//             phi_v1 = temp_v1;
-//             phi_a2_2 = temp_hi;
-//             phi_v1_2 = temp_v1;
-//             phi_a2_3 = temp_hi;
-//             phi_a1 = phi_a1 / 10;
-//         } while (phi_v0_2 != 0);
-//     }
-//     return phi_v1 + phi_a2_2;
-// }
+    while (phi_v0--) {
+        temp_hi = phi_a2_2 % phi_a2;
+        phi_v1 |= phi_a2_2 / phi_a2;
+        phi_v1 *= 0x10;
+        phi_a2_2 = temp_hi;
+        phi_a2 /= 10;
+    }
+    return phi_v1 + phi_a2_2;
+}
 
 extern s32 gCurrentRegion;
 
