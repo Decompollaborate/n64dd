@@ -72,6 +72,7 @@ MKLDSCRIPT      ?= ./tools/mkldscript
 DISASSEMBLER    ?= ./tools/py_mips_disasm/simpleDisasm.py
 ASM_PROCESSOR   ?= python3 tools/asm_processor/build.py
 
+ASMPROCFLAGS := 
 OPTFLAGS := -O2
 ASFLAGS := -march=vr4300 -32 -Iinclude
 MIPS_VERSION := -mips2
@@ -128,8 +129,13 @@ $(shell mkdir -p $(subst src/,$(BASE_DIR)/build/src/,$(SRC_DIRS)))
 # directory flags
 $(BASE_DIR)/build/src/n64dd_O2_g3/%.o: OPTFLAGS:= -O2 -g3
 
-# cc & asm-processor
-$(BASE_DIR)/build/src/%.o: CC := $(ASM_PROCESSOR) $(CC) -- $(AS) $(ASFLAGS) --
+# file flags
+$(BASE_DIR)/build/src/n64dd_O2_g3/n64dd_801C9B70.o: ASMPROCFLAGS:= --input-enc=utf-8 --output-enc=euc-jp
+
+# cc & asm-
+# Required to expand CC in the macro after it
+CC_ALT := $(CC)
+$(BASE_DIR)/build/src/%.o: CC = $(ASM_PROCESSOR) $(ASMPROCFLAGS) $(CC_ALT) -- $(AS) $(ASFLAGS) --
 
 
 #### Main Targets ####

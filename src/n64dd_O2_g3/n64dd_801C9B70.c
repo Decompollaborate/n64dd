@@ -96,14 +96,14 @@ void func_801C9CD4(char* buf, s32 number) {
     u16 character;
 
     if (number >= 10) {
-        character = ((temp_v0 >> 4) + '£∞'); // 0, 0xA380
+        character = ((temp_v0 >> 4) + 'Ôºê'); // 0, 0xA380
     } else {
-        character = '°°'; // Space, 0xA1A1
+        character = '„ÄÄ'; // Space, 0xA1A1
     }
 
     func_801C94F8(buf, character);
     buf += 2;
-    func_801C94F8(buf, ((temp_v0 & 0xF) + '£∞')); // 0, 0xA380
+    func_801C94F8(buf, ((temp_v0 & 0xF) + 'Ôºê')); // 0, 0xA380
 }
 
 // n64ddError_WriteNumberEN
