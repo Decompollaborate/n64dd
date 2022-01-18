@@ -61,7 +61,7 @@ else
 endif
 
 # Check code syntax with host compiler
-CHECK_WARNINGS := -Wall -Wextra -Wno-format-security -Wno-unknown-pragmas -Wno-unused-parameter -Wno-unused-variable -Wno-missing-braces -Wno-int-conversion -Wno-unused-but-set-variable -Wno-unused-label
+CHECK_WARNINGS := -Wall -Wextra -Wno-format-security -Wno-unknown-pragmas -Wno-unused-parameter -Wno-unused-variable -Wno-missing-braces -Wno-int-conversion -Wno-unused-but-set-variable -Wno-unused-label -Wno-multichar
 CC_CHECK   := gcc -fno-builtin -fsyntax-only -funsigned-char -fdiagnostics-color -std=gnu89 -D _LANGUAGE_C -D NON_MATCHING $(IINC) -nostdinc $(CHECK_WARNINGS)
 CC_CHECK += -m32
 
@@ -127,15 +127,15 @@ $(shell mkdir -p $(subst src/,$(BASE_DIR)/build/src/,$(SRC_DIRS)))
 
 
 # directory flags
-$(BASE_DIR)/build/src/n64dd_O2_g3/%.o: OPTFLAGS:= -O2 -g3
+$(BASE_DIR)/build/src/n64dd_O2_g3/%.o: OPTFLAGS := -O2 -g3
 
 # file flags
-$(BASE_DIR)/build/src/n64dd_O2_g3/n64dd_801C9B70.o: ASMPROCFLAGS:= --input-enc=utf-8 --output-enc=euc-jp
+$(BASE_DIR)/build/src/n64dd_O2_g3/n64dd_801C9B70.o: ASMPROCFLAGS := --input-enc=utf-8 --output-enc=euc-jp
 
-# cc & asm-
-# Required to expand CC in the macro after it
-CC_ALT := $(CC)
-$(BASE_DIR)/build/src/%.o: CC = $(ASM_PROCESSOR) $(ASMPROCFLAGS) $(CC_ALT) -- $(AS) $(ASFLAGS) --
+# cc & asm-processor
+$(BASE_DIR)/build/src/%.o: CC := $(ASM_PROCESSOR) $(ASMPROCFLAGS) $(CC) -- $(AS) $(ASFLAGS) --
+
+$(BASE_DIR)/build/src/n64dd_O2_g3/n64dd_801C9B70.o: CC := $(ASM_PROCESSOR) $(ASMPROCFLAGS) $(CC) -- $(AS) $(ASFLAGS) --
 
 
 #### Main Targets ####
