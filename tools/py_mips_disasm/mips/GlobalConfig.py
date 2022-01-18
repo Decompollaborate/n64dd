@@ -21,8 +21,12 @@ class GlobalConfig:
     DISASSEMBLE_UNKNOWN_INSTRUCTIONS: bool = False
     DISASSEMBLE_RSP: bool = False
 
+    STRING_GUESSER: bool = False
+
     QUIET: bool = False
     VERBOSE: bool = False
+    PRINT_FUNCTION_ANALYSIS_DEBUG_INFO: bool = False
+    PRINT_SYMBOL_FINDER_DEBUG_INFO: bool = False
 
 def printQuietless(*args, **kwargs):
     if not GlobalConfig.QUIET:

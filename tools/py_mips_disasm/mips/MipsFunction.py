@@ -42,6 +42,35 @@ class Function:
         return len(self.instructions)
 
 
+    def _printAnalisisDebugInfo_IterInfo(self, instr: InstructionBase, register1: int|None, register2: int|None, register3: int|None, currentVram: int, trackedRegisters: dict, registersValues: dict):
+        if not GlobalConfig.PRINT_FUNCTION_ANALYSIS_DEBUG_INFO:
+            return
+
+        print()
+        print(f"vram: {currentVram:X}")
+        print(instr)
+        if register1 is not None:
+            print(register1, instr.getRegisterName(register1))
+        if register2 is not None:
+            print(register2, instr.getRegisterName(register2))
+        if register3 is not None:
+            print(register3, instr.getRegisterName(register3))
+        print(trackedRegisters)
+        print({instr.getRegisterName(x): y for x, y in trackedRegisters.items()})
+        print({instr.getRegisterName(x): f"{y:X}" for x, y in registersValues.items()})
+        print()
+
+    def _printSymbolFinderDebugInfo_DelTrackedRegister(self, instr: InstructionBase, register: int, currentVram: int, trackedRegisters: dict):
+        if not GlobalConfig.PRINT_SYMBOL_FINDER_DEBUG_INFO:
+            return
+
+        print()
+        print(f"vram: {currentVram:X}")
+        print(instr)
+        print(trackedRegisters)
+        print(f"deleting {register} / {instr.getRegisterName(register)}")
+        print()
+
     def _processSymbol(self, luiInstr: InstructionBase, luiOffset: int, lowerInstr: InstructionBase, lowerOffset: int) -> int|None:
         upperHalf = luiInstr.immediate << 16
         lowerHalf = from2Complement(lowerInstr.immediate, 16)
@@ -54,11 +83,9 @@ class Function:
         if contextSym is None:
             if GlobalConfig.ADD_NEW_SYMBOLS:
                 contextSym = ContextSymbol(address, "D_" + toHex(address, 8)[2:])
-                if lowerInstr.isFloatInstruction():
-                    if lowerInstr.isDoubleFloatInstruction():
-                        contextSym.type = "f64"
-                    else:
-                        contextSym.type = "f32"
+                instrType = lowerInstr.mapInstrToType()
+                if instrType is not None:
+                    contextSym.setTypeIfUnset(instrType)
                 if self.parent.newStuffSuffix:
                     if address >= self.vram:
                         contextSym.name += f"_{self.parent.newStuffSuffix}"
@@ -93,8 +120,12 @@ class Function:
 
         instructionOffset = 0
         for instr in self.instructions:
+            currentVram = self.vram + instructionOffset
             isLui = False
             self.isLikelyHandwritten |= instr.uniqueId in InstructionsNotEmitedByIDO
+
+            self._printAnalisisDebugInfo_IterInfo(instr, instr.rs, instr.rt, instr.rd, currentVram, trackedRegisters, registersValues)
+
             if not self.isLikelyHandwritten:
                 if isinstance(instr, InstructionCoprocessor2):
                     self.isLikelyHandwritten = True
@@ -185,6 +216,14 @@ class Function:
                             if address is not None:
                                 registersValues[instr.rt] = address
 
+                        instrType = instr.mapInstrToType()
+                        if instrType is not None:
+                            if rs in registersValues:
+                                address = registersValues[rs]
+                                contextSym = self.context.getSymbol(address, tryPlusOffset=False)
+                                if contextSym is not None:
+                                    contextSym.setTypeIfUnset(instrType)
+
             elif instr.uniqueId == InstructionId.JR:
                 rs = instr.rs
                 if instr.getRegisterName(rs) != "$ra":
@@ -198,6 +237,7 @@ class Function:
                 if not isLui and instr.modifiesRt():
                     rt = instr.rt
                     if rt in trackedRegisters:
+                        self._printSymbolFinderDebugInfo_DelTrackedRegister(instr, rt, currentVram, trackedRegisters)
                         del trackedRegisters[rt]
                     if rt in trackedRegistersAll:
                         del trackedRegistersAll[rt]
@@ -208,12 +248,14 @@ class Function:
                         if instr.rd != instr.rs and instr.rd != instr.rt:
                             rd = instr.rd
                             if rd in trackedRegisters:
+                                self._printSymbolFinderDebugInfo_DelTrackedRegister(instr, rd, currentVram, trackedRegisters)
                                 del trackedRegisters[rd]
                             if rd in trackedRegistersAll:
                                 del trackedRegistersAll[rd]
                     else:
                         rd = instr.rd
                         if rd in trackedRegisters:
+                            self._printSymbolFinderDebugInfo_DelTrackedRegister(instr, rd, currentVram, trackedRegisters)
                             del trackedRegisters[rd]
                         if rd in trackedRegistersAll:
                             del trackedRegistersAll[rd]
@@ -225,6 +267,7 @@ class Function:
                     # in that register for anything else
                     rt = instr.rt
                     if rt in trackedRegisters:
+                        self._printSymbolFinderDebugInfo_DelTrackedRegister(instr, rt, currentVram, trackedRegisters)
                         del trackedRegisters[rt]
                     if rt in trackedRegistersAll:
                         del trackedRegistersAll[rt]
