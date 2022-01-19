@@ -66,10 +66,10 @@ void func_801C7018(void) {
 
 // #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C70E4.s")
 
-extern s32 D_801D9DC8;
+extern s32 B_801D9DC8;
 
 s32 func_801C70E4(void) {
-    return D_801D9DC8 == 1;
+    return B_801D9DC8 == 1;
 }
 
 // #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C70FC.s")
@@ -107,8 +107,8 @@ void func_801C70FC(void) {
 // s32 func_801C7A1C(s32);
 // #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C7A1C.s")
 void func_801C7A10(void *, void*);
-extern LEODiskID D_801DBFD0;
-extern s32 D_801DBFF0;
+extern LEODiskID B_801DBFD0;
+extern s32 B_801DBFF0;
 
 typedef struct {
     /* 0x00 */ char unk00[0x38];
@@ -120,20 +120,20 @@ s32 func_801C7A1C(struct_801C7A1C* arg0) {
 
     diskId = &arg0->diskId;
     func_801C7A10(diskId, arg0);
-    if (D_801DBFF0 == 0) {
+    if (B_801DBFF0 == 0) {
         if ((bcmp(&diskId->gameName, "EZLJ", 4) == 0) || (bcmp(&diskId->gameName, "EZLE", 4) == 0)) {
-            D_801DBFD0 = *diskId;
-            D_801DBFF0 = 1;
-            D_801D9DC8 = 1;
+            B_801DBFD0 = *diskId;
+            B_801DBFF0 = 1;
+            B_801D9DC8 = 1;
         } else {
-            D_801D9DC8 = 2;
+            B_801D9DC8 = 2;
         }
-    } else if (bcmp(&D_801DBFD0, diskId, 0x20) == 0) {
-        D_801D9DC8 = 1;
+    } else if (bcmp(&B_801DBFD0, diskId, 0x20) == 0) {
+        B_801D9DC8 = 1;
     } else {
-        D_801D9DC8 = 2;
+        B_801D9DC8 = 2;
     }
-    return D_801D9DC8 == 1;
+    return B_801D9DC8 == 1;
 }
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C7B48.s")

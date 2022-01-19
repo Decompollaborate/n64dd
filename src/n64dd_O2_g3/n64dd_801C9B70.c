@@ -22,9 +22,9 @@ extern const char* D_801D2EE0[2][8][4]; // Array of error message strings
 extern u8 D_801D3BE0[2][0x2800]; // Texture array
 
 // bss
-extern u8 D_801E0F80[];
-extern u8 D_801E1580[];
-extern u8 D_801E3D80[];
+extern u8 B_801E0F80[];
+extern u8 B_801E1580[];
+extern u8 B_801E3D80[];
 
 
 /**
@@ -144,17 +144,17 @@ u8* func_801C9E28(s32 errorNum) {
     }
 
     if (((errorNum >= 37) && (errorNum < 41)) || (errorNum == 31) || (errorNum == 32)) {
-        return D_801E0F80;
+        return B_801E0F80;
     } else {
-        func_801C9DB8(D_801E0F80, errorNum);
-        return D_801E0F80;
+        func_801C9DB8(B_801E0F80, errorNum);
+        return B_801E0F80;
     }
 }
 
 // Clear somethhing
 u8* func_801C9EC0(void) {
-    func_801C9C74(D_801E0F80, 0, 0x600);
-    return D_801E0F80;
+    func_801C9C74(B_801E0F80, 0, 0x600);
+    return B_801E0F80;
 }
 
 
@@ -173,24 +173,24 @@ u8* func_801C9F90(s32 arg0) {
     if (arg0 == 3) {
         return D_801D3BE0[func_801C9C48()];
     }
-    func_801C9EF4(D_801E1580, arg0, 4);
-    return D_801E1580;
+    func_801C9EF4(B_801E1580, arg0, 4);
+    return B_801E1580;
 }
 
 // Clear something
 u8* func_801C9FFC(void) {
-    func_801C9C74(D_801E1580, 0, 0x2800);
-    return D_801E1580;
+    func_801C9C74(B_801E1580, 0, 0x2800);
+    return B_801E1580;
 }
 
 u8* func_801CA030(s32 arg0) {
     func_801CA070();
-    func_801C9EF4(D_801E3D80, arg0, 2);
-    return D_801E3D80;
+    func_801C9EF4(B_801E3D80, arg0, 2);
+    return B_801E3D80;
 }
 
 // Clear something
 u8* func_801CA070(void) {
-    func_801C9C74(D_801E3D80, 0, 0x1400);
-    return D_801E3D80;
+    func_801C9C74(B_801E3D80, 0, 0x1400);
+    return B_801E3D80;
 }
