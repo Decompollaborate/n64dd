@@ -174,14 +174,22 @@ beginseg
     address 0x801C6E80
 
     include "oot/ne0/build/src/n64dd_O2_g3/z_n64dd.o"
+    include "oot/ne0/build/asm/data/n64dd/z_n64dd.data.o"
+
     pad_text
-    include "oot/ne0/build/src/n64dd/n64dd_801C8000.o"
+    include "oot/ne0/build/src/n64dd_O2_g3/n64dd_801C8000.o"
+    include "oot/ne0/build/asm/data/n64dd/n64dd_801C8000.data.o"
+
     include "oot/ne0/build/src/n64dd_O2_g3/n64dd_801C8940.o"
     include "oot/ne0/build/src/n64dd_O2_g3/n64dd_801C9440.o"
     include "oot/ne0/build/src/n64dd_O2_g3/n64dd_801C9B70.o"
+    include "oot/ne0/build/src/n64dd_O2_g3/n64dd_error_titles.o"
+    include "oot/ne0/build/src/n64dd_O2_g3/n64dd_error_bodies.o"
+//    include "oot/ne0/build/asm/data/n64dd/n64dd_801C9B70.data.o" // Error message string tables
+    include "oot/ne0/build/asm/data/n64dd/n64dd_801D2FE0.data.o" // Error message textures
 
-    include "oot/ne0/build/asm/data/n64dd/n64dd_801D8F40.rodata.o"
-    include "oot/ne0/build/asm/data/n64dd/n64dd_801D8F70.rodata.o"
+//    include "oot/ne0/build/asm/data/n64dd/n64dd_801D8F40.rodata.o"
+//    include "oot/ne0/build/asm/data/n64dd/n64dd_801D8F70.rodata.o"
 
     include "oot/ne0/build/src/n64dd_O2_g3/n64dd_801CA0B0.o"
 
@@ -232,10 +240,8 @@ beginseg
     include "oot/ne0/build/src/n64dd/n64dd_801D2D50.o"
 
     // data
-    include "oot/ne0/build/asm/data/n64dd/z_n64dd.data.o"
-    include "oot/ne0/build/asm/data/n64dd/n64dd_801C8000.data.o"
-    include "oot/ne0/build/asm/data/n64dd/n64dd_801C9B70.data.o" // Error message string tables
-    include "oot/ne0/build/asm/data/n64dd/n64dd_801D2FE0.data.o" // Error message textures
+
+
     include "oot/ne0/build/asm/data/n64dd/n64dd_801CA0B0.data.o"
 
     // bss

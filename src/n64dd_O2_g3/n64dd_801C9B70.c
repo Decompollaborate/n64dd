@@ -11,21 +11,21 @@ void func_801C94F8(char*, u16);
 void func_801C9A10(u8*, UNK_TYPE, const char*);
 
 // File-internal
-// All 3 of these are used in another file
+// All 3 of these are also used in another file
 u8* func_801C9EC0(void);
 u8* func_801C9FFC(void);
-u8* func_801CA070();
+u8* func_801CA070(void);
 
-extern char* D_801D2ED0[]; // "Error Number    " array
-extern u8 D_801D2FE0[2][192 * 16 / 2]; // i4 textures, 192*16. Error 41
+extern char* D_801D2ED0[];              // "Error Number    " array
 extern const char* D_801D2EE0[2][8][4]; // Array of error message strings
-extern u8 D_801D3BE0[2][0x2800]; // Texture array
+
+extern u8 D_801D2FE0[2][192 * 16 / 2]; // i4 textures, 192*16. Error 41
+extern u8 D_801D3BE0[2][0x2800];       // Texture array
 
 // bss
 extern u8 B_801E0F80[];
 extern u8 B_801E1580[];
 extern u8 B_801E3D80[];
-
 
 /**
  * @brief Converts a number in decimal to a hexadecimal number with the same digits, e.g. 1234 -> 0x1234.
@@ -57,7 +57,7 @@ s32 func_801C9B70(s32 decNumber) {
     while (currExponent--) {
         // Place the most significant remaining digit at the end of the hex output.
         accumulatedHexDigits |= remainingDecDigits / currPlaceValue;
-        accumulatedHexDigits *= 0x10;         // Shift left one hex digit.
+        accumulatedHexDigits *= 0x10; // Shift left one hex digit.
 
         remainingDecDigits %= currPlaceValue; // Remove most significant of the remaining digits.
 
@@ -67,7 +67,6 @@ s32 func_801C9B70(s32 decNumber) {
     accumulatedHexDigits += remainingDecDigits; // Only one digit left in the remainingDecDigits.
     return accumulatedHexDigits;
 }
-
 
 // n64ddError_GetLanguage
 s32 func_801C9C48(void) {
@@ -81,12 +80,10 @@ void func_801C9C74(u8* dest, u8 value, u32 count) {
     }
 }
 
-
 // n64ddError_GetErrorHeader
 char* func_801C9CA4(void) {
     return D_801D2ED0[func_801C9C48()];
 }
-
 
 // n64ddError_WriteNumberJP
 // Writes a 2-digit number to the char buffer provided
@@ -121,7 +118,6 @@ void func_801C9D54(char* buf, s32 number) {
     *buf = (temp_v0 & 0xF) + '0';
 }
 
-
 void func_801C9DB8(u8* arg0, s32 errorNum) {
     char* errorString = func_801C9CA4();
 
@@ -134,7 +130,6 @@ void func_801C9DB8(u8* arg0, s32 errorNum) {
     }
     func_801C9A10(arg0, 0xC0, errorString);
 }
-
 
 u8* func_801C9E28(s32 errorNum) {
     func_801C9EC0();
