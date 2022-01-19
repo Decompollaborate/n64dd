@@ -59,9 +59,19 @@ void func_801C8A64(void) {
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8940/func_801C8AA8.s")
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8940/func_801C8B58.s")
+// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8940/func_801C8B58.s")
+void func_801C8B58(s32 arg0, s32 arg1, s32 arg2) {
+    func_801C8940(arg0);
+    func_801C89B8(arg1);
+    func_801C8A30(arg2);
+}
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8940/func_801C8B90.s")
+// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8940/func_801C8B90.s")
+void func_801C8B90(void) {
+    func_801C8974();
+    func_801C89EC();
+    func_801C8A64();
+}
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8940/func_801C8BC0.s")
 
