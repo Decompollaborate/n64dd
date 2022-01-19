@@ -132,3 +132,5 @@
 80051B50,GameInfo_Init
 800012A0,Locale_Init
 80001310,Locale_ResetRegion
+800D4390,bcmp
+800D3810,__osSumcalc
