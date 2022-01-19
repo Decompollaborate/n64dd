@@ -66,7 +66,7 @@ void func_801C7018(void) {
 
 // #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C70E4.s")
 
-extern s32 B_801D9DC8;
+extern s32 B_801D9DC8; // 1 if disk gameName is correct, 2 otherwise
 
 s32 func_801C70E4(void) {
     return B_801D9DC8 == 1;
@@ -108,22 +108,23 @@ void func_801C70FC(void) {
 // #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C7A1C.s")
 void func_801C7A10(void *, void*);
 extern LEODiskID B_801DBFD0;
-extern s32 B_801DBFF0;
+extern s32 B_801DBFF0; // bool
 
 typedef struct {
     /* 0x00 */ char unk00[0x38];
     /* 0x038 */ LEODiskID diskId;
 } struct_801C7A1C;
 
+// Checks diskId, sets B_801D9DC8 and returns true if diskId is correct
 s32 func_801C7A1C(struct_801C7A1C* arg0) {
     LEODiskID *diskId;
 
     diskId = &arg0->diskId;
     func_801C7A10(diskId, arg0);
-    if (B_801DBFF0 == 0) {
+    if (!B_801DBFF0) {
         if ((bcmp(&diskId->gameName, "EZLJ", 4) == 0) || (bcmp(&diskId->gameName, "EZLE", 4) == 0)) {
             B_801DBFD0 = *diskId;
-            B_801DBFF0 = 1;
+            B_801DBFF0 = true;
             B_801D9DC8 = 1;
         } else {
             B_801D9DC8 = 2;

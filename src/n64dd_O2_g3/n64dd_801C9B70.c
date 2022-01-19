@@ -143,6 +143,7 @@ u8* func_801C9E28(s32 errorNum) {
         return D_801D2FE0[func_801C9C48()];
     }
 
+    // 31,32, 37,38,39,40
     if (((errorNum >= 37) && (errorNum < 41)) || (errorNum == 31) || (errorNum == 32)) {
         return B_801E0F80;
     } else {
@@ -151,20 +152,19 @@ u8* func_801C9E28(s32 errorNum) {
     }
 }
 
-// Clear somethhing
+// Clear something
 u8* func_801C9EC0(void) {
     func_801C9C74(B_801E0F80, 0, 0x600);
     return B_801E0F80;
 }
 
-
-// Prints 4 lines of the error message (?). arg2 is sumber of lines, arg1 the actual message.
-void func_801C9EF4(u8* arg0, s32 arg1, s32 arg2) {
+// Prints the error message body (?)
+void func_801C9EF4(u8* arg0, s32 errorNum, s32 lineCount) {
     s32 i;
 
-    for (i = 0; i < arg2; i++, arg0 += 0xA00) {
+    for (i = 0; i < lineCount; i++, arg0 += 0xA00) {
         if (1) {}
-        func_801C9A10(arg0, 320, D_801D2EE0[func_801C9C48()][arg1][i]);
+        func_801C9A10(arg0, 320, D_801D2EE0[func_801C9C48()][errorNum][i]);
     }
 }
 

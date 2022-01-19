@@ -1,16 +1,61 @@
 #include "n64dd.h"
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8940/func_801C8940.s")
+u8* func_801C9E28(s32 errorNum);
+u8* func_801C9EC0(void);
+u8* func_801C9F90(s32 errorNum);
+u8* func_801C9FFC(void);
+u8* func_801CA030(s32 errorNum);
+u8* func_801CA070(void);
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8940/func_801C8974.s")
+extern u8* D_801D2EA4;
+extern s32 D_801D2EA8;
+extern u8* D_801D2EAC;
+extern u8* D_801D2EB0;
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8940/func_801C89B8.s")
+extern s32 B_801E0F60;
+extern s32 B_801E0F64;
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8940/func_801C89EC.s")
+// Set error message title texture?
+void func_801C8940(s32 errorNum) {
+    D_801D2EA4 = func_801C9E28(errorNum);
+    D_801D2EA8 = 1;
+}
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8940/func_801C8A30.s")
+// Clear error message title texture?
+void func_801C8974(void) {
+    if (D_801D2EA8 == 1) {
+        D_801D2EA4 = func_801C9EC0();
+        D_801D2EA8 = 0;
+    }
+}
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8940/func_801C8A64.s")
+// Set error message something
+void func_801C89B8(s32 errorNum) {
+    D_801D2EAC = func_801C9F90(errorNum);
+    B_801E0F60 = 1;
+}
+
+// Clear error message something
+void func_801C89EC(void) {
+    if (B_801E0F60 == 1) {
+        D_801D2EAC = func_801C9FFC();
+        B_801E0F60 = 0;
+    }
+}
+
+// Set error message something
+void func_801C8A30(s32 errorNum) {
+    D_801D2EB0 = func_801CA030(errorNum);
+    B_801E0F64 = 1;
+}
+
+// Clear error message something
+void func_801C8A64(void) {
+    if (B_801E0F64 == 1) {
+        D_801D2EB0 = func_801CA070();
+        B_801E0F64 = 0;
+    }
+}
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8940/func_801C8AA8.s")
 
