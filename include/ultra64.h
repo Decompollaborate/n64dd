@@ -29,4 +29,6 @@
 #include "ultra64/motor.h"
 #include "ultra64/r4300.h"
 
+#include "ultra64/leo.h"
+
 #endif

@@ -80,6 +80,7 @@ void __osRestoreInt(OSIntMask im);
 s32 osEPiReadIo(OSPiHandle* pihandle, u32 devAddr, u32* data);
 s32 osEPiWriteIo(OSPiHandle* pihandle, u32 devAddr, u32 data);
 void osStartThread(OSThread* arg0);
+u32 bcmp(void* __sl, void* __s2, u32 __n);
 
 OSPiHandle* osDriveRomInit(void);
 
