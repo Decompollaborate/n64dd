@@ -117,7 +117,50 @@ UNK_TYPE4 func_801C9778(UNK_TYPE4 arg0, UNK_TYPE4* arg1, s32 arg2) {
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9440/func_801C97C4.s")
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9440/func_801C9954.s")
+// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9440/func_801C9954.s")
+void func_801C9954(u8* bytes, s32* arg1, s32* arg2) {
+    u8 prevCh;
+    u8 nextCh;
+
+    if (func_801C9440(bytes)) {
+        *arg2 = 0;
+        *arg1 = 0;
+    } else {
+        *arg2 = 0;
+        *arg1 = 0;
+
+        prevCh = bytes[-1];
+        nextCh = bytes[1];
+
+        switch (bytes[0]) {
+            case ' ':
+                *arg2 = 0;
+                *arg1 = 0;
+                break;
+
+            case 'I':
+            case 'i':
+                *arg2 = 2;
+                *arg1 = 2;
+                if (1) {}
+                *arg2 = 2;
+                if (prevCh == 0x20) {
+                    *arg1 = 0;
+                }
+                if (nextCh == 0x20) {
+                    *arg2 = 0;
+                }
+                break;
+
+            default:
+                *arg2 = 1;
+                *arg1 = 1;
+                if (1) {}
+                *arg2 = 1;
+                break;
+        }
+    }
+}
 
 void func_801C9A10(u8*, s32, char*);
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9440/func_801C9A10.s")
