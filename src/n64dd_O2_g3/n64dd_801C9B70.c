@@ -8,7 +8,7 @@ extern s32 gCurrentRegion;
 
 // From other files
 void func_801C94F8(char*, u16);
-void func_801C9A10(u8*, UNK_TYPE, const char*);
+void func_801C9A10(u8*, s32, char*);
 
 // File-internal
 // All 3 of these are also used in another file
@@ -119,16 +119,16 @@ void func_801C9D54(char* buf, s32 number) {
 }
 
 void func_801C9DB8(u8* arg0, s32 errorNum) {
-    char* errorString = func_801C9CA4();
+    char* errorHeader = func_801C9CA4();
 
     //! @bug: both of these functions will write to the pointer target, but errorString points to a string literal,
     //! which is meant to be const.
     if (gCurrentRegion == LANGUAGE_EN) {
-        func_801C9CD4(&errorString[12], errorNum);
+        func_801C9CD4(&errorHeader[12], errorNum);
     } else {
-        func_801C9D54(&errorString[13], errorNum);
+        func_801C9D54(&errorHeader[13], errorNum);
     }
-    func_801C9A10(arg0, 0xC0, errorString);
+    func_801C9A10(arg0, 192, errorHeader);
 }
 
 u8* func_801C9E28(s32 errorNum) {
@@ -158,17 +158,18 @@ void func_801C9EF4(u8* arg0, s32 errorNum, s32 lineCount) {
     s32 i;
 
     for (i = 0; i < lineCount; i++, arg0 += 0xA00) {
+        char* line = D_801D2EE0[func_801C9C48()][errorNum][i];
         if (1) {}
-        func_801C9A10(arg0, 320, D_801D2EE0[func_801C9C48()][errorNum][i]);
+        func_801C9A10(arg0, 320, line);
     }
 }
 
-u8* func_801C9F90(s32 arg0) {
+u8* func_801C9F90(s32 errorNum) {
     func_801C9FFC();
-    if (arg0 == 3) {
+    if (errorNum == 3) {
         return D_801D3BE0[func_801C9C48()];
     }
-    func_801C9EF4(B_801E1580, arg0, 4);
+    func_801C9EF4(B_801E1580, errorNum, 4);
     return B_801E1580;
 }
 
@@ -178,9 +179,9 @@ u8* func_801C9FFC(void) {
     return B_801E1580;
 }
 
-u8* func_801CA030(s32 arg0) {
+u8* func_801CA030(s32 errorNum) {
     func_801CA070();
-    func_801C9EF4(B_801E3D80, arg0, 2);
+    func_801C9EF4(B_801E3D80, errorNum, 2);
     return B_801E3D80;
 }
 
