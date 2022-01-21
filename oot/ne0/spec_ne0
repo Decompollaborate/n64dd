@@ -183,7 +183,7 @@ beginseg
     include "oot/ne0/build/src/n64dd_O2_g3/n64dd_801C8940.o"
     include "oot/ne0/build/src/n64dd_O2_g3/n64dd_801C9440.o"
     include "oot/ne0/build/src/n64dd_O2_g3/n64dd_801C9B70.o"
-    include "oot/ne0/build/src/n64dd_O2_g3/n64dd_error_titles.o"
+    include "oot/ne0/build/src/n64dd_O2_g3/n64dd_error_headers.o"
     include "oot/ne0/build/src/n64dd_O2_g3/n64dd_error_bodies.o"
 //    include "oot/ne0/build/asm/data/n64dd/n64dd_801C9B70.data.o" // Error message string tables
     include "oot/ne0/build/asm/data/n64dd/n64dd_801D2FE0.data.o" // Error message textures
