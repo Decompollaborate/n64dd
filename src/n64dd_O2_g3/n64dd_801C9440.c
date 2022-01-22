@@ -32,18 +32,45 @@ s32 func_801C9494(u8* bytes) {
     return false;
 }
 
+// Extracts 2 bytes from a bytepacked big-endian short.
 void func_801C94F8(char* arg0, u16 arg1) {
     arg0[0] = arg1 >> 8;
     arg0[1] = arg1 & 0xFF;
 }
 
-// Convert EUC-JP to JIS (?)
-u16 func_801C9514(u16 arg0) {
-    return arg0 - 0x8080;
+// Convert EUC-JP to JIS X 0208
+u16 func_801C9514(u16 eucjpCh) {
+    return eucjpCh - 0x8080;
 }
 
-u16 func_801C9534(u16);
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9440/func_801C9534.s")
+/**
+ * @brief Converts a JIS X 0208 codepoint to a Shift-JIS one.
+ *
+ * @param jisCodepoint Two bytes, each between 0x21 and 0x7E, packed big-endian into a short.
+ * @return u16 Shift-JIS character representation (expected to be big-endian)
+ */
+u16 func_801C9534(u16 jisCodepoint) {
+    u8 hiByte = (jisCodepoint >> 8) & 0xFF;
+    u8 loByte = jisCodepoint & 0xFF;
+
+    if (hiByte & 1) {
+        loByte += 0x1F;
+        if (loByte >= 0x7F) {
+            loByte++;
+        }
+    } else {
+        loByte += 0x7E;
+    }
+
+    hiByte = (hiByte - 0x21) / 2 + 0x81;
+    if (hiByte >= 0xA0) {
+        hiByte += 0x40;
+    }
+
+    return (hiByte << 8) + loByte;
+}
+
+
 
 void func_801C95C0(s32, s32, UNK_TYPE);
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9440/func_801C95C0.s")
