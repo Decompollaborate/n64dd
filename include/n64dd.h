@@ -5,7 +5,6 @@
 #include "macros.h"
 #include "libultra_functions.h"
 #include "code_functions.h"
-#include "n64dd_functions.h"
 
 typedef struct {
     /* 0x000 */ UNK_TYPE unk_000;

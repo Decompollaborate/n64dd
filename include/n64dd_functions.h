@@ -2,6 +2,7 @@
 #define N64DD_FUNCTIONS_H
 
 #include "ultra64.h"
+#include "n64dd.h"
 
 
 // void func_801C6E80();
@@ -165,7 +166,7 @@
 // void func_801CBEF0();
 
 // void func_801CC040();
-// void func_801CC0F0();
+struct_801E5EF0* func_801CC0F0(void);
 
 // void func_801CC190();
 // void func_801CC1F0();
