@@ -181,15 +181,14 @@ beginseg
     include "oot/ne0/build/asm/data/n64dd/n64dd_801C8000.data.o"
 
     include "oot/ne0/build/src/n64dd_O2_g3/n64dd_801C8940.o"
+
     include "oot/ne0/build/src/n64dd_O2_g3/n64dd_801C9440.o"
+//    include "oot/ne0/build/asm/data/n64dd/n64dd_801C9440.data.o"
+
     include "oot/ne0/build/src/n64dd_O2_g3/n64dd_801C9B70.o"
     include "oot/ne0/build/src/n64dd_O2_g3/n64dd_error_headers.o"
     include "oot/ne0/build/src/n64dd_O2_g3/n64dd_error_bodies.o"
-//    include "oot/ne0/build/asm/data/n64dd/n64dd_801C9B70.data.o" // Error message string tables
     include "oot/ne0/build/asm/data/n64dd/n64dd_801D2FE0.data.o" // Error message textures
-
-//    include "oot/ne0/build/asm/data/n64dd/n64dd_801D8F40.rodata.o"
-//    include "oot/ne0/build/asm/data/n64dd/n64dd_801D8F70.rodata.o"
 
     include "oot/ne0/build/src/n64dd_O2_g3/n64dd_801CA0B0.o"
 
@@ -198,8 +197,7 @@ beginseg
     include "oot/ne0/build/src/n64dd/n64dd_801CAC40.o"
     include "oot/ne0/build/src/n64dd/n64dd_801CB640.o"
 
-    // Handwritten
-    include "oot/ne0/build/asm/text/n64dd/n64dd_801CBCD0.text.o"
+    include "oot/ne0/build/asm/text/n64dd/n64dd_801CBCD0.text.o" // Handwritten
 
     include "oot/ne0/build/src/n64dd/n64dd_801CBD30.o"
     include "oot/ne0/build/src/n64dd/n64dd_801CBEF0.o"
@@ -230,8 +228,8 @@ beginseg
 
     include "oot/ne0/build/src/n64dd/n64dd_801CEBA0.o"
 
-    // Handwritten
-    include "oot/ne0/build/asm/text/n64dd/n64dd_801CF0B0.text.o"
+    include "oot/ne0/build/asm/text/n64dd/n64dd_801CF0B0.text.o" // Handwritten
+    include "oot/ne0/build/asm/text/n64dd/n64dd_801CFBB0.text.o" // Handwritten
 
     include "oot/ne0/build/src/n64dd/n64dd_801D2040.o"
     include "oot/ne0/build/src/n64dd/n64dd_801D2170.o"
@@ -240,8 +238,6 @@ beginseg
     include "oot/ne0/build/src/n64dd/n64dd_801D2D50.o"
 
     // data
-
-
     include "oot/ne0/build/asm/data/n64dd/n64dd_801CA0B0.data.o"
 
     // bss

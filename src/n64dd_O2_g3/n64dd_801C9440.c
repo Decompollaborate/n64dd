@@ -3,6 +3,9 @@
 
 UNK_TYPE func_801CF0B0(UNK_TYPE); // Handwritten function, looks up in a table.
 
+// data
+void (*D_801D2EC0)(s32, s32, s32) = NULL;
+
 /**
  * Seems to work out if a pair of bytes is a valid EUC-JP character, although there may be additions to the font that
  * make the strange first check make more sense.
@@ -72,9 +75,6 @@ u16 func_801C9534(u16 jisCodepoint) {
 }
 
 // #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9440/func_801C95C0.s")
-extern void (*D_801D2EC0)(s32, s32, UNK_TYPE);
-// void (*D_801D2EC0)(s32, s32, s32) = NULL;
-
 void func_801C95C0(s32 arg0, s32 arg1, UNK_TYPE arg2) {
     if (D_801D2EC0 != NULL) {
         D_801D2EC0(arg0, arg1, arg2);
