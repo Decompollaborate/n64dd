@@ -3,3 +3,4 @@
 801C5FA4,n64dd_SetDiskVersion
 800052E0,__osDisableInt
 80005350,__osRestoreInt
+800D4A90,bcmp

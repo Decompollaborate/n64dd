@@ -1,10 +1,8 @@
 ,,,ner,,,ne0,,,ne1,,,np0,,,ne2,,,np1,,
 File,,Notes,Offset,VRAM,Size,Offset,VRAM,Size,Offset,VRAM,Size,Offset,VRAM,Size,Offset,VRAM,Size,Offset,VRAM,Size
 z_n64dd,,,BED0,801D2B50,10,BFD0,801D2E50,10,BFB0,801D2FF0,,BF50,801D0E10,,BF90,801D36D0,,BF50,801D0E50,
-n64dd_801C8000,,,BEE0,801D2B60,,BFE0,801D2E60,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
+n64dd_801C8000,,,BEE0,801D2B60,,BFE0,801D2E60,60,,,,,,,,,,,,
+n64dd_801C9440,,,,,,C040,801D2EC0,10,,,,,,,,,,,,
 n64dd_801C9B70,,Error strings,,,,C050,801D2ED0,110,,,,,,,,,,,,
 n64dd_801D2FE0,,Error textures arrays,,,,C160,801D2FE0,5B80,,,,,,,,,,,,
 n64dd_801CA0B0,,,,,,11CE0,801D8B60,,,,,,,,,,,,,

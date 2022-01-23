@@ -1,3 +1,4 @@
 80000DF0,DmaMgr_SendRequest1
 80002E80,bzero
 801C7CB0,n64dd_SetDiskVersion
+800D4180,bcmp
