@@ -1,7 +1,28 @@
 #include "n64dd.h"
 #include "n64dd_functions.h"
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801CC040/func_801CC040.s")
+extern struct_801E5E78* B_801E5E78;
+extern OSPiHandle* B_801E5EC0;
+
+void func_801CC040(void) {
+    u32 sp1C;
+
+    osEPiReadIo(B_801E5EC0, 0x05000540U, &sp1C);
+    if (func_801CC820(0x1B0000, 0) == 0) {
+        u32 sp18;
+
+        osEPiReadIo(B_801E5EC0, 0x05000500U, &sp18);
+        if (sp18 & 0x10000) {
+            sp1C |= 0x100000;
+        }
+    }
+
+    B_801E5E78->unk_0C = 0;
+    B_801E5E78->unk_0D = (s8) (sp1C >> 0x10);
+    B_801E5E78->unk_0E = 1;
+    B_801E5E78->unk_0F = 0;
+    B_801E5E78->unk_04 = 0;
+}
 
 extern struct_801E5EF0 B_801E5EF0;
 extern struct_801E5F04 B_801E5F04;

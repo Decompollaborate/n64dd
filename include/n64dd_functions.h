@@ -165,7 +165,7 @@
 
 // void func_801CBEF0();
 
-// void func_801CC040();
+void func_801CC040(void);
 struct_801E5EF0* func_801CC0F0(void);
 
 // void func_801CC190();
@@ -176,7 +176,7 @@ struct_801E5EF0* func_801CC0F0(void);
 // void func_801CC574();
 // void func_801CC728();
 // void func_801CC7D0();
-// void func_801CC820();
+s32 func_801CC820(UNK_TYPE, UNK_TYPE);
 // void func_801CC858();
 // void func_801CC944();
 // void func_801CC96C();
