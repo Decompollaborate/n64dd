@@ -25,4 +25,21 @@ typedef struct {
     /* 0x0000 */ char unk_0000[0x4D10];
 } struct_801DC000; // size = 0x4D10?
 
+typedef struct {
+    /* 0x00 */ UNK_TYPE4 unk_0;
+    /* 0x00 */ UNK_TYPE1 unk_4;
+    /* 0x00 */ UNK_TYPE1 unk_5;
+    /* 0x00 */ UNK_TYPE1 unk_6;
+    /* 0x00 */ UNK_TYPE1 unk_7;
+    /* 0x00 */ UNK_TYPE1 unk_8;
+    /* 0x00 */ UNK_TYPE1 unk_9;
+    /* 0x0A */ char unk_A[0x2]; // padding?
+    /* 0x00 */ UNK_TYPE4 unk_C;
+    /* 0x10 */ UNK_TYPE4 unk_10;
+} struct_801E5EF0; // size = 0x14
+
+typedef struct {
+    /* 0x00 */ char unk_00[0x60];
+} struct_801E5F04; // size = 0x60
+
 #endif
