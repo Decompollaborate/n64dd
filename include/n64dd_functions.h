@@ -160,7 +160,7 @@
 
 // void func_801CBCD0();
 
-// void func_801CBD30();
+void func_801CBD30(void);
 // void func_801CBD5C();
 
 // void func_801CBEF0();
@@ -169,7 +169,7 @@ void func_801CC040(void);
 struct_801E5EF0* func_801CC0F0(void);
 
 // void func_801CC190();
-// void func_801CC1F0();
+void func_801CC1F0(void);
 
 // void func_801CC380();
 // void func_801CC48C();
@@ -203,36 +203,36 @@ s32 func_801CC820(UNK_TYPE, UNK_TYPE);
 // void func_801CDDF4();
 // void func_801CDE38();
 // void func_801CDE80();
-// void func_801CE030();
+void func_801CE030();
 
 // void func_801CE120();
 
-// void func_801CE1F0();
+void func_801CE1F0(void);
 
-// void func_801CE2A0();
+void func_801CE2A0(void);
 
 // void func_801CE340();
 // void func_801CE534();
 
-// void func_801CE590();
+void func_801CE590(void);
 
 // void func_801CE630();
 
 // void func_801CE680();
 
-// void func_801CE7E0();
-// void func_801CE888();
+void func_801CE7E0(void);
+void func_801CE888(void);
 
-// void func_801CE900();
+void func_801CE900(void);
 
-// void func_801CEBA0();
-// void func_801CEC5C();
+void func_801CEBA0(void);
+void func_801CEC5C(void);
 // void func_801CEE94();
 // void func_801CF004();
 
 // void func_801CF0B0();
 
-// void func_801D2040();
+void func_801D2040(void);
 
 // void func_801D2170();
 
@@ -243,7 +243,7 @@ s32 func_801CC820(UNK_TYPE, UNK_TYPE);
 
 // void func_801D2CB0();
 
-// void func_801D2D50();
-// void func_801D2D90();
+void func_801D2D50(void);
+void func_801D2D90(void);
 
 #endif
