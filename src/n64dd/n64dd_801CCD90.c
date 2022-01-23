@@ -1,4 +1,5 @@
 #include "n64dd.h"
+#include "n64dd_functions.h"
 
 // There's a file split somewhere in this file, between (func_801CCD90, func_801CDE80)
 

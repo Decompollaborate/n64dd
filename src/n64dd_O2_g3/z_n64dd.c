@@ -1,4 +1,5 @@
 #include "n64dd.h"
+#include "n64dd_functions.h"
 
 extern struct_801D9C30 D_801D9C30;
 

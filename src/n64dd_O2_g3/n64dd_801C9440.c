@@ -1,4 +1,5 @@
 #include "n64dd.h"
+#include "n64dd_functions.h"
 
 UNK_TYPE func_801CF0B0(UNK_TYPE); // Handwritten function, looks up in a table.
 

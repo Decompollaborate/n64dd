@@ -1,4 +1,5 @@
 #include "n64dd.h"
+#include "n64dd_functions.h"
 
 char* D_801D2EE0[2][8][4] = {
     {
