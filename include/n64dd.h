@@ -41,6 +41,18 @@ typedef struct {
     /* 0x00 */ char unk_00[0x60];
 } struct_801E5F04; // size = 0x60
 
+extern u16 D_801D9516[];
+extern u16 D_801D9686[];
+extern u8 LEOBYTE_TBL1[];
+extern u8 LEOBYTE_TBL2[];
+extern u8 LEOVZONE_PZONEHD_TBL[];
+extern u16 LEOZONE_SCYL_TBL[];
+extern s32 LEO_country_code;
+extern u8 LEOdisk_type;
+extern u8 LEO_sys_data[];
+
+extern tgt_param_form LEOtgt_param;
+
 // bss
 extern LEOCmd *LEOcur_command;
 

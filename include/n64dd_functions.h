@@ -213,7 +213,7 @@ void func_801CE1F0(void);
 void func_801CE2A0(void);
 
 u16 leoLba_to_phys(u32 lba);
-// void leoLba_to_vzone();
+u16 leoLba_to_vzone(u32 lba);
 
 void func_801CE590(void);
 

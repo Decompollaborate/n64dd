@@ -30,5 +30,7 @@
 #include "ultra64/r4300.h"
 
 #include "ultra64/leo.h"
+#include "ultra64/leoappli.h"
+#include "ultra64/leodrive.h"
 
 #endif
