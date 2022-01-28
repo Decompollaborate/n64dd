@@ -170,12 +170,14 @@
 800E0AA4,Message_Update
 800E162C,Message_SetTables
 801CBEF0,LeoLBAToByte
+801CC040,leoInquiry
+801CC858,leoSend_asic_cmd_w
 801CCA20,leoSeek_w
+801CCAB0,leoChk_err_retry
 801CDE80,leoSet_mseq
 801CE030,leoStart_stop
-801CC858,leoSend_asic_cmd_w
-801CCAB0,leoChk_err_retry
 801CE340,leoLba_to_phys
 801CE534,leoLba_to_vzone
 801CE680,LeoByteToLBA
+801D2D50,leoTest_unit_rdy
 801D2D90,leoSeek

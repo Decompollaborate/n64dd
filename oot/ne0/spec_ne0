@@ -237,7 +237,7 @@ beginseg
     include "oot/ne0/build/src/n64dd/n64dd_801D2170.o"
     include "oot/ne0/build/src/n64dd/n64dd_801D23B0.o"
     include "oot/ne0/build/src/n64dd/n64dd_801D2CB0.o"
-    include "oot/ne0/build/src/n64dd/n64dd_801D2D50.o"
+    include "oot/ne0/build/src/libleo/leo/leotestunit.o"
     include "oot/ne0/build/src/libleo/leo/leoseek.o"
 
     // data

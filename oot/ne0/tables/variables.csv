@@ -9,3 +9,4 @@
 80006280,gCurrentRegion,u32,0x4
 8012BE40,gZBuffer,u16,0x25800
 801E5E78,LEOcur_command,LEOCmd*,0x4
+801E5EC0,LEOPiInfo,OSPiHandle*,0x4

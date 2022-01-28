@@ -1,27 +1,26 @@
 #include "n64dd.h"
 #include "n64dd_functions.h"
 
-extern struct_801E5E78* LEOcur_command;
-extern OSPiHandle* B_801E5EC0;
+extern OSPiHandle* LEOPiInfo;
 
-void func_801CC040(void) {
+void leoInquiry(void) {
     u32 sp1C;
 
-    osEPiReadIo(B_801E5EC0, 0x05000540U, &sp1C);
+    osEPiReadIo(LEOPiInfo, 0x05000540, &sp1C);
     if (func_801CC820(0x1B0000, 0) == 0) {
         u32 sp18;
 
-        osEPiReadIo(B_801E5EC0, 0x05000500U, &sp18);
+        osEPiReadIo(LEOPiInfo, 0x05000500, &sp18);
         if (sp18 & 0x10000) {
             sp1C |= 0x100000;
         }
     }
 
-    LEOcur_command->unk_0C = 0;
-    LEOcur_command->unk_0D = (s8) (sp1C >> 0x10);
-    LEOcur_command->unk_0E = 1;
-    LEOcur_command->unk_0F = 0;
-    LEOcur_command->unk_04 = 0;
+    ((LEOCmdInquiry*)LEOcur_command)->devType = 0;
+    ((LEOCmdInquiry*)LEOcur_command)->version = (s8) (sp1C >> 0x10);
+    ((LEOCmdInquiry*)LEOcur_command)->devNum = 1;
+    ((LEOCmdInquiry*)LEOcur_command)->leoBiosVer = 0;
+    LEOcur_command->header.status = LEO_STATUS_GOOD;
 }
 
 extern struct_801E5EF0 B_801E5EF0;

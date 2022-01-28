@@ -41,17 +41,7 @@ typedef struct {
     /* 0x00 */ char unk_00[0x60];
 } struct_801E5F04; // size = 0x60
 
-
-typedef struct {
-    /* 0x00 */ char unk_00[0x4];
-    /* 0x04 */ UNK_TYPE1 unk_04;
-    /* 0x05 */ char unk_05[0x3];
-    /* 0x08 */ char unk_08[0x4];
-    /* 0x0C */ UNK_TYPE1 unk_0C;
-    /* 0x0D */ UNK_TYPE1 unk_0D;
-    /* 0x0E */ UNK_TYPE1 unk_0E;
-    /* 0x0F */ UNK_TYPE1 unk_0F;
-} struct_801E5E78; // size >= 0x10
-
+// bss
+extern LEOCmd *LEOcur_command;
 
 #endif
