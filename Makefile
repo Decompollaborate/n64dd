@@ -127,6 +127,7 @@ $(shell mkdir -p $(subst src/,$(BASE_DIR)/build/src/,$(SRC_DIRS)))
 
 
 # directory flags
+$(BASE_DIR)/build/src/libleo/%.o: OPTFLAGS := -O2
 $(BASE_DIR)/build/src/n64dd_O2_g3/%.o: OPTFLAGS := -O2 -g3
 
 # file flags
@@ -134,7 +135,9 @@ $(BASE_DIR)/build/src/n64dd_O2_g3/n64dd_801C9B70.o: ASMPROCFLAGS := --input-enc=
 $(BASE_DIR)/build/src/n64dd_O2_g3/n64dd_error_headers.o: ASMPROCFLAGS := --input-enc=utf-8 --output-enc=euc-jp
 $(BASE_DIR)/build/src/n64dd_O2_g3/n64dd_error_bodies.o: ASMPROCFLAGS := --input-enc=utf-8 --output-enc=euc-jp
 
+
 # cc & asm-processor
+$(BASE_DIR)/build/src/libleo/%.o: CC := $(ASM_PROCESSOR) $(ASMPROCFLAGS) $(CC_OLD) -- $(AS) $(ASFLAGS) --
 $(BASE_DIR)/build/src/%.o: CC := $(ASM_PROCESSOR) $(ASMPROCFLAGS) $(CC) -- $(AS) $(ASFLAGS) --
 
 $(BASE_DIR)/build/src/n64dd_O2_g3/n64dd_801C9B70.o: CC := $(ASM_PROCESSOR) $(ASMPROCFLAGS) $(CC) -- $(AS) $(ASFLAGS) --
