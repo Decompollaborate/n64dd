@@ -221,7 +221,7 @@ beginseg
     include "oot/ne0/build/src/n64dd/n64dd_801CE590.o"
     include "oot/ne0/build/src/n64dd/n64dd_801CE630.o"
     include "oot/ne0/build/src/n64dd/bytetolba.o"
-    include "oot/ne0/build/src/n64dd/n64dd_801CE7E0.o"
+    include "oot/ne0/build/src/libleo/leo/leoreset.o"
     include "oot/ne0/build/src/n64dd/n64dd_801CE900.o"
 
     include "oot/ne0/build/asm/data/n64dd/n64dd_801D96D0.rodata.o"

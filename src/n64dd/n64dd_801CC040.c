@@ -17,7 +17,7 @@ void leoInquiry(void) {
     }
 
     ((LEOCmdInquiry*)LEOcur_command)->devType = 0;
-    ((LEOCmdInquiry*)LEOcur_command)->version = (s8) (sp1C >> 0x10);
+    ((LEOCmdInquiry*)LEOcur_command)->version = sp1C >> 0x10;
     ((LEOCmdInquiry*)LEOcur_command)->devNum = 1;
     ((LEOCmdInquiry*)LEOcur_command)->leoBiosVer = 0;
     LEOcur_command->header.status = LEO_STATUS_GOOD;
