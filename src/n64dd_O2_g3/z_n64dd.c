@@ -140,14 +140,11 @@ s32 func_801C7A1C(struct_801C7A1C* arg0) {
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C7B48.s")
 
+s32 func_801C7BEC(s32 startLBA) {
+    s32 bytes;
 
-s32 func_801CBEF0(UNK_TYPE arg0, UNK_TYPE arg1, s32* arg2);
-
-s32 func_801C7BEC(s32 arg0) {
-    s32 sp1C;
-
-    if (func_801CBEF0(arg0, 1, &sp1C) == 0) {
-        return sp1C;
+    if (LeoLBAToByte(startLBA, 1, &bytes) == 0) {
+        return bytes;
     }
     return 0;
 }

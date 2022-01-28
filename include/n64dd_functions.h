@@ -163,7 +163,7 @@
 void func_801CBD30(void);
 // void func_801CBD5C();
 
-// void func_801CBEF0();
+s32 LeoByteToLBA(s32 startLBA, u32 nbytes, s32 *lbas);
 
 void func_801CC040(void);
 struct_801E5EF0* func_801CC0F0(void);
@@ -177,14 +177,14 @@ void func_801CC1F0(void);
 // void func_801CC728();
 // void func_801CC7D0();
 s32 func_801CC820(UNK_TYPE, UNK_TYPE);
-// void func_801CC858();
+// void leoSend_asic_cmd_w();
 // void func_801CC944();
 // void func_801CC96C();
 // void func_801CC994();
 // void func_801CC9BC();
-// void func_801CCA20();
+u8 leoSeek_w(void);
 // void func_801CCA5C();
-// void func_801CCAB0();
+u32 leoChk_err_retry(u32 sense);
 // void func_801CCBC0();
 // void func_801CCC00();
 // void func_801CCC30();
@@ -202,8 +202,8 @@ s32 func_801CC820(UNK_TYPE, UNK_TYPE);
 // void func_801CD558();
 // void func_801CDDF4();
 // void func_801CDE38();
-// void func_801CDE80();
-void func_801CE030();
+// void leoSet_mseq();
+void leoStart_stop(void);
 
 // void func_801CE120();
 
@@ -211,14 +211,14 @@ void func_801CE1F0(void);
 
 void func_801CE2A0(void);
 
-// void func_801CE340();
-// void func_801CE534();
+u16 leoLba_to_phys(u32 lba);
+// void leoLba_to_vzone();
 
 void func_801CE590(void);
 
 // void func_801CE630();
 
-// void func_801CE680();
+// void LeoByteToLBA();
 
 void func_801CE7E0(void);
 void func_801CE888(void);
@@ -244,6 +244,9 @@ void func_801D2040(void);
 // void func_801D2CB0();
 
 void func_801D2D50(void);
-void func_801D2D90(void);
+void leoSeek(void);
+
+
+
 
 #endif

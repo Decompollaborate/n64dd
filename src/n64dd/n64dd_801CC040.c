@@ -1,7 +1,7 @@
 #include "n64dd.h"
 #include "n64dd_functions.h"
 
-extern struct_801E5E78* B_801E5E78;
+extern struct_801E5E78* LEOcur_command;
 extern OSPiHandle* B_801E5EC0;
 
 void func_801CC040(void) {
@@ -17,11 +17,11 @@ void func_801CC040(void) {
         }
     }
 
-    B_801E5E78->unk_0C = 0;
-    B_801E5E78->unk_0D = (s8) (sp1C >> 0x10);
-    B_801E5E78->unk_0E = 1;
-    B_801E5E78->unk_0F = 0;
-    B_801E5E78->unk_04 = 0;
+    LEOcur_command->unk_0C = 0;
+    LEOcur_command->unk_0D = (s8) (sp1C >> 0x10);
+    LEOcur_command->unk_0E = 1;
+    LEOcur_command->unk_0F = 0;
+    LEOcur_command->unk_04 = 0;
 }
 
 extern struct_801E5EF0 B_801E5EF0;

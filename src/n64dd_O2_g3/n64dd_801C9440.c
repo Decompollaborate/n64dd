@@ -1,10 +1,16 @@
 #include "n64dd.h"
 #include "n64dd_functions.h"
 
-UNK_TYPE func_801CF0B0(UNK_TYPE); // Handwritten function, looks up in a table.
+// Handwritten function, looks up offset in `kanji` or similar of Shift-JIS codepoint using a table.
+s32 func_801CF0B0(s32);
+// Handwritten function, looks up glyphs in a table.
+s32 func_801CFBB0(s32, s32*, s32*, s32*);
 
 // data
 void (*D_801D2EC0)(s32, s32, s32) = NULL;
+
+// bss
+extern s32 B_801E0F70;
 
 /**
  * Seems to work out if a pair of bytes is a valid EUC-JP character, although there may be additions to the font that
@@ -23,14 +29,16 @@ s32 func_801C9440(u8* bytes) {
 }
 
 /**
- * Seems to be a crude check for a valid 2-byte Shift-JIS character
+ * A crude check for a valid 2-byte Shift-JIS character
  *
- * @param bytes Array 2 bytes to test
+ * @param bytes Array containing a pair of bytes to test
  * @return boolean
  */
 s32 func_801C9494(u8* bytes) {
+    // Allowable first bytes.
     if (((*bytes >= 0x81) && (*bytes <= 0x9F)) || ((*bytes >= 0xE0) && (*bytes <= 0xFC))) {
         bytes++;
+        // Allowable second bytes.
         return (*bytes >= 0x40) && (*bytes <= 0xFC) && *bytes != 0x7F;
     }
     return false;
@@ -86,11 +94,8 @@ s32 func_801C95F0(char* arg0) {
 }
 
 // #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9440/func_801C963C.s")
-extern s32 B_801E0F70;
 
-s32 func_801CFBB0(s32, UNK_PTR, UNK_PTR, UNK_PTR);
-
-s32 func_801C963C(s32* arg0, UNK_PTR arg1, UNK_PTR arg2, UNK_PTR arg3, u8 arg4) {
+s32 func_801C963C(s32* arg0, s32* arg1, s32* arg2, s32* arg3, u8 arg4) {
     s32 temp_v0;
     s32 temp_v1;
 
@@ -104,11 +109,11 @@ s32 func_801C963C(s32* arg0, UNK_PTR arg1, UNK_PTR arg2, UNK_PTR arg3, u8 arg4) 
 }
 
 // #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9440/func_801C969C.s")
-s32 func_801C969C(UNK_TYPE arg0, UNK_PTR* arg1, UNK_PTR* arg2, UNK_PTR* arg3, u8* arg4) {
+s32 func_801C969C(UNK_TYPE arg0, s32* arg1, s32* arg2, s32* arg3, u8* arg4) {
     s32 sp24;
     s32 phi_v1;
 
-    if (func_801C9440(arg4) != 0) {
+    if (func_801C9440(arg4)) {
         sp24 = func_801C95F0(arg4);
         *arg1 = 0x10;
         *arg2 = 0x10;
@@ -123,7 +128,8 @@ s32 func_801C969C(UNK_TYPE arg0, UNK_PTR* arg1, UNK_PTR* arg2, UNK_PTR* arg3, u8
 }
 
 // #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9440/func_801C9740.s")
-UNK_TYPE4 func_801C9740(u8* arg0, UNK_TYPE4 arg1, u8 arg2) {
+// return boolean
+s32 func_801C9740(u8* arg0, UNK_TYPE4 arg1, u8 arg2) {
     if (arg1 == 1) {
         *arg0 = arg2 * 0x10;
         return false;

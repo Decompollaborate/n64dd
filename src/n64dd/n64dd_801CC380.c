@@ -13,7 +13,7 @@
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801CC380/func_801CC820.s")
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801CC380/func_801CC858.s")
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801CC380/leoSend_asic_cmd_w.s")
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801CC380/func_801CC944.s")
 
@@ -23,11 +23,11 @@
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801CC380/func_801CC9BC.s")
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801CC380/func_801CCA20.s")
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801CC380/leoSeek_w.s")
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801CC380/func_801CCA5C.s")
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801CC380/func_801CCAB0.s")
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801CC380/leoChk_err_retry.s")
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801CC380/func_801CCBC0.s")
 
