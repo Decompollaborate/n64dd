@@ -1,7 +1,7 @@
 #include "n64dd.h"
 #include "n64dd_functions.h"
 
-extern OSMesgQueue B_801E5DE8;
+extern OSMesgQueue LEOcommand_que;
 // OSMesgQueue LEOcommand_que;
 
 u8 func_801CC380(void);
@@ -11,10 +11,10 @@ void leoClr_queue(void);
 //    OSMesg clr_cmd;
 //}
 
-void func_801CE7E0(void) {
+void leoClr_queue(void) {
     OSMesg clr_cmd;
 
-    while (osRecvMesg(&B_801E5DE8, &clr_cmd, OS_MESG_NOBLOCK) == 0) {
+    while (osRecvMesg(&LEOcommand_que, &clr_cmd, OS_MESG_NOBLOCK) == 0) {
         ((LEOCmd*)clr_cmd)->header.sense = LEO_SENSE_COMMAND_TERMINATED;
         ((LEOCmd*)clr_cmd)->header.status = LEO_STATUS_CHECK_CONDITION;
         if (((LEOCmd*)clr_cmd)->header.control & LEO_CONTROL_POST) {

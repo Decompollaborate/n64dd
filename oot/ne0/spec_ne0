@@ -175,26 +175,44 @@ beginseg
 
     include "oot/ne0/build/src/n64dd_O2_g3/z_n64dd.o"
     include "oot/ne0/build/asm/data/n64dd/z_n64dd.data.o"
+    include "oot/ne0/build/asm/data/n64dd/z_n64dd.bss.o"
 
     pad_text
     include "oot/ne0/build/src/n64dd_O2_g3/n64dd_801C8000.o"
     include "oot/ne0/build/asm/data/n64dd/n64dd_801C8000.data.o"
+    include "oot/ne0/build/asm/data/n64dd/n64dd_801C8000.bss.o"
 
     include "oot/ne0/build/src/n64dd_O2_g3/n64dd_801C8940.o"
+    include "oot/ne0/build/asm/data/n64dd/n64dd_801C8940.bss.o"
 
     include "oot/ne0/build/src/n64dd_O2_g3/n64dd_801C9440.o"
+    include "oot/ne0/build/asm/data/n64dd/n64dd_801C9440.bss.o"
 
     include "oot/ne0/build/src/n64dd_O2_g3/n64dd_801C9B70.o"
+    include "oot/ne0/build/asm/data/n64dd/n64dd_801C9B70.bss.o"
+
     include "oot/ne0/build/src/n64dd_O2_g3/n64dd_error_headers.o" // padding in rodata seems to force all of these to be separate
     include "oot/ne0/build/src/n64dd_O2_g3/n64dd_error_bodies.o"
     include "oot/ne0/build/asm/data/n64dd/n64dd_801D2FE0.data.o" // Error message textures
 
     include "oot/ne0/build/src/n64dd_O2_g3/n64dd_801CA0B0.o"
 
+    // needs to be splited
+    include "oot/ne0/build/asm/data/n64dd/n64dd_801CA0B0.data.o"
+
     include "oot/ne0/build/src/n64dd/n64dd_801CA740.o"
+
     include "oot/ne0/build/src/n64dd/n64dd_801CA7D0.o"
+    include "oot/ne0/build/asm/data/n64dd/n64dd_801CA7D0.bss.o"
+
     include "oot/ne0/build/src/n64dd/n64dd_801CAC40.o"
-    include "oot/ne0/build/src/n64dd/n64dd_801CB640.o"
+
+    // ?
+    include "oot/ne0/build/asm/data/n64dd/file_01E320.bss.o"
+
+    include "oot/ne0/build/src/libleo/leo/leocmdex.o"
+    include "oot/ne0/build/asm/data/n64dd/leocmdex.data.o"
+    include "oot/ne0/build/asm/data/n64dd/leocmdex.bss.o"
 
     include "oot/ne0/build/asm/text/n64dd/n64dd_801CBCD0.text.o" // Handwritten
 
@@ -241,16 +259,10 @@ beginseg
     include "oot/ne0/build/src/libleo/leo/leoseek.o"
 
     // data
-    include "oot/ne0/build/asm/data/n64dd/n64dd_801CA0B0.data.o"
+    include "oot/ne0/build/asm/data/n64dd/file_011F50.data.o"
 
     // bss
-    include "oot/ne0/build/asm/data/n64dd/z_n64dd.bss.o"
-    include "oot/ne0/build/asm/data/n64dd/n64dd_801C8000.bss.o"
-    include "oot/ne0/build/asm/data/n64dd/n64dd_801C8940.bss.o"
-    include "oot/ne0/build/asm/data/n64dd/n64dd_801C9440.bss.o"
-    include "oot/ne0/build/asm/data/n64dd/n64dd_801C9B70.bss.o"
-    include "oot/ne0/build/asm/data/n64dd/n64dd_801CA7D0.bss.o"
-    include "oot/ne0/build/asm/data/n64dd/file_01E320.bss.o"
+    include "oot/ne0/build/asm/data/n64dd/file_01F060.bss.o"
 endseg
 
 beginseg

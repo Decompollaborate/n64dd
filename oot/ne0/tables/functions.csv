@@ -178,6 +178,9 @@
 801CE030,leoStart_stop
 801CE340,leoLba_to_phys
 801CE534,leoLba_to_vzone
+801CE7E0,leoClr_queue
 801CE680,LeoByteToLBA
+801CB640,leomain
+801CBABC,leoRead_system_area
 801D2D50,leoTest_unit_rdy
 801D2D90,leoSeek

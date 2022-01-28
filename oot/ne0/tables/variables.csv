@@ -8,5 +8,8 @@
 801D9D48,D_801D9D48,struct_801D9D48,0x14
 80006280,gCurrentRegion,u32,0x4
 8012BE40,gZBuffer,u16,0x25800
+801E5DE8,LEOcommand_que,OSMesgQueue,0x18
 801E5E78,LEOcur_command,LEOCmd*,0x4
 801E5EC0,LEOPiInfo,OSPiHandle*,0x4
+801E5EC8,LEOPiDmaParam,,0x18
+801E5E9C,LEO_country_code,,0x4
