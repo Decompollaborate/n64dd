@@ -233,7 +233,7 @@ void func_801CEC5C(void);
 
 // void func_801CF0B0();
 
-void func_801D2040(void);
+void leoWrite(void);
 
 // void func_801D2170();
 
