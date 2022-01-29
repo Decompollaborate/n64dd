@@ -160,8 +160,8 @@
 
 // void func_801CBCD0();
 
-void func_801CBD30(void);
-// void func_801CBD5C();
+void leoRead(void);
+void leoRead_common(unsigned int offset);
 
 s32 LeoByteToLBA(s32 startLBA, u32 nbytes, s32 *lbas);
 
@@ -196,7 +196,7 @@ s8 leoChk_cur_drvmode(void);
 // void func_801CCCC0();
 // void func_801CCCD0();
 
-// void func_801CCD90();
+int leoC2_Correction(void);
 // void func_801CCE1C();
 // void func_801CCEF0();
 // void func_801CD170();
