@@ -21,7 +21,7 @@ offset,vram,.text
 6FE0,801CE020,leomseq_tbl
 7190,801CE1D0,leomotor
 7280,801CE2C0,n64dd_801CE120
-7350,801CE390,n64dd_801CE1F0
+7350,801CE390,leomode_sel
 7400,801CE440,leord_capa
 74A0,801CE4E0,leoutil
 76F0,801CE730,leorezero

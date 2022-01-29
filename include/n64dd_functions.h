@@ -208,7 +208,7 @@ void leoStart_stop(void);
 
 // void func_801CE120();
 
-void func_801CE1F0(void);
+void leoMode_sel(void);
 
 void leoRd_capacity(void);
 
