@@ -44,10 +44,10 @@ s32 LeoResetClear(void);
 #define LEO_COMMAND_SEEK            0x07
 #define LEO_COMMAND_START_STOP      0x08
 #define LEO_COMMAND_READ_CAPACITY   0x09
-#define LEO_COMMAND_TRANSLATE       0x0a
-#define LEO_COMMAND_MODE_SELECT     0x0b
-#define LEO_COMMAND_READ_DISK_ID    0x0c
-#define LEO_COMMAND_READ_TIMER      0x0d
+#define LEO_COMMAND_TRANSLATE       0x0A
+#define LEO_COMMAND_MODE_SELECT     0x0B
+#define LEO_COMMAND_READ_DISK_ID    0x0C
+#define LEO_COMMAND_READ_TIMER      0x0D
 #define LEO_COMMAND_SET_TIMER       0x0e
 
 #define LEO_CONTROL_POST            0x80   // ENABLE POST QUEUE
