@@ -217,7 +217,7 @@ beginseg
     include "oot/ne0/build/asm/text/n64dd/n64dd_801CBCD0.text.o" // Handwritten
 
     include "oot/ne0/build/src/n64dd/n64dd_801CBD30.o"
-    include "oot/ne0/build/src/n64dd/lbatobyte.o"
+    include "oot/ne0/build/src/libleo/api/lbatobyte.o"
     include "oot/ne0/build/src/n64dd/n64dd_801CC040.o"
     include "oot/ne0/build/src/libleo/api/seek.o"
     include "oot/ne0/build/src/n64dd/n64dd_801CC1F0.o"
@@ -231,10 +231,10 @@ beginseg
 
     include "oot/ne0/build/asm/data/n64dd/file_01F060.bss.o"
 
-    include "oot/ne0/build/src/n64dd/leomseq_tbl.o"
+    include "oot/ne0/build/src/libleo/leo/leomseq_tbl.o"
     include "oot/ne0/build/asm/data/n64dd/leomseq_tbl.bss.o"
 
-    include "oot/ne0/build/src/n64dd/leomotor.o"
+    include "oot/ne0/build/src/libleo/leo/leomotor.o"
     include "oot/ne0/build/src/n64dd/n64dd_801CE120.o"
     include "oot/ne0/build/src/n64dd/n64dd_801CE1F0.o"
     include "oot/ne0/build/src/n64dd/n64dd_801CE2A0.o"
@@ -245,7 +245,7 @@ beginseg
 
     include "oot/ne0/build/src/libleo/leo/leorezero.o"
     include "oot/ne0/build/src/n64dd/n64dd_801CE630.o"
-    include "oot/ne0/build/src/n64dd/bytetolba.o"
+    include "oot/ne0/build/src/libleo/api/bytetolba.o"
     include "oot/ne0/build/src/libleo/leo/leoreset.o"
     include "oot/ne0/build/src/n64dd/n64dd_801CE900.o"
 
