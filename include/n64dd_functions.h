@@ -210,7 +210,7 @@ void leoStart_stop(void);
 
 void func_801CE1F0(void);
 
-void func_801CE2A0(void);
+void leoRd_capacity(void);
 
 u16 leoLba_to_phys(u32 lba);
 u16 leoLba_to_vzone(u32 lba);
