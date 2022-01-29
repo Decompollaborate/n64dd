@@ -55,6 +55,8 @@ extern u16 LEOVZONE_TBL[][0x10];
 extern leo_sys_form LEO_sys_data;
 extern tgt_param_form LEOtgt_param;
 
+extern s32 __leoActive;
+
 // bss
 extern LEOCmd *LEOcur_command;
 

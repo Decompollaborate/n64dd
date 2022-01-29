@@ -184,5 +184,7 @@
 801CE680,LeoByteToLBA
 801CB640,leomain
 801CBABC,leoRead_system_area
+801CC190,LeoSeek
+801CA9A4,leoCommand
 801D2D50,leoTest_unit_rdy
 801D2D90,leoSeek
