@@ -197,7 +197,7 @@ beginseg
 
     include "oot/ne0/build/src/n64dd_O2_g3/n64dd_801CA0B0.o"
 
-    // needs to be splited
+    // needs to be split
     include "oot/ne0/build/asm/data/n64dd/n64dd_801CA0B0.data.o"
 
     include "oot/ne0/build/src/n64dd/n64dd_801CA740.o"
