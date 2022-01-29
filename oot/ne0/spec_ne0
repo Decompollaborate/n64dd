@@ -224,7 +224,7 @@ beginseg
     include "oot/ne0/build/src/n64dd/n64dd_801CC1F0.o"
     include "oot/ne0/build/src/n64dd/n64dd_801CC380.o"
 
-    include "oot/ne0/build/asm/data/n64dd/leo_tbl.rodata.o"
+    include "oot/ne0/build/src/libleo/leo/leo_tbl.o"
 
     include "oot/ne0/build/asm/data/n64dd/n64dd_801D96D0.rodata.o"
 

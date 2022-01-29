@@ -41,16 +41,19 @@ typedef struct {
     /* 0x00 */ char unk_00[0x60];
 } struct_801E5F04; // size = 0x60
 
-//extern u16 D_801D9516[];
-//extern u16 D_801D9686[];
-extern u8 LEOBYTE_TBL1[];
-extern u16 LEOBYTE_TBL2[];
-extern u8 LEOVZONE_PZONEHD_TBL[][0x10];
-extern u16 LEOZONE_SCYL_TBL[];
 extern s32 LEO_country_code;
 extern u8 LEOdisk_type;
-extern u16 LEOZONE_OUTERCYL_TBL[];
-extern u16 LEOVZONE_TBL[][0x10];
+
+// leo_tbl
+extern const char LEOfirmware_rev[];
+extern const u8 LEOBYTE_TBL1[];
+extern const u16 LEOBYTE_TBL2[];
+extern const u16 LEOVZONE_TBL[][0x10];
+extern const u16 LEOZONE_SCYL_TBL[];
+extern const u8 LEOVZONE_PZONEHD_TBL[][0x10];
+extern const u16 LEOZONE_OUTERCYL_TBL[];
+extern const u16 LEORAM_START_LBA[];
+extern const s32 LEORAM_BYTE[];
 
 extern leo_sys_form LEO_sys_data;
 extern tgt_param_form LEOtgt_param;
