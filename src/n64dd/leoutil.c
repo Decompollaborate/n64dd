@@ -1,7 +1,7 @@
 #include "n64dd.h"
 #include "n64dd_functions.h"
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801D94F0/R_801D94F0.s")
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leo_tbl/LEOfirmware_rev.s")
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leoutil/leoLba_to_phys.s")
 

@@ -234,9 +234,10 @@ beginseg
 
     // include "oot/ne0/build/src/n64dd/leoutil.o"
     include "oot/ne0/build/asm/text/n64dd/leoutil.text.o"
-    include "oot/ne0/build/asm/data/n64dd/n64dd_801D94F0.rodata.o"
+    include "oot/ne0/build/asm/data/n64dd/leo_tbl.rodata.o"
+    // include "oot/ne0/build/asm/data/n64dd/n64dd_801D94F0.rodata.o"
 
-    include "oot/ne0/build/src/n64dd/n64dd_801CE590.o"
+    include "oot/ne0/build/src/libleo/leo/leorezero.o"
     include "oot/ne0/build/src/n64dd/n64dd_801CE630.o"
     include "oot/ne0/build/src/n64dd/bytetolba.o"
     include "oot/ne0/build/src/libleo/leo/leoreset.o"

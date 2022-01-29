@@ -29,7 +29,7 @@
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801CC380/func_801CC96C.s")
 
 // leoRecal_w
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801CC380/func_801CC994.s")
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801CC380/leoRecal_w.s")
 
 // leoSeek_i
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801CC380/func_801CC9BC.s")

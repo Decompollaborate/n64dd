@@ -172,12 +172,14 @@
 801CBEF0,LeoLBAToByte
 801CC040,leoInquiry
 801CC858,leoSend_asic_cmd_w
+801CC994,leoRecal_w
 801CCA20,leoSeek_w
 801CCAB0,leoChk_err_retry
 801CDE80,leoSet_mseq
 801CE030,leoStart_stop
 801CE340,leoLba_to_phys
 801CE534,leoLba_to_vzone
+801CE590,leoRezero
 801CE7E0,leoClr_queue
 801CE680,LeoByteToLBA
 801CB640,leomain

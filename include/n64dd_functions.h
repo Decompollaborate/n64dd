@@ -180,7 +180,7 @@ s32 func_801CC820(UNK_TYPE, UNK_TYPE);
 // void leoSend_asic_cmd_w();
 // void func_801CC944();
 // void func_801CC96C();
-// void func_801CC994();
+u8 leoRecal_w(void);
 // void func_801CC9BC();
 u8 leoSeek_w(void);
 // void func_801CCA5C();
@@ -215,7 +215,7 @@ void func_801CE2A0(void);
 u16 leoLba_to_phys(u32 lba);
 u16 leoLba_to_vzone(u32 lba);
 
-void func_801CE590(void);
+void leoRezero(void);
 
 // void func_801CE630();
 

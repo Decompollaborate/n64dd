@@ -2,14 +2,8 @@
 #include "n64dd_functions.h"
 
 extern OSMesgQueue LEOcommand_que;
-// OSMesgQueue LEOcommand_que;
 
 u8 func_801CC380(void);
-
-void leoClr_queue(void);
-//{
-//    OSMesg clr_cmd;
-//}
 
 void leoClr_queue(void) {
     OSMesg clr_cmd;
