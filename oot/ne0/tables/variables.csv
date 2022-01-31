@@ -55,3 +55,5 @@
 801D93C0,system_lba,u8,0x8
 801D8DD0,read_id_cmd,LEOCmdRead,0x1C
 801D9470,leo_disk_id_lba,u8,0x2
+801D9B70,ymdupper,u8,0x6
+801D9B78,dayupper,u8,0x13

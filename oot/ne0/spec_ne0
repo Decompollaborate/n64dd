@@ -255,7 +255,7 @@ beginseg
     include "oot/ne0/build/src/libleo/leo/leoreset.o"
     include "oot/ne0/build/src/libleo/leo/leotranslat.o"
 
-    include "oot/ne0/build/src/n64dd/n64dd_801CEBA0.o"
+    include "oot/ne0/build/src/libleo/leo/leotimer.o"
 
     include "oot/ne0/build/asm/text/n64dd/n64dd_801CF0B0.text.o" // Handwritten
     include "oot/ne0/build/asm/text/n64dd/n64dd_801CFBB0.text.o" // Handwritten
