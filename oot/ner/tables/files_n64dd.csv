@@ -55,7 +55,7 @@ offset,vram,.rodata
 12440,801D90C0,leofunc
 12450,801D90D0,leocmdex
 12500,801D9180,leord_diskid
-12510,801D9190,n64dd_801CC380
+12510,801D9190,leomecha
 12580,801D9200,leo_tbl
 12760,801D93E0,leoc2ecc
 12B80,801D9800,leomseq_tbl
