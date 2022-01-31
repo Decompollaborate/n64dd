@@ -1,8 +1,6 @@
 #include "n64dd.h"
 #include "n64dd_functions.h"
 
-// This file is not included in the spec
-
 #if 0
 u16 leoLba_to_phys(u32 lba) {
     //s32 temp_t6;

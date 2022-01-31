@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import argparse
 
-from py_mips_disasm.mips.Utils import *
+from py_mips_disasm.backend.common.Utils import *
 
 from mips.MipsSplitEntry import readSplitsFromCsv
 
