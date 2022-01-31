@@ -9,7 +9,7 @@ typedef struct {
     s8 unk4[8];
 } struct_801CE630;
 
-s32 func_801CE630(void) {
+s32 LeoClearQueue(void) {
     struct_801CE630 temp;
 
     if (__leoActive == 0) {

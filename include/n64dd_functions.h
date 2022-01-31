@@ -217,7 +217,7 @@ u16 leoLba_to_vzone(u32 lba);
 
 void leoRezero(void);
 
-// void func_801CE630();
+// void LeoClearQueue();
 
 // void LeoByteToLBA();
 
