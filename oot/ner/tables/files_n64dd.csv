@@ -19,6 +19,8 @@ offset,vram,.text
 5210,801CBE90,seek
 5270,801CBEF0,leord_diskid
 5400,801CC080,leomecha
+5CB0,801CC930,n64dd_801CCC30
+5D50,801CC9D0,spdlmotor
 5E10,801CCA90,leoc2ecc
 6F00,801CDB80,leomseq_tbl
 70B0,801CDD30,leomotor
@@ -44,6 +46,14 @@ BE10,801D2A90,leoseek
 offset,vram,.data
 BED0,801D2B50,z_n64dd
 BEE0,801D2B60,n64dd_801C8000
+BF40,801D2BC0,n64dd_801C9440
+BF50,801D2BD0,n64dd_error_headers
+BF60,801D2BE0,n64dd_error_bodies
+C060,801D2CE0,n64dd_801D2FE0
+11BE0,801D8860,n64dd_801CA0B0
+11DF0,801D8A70,leocmdex
+11E50,801D8AD0,leord_diskid
+11E70,801D8AF0,createleomanager
 
 offset,vram,.rodata
 11E80,801D8B00,z_n64dd
