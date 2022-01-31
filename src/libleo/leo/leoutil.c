@@ -113,7 +113,7 @@ u16 leoLba_to_phys(u32 lba) {
 
 u16 leoLba_to_vzone(u32 lba) {
     u16 i;
-    u16* ptr = LEOVZONE_TBL[LEOdisk_type];
+    const u16* ptr = LEOVZONE_TBL[LEOdisk_type];
 
     for (i = 0; i < ARRAY_COUNT(LEOVZONE_TBL[LEOdisk_type]); i++, ptr++) {
         if (lba < *ptr) {
