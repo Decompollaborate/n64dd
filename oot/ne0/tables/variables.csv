@@ -49,3 +49,4 @@
 801E5F80,LEO_TempBuffer,,0xF0
 801E6070,LEOC2_Syndrome,,0x740
 801E67B0,LEOc2_param,,0x10
+801E5F70,asic_cur_status,u32,0x4
