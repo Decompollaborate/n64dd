@@ -253,7 +253,7 @@ beginseg
     include "oot/ne0/build/src/libleo/api/clearqueue.o"
     include "oot/ne0/build/src/libleo/api/bytetolba.o"
     include "oot/ne0/build/src/libleo/leo/leoreset.o"
-    include "oot/ne0/build/src/n64dd/n64dd_801CE900.o"
+    include "oot/ne0/build/src/libleo/leo/leotranslat.o"
 
     include "oot/ne0/build/src/n64dd/n64dd_801CEBA0.o"
 
