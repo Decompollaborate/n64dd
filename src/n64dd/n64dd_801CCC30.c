@@ -12,5 +12,3 @@
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801CCC30/func_801CCCA8.s")
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801CCC30/func_801CCCC0.s")
-
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801CCC30/func_801CCCD0.s")
