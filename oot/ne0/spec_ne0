@@ -9,11 +9,13 @@ endseg
 
 beginseg
     name "boot"
+    address 0x80000460
     include "oot/ne0/build/baserom/boot.o"
 endseg
 
 beginseg
     name "dmadata"
+    address 0x10 // fake RAM address to avoid map lookup inaccuracies
     include "oot/ne0/build/baserom/dmadata.o"
 endseg
 
@@ -165,6 +167,7 @@ endseg
 beginseg
     name "code"
     compress
+    address 0x800110A0
     include "oot/ne0/build/baserom/code.o"
 endseg
 
@@ -222,8 +225,8 @@ beginseg
     include "oot/ne0/build/src/libleo/api/lbatobyte.o"
     include "oot/ne0/build/src/libleo/leo/leoinquiry.o"
 
-    include "oot/ne0/build/src/n64dd/n64dd_801CC0F0.o"
-    include "oot/ne0/build/asm/data/n64dd/n64dd_801CC0F0.bss.o"
+    include "oot/ne0/build/src/libleo/leo/leodiskinit.o"
+    include "oot/ne0/build/asm/data/n64dd/leodiskinit.bss.o"
 
     include "oot/ne0/build/src/libleo/api/seek.o"
 

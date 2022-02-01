@@ -166,7 +166,7 @@ void leoRead_common(unsigned int offset);
 s32 LeoByteToLBA(s32 startLBA, u32 nbytes, s32 *lbas);
 
 void leoInquiry(void);
-struct_801E5EF0* func_801CC0F0(void);
+OSPiHandle* osLeoDiskInit(void);
 
 // void func_801CC190();
 void func_801CC1F0(void);

@@ -8,6 +8,7 @@
 801D9D48,D_801D9D48,struct_801D9D48,0x14
 80006280,gCurrentRegion,u32,0x4
 8012BE40,gZBuffer,u16,0x25800
+8000638C,__osPiTable,OSPiHandle*,0x4
 801E5EC0,LEOPiInfo,OSPiHandle*,0x4
 801E5EC8,LEOPiDmaParam,,0x18
 801E51A0,LEO_sys_data,,0xE8
@@ -60,3 +61,5 @@
 801CF168,kantbl,,0xA48
 801CFC20,asc2tbl,,0x2420
 801E6800,__leoVersion,,0x4
+801E5EF0,__LeoDiskHandle,OSPiHandle,0x74
+801E5F64,__osDiskHandle,OSPiHandle*,0x4

@@ -15,7 +15,7 @@ offset,vram,.text
 4E90,801CBED0,leoread
 5050,801CC090,lbatobyte
 51A0,801CC1E0,leoinquiry
-5250,801CC290,n64dd_801CC0F0
+5250,801CC290,leodiskinit
 52F0,801CC330,seek
 5350,801CC390,leord_diskid
 54E0,801CC520,leomecha

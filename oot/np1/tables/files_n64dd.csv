@@ -13,7 +13,7 @@ offset,vram,.text
 4E30,801C9CF0,leoread
 4FF0,801C9EB0,lbatobyte
 5140,801CA000,leoinquiry
-51F0,801CA0B0,n64dd_801CC0F0
+51F0,801CA0B0,leodiskinit
 5290,801CA150,seek
 52F0,801CA1B0,leord_diskid
 5480,801CA340,leomecha

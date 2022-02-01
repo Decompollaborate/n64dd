@@ -24,23 +24,6 @@ typedef struct {
     /* 0x0000 */ char unk_0000[0x4D10];
 } struct_801DC000; // size = 0x4D10?
 
-typedef struct {
-    /* 0x00 */ UNK_TYPE4 unk_0;
-    /* 0x04 */ UNK_TYPE1 unk_4;
-    /* 0x05 */ UNK_TYPE1 unk_5;
-    /* 0x06 */ UNK_TYPE1 unk_6;
-    /* 0x07 */ UNK_TYPE1 unk_7;
-    /* 0x08 */ UNK_TYPE1 unk_8;
-    /* 0x09 */ UNK_TYPE1 unk_9;
-    /* 0x0A */ char unk_A[0x2]; // padding?
-    /* 0x0C */ UNK_TYPE4 unk_C;
-    /* 0x10 */ UNK_TYPE4 unk_10;
-} struct_801E5EF0; // size = 0x14
-
-typedef struct {
-    /* 0x00 */ char unk_00[0x60];
-} struct_801E5F04; // size = 0x60
-
 extern s32 LEO_country_code;
 extern u8 LEOdisk_type;
 

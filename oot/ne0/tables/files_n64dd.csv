@@ -14,7 +14,7 @@ offset,vram,.text
 4EB0,801CBD30,leoread
 5070,801CBEF0,lbatobyte
 51C0,801CC040,leoinquiry
-5270,801CC0F0,n64dd_801CC0F0
+5270,801CC0F0,leodiskinit
 5310,801CC190,seek
 5370,801CC1F0,leord_diskid
 5500,801CC380,leomecha
@@ -82,7 +82,7 @@ offset,vram,.bss
 1F020,801E5EA0,leoint
 1F040,801E5EC0,leocmdex
 1F060,801E5EE0,n64dd_801E5EE0
-1F070,801E5EF0,n64dd_801CC0F0
+1F070,801E5EF0,leodiskinit
 1F0F0,801E5F70,leomecha
 1F100,801E5F80,leoc2ecc
 1F940,801E67C0,leomseq_tbl
