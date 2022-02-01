@@ -6,7 +6,7 @@ extern struct_801E5F04 B_801E5F04;
 extern struct_801E5EF0* B_801E5F64;
 extern struct_801E5EF0* D_8000638C;
 
-struct_801E5EF0* func_801CC0F0(void) {
+struct_801E5EF0* osLeoDiskInit(void) {
     struct_801E5EF0 *temp_t9;
     u32 prevInt;
 

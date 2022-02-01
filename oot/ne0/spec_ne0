@@ -216,7 +216,7 @@ beginseg
 
     include "oot/ne0/build/asm/data/n64dd/n64dd_801E5EE0.bss.o"
 
-    include "oot/ne0/build/asm/text/n64dd/n64dd_801CBCD0.text.o" // Handwritten
+    include "oot/ne0/build/asm/text/n64dd/getaadr2.text.o" // Handwritten
 
     include "oot/ne0/build/src/libleo/leo/leoread.o"
     include "oot/ne0/build/src/libleo/api/lbatobyte.o"
@@ -246,7 +246,7 @@ beginseg
     include "oot/ne0/build/asm/data/n64dd/leomseq_tbl.bss.o"
 
     include "oot/ne0/build/src/libleo/leo/leomotor.o"
-    include "oot/ne0/build/src/n64dd/n64dd_801CE120.o"
+    include "oot/ne0/build/src/libleo/api/driveexist.o"
     include "oot/ne0/build/src/libleo/leo/leomode_sel.o"
     include "oot/ne0/build/src/libleo/leo/leord_capa.o"
 
@@ -260,12 +260,13 @@ beginseg
 
     include "oot/ne0/build/src/libleo/leo/leotimer.o"
 
-    include "oot/ne0/build/asm/text/n64dd/n64dd_801CF0B0.text.o" // Handwritten
-    include "oot/ne0/build/asm/text/n64dd/n64dd_801CFBB0.text.o" // Handwritten
+    include "oot/ne0/build/asm/text/n64dd/getkadr.text.o" // Handwritten
+    include "oot/ne0/build/asm/text/n64dd/getaadr.text.o" // Handwritten
 
     include "oot/ne0/build/src/libleo/leo/leowrite.o"
-    include "oot/ne0/build/src/n64dd/n64dd_801D2170.o"
+    include "oot/ne0/build/src/libleo/api/cjcreateleomanager.o"
     include "oot/ne0/build/src/n64dd/n64dd_801D23B0.o"
+    include "oot/ne0/build/src/libleo/api/cacreateleomanager.o"
     include "oot/ne0/build/src/libleo/api/testunitready.o"
     include "oot/ne0/build/src/libleo/leo/leotestunit.o"
     include "oot/ne0/build/src/libleo/leo/leoseek.o"

@@ -2,9 +2,9 @@
 #include "n64dd_functions.h"
 
 // Handwritten function, looks up offset in `kanji` or similar of Shift-JIS codepoint using a table.
-s32 func_801CF0B0(s32);
+s32 LeoGetKAdr(s32);
 // Handwritten function, looks up glyphs in a table.
-s32 func_801CFBB0(s32, s32*, s32*, s32*);
+s32 LeoGetAAdr(s32, s32*, s32*, s32*);
 
 // data
 void (*D_801D2EC0)(s32, s32, s32) = NULL;
@@ -90,7 +90,7 @@ void func_801C95C0(s32 arg0, s32 arg1, UNK_TYPE arg2) {
 }
 
 s32 func_801C95F0(char* arg0) {
-    return func_801CF0B0(func_801C9534(func_801C9514((arg0[0] << 8) | arg0[1]))) + 0xA0000;
+    return LeoGetKAdr(func_801C9534(func_801C9514((arg0[0] << 8) | arg0[1]))) + 0xA0000;
 }
 
 // #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9440/func_801C963C.s")
@@ -102,7 +102,7 @@ s32 func_801C963C(s32* arg0, s32* arg1, s32* arg2, s32* arg3, u8 arg4) {
     u16 temp = (arg4 - 0x20);
     temp += ((0xC0 * B_801E0F70));
 
-    temp_v0 = func_801CFBB0(temp, arg1, arg2, arg3);
+    temp_v0 = LeoGetAAdr(temp, arg1, arg2, arg3);
     temp_v1 = temp_v0 & 0xF;
     *arg0 = (temp_v0 - temp_v1) + 0xA0000;
     return temp_v1;

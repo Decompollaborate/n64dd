@@ -30,6 +30,6 @@ void leoReset();
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leofunc/leoReset.s")
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leofunc/func_801CAB94.s")
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leofunc/__leoSetReset.s")
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leofunc/func_801CABB8.s")

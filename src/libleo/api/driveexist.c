@@ -1,10 +1,7 @@
 #include "n64dd.h"
 #include "n64dd_functions.h"
 
-// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801CE120/func_801CE120.s")
-
-// LeoDriveWrite?
-u32 func_801CE120(void) {
+u32 LeoDriveExist(void) {
     register u32 sp1C;
     register s32 status;
     register u32 lastLatency;

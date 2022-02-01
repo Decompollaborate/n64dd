@@ -11,7 +11,7 @@ offset,vram,.text
 3CB0,801CA930,[PADDING]
 3CC0,801CA940,leoint
 46C0,801CB340,leocmdex
-4D50,801CB9D0,n64dd_801CBCD0
+4D50,801CB9D0,getaadr2
 4DB0,801CBA30,leoread
 4F70,801CBBF0,lbatobyte
 50C0,801CBD40,leoinquiry
@@ -24,7 +24,7 @@ offset,vram,.text
 5E10,801CCA90,leoc2ecc
 6F00,801CDB80,leomseq_tbl
 70B0,801CDD30,leomotor
-71A0,801CDE20,n64dd_801CE120
+71A0,801CDE20,driveexist
 7270,801CDEF0,leomode_sel
 7320,801CDFA0,leord_capa
 73C0,801CE040,leoutil
@@ -34,11 +34,12 @@ offset,vram,.text
 7860,801CE4E0,leoreset
 7980,801CE600,leotranslat
 7C20,801CE8A0,leotimer
-8130,801CEDB0,n64dd_801CF0B0
-8C30,801CF8B0,n64dd_801CFBB0
+8130,801CEDB0,getkadr
+8C30,801CF8B0,getaadr
 B0C0,801D1D40,leowrite
-B1F0,801D1E70,n64dd_801D2170
+B1F0,801D1E70,cjcreateleomanager
 B430,801D20B0,n64dd_801D23B0
+BB00,801D2780,cacreateleomanager
 BD30,801D29B0,testunitready
 BDD0,801D2A50,leotestunit
 BE10,801D2A90,leoseek

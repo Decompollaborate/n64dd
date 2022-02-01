@@ -206,7 +206,7 @@ int leoC2_Correction(void);
 // void leoSet_mseq();
 void leoStart_stop(void);
 
-// void func_801CE120();
+// void LeoDriveExist();
 
 void leoMode_sel(void);
 
@@ -231,7 +231,7 @@ void func_801CEC5C(void);
 // void func_801CEE94();
 // void func_801CF004();
 
-// void func_801CF0B0();
+// void LeoGetKAdr();
 
 void leoWrite(void);
 
