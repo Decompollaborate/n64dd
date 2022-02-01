@@ -38,7 +38,7 @@ offset,vram,.text
 8C30,801CF8B0,getaadr
 B0C0,801D1D40,leowrite
 B1F0,801D1E70,cjcreateleomanager
-B430,801D20B0,n64dd_801D23B0
+B430,801D20B0,leointerrupt
 BB00,801D2780,cacreateleomanager
 BD30,801D29B0,testunitready
 BDD0,801D2A50,leotestunit
@@ -54,7 +54,7 @@ C060,801D2CE0,n64dd_801D2FE0
 11BE0,801D8860,n64dd_801CA0B0
 11DF0,801D8A70,leocmdex
 11E50,801D8AD0,leord_diskid
-11E70,801D8AF0,createleomanager
+11E70,801D8AF0,leoglobals
 
 offset,vram,.rodata
 11E80,801D8B00,z_n64dd

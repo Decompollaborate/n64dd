@@ -266,19 +266,19 @@ beginseg
     include "oot/ne0/build/asm/text/n64dd/getkadr.text.o" // Handwritten
     include "oot/ne0/build/asm/text/n64dd/getaadr.text.o" // Handwritten
 
+    include "oot/ne0/build/asm/data/n64dd/leoglobals.data.o"
+    include "oot/ne0/build/asm/data/n64dd/leoglobals.bss.o"
+
     include "oot/ne0/build/src/libleo/leo/leowrite.o"
     include "oot/ne0/build/src/libleo/api/cjcreateleomanager.o"
-    include "oot/ne0/build/src/n64dd/n64dd_801D23B0.o"
+
+    include "oot/ne0/build/src/libleo/leo/leointerrupt.o"
+    include "oot/ne0/build/asm/data/n64dd/leointerrupt.bss.o"
+
     include "oot/ne0/build/src/libleo/api/cacreateleomanager.o"
     include "oot/ne0/build/src/libleo/api/testunitready.o"
     include "oot/ne0/build/src/libleo/leo/leotestunit.o"
     include "oot/ne0/build/src/libleo/leo/leoseek.o"
-
-    // data
-    include "oot/ne0/build/asm/data/n64dd/createleomanager.data.o"
-
-    // bss
-    include "oot/ne0/build/asm/data/n64dd/n64dd_801E6800.bss.o"
 endseg
 
 beginseg

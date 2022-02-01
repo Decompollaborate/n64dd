@@ -209,5 +209,7 @@
 801CF0B0,LeoGetKAdr
 801CFBB0,LeoGetAAdr
 801D23B0,__osLeoInterrupt
+801D2910,__osLeoAbnormalResume
+801D29C4,__osLeoResume
 801CC0F0,osLeoDiskInit
 801CAB94,__leoSetReset

@@ -61,5 +61,6 @@
 801CF168,kantbl,,0xA48
 801CFC20,asc2tbl,,0x2420
 801E6800,__leoVersion,,0x4
+801E6810,leoDiskStack,,0x1000
 801E5EF0,__LeoDiskHandle,OSPiHandle,0x74
 801E5F64,__osDiskHandle,OSPiHandle*,0x4
