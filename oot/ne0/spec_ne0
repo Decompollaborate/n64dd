@@ -231,7 +231,6 @@ beginseg
     include "oot/ne0/build/asm/data/n64dd/leord_diskid.data.o"
 
     include "oot/ne0/build/src/libleo/leo/leomecha.o"
-    include "oot/ne0/build/asm/data/n64dd/leomecha.bss.o"
 
     include "oot/ne0/build/src/libleo/api/spdlmotor.o"
 
