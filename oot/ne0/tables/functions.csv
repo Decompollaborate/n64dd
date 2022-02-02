@@ -198,7 +198,9 @@
 801CAC40,leointerrupt
 801CA7D0,leoInitialize
 801CA9A4,leoCommand
-801CAB04,leoReset
+801CAB04,LeoReset
+801CAB94,__leoSetReset
+801CABB8,LeoResetClear
 801D2CB0,LeoTestUnitReady
 801CCCD0,LeoSpdlMotor
 801CE630,LeoClearQueue
@@ -213,7 +215,6 @@
 801D2910,__osLeoAbnormalResume
 801D29C4,__osLeoResume
 801CC0F0,osLeoDiskInit
-801CAB94,__leoSetReset
 801CEBA0,leoReadTimer
 801CEC5C,leoSetTimer
 801CE888,leoClr_reset

@@ -199,13 +199,12 @@ beginseg
     include "oot/ne0/build/asm/data/n64dd/n64dd_801D2FE0.data.o" // Error message textures
 
     include "oot/ne0/build/src/n64dd_O2_g3/n64dd_801CA0B0.o"
-
-    // needs to be split
     include "oot/ne0/build/asm/data/n64dd/n64dd_801CA0B0.data.o"
 
     include "oot/ne0/build/src/n64dd/n64dd_801CA740.o"
 
     include "oot/ne0/build/src/libleo/leo/leofunc.o"
+    include "oot/ne0/build/asm/data/n64dd/leofunc.data.o"
     include "oot/ne0/build/asm/data/n64dd/leofunc.bss.o"
 
     include "oot/ne0/build/asm/data/n64dd/leoram.bss.o"

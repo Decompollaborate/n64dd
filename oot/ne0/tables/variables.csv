@@ -65,3 +65,5 @@
 801E6810,leoDiskStack,,0x1000
 801E5EF0,__LeoDiskHandle,OSPiHandle,0x74
 801E5F64,__osDiskHandle,OSPiHandle*,0x4
+801D8D60,__leoResetCalled,,0x4
+801D8D64,__leoQueuesCreated,,0x4
