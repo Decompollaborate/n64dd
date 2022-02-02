@@ -2,7 +2,6 @@
 #include "n64dd_functions.h"
 #include "libleo_functions.h"
 
-// leoRd_capacity
 void leoRd_capacity(void) {
     if (LEOcur_command->header.control & LEO_CONTROL_WRT) { // Possibly LEO_CONTROL_TBL
         LEOcur_command->data.readWrite.lba = LEORAM_START_LBA[LEOdisk_type] - 0x18;

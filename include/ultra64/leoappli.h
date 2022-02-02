@@ -105,7 +105,7 @@ typedef struct{
 } LEOCmdHeader; // 0xC
 
 typedef struct {
-    LEOCmdHeader header;
+    /* 0x0 */ LEOCmdHeader header;
 } LEOCmdClearQueue; // 0xC
 
 typedef struct {

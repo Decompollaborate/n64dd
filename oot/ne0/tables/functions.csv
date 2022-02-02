@@ -222,6 +222,8 @@
 801CC0F0,osLeoDiskInit
 801CEBA0,leoReadTimer
 801CEC5C,leoSetTimer
+801CEE94,__locReadTimer
+801CF004,__locSetTimer
 801CE888,leoClr_reset
 801CC380,leoAnalize_asic_status
 801CC48C,leoChk_asic_ready

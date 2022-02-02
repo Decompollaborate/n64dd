@@ -36,6 +36,10 @@ void __osLeoResume();
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leointerrupt/__osLeoInterrupt.s")
 
+// static
+void __osLeoAbnormalResume();
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leointerrupt/__osLeoAbnormalResume.s")
 
+// static
+void __osLeoResume();
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leointerrupt/__osLeoResume.s")

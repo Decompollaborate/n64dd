@@ -6,70 +6,64 @@
 
 s32 LeoReadWrite(LEOCmd* cmdBlock, s32 direction, u32 LBA, void* vAddr, u32 nLBAs, OSMesgQueue* mq);
 
-// void func_801CA7D0();
-// void func_801CA9A4();
-// void func_801CAB04();
-// void func_801CAB94();
-// void func_801CABB8();
+void leoInitialize(OSPri compri, OSPri intpri, OSMesg* command_que_buf, u32 cmd_buff_size);
+void leoCommand(void* cmd_blk_addr);
+void LeoReset(void);
+s32 __leoSetReset(void);
+s32 LeoResetClear(void);
 
-// void func_801CAC40();
-// void func_801CADD0();
-// void func_801CB3CC();
-// void func_801CB434();
-// void func_801CB51C();
+void leointerrupt(void* arg);
 
-// void func_801CB640();
-// void func_801CBABC();
+void leomain(void* arg);
+u8 leoRead_system_area(void);
 
-// void func_801CBCD0();
+int LeoGetAAdr2(u32 ccode,int *dx,int *dy, int *cy);
 
 void leoRead(void);
 void leoRead_common(unsigned int offset);
 
-s32 LeoByteToLBA(s32 startLBA, u32 nbytes, s32 *lbas);
+s32 LeoLBAToByte(s32 startlba, u32 nlbas, s32* bytes);
 
 void leoInquiry(void);
+
 OSPiHandle* osLeoDiskInit(void);
 
-// void func_801CC190();
-void func_801CC1F0(void);
+s32 LeoSeek(LEOCmd* cmdBlock, u32 lba, OSMesgQueue* mq);
+
+void leoReadDiskId(void);
 
 u8 leoAnalize_asic_status(void);
-// void func_801CC48C();
-// void func_801CC574();
-// void func_801CC728();
-// void func_801CC7D0();
+u8 leoChk_asic_ready(u32 asic_cmd);
+u8 leoChk_done_status(u32 asic_cmd);
+u8 leoSend_asic_cmd_i(u32 asic_cmd, u32 asic_data);
+u8 leoWait_mecha_cmd_done(u32 asic_cmd);
 u8 leoSend_asic_cmd_w(u32 asic_cmd, u32 asic_data);
 u8 leoSend_asic_cmd_w_nochkDiskChange(u32 asic_cmd, u32 asic_data);
-// void func_801CC944();
-// void func_801CC96C();
+u8 leoDetect_index_w(void);
+u8 leoRecal_i(void);
 u8 leoRecal_w(void);
-// void func_801CC9BC();
+u8 leoSeek_i(u16 rwmode);
 u8 leoSeek_w(void);
-// void func_801CCA5C();
+u8 leoRecv_event_mesg(s32 control);
 u32 leoChk_err_retry(u32 sense);
-s8 leoChk_cur_drvmode(void);
+u8 leoChk_cur_drvmode(void);
+void leoDrive_reset(void);
+u32 leoChkUnit_atten(void);
+u32 leoRetUnit_atten(void);
+void leoClrUA_RESET(void);
+void leoClrUA_MEDIUM_CHANGED(void);
+void leoSetUA_MEDIUM_CHANGED(void);
+void leoInitUnit_atten(void);
 
-// void func_801CCC00();
-// void func_801CCC30();
-// void func_801CCC3C();
-// void func_801CCC70();
-// void func_801CCC8C();
-// void func_801CCCA8();
-// void func_801CCCC0();
-// void func_801CCCD0();
+s32 LeoSpdlMotor(LEOCmd* cmdBlock, LEOSpdlMode mode, OSMesgQueue* mq);
 
 int leoC2_Correction(void);
-// void func_801CCE1C();
-// void func_801CCEF0();
-// void func_801CD170();
-// void func_801CD558();
-// void func_801CDDF4();
-// void func_801CDE38();
-// void leoSet_mseq();
+
+void leoSet_mseq(u16 rwmode);
+
 void leoStart_stop(void);
 
-// void LeoDriveExist();
+u32 LeoDriveExist(void);
 
 void leoMode_sel(void);
 
@@ -80,34 +74,34 @@ u16 leoLba_to_vzone(u32 lba);
 
 void leoRezero(void);
 
-// void LeoClearQueue();
+s32 LeoClearQueue(void);
 
-// void LeoByteToLBA();
+s32 LeoByteToLBA(s32 startlba, u32 nbytes, s32* lba);
 
-void func_801CE7E0(void);
+void leoClr_queue(void);
 void leoClr_reset(void);
 
-void func_801CE900(void);
+void leoTranslate();
 
-void func_801CEBA0(void);
-void func_801CEC5C(void);
-// void func_801CEE94();
-// void func_801CF004();
+void leoReadTimer(void);
+void leoSetTimer(void);
 
-// void LeoGetKAdr();
+int LeoGetKAdr(int sjis);
+
+int LeoGetAAdr(int code,int *dx,int *dy, int *cy);
 
 void leoWrite(void);
 
-// void func_801D2170();
+s32 LeoCJCreateLeoManager(OSPri comPri, OSPri intPri, OSMesg* cmdBuf, s32 cmdMsgCnt);
 
-// void func_801D23B0();
-// void func_801D2910();
-// void func_801D29C4();
-// void func_801D2A80();
+s32 __osLeoInterrupt(void);
 
-// void func_801D2CB0();
+s32 LeoCACreateLeoManager(OSPri comPri, OSPri intPri, OSMesg* cmdBuf, s32 cmdMsgCnt);
+
+s32 LeoTestUnitReady(LEOStatus* status);
 
 void leoTest_unit_rdy(void);
+
 void leoSeek(void);
 
 #endif

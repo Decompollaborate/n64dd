@@ -3,6 +3,21 @@
 #include "libleo_functions.h"
 
 #if 0
+u16 leoLba_to_phys(u32 lba);
+//{
+//    u16 vzone_num;
+//    u16 zone_slba;
+//    u16 zone_scyl;
+//    u16 zone_tk;
+//    u16 bad_tk_num;
+//    u32 counter;
+//    u16 def_offset;
+//    u16 defect;
+//    u8 def_zone_no;
+//}
+#endif
+
+#if 0
 u16 leoLba_to_phys(u32 lba) {
     //s32 temp_t6;
     u16 temp_v0_2;

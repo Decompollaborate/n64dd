@@ -2,7 +2,6 @@
 #include "n64dd_functions.h"
 #include "libleo_functions.h"
 
-#if 0
 typedef struct {
     /* 0x0 */ u8 year;
     /* 0x1 */ u8 month;
@@ -12,6 +11,7 @@ typedef struct {
     /* 0x5 */ u8 second;
 } __LOCTime;
 
+#if 0
 void leoReadTimer();
 //{
 //    u8* rdparam;
@@ -61,6 +61,10 @@ u8 __locSetTimer(__LOCTime* time);
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leotimer/leoSetTimer.s")
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leotimer/func_801CEE94.s")
+// static
+u8 __locReadTimer(__LOCTime* time);
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leotimer/__locReadTimer.s")
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leotimer/func_801CF004.s")
+// static
+u8 __locSetTimer(__LOCTime* time);
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leotimer/__locSetTimer.s")

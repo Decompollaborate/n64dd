@@ -131,14 +131,26 @@ int leoAlpha_div(int i, int k);
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leoc2ecc/leoC2_Correction.s")
 
+// static
+void leoC2_single_ecc();
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leoc2ecc/leoC2_single_ecc.s")
 
+// static
+void leoC2_double_ecc();
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leoc2ecc/leoC2_double_ecc.s")
 
+// static
+void leoC2_3_ecc();
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leoc2ecc/leoC2_3_ecc.s")
 
+// static
+void leoC2_4_ecc();
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leoc2ecc/leoC2_4_ecc.s")
 
+// static
+int leoAlpha_mult(int i, int k);
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leoc2ecc/leoAlpha_mult.s")
 
+// static
+int leoAlpha_div(int i, int k);
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leoc2ecc/leoAlpha_div.s")
