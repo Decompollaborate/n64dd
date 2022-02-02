@@ -11,6 +11,7 @@
 8000638C,__osPiTable,OSPiHandle*,0x4
 801E5EC0,LEOPiInfo,OSPiHandle*,0x4
 801E5EC8,LEOPiDmaParam,,0x18
+801E5EE0,currentCommand,,0x4
 801E51A0,LEO_sys_data,,0xE8
 801E5288,LEOcommandThread,,0x1B0
 801E5438,LEOinterruptThread,OSThread,0x1B0

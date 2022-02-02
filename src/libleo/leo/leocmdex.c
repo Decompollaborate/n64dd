@@ -2,14 +2,15 @@
 #include "n64dd_functions.h"
 
 #if 0
-static void (*cmd_tbl)(/* ECOFF does not store param types */)[15];
+static void (*cmd_tbl)(/* ECOFF does not store param types */)[16];
 
 void leomain(void* arg);
 //{
 //    u32 cur_status;
 //    u32 sense_code;
-//    Label: invalid_disktype @ 908;
-//    Label: post_exe @ 996;
+//    u8 disktype_bak;
+//    Label: invalid_disktype @ 1252;
+//    Label: post_exe @ 1340;
 //}
 
 static const LEOCmdRead system_read_cmd;
@@ -22,8 +23,8 @@ u8 leoRead_system_area();
 //    void* backup_pointer;
 //    u32 retry_cntr;
 //    u32 read_mode;
-//    Label: system_retry @ 1504;
-//    Label: sys_read_end @ 1624;
+//    Label: system_retry @ 1848;
+//    Label: sys_read_end @ 1968;
 //}
 #endif
 
