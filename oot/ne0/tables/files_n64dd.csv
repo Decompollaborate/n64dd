@@ -84,7 +84,9 @@ offset,vram,.bss
 1F040,801E5EC0,leocmdex
 1F070,801E5EF0,leodiskinit
 1F0F0,801E5F70,leomecha
-1F100,801E5F80,leoc2ecc
+1F100,801E5F80,leotempbuffer
+1F1F0,801E6070,leoc2_syndrome
+1F930,801E67B0,leoc2ecc
 1F940,801E67C0,leomseq_tbl
 1F980,801E6800,leoglobals
 1F990,801E6810,leointerrupt

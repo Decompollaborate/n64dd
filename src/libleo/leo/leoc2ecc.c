@@ -130,14 +130,14 @@ int leoAlpha_div(int i, int k);
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leoc2ecc/leoC2_Correction.s")
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leoc2ecc/func_801CCE1C.s")
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leoc2ecc/leoC2_single_ecc.s")
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leoc2ecc/func_801CCEF0.s")
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leoc2ecc/leoC2_double_ecc.s")
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leoc2ecc/func_801CD170.s")
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leoc2ecc/leoC2_3_ecc.s")
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leoc2ecc/func_801CD558.s")
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leoc2ecc/leoC2_4_ecc.s")
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leoc2ecc/func_801CDDF4.s")
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leoc2ecc/leoAlpha_mult.s")
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leoc2ecc/func_801CDE38.s")
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leoc2ecc/leoAlpha_div.s")

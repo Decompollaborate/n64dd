@@ -179,6 +179,12 @@
 801CCA20,leoSeek_w
 801CCAB0,leoChk_err_retry
 801CCD90,leoC2_Correction
+801CCE1C,leoC2_single_ecc
+801CCEF0,leoC2_double_ecc
+801CD170,leoC2_3_ecc
+801CD558,leoC2_4_ecc
+801CDDF4,leoAlpha_mult
+801CDE38,leoAlpha_div
 801CDE80,leoSet_mseq
 801CE030,leoStart_stop
 801CE1F0,leoMode_sel

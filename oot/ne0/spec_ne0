@@ -239,6 +239,9 @@ beginseg
 
     include "oot/ne0/build/src/libleo/leo/leo_tbl.o"
 
+    include "oot/ne0/build/asm/data/n64dd/leotempbuffer.bss.o"
+    include "oot/ne0/build/asm/data/n64dd/leoc2_syndrome.bss.o"
+
     include "oot/ne0/build/src/libleo/leo/leoc2ecc.o"
     include "oot/ne0/build/asm/data/n64dd/leoc2ecc.bss.o"
 
