@@ -8,31 +8,20 @@ extern u16 LEOrw_flags; // N.B. NOT volatile in this file!
 extern LEOCmd *LEOcur_command;
 extern u8 LEOdisk_type;
 
-
-// Different from libleo.a:
-// void leoWrite();
-// //{
-// //    u32 message;
-// //    u32 start_lba;
-// //    u32 xfer_blk;
-// //    u32 write_bytes;
-// //    u8 retry_count;
-// //    Label: invalid_lba @ 132;
-// //}
 void leoWrite(void) {
     u32 message;
     u32 start_lba;
     u32 xfer_blk;
-    u32 write_bytes;
-    // u8 retry_count;
+    u32 write_bytes = 0;
+    u8 retry_count = 0;
 
     start_lba = LEOcur_command->data.readWrite.lba;
     xfer_blk = LEOcur_command->data.readWrite.transferBlks;
-    if (((start_lba | xfer_blk) >> 0x10) != 0) {
+    if (((start_lba | xfer_blk) & 0xFFFF0000) != 0) {
         goto invalid_lba;
     }
+
     start_lba += 0x18;
-    // temp = start_lba + xfer_blk; // ?
     if ((start_lba >= 0x10DC) || (start_lba + xfer_blk > 0x10DC)) {
         invalid_lba:
         LEOcur_command->header.sense = LEO_SENSE_LBA_OUT_OF_RANGE;
