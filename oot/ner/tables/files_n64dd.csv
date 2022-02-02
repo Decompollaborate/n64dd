@@ -19,7 +19,6 @@ offset,vram,.text
 5210,801CBE90,seek
 5270,801CBEF0,leord_diskid
 5400,801CC080,leomecha
-5CB0,801CC930,n64dd_801CCC30
 5D50,801CC9D0,spdlmotor
 5E10,801CCA90,leoc2ecc
 6F00,801CDB80,leomseq_tbl

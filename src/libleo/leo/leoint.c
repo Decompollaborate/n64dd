@@ -49,10 +49,10 @@ u32 leochk_err_reg();
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leoint/leointerrupt.s")
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leoint/func_801CADD0.s")
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leoint/read_write_track.s")
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leoint/func_801CB3CC.s")
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leoint/leoChk_mecha_int.s")
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leoint/func_801CB434.s")
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leoint/leosetup_BM.s")
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leoint/func_801CB51C.s")
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leoint/leochk_err_reg.s")

@@ -52,6 +52,7 @@
 801E6070,LEOC2_Syndrome,,0x740
 801E67B0,LEOc2_param,,0x10
 801E5F70,asic_cur_status,u32,0x4
+801E5F74,unit_atten,u32,0x4
 801D8D70,cmd_tbl,void (*)(),0x40
 801D8DB0,system_read_cmd,LEOCmdRead,0x1C
 801D93C0,system_lba,u8,0x8

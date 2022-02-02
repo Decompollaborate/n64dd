@@ -4,6 +4,8 @@
 #if 0
 static u32 asic_cur_status;
 
+static u32 unit_atten;
+
 u8 leoAnalize_asic_status();
 //{
 //    u32 curr_stat;
@@ -35,6 +37,12 @@ u8 leoSend_asic_cmd_w(u32 asic_cmd, u32 asic_data);
 //    u32 wstatus;
 //}
 
+u8 leoSend_asic_cmd_w_nochkDiskChange(u32 asic_cmd, u32 asic_data);
+//{
+//    u8 status;
+//    u32 done_stat;
+//}
+
 u8 leoDetect_index_w();
 //{
 //}
@@ -59,7 +67,7 @@ u8 leoSeek_w();
 
 u8 leoRecv_event_mesg(s32 control);
 //{
-//    u32 message;
+//    u32 done_mesg;
 //}
 
 u32 leoChk_err_retry(u32 sense);
@@ -74,51 +82,72 @@ u8 leoChk_cur_drvmode();
 void leoDrive_reset();
 //{
 //}
+
+u32 leoChkUnit_atten();
+//{
+//}
+
+u32 leoRetUnit_atten();
+//{
+//}
+
+void leoClrUA_RESET();
+//{
+//}
+
+void leoClrUA_MEDIUM_CHANGED();
+//{
+//}
+
+void leoSetUA_MEDIUM_CHANGED();
+//{
+//}
+
+void leoInitUnit_atten();
+//{
+//}
 #endif
 
-// leoAnalize_asic_status
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/leoAnalize_asic_status.s")
 
-// leoChk_asic_ready
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/func_801CC48C.s")
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/leoChk_asic_ready.s")
 
-// leoChk_done_status
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/func_801CC574.s")
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/leoChk_done_status.s")
 
-// leoSend_asic_cmd_i
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/func_801CC728.s")
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/leoSend_asic_cmd_i.s")
 
-// leoWait_mecha_cmd_done
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/func_801CC7D0.s")
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/leoWait_mecha_cmd_done.s")
 
-// Looks more like leoSend_asic_cmd_w ?
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/leoSend_asic_cmd_w.s")
 
-// ?
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/leoSend_asic_cmd_w_nochkDiskChange.s")
 
-// leoDetect_index_w
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/func_801CC944.s")
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/leoDetect_index_w.s")
 
-// leoRecal_i
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/func_801CC96C.s")
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/leoRecal_i.s")
 
-// leoRecal_w
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/leoRecal_w.s")
 
-// leoSeek_i
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/func_801CC9BC.s")
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/leoSeek_i.s")
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/leoSeek_w.s")
 
-// leoRecv_event_mesg
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/func_801CCA5C.s")
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/leoRecv_event_mesg.s")
 
-// Quite different
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/leoChk_err_retry.s")
 
-// leoChk_cur_drvmode
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/func_801CCBC0.s")
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/leoChk_cur_drvmode.s")
 
-// leoDrive_reset
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/func_801CCC00.s")
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/leoDrive_reset.s")
+
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/leoChkUnit_atten.s")
+
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/leoRetUnit_atten.s")
+
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/leoClrUA_RESET.s")
+
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/leoClrUA_MEDIUM_CHANGED.s")
+
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/leoSetUA_MEDIUM_CHANGED.s")
+
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/leoInitUnit_atten.s")
