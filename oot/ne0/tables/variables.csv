@@ -68,3 +68,6 @@
 801E5F64,__osDiskHandle,OSPiHandle*,0x4
 801D8D60,__leoResetCalled,,0x4
 801D8D64,__leoQueuesCreated,,0x4
+801E67C0,mseq_tbl,u32,0x40
+801D9AF0,rd_mseq_code,u32,0x40
+801D9B30,wt_mseq_code,u32,0x40

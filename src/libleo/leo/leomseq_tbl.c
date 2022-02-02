@@ -17,8 +17,8 @@ void leoSet_mseq(u16 rwmode);
 //}
 #endif
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomseq_tbl/R_801D9AF0.s")
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomseq_tbl/rd_mseq_code.s")
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomseq_tbl/R_801D9B30.s")
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomseq_tbl/wt_mseq_code.s")
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomseq_tbl/leoSet_mseq.s")

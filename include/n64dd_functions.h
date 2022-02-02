@@ -141,7 +141,7 @@
 // void func_801CA6E4();
 // void func_801CA704();
 
-// void func_801CA740();
+s32 LeoReadWrite(LEOCmd* cmdBlock, s32 direction, u32 LBA, void* vAddr, u32 nLBAs, OSMesgQueue* mq);
 
 // void func_801CA7D0();
 // void func_801CA9A4();
