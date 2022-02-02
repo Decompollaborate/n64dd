@@ -18,6 +18,7 @@ class GlobalConfig:
     ADD_NEW_SYMBOLS: bool = True
     PRODUCE_SYMBOLS_PLUS_OFFSET: bool = False
     SYMBOL_FINDER_FILTER_LOW_ADDRESSES: bool = True
+    SYMBOL_FINDER_FILTER_HIGH_ADDRESSES: bool = True
 
     TRUST_USER_FUNCTIONS: bool = True
     DISASSEMBLE_UNKNOWN_INSTRUCTIONS: bool = False
@@ -29,6 +30,7 @@ class GlobalConfig:
     VERBOSE: bool = False
     PRINT_FUNCTION_ANALYSIS_DEBUG_INFO: bool = False
     PRINT_SYMBOL_FINDER_DEBUG_INFO: bool = False
+    PRINT_UNPAIRED_LUIS_DEBUG_INFO: bool = False
 
 
     @staticmethod
@@ -43,6 +45,7 @@ class GlobalConfig:
         backendConfig.add_argument("--disable-string-guesser", help="Disables the string guesser feature (does nto affect the strings referenced by .data)", action="store_true")
 
         backendConfig.add_argument("--not-filter-low-addressses", help="Treat low addresses (lower than 0x40000000) as real pointers.", action="store_true")
+        backendConfig.add_argument("--not-filter-high-addressses", help="Treat high addresses (higher than 0xC0000000) as real pointers.", action="store_true")
 
 
         miscConfig = parser.add_argument_group("Disassembler misc options")
@@ -61,6 +64,7 @@ class GlobalConfig:
 
         debugging.add_argument("--debug-func-analysis", help="Enables some debug info printing related to the function analysis)", action="store_true")
         debugging.add_argument("--debug-symbol-finder", help="Enables some debug info printing related to the symbol finder system)", action="store_true")
+        debugging.add_argument("--debug-unpaired-luis", help="Enables some debug info printing related to the unpaired LUI instructions)", action="store_true")
 
 
     @classmethod
@@ -74,6 +78,7 @@ class GlobalConfig:
 
         GlobalConfig.STRING_GUESSER = not args.disable_string_guesser
         GlobalConfig.SYMBOL_FINDER_FILTER_LOW_ADDRESSES = not args.not_filter_low_addressses
+        GlobalConfig.SYMBOL_FINDER_FILTER_HIGH_ADDRESSES = not args.not_filter_high_addressses
 
         GlobalConfig.WRITE_BINARY = args.write_binary
         GlobalConfig.ASM_COMMENT = not args.disable_asm_comments
@@ -83,6 +88,7 @@ class GlobalConfig:
 
         GlobalConfig.PRINT_FUNCTION_ANALYSIS_DEBUG_INFO = args.debug_func_analysis
         GlobalConfig.PRINT_SYMBOL_FINDER_DEBUG_INFO = args.debug_symbol_finder
+        GlobalConfig.PRINT_SYMBOL_FINDER_DEBUG_INFO = args.debug_unpaired_luis
 
 
 def printQuietless(*args, **kwargs):
