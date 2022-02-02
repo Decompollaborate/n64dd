@@ -66,15 +66,16 @@ u8 leoChk_asic_ready(u32 asic_cmd) {
                     return 37;
                 }
             }
+        default:
             break;
 
         case 49:
-            if (!(asic_cmd & 1)) {
-                case 21:
-                    return 0;
+            if (asic_cmd & 1) {
+                break;
             }
-        default:
-            break;
+
+        case 21:
+            return 0;
     }
     return sense_code;
 }
@@ -100,10 +101,10 @@ u8 leoChk_done_status(u32 asic_cmd) {
             break;
 
         case 49:
-            if ((asic_cmd & 1) == 0) {
-                return 0;
+            if (asic_cmd & 1) {
+                break;
             }
-            break;
+            return 0;
 
         case 21:
             osEPiWriteIo(LEOPiInfo, 0x5000500, 0);
@@ -150,14 +151,12 @@ u8 leoSend_asic_cmd_i(u32 asic_cmd, u32 asic_data) {
     u8 status = leoChk_asic_ready(asic_cmd);
 
     if (status != 0) {
-        LEOcur_command->header.sense = status;
-        return LEOcur_command->header.sense;
+        return LEOcur_command->header.sense = status;
     }
 
     osEPiWriteIo(LEOPiInfo, 0x5000500, asic_data);
     if (leoRecv_event_mesg(0) != 0) {
-        LEOcur_command->header.sense = 0x25;
-        return LEOcur_command->header.sense;
+        return LEOcur_command->header.sense = 37;
     }
 
     osEPiWriteIo(LEOPiInfo, 0x5000508, asic_cmd);
@@ -196,14 +195,12 @@ u8 leoSend_asic_cmd_w_nochkDiskChange(u32 asic_cmd, u32 asic_data) {
 
     status = leoChk_asic_ready(asic_cmd);
     if ((status != 0x2F) && (status != 0)) {
-        LEOcur_command->header.sense = status;
-        return LEOcur_command->header.sense;
+        return LEOcur_command->header.sense = status;
     }
 
     osEPiWriteIo(LEOPiInfo, 0x5000500, asic_data);
     if (leoRecv_event_mesg(0) != 0) {
-        LEOcur_command->header.sense = 0x25;
-        return LEOcur_command->header.sense;
+        return LEOcur_command->header.sense = 0x25;
     }
 
     osEPiWriteIo(LEOPiInfo, 0x5000508, asic_cmd);
@@ -277,8 +274,6 @@ u32 leoChk_err_retry(u32 sense) {
             case LEO_SENSE_EJECTED_ILLEGALLY_RESUME:
                 LEOdrive_flag = 0;
                 return -1;
-            default:
-                break;
         }
     } else {
         switch (sense) {
@@ -294,8 +289,6 @@ u32 leoChk_err_retry(u32 sense) {
             case LEO_SENSE_EJECTED_ILLEGALLY_RESUME:
                 LEOdrive_flag = 0;
                 return -1;
-            default:
-                break;
         }
     }
 
