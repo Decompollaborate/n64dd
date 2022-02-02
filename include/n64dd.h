@@ -46,4 +46,6 @@ extern s32 __leoActive;
 // bss
 extern LEOCmd *LEOcur_command;
 
+extern OSMesgQueue LEOcommand_que;
+
 #endif

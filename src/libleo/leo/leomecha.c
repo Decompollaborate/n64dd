@@ -77,7 +77,7 @@ void leoDrive_reset();
 #endif
 
 // leoAnalize_asic_status
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/func_801CC380.s")
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/leoAnalize_asic_status.s")
 
 // leoChk_asic_ready
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/func_801CC48C.s")
@@ -92,10 +92,10 @@ void leoDrive_reset();
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/func_801CC7D0.s")
 
 // Looks more like leoSend_asic_cmd_w ?
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/func_801CC820.s")
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/leoSend_asic_cmd_w.s")
 
 // ?
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/leoSend_asic_cmd_w.s")
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/leoSend_asic_cmd_w_nochkDiskChange.s")
 
 // leoDetect_index_w
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leomecha/func_801CC944.s")

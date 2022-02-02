@@ -1,10 +1,6 @@
 #include "n64dd.h"
 #include "n64dd_functions.h"
 
-extern OSMesgQueue LEOcommand_que;
-
-u8 func_801CC380(void);
-
 void leoClr_queue(void) {
     OSMesg clr_cmd;
 
@@ -17,14 +13,12 @@ void leoClr_queue(void) {
     }
 }
 
+void leoClr_reset(void) {
+    u32 code = leoAnalize_asic_status();
 
-void func_801CE888(void) {
-    u32 sense_code;
-
-    sense_code = func_801CC380();
-    if ((sense_code == LEO_SENSE_COMMAND_PHASE_ERROR) || (sense_code == LEO_SENSE_DEVICE_COMMUNICATION_FAILURE) ||
-        (sense_code == LEO_SENSE_POWERONRESET_DEVICERESET_OCCURED)) {
-        LEOcur_command->header.sense = sense_code;
+    if ((code == LEO_SENSE_COMMAND_PHASE_ERROR) || (code == LEO_SENSE_DEVICE_COMMUNICATION_FAILURE) ||
+        (code == LEO_SENSE_POWERONRESET_DEVICERESET_OCCURED)) {
+        LEOcur_command->header.sense = code;
         LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
     } else {
         LEOcur_command->header.sense = LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION;

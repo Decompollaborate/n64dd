@@ -3,11 +3,19 @@
 
 extern OSPiHandle* LEOPiInfo;
 
+#if 0
+void leoInquiry();
+//{
+//    u32 asic_id;
+//    u32 asic_data;
+//}
+#endif
+
 void leoInquiry(void) {
     u32 sp1C;
 
     osEPiReadIo(LEOPiInfo, 0x05000540, &sp1C);
-    if (func_801CC820(0x1B0000, 0) == 0) {
+    if (leoSend_asic_cmd_w(0x1B0000, 0) == 0) {
         u32 sp18;
 
         osEPiReadIo(LEOPiInfo, 0x05000500, &sp18);

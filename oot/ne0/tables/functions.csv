@@ -173,7 +173,8 @@
 801CBD5C,leoRead_common
 801CBEF0,LeoLBAToByte
 801CC040,leoInquiry
-801CC858,leoSend_asic_cmd_w
+801CC820,leoSend_asic_cmd_w
+801CC858,leoSend_asic_cmd_w_nochkDiskChange
 801CC994,leoRecal_w
 801CCA20,leoSeek_w
 801CCAB0,leoChk_err_retry
@@ -213,3 +214,7 @@
 801D29C4,__osLeoResume
 801CC0F0,osLeoDiskInit
 801CAB94,__leoSetReset
+801CEBA0,leoReadTimer
+801CEC5C,leoSetTimer
+801CE888,leoClr_reset
+801CC380,leoAnalize_asic_status

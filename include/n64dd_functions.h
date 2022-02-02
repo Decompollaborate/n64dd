@@ -171,13 +171,13 @@ OSPiHandle* osLeoDiskInit(void);
 // void func_801CC190();
 void func_801CC1F0(void);
 
-// void func_801CC380();
+u8 leoAnalize_asic_status(void);
 // void func_801CC48C();
 // void func_801CC574();
 // void func_801CC728();
 // void func_801CC7D0();
-s32 func_801CC820(UNK_TYPE, UNK_TYPE);
-// void leoSend_asic_cmd_w();
+u8 leoSend_asic_cmd_w(u32 asic_cmd, u32 asic_data);
+u8 leoSend_asic_cmd_w_nochkDiskChange(u32 asic_cmd, u32 asic_data);
 // void func_801CC944();
 // void func_801CC96C();
 u8 leoRecal_w(void);
@@ -222,7 +222,7 @@ void leoRezero(void);
 // void LeoByteToLBA();
 
 void func_801CE7E0(void);
-void func_801CE888(void);
+void leoClr_reset(void);
 
 void func_801CE900(void);
 
