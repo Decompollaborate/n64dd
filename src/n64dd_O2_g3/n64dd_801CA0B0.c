@@ -1,5 +1,6 @@
 #include "n64dd.h"
 #include "n64dd_functions.h"
+#include "libleo_functions.h"
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801CA0B0/func_801CA0B0.s")
 

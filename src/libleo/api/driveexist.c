@@ -1,5 +1,6 @@
 #include "n64dd.h"
 #include "n64dd_functions.h"
+#include "libleo_functions.h"
 
 u32 LeoDriveExist(void) {
     register u32 sp1C;

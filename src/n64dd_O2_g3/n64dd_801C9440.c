@@ -1,5 +1,6 @@
 #include "n64dd.h"
 #include "n64dd_functions.h"
+#include "libleo_functions.h"
 
 // Handwritten function, looks up offset in `kanji` or similar of Shift-JIS codepoint using a table.
 s32 LeoGetKAdr(s32);

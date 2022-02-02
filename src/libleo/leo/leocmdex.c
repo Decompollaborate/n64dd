@@ -1,5 +1,6 @@
 #include "n64dd.h"
 #include "n64dd_functions.h"
+#include "libleo_functions.h"
 
 #if 0
 static void (*cmd_tbl)(/* ECOFF does not store param types */)[16];

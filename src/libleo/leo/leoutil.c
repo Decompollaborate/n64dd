@@ -1,5 +1,6 @@
 #include "n64dd.h"
 #include "n64dd_functions.h"
+#include "libleo_functions.h"
 
 #if 0
 u16 leoLba_to_phys(u32 lba) {

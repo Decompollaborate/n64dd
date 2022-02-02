@@ -1,5 +1,6 @@
 #include "n64dd.h"
 #include "n64dd_functions.h"
+#include "libleo_functions.h"
 
 void leoTest_unit_rdy(void) {
     ((LEOCmdTestUnitReady*)LEOcur_command)->test = leoChk_cur_drvmode();

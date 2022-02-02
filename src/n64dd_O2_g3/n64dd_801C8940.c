@@ -1,5 +1,6 @@
 #include "n64dd.h"
 #include "n64dd_functions.h"
+#include "libleo_functions.h"
 
 u8* func_801C9E28(s32 errorNum);
 u8* func_801C9EC0(void);

@@ -1,5 +1,6 @@
 #include "n64dd.h"
 #include "n64dd_functions.h"
+#include "libleo_functions.h"
 
 #define LANGUAGE_JP 0
 #define LANGUAGE_EN 1

@@ -1,5 +1,6 @@
 #include "n64dd.h"
 #include "n64dd_functions.h"
+#include "libleo_functions.h"
 
 void leoClr_queue(void) {
     OSMesg clr_cmd;
