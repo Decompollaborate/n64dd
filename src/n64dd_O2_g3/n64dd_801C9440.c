@@ -91,7 +91,7 @@ void func_801C95C0(s32 arg0, s32 arg1, UNK_TYPE arg2) {
 }
 
 s32 func_801C95F0(char* arg0) {
-    return LeoGetKAdr(func_801C9534(func_801C9514((arg0[0] << 8) | arg0[1]))) + 0xA0000;
+    return LeoGetKAdr(func_801C9534(func_801C9514((arg0[0] << 8) | arg0[1]))) + DDROM_FONT_START;
 }
 
 // #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9440/func_801C963C.s")
@@ -105,7 +105,7 @@ s32 func_801C963C(s32* arg0, s32* arg1, s32* arg2, s32* arg3, u8 arg4) {
 
     temp_v0 = LeoGetAAdr(temp, arg1, arg2, arg3);
     temp_v1 = temp_v0 & 0xF;
-    *arg0 = (temp_v0 - temp_v1) + 0xA0000;
+    *arg0 = (temp_v0 - temp_v1) + DDROM_FONT_START;
     return temp_v1;
 }
 
