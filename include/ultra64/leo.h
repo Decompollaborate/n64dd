@@ -59,30 +59,30 @@ typedef struct {
 
 // Not attempting to number this struct until required since it's scary
 typedef struct{
-    LEOCmdHeader header;
+    /* 0x00 */ LEOCmdHeader header;
     union {
         struct {
-            u32 lba;
-            u32 transferBlks;
-            void* buffPtr;
-            u32 rwBytes;
+            /* 0x0C */ u32 lba;
+            /* 0x10 */ u32 transferBlks;
+            /* 0x14 */ void* buffPtr;
+            /* 0x18 */ u32 rwBytes;
 #ifdef _LONGCMD
-            u32 size;
+            /* 0x1C */ u32 size;
 #endif
         } readWrite;
         struct {
-            u32 lba;
+            /* 0x0C */ u32 lba;
         } seek;
         struct {
-            void* bufferPointer;
+            /* 0x0C */ void* bufferPointer;
         } readdiskid;
-        LEODiskTime time;
+        /* 0x0C */ LEODiskTime time;
         struct {
-            u8 reserve1;
-            u8 reserve2;
-            u8 standbyTime;
-            u8 sleepTime;
-            u32 reserve3;
+            /* 0x0C */ u8 reserve1;
+            /* 0x0D */ u8 reserve2;
+            /* 0x0E */ u8 standbyTime;
+            /* 0x0F */ u8 sleepTime;
+            /* 0x10 */ u32 reserve3;
         } modeSelect;
     } data;
 } LEOCmd; // size = 0x1C

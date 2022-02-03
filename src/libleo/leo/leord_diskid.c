@@ -2,6 +2,10 @@
 #include "n64dd_functions.h"
 #include "libleo_functions.h"
 
+extern const LEOCmdRead read_id_cmd;
+
+extern const u8 leo_disk_id_lba[2];
+
 #if 0
 static const LEOCmdRead read_id_cmd;
 

@@ -2,10 +2,32 @@
 #include "n64dd_functions.h"
 #include "libleo_functions.h"
 
-#if 0
-s32 LeoReadWrite(LEOCmd* cmdBlock, s32 direction, u32 LBA, void* vAddr, u32 nLBAs, OSMesgQueue* mq);
-//{
-//}
-#endif
+s32 LeoReadWrite(LEOCmd* cmdBlock, s32 direction, u32 LBA, void* vAddr, u32 nLBAs, OSMesgQueue* mq) {
+    if (!__leoActive) {
+        return -1;
+    }
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/readwrite/LeoReadWrite.s")
+    if (direction == OS_READ) {
+        cmdBlock->header.command = 5;
+    } else {
+        cmdBlock->header.command = 6;
+    }
+
+    cmdBlock->header.reserve1 = 0;
+
+    if (mq != NULL) {
+        cmdBlock->header.control = 0x80;
+    } else {
+        cmdBlock->header.control = 0;
+    }
+
+    cmdBlock->header.reserve3 = 0;
+    cmdBlock->header.post = mq;
+    cmdBlock->data.readWrite.lba = LBA;
+    cmdBlock->data.readWrite.transferBlks = nLBAs;
+    cmdBlock->data.readWrite.buffPtr = vAddr;
+
+    leoCommand(cmdBlock);
+
+    return 0;
+}
