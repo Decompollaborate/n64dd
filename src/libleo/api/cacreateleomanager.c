@@ -13,11 +13,11 @@ s32 LeoCACreateLeoManager(s32 comPri, s32 intPri, void** cmdBuf, s32 cmdMsgCnt) 
     u32 data;
 
     if (__leoActive) {
-        return 0;
+        return LEO_ERROR_GOOD;
     }
 
-    if (LeoDriveExist() == 0) {
-        return 0x29;
+    if (!LeoDriveExist()) {
+        return LEO_ERROR_DEVICE_COMMUNICATION_FAILURE;
     }
 
     if (data && data) {}
@@ -47,7 +47,7 @@ s32 LeoCACreateLeoManager(s32 comPri, s32 intPri, void** cmdBuf, s32 cmdMsgCnt) 
         }
     }
 
-    while (cmdBlockInq.header.status == 8);
+    while (cmdBlockInq.header.status == 8) {}
 
     if (cmdBlockInq.header.status != 0) {
         return cmdBlockInq.header.sense;
@@ -66,15 +66,15 @@ s32 LeoCACreateLeoManager(s32 comPri, s32 intPri, void** cmdBuf, s32 cmdMsgCnt) 
 
         osEPiReadIo(driveRomHandle, 0x9FF00, &data);
         if (((data & 0xFF000000) >> 0x18) != 4) {
-            while (true);
+            while (true) {}
         }
 
         dummy = 0x32F8EB20;
         LEO_country_code = 0x2263EE56;
         dummy += (uintptr_t)&__leoActive;
     } else {
-        while (true);
+        while (true) {}
     }
 
-    return 0;
+    return LEO_ERROR_GOOD;
 }

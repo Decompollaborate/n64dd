@@ -33,7 +33,7 @@ u32 LeoDriveExist(void) {
 
     __osPiRelAccess();
     if (sp1C == 0x2129FFF8) {
-        return 1;
+        return true;
     }
-    return 0;
+    return false;
 }

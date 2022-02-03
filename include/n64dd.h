@@ -24,7 +24,7 @@ typedef struct {
     /* 0x0000 */ char unk_0000[0x4D10];
 } struct_801DC000; // size = 0x4D10?
 
-extern s32 LEO_country_code;
+extern UNK_TYPE4 LEO_country_code;
 extern u8 LEOdisk_type;
 
 // leo_tbl
