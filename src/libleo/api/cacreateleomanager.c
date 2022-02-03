@@ -1,24 +1,80 @@
 #include "n64dd.h"
 #include "n64dd_functions.h"
 #include "libleo_functions.h"
+#include "libc/stdint.h"
 
-#if 0
-s32 LeoCACreateLeoManager(OSPri comPri, OSPri intPri, OSMesg* cmdBuf, s32 cmdMsgCnt);
-//{
-//    OSPiHandle* driveRomHandle;
-//    OSPiHandle* leoDiskHandle;
-//    volatile LEOCmdInquiry cmdBlockInq;
-//    volatile LEOCmd cmdBlockID;
-//    LEODiskID thisID;
-//    u32 stat;
-//    u32 data;
-//    {
-//        volatile s32 dummy;
-//    }
-//    {
-//        volatile u32 dummy;
-//    }
-//}
-#endif
+s32 LeoCACreateLeoManager(s32 comPri, s32 intPri, void** cmdBuf, s32 cmdMsgCnt) {
+    OSPiHandle* driveRomHandle;
+    OSPiHandle* leoDiskHandle;
+    volatile LEOCmdInquiry cmdBlockInq;
+    volatile LEOCmd cmdBlockID;
+    LEODiskID thisID;
+    u32 stat;
+    u32 data;
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/cacreateleomanager/LeoCACreateLeoManager.s")
+    if (__leoActive) {
+        return 0;
+    }
+
+    if (LeoDriveExist() == 0) {
+        return 0x29;
+    }
+
+    if (data && data) {}
+
+    osLeoDiskInit();
+    driveRomHandle = osDriveRomInit();
+    __leoActive = true;
+
+    __osSetHWIntrRoutine(1, __osLeoInterrupt, leoDiskStack + 0xFF0);
+    leoInitialize(comPri, intPri, cmdBuf, cmdMsgCnt);
+
+    if (osResetType == 1) {
+        __leoSetReset();
+    }
+
+    cmdBlockInq.header.command = 2;
+    cmdBlockInq.header.reserve1 = 0;
+    cmdBlockInq.header.control = 0;
+    cmdBlockInq.header.reserve3 = 0;
+    leoCommand((void*)&cmdBlockInq);
+
+    {
+        volatile s32 dummy = (uintptr_t)__osSetHWIntrRoutine & 0xA48D3C;
+
+        while (dummy < 0xE00000) {
+            dummy += (((uintptr_t)leoCommand & 0xFF) | 0x8A) << 0x10;
+        }
+    }
+
+    while (cmdBlockInq.header.status == 8);
+
+    if (cmdBlockInq.header.status != 0) {
+        return cmdBlockInq.header.sense;
+    }
+
+    __leoVersion.driver = cmdBlockInq.version;
+    __leoVersion.drive = 6;
+    __leoVersion.deviceType = cmdBlockInq.devType;
+    __leoVersion.nDevices = cmdBlockInq.devNum;
+
+    stat = __leoVersion.driver & 0xF;
+    if (stat == 4) {
+        LEO_country_code = 0;
+    } else if ((stat == 3) || (stat == 1)) {
+        volatile u32 dummy;
+
+        osEPiReadIo(driveRomHandle, 0x9FF00, &data);
+        if (((data & 0xFF000000) >> 0x18) != 4) {
+            while (true);
+        }
+
+        dummy = 0x32F8EB20;
+        LEO_country_code = 0x2263EE56;
+        dummy += (uintptr_t)&__leoActive;
+    } else {
+        while (true);
+    }
+
+    return 0;
+}

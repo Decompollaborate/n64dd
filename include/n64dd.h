@@ -43,9 +43,15 @@ extern tgt_param_form LEOtgt_param;
 
 extern s32 __leoActive;
 
+extern LEOVersion __leoVersion;
+extern u8 leoDiskStack[];
+
 // bss
 extern LEOCmd *LEOcur_command;
 
 extern OSMesgQueue LEOcommand_que;
+
+// other
+extern u32 osResetType;
 
 #endif

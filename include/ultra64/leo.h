@@ -85,7 +85,7 @@ typedef struct{
             u32 reserve3;
         } modeSelect;
     } data;
-} LEOCmd;
+} LEOCmd; // size = 0x1C
 
 
 #define _nbytes readwrite.rwBytes
