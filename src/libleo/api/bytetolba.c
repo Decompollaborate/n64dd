@@ -2,15 +2,48 @@
 #include "n64dd_functions.h"
 #include "libleo_functions.h"
 
-#if 0
-s32 LeoByteToLBA(s32 startlba, u32 nbytes, s32* lba);
-//{
-//    u32 reslba;
-//    u32 byte_p_blk;
-//    u16 zone;
-//    u16 vzone;
-//    u8 flag;
-//}
-#endif
+s32 LeoByteToLBA(s32 startlba, u32 nbytes, s32* lba) {
+    u32 reslba;
+    u32 byte_p_blk;
+    u16 zone;
+    u16 vzone;
+    u8 flag;
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/bytetolba/LeoByteToLBA.s")
+    if (!__leoActive) {
+        return -1;
+    }
+
+    #ifdef _DEBUG
+    if ((u32) startlba >= NUM_LBAS) {
+        return 0x20;
+    }
+    #endif
+
+    reslba = 0;
+    flag = vzone = 1;
+    startlba += 0x18;
+    while (nbytes != 0) {
+        if ((flag != 0) || (LEOVZONE_TBL[LEOdisk_type][vzone] == startlba)) {
+            vzone = leoLba_to_vzone(startlba);
+            zone = LEOVZONE_PZONEHD_TBL[LEOdisk_type][vzone];
+            if (zone >= 8) {
+                zone += -7;
+            }
+            byte_p_blk = LEOBYTE_TBL2[zone];
+        }
+        if (nbytes < byte_p_blk) {
+            nbytes = 0;
+        } else {
+            nbytes -= byte_p_blk;
+        }
+        reslba++;
+        startlba++;
+        if ((nbytes != 0) && ((u32) startlba >= NUM_LBAS+0x18)) {
+            return 0x20;
+        }
+        flag = 0;
+    }
+
+    *lba = reslba;
+    return 0;
+}
