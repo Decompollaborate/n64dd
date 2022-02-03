@@ -3,34 +3,14 @@
 #include "libleo_functions.h"
 #include "libc/stdint.h"
 
-#if 0
-s32 LeoCJCreateLeoManager(OSPri comPri, OSPri intPri, OSMesg* cmdBuf, s32 cmdMsgCnt);
-//{
-//    OSPiHandle* driveRomHandle;
-//    OSPiHandle* leoDiskHandle;
-//    volatile LEOCmdInquiry cmdBlockInq;
-//    volatile LEOCmd cmdBlockID;
-//    LEODiskID thisID;
-//    u32 stat;
-//    u32 data;
-//    {
-//        volatile s32 dummy;
-//    }
-//    {
-//        volatile u32 dummy;
-//    }
-//}
-#endif
-
-#ifdef NON_MATCHING
 s32 LeoCJCreateLeoManager(s32 comPri, s32 intPri, void** cmdBuf, s32 cmdMsgCnt) {
-    OSPiHandle* driveRomHandle; // sp84
-    OSPiHandle* leoDiskHandle; // sp80
-    volatile LEOCmdInquiry cmdBlockInq; // sp6C
-    volatile LEOCmd cmdBlockID; // sp50
-    LEODiskID thisID; // sp30
-    u32 stat; // sp2C
-    u32 data; // sp28
+    OSPiHandle* driveRomHandle;
+    OSPiHandle* leoDiskHandle;
+    volatile LEOCmdInquiry cmdBlockInq;
+    volatile LEOCmd cmdBlockID;
+    LEODiskID thisID;
+    u32 stat;
+    u32 data;
 
     if (__leoActive) {
         return LEO_ERROR_GOOD;
@@ -40,7 +20,7 @@ s32 LeoCJCreateLeoManager(s32 comPri, s32 intPri, void** cmdBuf, s32 cmdMsgCnt) 
         return LEO_ERROR_DEVICE_COMMUNICATION_FAILURE;
     }
 
-    osLeoDiskInit();
+    leoDiskHandle = osLeoDiskInit();
     driveRomHandle = osDriveRomInit();
     __leoActive = true;
 
@@ -83,8 +63,9 @@ s32 LeoCJCreateLeoManager(s32 comPri, s32 intPri, void** cmdBuf, s32 cmdMsgCnt) 
         volatile u32 dummy;
 
         osEPiReadIo(driveRomHandle, 0x9FF00, &data);
+        data = ((data & 0xFF000000) >> 0x18);
         dummy = 0x3ED98F23;
-        if (((data & 0xFF000000) >> 0x18) != 0xC3) {
+        if (data != 0xC3) {
             while (true) {}
         }
 
@@ -97,6 +78,3 @@ s32 LeoCJCreateLeoManager(s32 comPri, s32 intPri, void** cmdBuf, s32 cmdMsgCnt) 
 
     return LEO_ERROR_GOOD;
 }
-#else
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/cjcreateleomanager/LeoCJCreateLeoManager.s")
-#endif

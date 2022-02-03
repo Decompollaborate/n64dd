@@ -22,7 +22,7 @@ s32 LeoCACreateLeoManager(s32 comPri, s32 intPri, void** cmdBuf, s32 cmdMsgCnt) 
 
     if (data && data) {}
 
-    osLeoDiskInit();
+    leoDiskHandle = osLeoDiskInit();
     driveRomHandle = osDriveRomInit();
     __leoActive = true;
 
