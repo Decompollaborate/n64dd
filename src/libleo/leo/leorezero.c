@@ -6,7 +6,7 @@ void leoRezero(void) {
     u8 sense_code;
     u8 retry_cntr = 8;
 
-    while (true) {
+    do {
         sense_code = leoRecal_w();
 
         if (sense_code == LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION) {
@@ -14,17 +14,15 @@ void leoRezero(void) {
             LEOtgt_param.head = 0;
             LEOtgt_param.zone = 0;
             LEOcur_command->header.status = LEO_STATUS_GOOD;
-            break;
+            return;
         }
 
-        if ((leoChk_err_retry(sense_code) == 0) && (retry_cntr--)) {
-            continue;
-        } else {
-            do {
-                LEOcur_command->header.sense = sense_code;
-                LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
-            } while (0);
+        if (leoChk_err_retry(sense_code) != 0) {
             break;
         }
-    }
+    } while (retry_cntr--);
+    
+    LEOcur_command->header.sense = sense_code;
+    LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
+    return;     
 }
