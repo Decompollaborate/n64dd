@@ -2,8 +2,6 @@
 #include "n64dd_functions.h"
 #include "libleo_functions.h"
 
-extern OSPiHandle* LEOPiInfo;
-
 #if 0
 void leoInquiry();
 //{

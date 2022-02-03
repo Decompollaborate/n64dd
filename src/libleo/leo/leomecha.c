@@ -5,7 +5,6 @@
 extern u8 LEOdrive_flag;
 extern s32 currentCommand;
 extern OSMesgQueue LEOevent_que;
-extern OSPiHandle* LEOPiInfo;
 
 static u32 asic_cur_status;
 static u32 unit_atten;

@@ -46,6 +46,8 @@ extern s32 __leoActive;
 extern LEOVersion __leoVersion;
 extern u8 leoDiskStack[];
 
+extern OSPiHandle* LEOPiInfo;
+
 // bss
 extern LEOCmd *LEOcur_command;
 
