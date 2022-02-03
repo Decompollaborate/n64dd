@@ -2,10 +2,36 @@
 #include "n64dd_functions.h"
 #include "libleo_functions.h"
 
-#if 0
-s32 LeoSpdlMotor(LEOCmd* cmdBlock, LEOSpdlMode mode, OSMesgQueue* mq);
-//{
-//}
-#endif
+s32 LeoSpdlMotor(LEOCmd* cmdBlock, u8 mode, OSMesgQueue* mq) {
+    if (!__leoActive) {
+        return -1;
+    }
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/spdlmotor/LeoSpdlMotor.s")
+    cmdBlock->header.command = 8;
+    cmdBlock->header.reserve1 = 0;
+
+    switch (mode) {
+    case LEO_MOTOR_ACTIVE:
+        cmdBlock->header.control = 1;
+        break;
+    case LEO_MOTOR_STANDBY:
+        cmdBlock->header.control = 2;
+        break;
+    case LEO_MOTOR_SLEEP:
+        cmdBlock->header.control = 0;
+        break;
+    case LEO_MOTOR_BRAKE:
+        cmdBlock->header.control = 4;
+        break;
+    }
+
+    cmdBlock->header.reserve3 = 0;
+
+    if (mq != NULL) {
+        cmdBlock->header.post = mq;
+        cmdBlock->header.control |= 0x80;
+    }
+
+    leoCommand(cmdBlock);
+    return 0;
+}
