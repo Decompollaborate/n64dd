@@ -2,6 +2,10 @@
 #include "n64dd_functions.h"
 #include "libleo_functions.h"
 
+
+extern u32 LEOasic_bm_ctl_shadow;
+extern u16 LEOrw_flags;
+
 #if 0
 void leointerrupt(void* arg);
 //{
@@ -70,11 +74,6 @@ u32 leoChk_mecha_int(void) {
 
 // static
 void leosetup_BM();
-//
-
-extern u32 LEOasic_bm_ctl_shadow;
-extern u16 LEOrw_flags;
-
 #ifdef NON_MATCHING
 // weird access to LEOrw_flags
 void leosetup_BM(void) {
@@ -103,4 +102,41 @@ void leosetup_BM(void) {
 
 // static
 u32 leochk_err_reg();
+#ifdef NON_MATCHING
+u32 leochk_err_reg(void) {
+    u32 sense;
+    u32 index_status;
+
+    osEPiReadIo(LEOPiInfo, 0x05000514, &sense);
+    osEPiWriteIo(LEOPiInfo, 0x05000510, LEOasic_bm_ctl_shadow | 0x10000000);
+    osEPiWriteIo(LEOPiInfo, 0x05000510, LEOasic_bm_ctl_shadow);
+
+    if (sense & 0x04000000) {
+        return 0x31;
+    }
+
+    if (sense & 0x10000000) {
+        return 4;
+    }
+
+    if (sense & (0x40000000 | 0x2000000)) {
+        if (LEOrw_flags & 0x8000) {
+            return 0x16;
+        }
+        return 0x17;
+    }
+
+    if (sense & 0x80000000) {
+        return 0x18;
+    }
+
+    osEPiReadIo(LEOPiInfo, 0x0500050C, &index_status);
+    if ((index_status & 0x60000000) == 0x60000000) {
+        return 0x19;
+    }
+
+    return 0x18;
+}
+#else
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leoint/leochk_err_reg.s")
+#endif
