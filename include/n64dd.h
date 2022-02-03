@@ -24,6 +24,18 @@ typedef struct {
     /* 0x0000 */ char unk_0000[0x4D10];
 } struct_801DC000; // size = 0x4D10?
 
+typedef struct {
+    /* 0x00 */ char unk_00[0x64];
+    /* 0x64 */ u8 unk_64;
+    /* 0x65 */ u8 unk_65;
+    /* 0x66 */ u8 unk_66;
+    /* 0x67 */ char unk_67[1];
+    /* 0x68 */ s32 unk_68;
+    /* 0x6C */ s32 unk_6C;
+} struct_801E0D18; // size >= 0x70
+
+extern struct_801E0D18 B_801E0D18;
+
 extern UNK_TYPE4 LEO_country_code;
 extern u8 LEOdisk_type;
 

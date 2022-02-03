@@ -86,8 +86,10 @@ void leoTranslate();
 void leoReadTimer(void);
 void leoSetTimer(void);
 
+// Handwritten function, looks up offset in `kanji` or similar of Shift-JIS codepoint using a table.
 int LeoGetKAdr(int sjis);
 
+// Handwritten function, looks up glyphs in a table.
 int LeoGetAAdr(int code,int *dx,int *dy, int *cy);
 
 void leoWrite(void);

@@ -2,11 +2,6 @@
 #include "n64dd_functions.h"
 #include "libleo_functions.h"
 
-// Handwritten function, looks up offset in `kanji` or similar of Shift-JIS codepoint using a table.
-s32 LeoGetKAdr(s32);
-// Handwritten function, looks up glyphs in a table.
-s32 LeoGetAAdr(s32, s32*, s32*, s32*);
-
 // data
 void (*D_801D2EC0)(s32, s32, s32) = NULL;
 
@@ -94,8 +89,6 @@ s32 func_801C95F0(char* arg0) {
     return LeoGetKAdr(func_801C9534(func_801C9514((arg0[0] << 8) | arg0[1]))) + DDROM_FONT_START;
 }
 
-// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9440/func_801C963C.s")
-
 s32 func_801C963C(s32* arg0, s32* arg1, s32* arg2, s32* arg3, u8 arg4) {
     s32 temp_v0;
     s32 temp_v1;
@@ -109,7 +102,6 @@ s32 func_801C963C(s32* arg0, s32* arg1, s32* arg2, s32* arg3, u8 arg4) {
     return temp_v1;
 }
 
-// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9440/func_801C969C.s")
 s32 func_801C969C(UNK_TYPE arg0, s32* arg1, s32* arg2, s32* arg3, u8* arg4) {
     s32 sp24;
     s32 phi_v1;
@@ -128,7 +120,6 @@ s32 func_801C969C(UNK_TYPE arg0, s32* arg1, s32* arg2, s32* arg3, u8* arg4) {
     return phi_v1;
 }
 
-// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9440/func_801C9740.s")
 // return boolean
 s32 func_801C9740(u8* arg0, UNK_TYPE4 arg1, u8 arg2) {
     if (arg1 == 1) {
@@ -281,7 +272,6 @@ void func_801C9954(u8* bytes, s32* arg1, s32* arg2) {
 void func_801C9A10(u8*, s32, char*);
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9440/func_801C9A10.s")
 
-// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9440/func_801C9B50.s")
 void func_801C9B50(s32 arg0, void (*arg1)(s32, s32, s32)) {
     B_801E0F70 = arg0;
     D_801D2EC0 = arg1;

@@ -64,7 +64,7 @@
 // void func_801C8844();
 // void func_801C885C();
 // void func_801C88AC();
-// void func_801C88FC();
+s32 func_801C88FC(void);
 
 // void func_801C8940();
 // void func_801C8974();
@@ -91,21 +91,21 @@
 // void func_801C9334();
 // void func_801C93C4();
 
-// void func_801C9440();
-// void func_801C9494();
-// void func_801C94F8();
-// void func_801C9514();
-// void func_801C9534();
-// void func_801C95C0();
-// void func_801C95F0();
-// void func_801C963C();
-// void func_801C969C();
-// void func_801C9740();
-// void func_801C9778();
+s32 func_801C9440(u8* bytes);
+s32 func_801C9494(u8* bytes);
+void func_801C94F8(char* arg0, u16 arg1);
+u16 func_801C9514(u16 eucjpCh);
+u16 func_801C9534(u16 jisCodepoint);
+void func_801C95C0(s32 arg0, s32 arg1, UNK_TYPE arg2);
+s32 func_801C95F0(char* arg0);
+s32 func_801C963C(s32* arg0, s32* arg1, s32* arg2, s32* arg3, u8 arg4);
+s32 func_801C969C(UNK_TYPE arg0, s32* arg1, s32* arg2, s32* arg3, u8* arg4);
+s32 func_801C9740(u8* arg0, UNK_TYPE4 arg1, u8 arg2);
+s32 func_801C9778(s32 arg0, s32* arg1, s32 arg2);
 // void func_801C97C4();
-// void func_801C9954();
+void func_801C9954(u8* bytes, s32* arg1, s32* arg2);
 // void func_801C9A10();
-// void func_801C9B50();
+void func_801C9B50(s32 arg0, void (*arg1)(s32, s32, s32));
 
 // void func_801C9B70();
 // void func_801C9C48();
