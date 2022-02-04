@@ -2,14 +2,20 @@
 #include "n64dd_functions.h"
 #include "libleo_functions.h"
 
+// bss
+extern OSMesgQueue* B_801E0D10;
+// B_801E0D14
+extern struct_801E0D18 B_801E0D18;
+extern OSMesg B_801E0D88[1];
+extern OSMesg B_801E0D90[8];
 extern OSThread B_801E0DB0;
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8000/func_801C8000.s")
 
 extern s32 D_801D2E60;
 extern s32 D_801D2E64;
-void func_801C819C(UNK_PTR arg0) {
-    if (arg0 != NULL) {
+void func_801C819C(UNK_TYPE arg0) {
+    if (arg0 != 0) {
         D_801D2E60 = 1;
     } else {
         D_801D2E60 = 2;
@@ -24,7 +30,19 @@ s32 func_801C81D4(void) {
     return D_801D2E64 == 1;
 }
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8000/func_801C81EC.s")
+void func_801C81EC(struct_801E0D18* arg0) {
+    osCreateMesgQueue(&arg0->unk_1C, B_801E0D88, ARRAY_COUNT(B_801E0D88));
+
+    if (gCurrentRegion == 1) {
+        arg0->unk_68 = LeoCJCreateLeoManager(0x95, 0x96, B_801E0D90, ARRAY_COUNT(B_801E0D90));
+    } else {
+        arg0->unk_68 = LeoCACreateLeoManager(0x95, 0x96, B_801E0D90, ARRAY_COUNT(B_801E0D90));
+    }
+
+    if ((arg0->unk_68 == LEO_ERROR_DEVICE_COMMUNICATION_FAILURE) || (arg0->unk_68 == LEO_ERROR_GOOD)) {
+        D_801D2E64 = 1;
+    }
+}
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8000/func_801C8298.s")
 
@@ -67,14 +85,11 @@ void func_801C8424(struct_801E0D18* arg0) {
     }
 }
 
-
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8000/func_801C84D4.s")
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8000/func_801C8554.s")
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8000/func_801C8578.s")
-
-extern OSMesgQueue* B_801E0D10;
 
 void func_801C85F0(struct_801E0D18* arg0, s32 arg1) {
     if (arg1 == 1) {
@@ -117,8 +132,7 @@ s32 func_801C873C(struct_801E0D18* arg0) {
 s8 func_801C8770(void) {
     s32 temp = func_801C873C(&B_801E0D18);
 
-    // == LEO_ERROR_BUSY?
-    if (B_801E0D18.unk_68 == 8) {
+    if (B_801E0D18.unk_68 == LEO_ERROR_BUSY) {
         return 0;
     }
 

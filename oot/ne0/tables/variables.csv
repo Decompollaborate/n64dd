@@ -71,3 +71,4 @@
 801E67C0,mseq_tbl,u32,0x40
 801D9AF0,rd_mseq_code,u32,0x40
 801D9B30,wt_mseq_code,u32,0x40
+801E0D18,B_801E0D18,struct_801E0D18,0x70

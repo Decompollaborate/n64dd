@@ -25,7 +25,9 @@ typedef struct {
 } struct_801DC000; // size = 0x4D10?
 
 typedef struct {
-    /* 0x00 */ char unk_00[0x64];
+    /* 0x00 */ LEOCmd unk_00;
+    /* 0x1C */ OSMesgQueue unk_1C;
+    /* 0x34 */ char unk_34[0x30];
     /* 0x64 */ u8 unk_64;
     /* 0x65 */ u8 unk_65;
     /* 0x66 */ u8 unk_66;
@@ -35,6 +37,16 @@ typedef struct {
 } struct_801E0D18; // size >= 0x70
 
 extern struct_801E0D18 B_801E0D18;
+
+
+#define LANGUAGE_JP 0
+#define LANGUAGE_EN 1
+
+
+
+// Segment-external
+extern s32 gCurrentRegion;
+
 
 extern UNK_TYPE4 LEO_country_code;
 extern u8 LEOdisk_type;

@@ -2,11 +2,6 @@
 #include "n64dd_functions.h"
 #include "libleo_functions.h"
 
-#define LANGUAGE_JP 0
-#define LANGUAGE_EN 1
-
-// Segment-external
-extern s32 gCurrentRegion;
 
 // From other files
 void func_801C94F8(char*, u16);

@@ -3,7 +3,7 @@
 #include "libleo_functions.h"
 #include "libc/stdint.h"
 
-s32 LeoCACreateLeoManager(s32 comPri, s32 intPri, void** cmdBuf, s32 cmdMsgCnt) {
+s32 LeoCACreateLeoManager(s32 comPri, s32 intPri, OSMesg* cmdBuf, s32 cmdMsgCnt) {
     OSPiHandle* driveRomHandle;
     OSPiHandle* leoDiskHandle;
     volatile LEOCmdInquiry cmdBlockInq;
