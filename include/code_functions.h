@@ -5,4 +5,6 @@
 
 void Fault_AddHungupAndCrash(const char* filename, u32 line);
 
+void func_800AD51C(void);
+
 #endif

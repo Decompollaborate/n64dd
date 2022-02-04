@@ -4,7 +4,6 @@
 
 // bss
 extern OSMesgQueue* B_801E0D10[2];
-// B_801E0D14
 extern struct_801E0D18 B_801E0D18;
 extern OSMesg B_801E0D88[1];
 extern OSMesg B_801E0D90[8];

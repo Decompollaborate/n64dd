@@ -9,6 +9,7 @@ offset,vram,.text
 38C0,801CA740,readwrite
 3950,801CA7D0,leofunc
 3DC0,801CAC40,leoint
+47B0,801CB630,[PADDING]
 47C0,801CB640,leocmdex
 4E50,801CBCD0,getaadr2
 4EB0,801CBD30,leoread

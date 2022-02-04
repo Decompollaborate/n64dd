@@ -4,20 +4,20 @@
 #include "ultra64.h"
 #include "n64dd.h"
 
-// void func_801C6E80();
+u32 func_801C6E80(void);
 // void func_801C6EA0();
 // void func_801C6EAC();
 // void func_801C6EF0();
 // void func_801C6F08();
 // void func_801C6F30();
 // void func_801C6F78();
-// void func_801C6FAC();
-// void func_801C6FD8();
-// void func_801C7018();
+s32 func_801C6FAC(void);
+void func_801C6FD8(void);
+void func_801C7018(void);
 // void func_801C7064();
 // void func_801C7098();
-// void func_801C70E4();
-// void func_801C70FC();
+s32 func_801C70E4(void);
+s32 func_801C70FC(void);
 // void func_801C711C();
 // void func_801C7268();
 // void func_801C7438();
@@ -30,15 +30,15 @@
 // void func_801C78F0();
 // void func_801C7920();
 // void func_801C79CC();
-// void func_801C7A10();
-// void func_801C7A1C();
+void func_801C7A10(LEODiskID*, struct_801C7A1C*);
+s32 func_801C7A1C(struct_801C7A1C* arg0);
 // void func_801C7B48();
-// void func_801C7BEC();
+s32 func_801C7BEC(s32 startLBA);
 // void func_801C7C1C();
 // void func_801C7E78();
-// void func_801C7E80();
-// void func_801C7F24();
-// void n64dd_SetDiskVersion();
+s32 func_801C7E80(void);
+s32 func_801C7F24(void);
+void n64dd_SetDiskVersion(s32 arg0);
 
 // void func_801C8000();
 void func_801C819C(UNK_TYPE arg0);

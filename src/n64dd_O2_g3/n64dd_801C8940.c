@@ -59,13 +59,12 @@ void func_801C8A64(void) {
     }
 }
 
-extern OSMesgQueue* B_801E0D14;
 extern s32 D_801D2EA0;
 
 extern UNK_TYPE (*D_801D2EB4)(u8*, u8*, u8*);
 
 void func_801C8AA8(void) {
-    osRecvMesg(B_801E0D14, NULL, 0);
+    osRecvMesg(B_801E0D10[1], NULL, 0);
 
     if ((D_801D2EB4 != NULL) && (D_801D2EA0 == 0)) {
         u32 temp_v0 = osSetIntMask(1U);

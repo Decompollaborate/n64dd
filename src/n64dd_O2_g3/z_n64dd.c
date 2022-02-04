@@ -2,18 +2,16 @@
 #include "n64dd_functions.h"
 #include "libleo_functions.h"
 
-extern struct_801D9C30 D_801D9C30;
+extern struct_801D9C30 B_801D9C30;
 
-extern struct_801D9D48 D_801D9D48;
+extern s32 B_801D9D48;
 
 // data
 /*
-struct_801DC000* D_801D2E50 = &D_801DC000;
+struct_801DC000* D_801D2E50 = &B_801DC000;
 
 s32 (*D_801D2E54)(s32) = func_801C7A1C;
 */
-
-extern struct_801DC000* D_801D2E50;
 
 // Might be u8, will need to examine code function
 u32 func_801C6E80(void) {
@@ -33,7 +31,7 @@ u32 func_801C6E80(void) {
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C6F78.s")
 
 extern vu8 D_80121213;
-// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C6FAC.s")
+
 // boolean
 s32 func_801C6FAC(void) {
     if (D_80121213 == 0) {
@@ -44,14 +42,12 @@ s32 func_801C6FAC(void) {
     }
 }
 
-// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C6FD8.s")
 void func_801C6FD8(void) {
     while (!func_801C6FAC()) {
         Sleep_Usec(16666); // 100000 / 6
     }
 }
 
-// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C7018.s")
 // Adds a HungupAndCrash
 void func_801C7018(void) {
     if (D_80121213 != 0) {
@@ -60,11 +56,19 @@ void func_801C7018(void) {
     D_80121213 = 1;
 }
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C7064.s")
+// probably a struct
+extern u8 B_801D9D50;
+s32 func_801C8000(UNK_PTR);
+
+//#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C7064.s")
+void func_801C7064(void) {
+    s32 (*temp)(UNK_PTR) = func_801C8000;
+
+    B_801D9D50 = 5;
+    temp(&B_801D9D50);
+}
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C7098.s")
-
-// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C70E4.s")
 
 extern s32 B_801D9DC8; // 1 if disk gameName is correct, 2 otherwise
 
@@ -72,10 +76,9 @@ s32 func_801C70E4(void) {
     return B_801D9DC8 == 1;
 }
 
-// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C70FC.s")
 // Used by EnMag and FileChoose
-void func_801C70FC(void) {
-    func_801C70E4();
+s32 func_801C70FC(void) {
+    return func_801C70E4();
 }
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C711C.s")
@@ -103,17 +106,8 @@ void func_801C70FC(void) {
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C79CC.s")
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C7A10.s")
-
-// s32 func_801C7A1C(s32);
-// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C7A1C.s")
-void func_801C7A10(void *, void*);
 extern LEODiskID B_801DBFD0;
 extern s32 B_801DBFF0; // bool
-
-typedef struct {
-    /* 0x00 */ char unk00[0x38];
-    /* 0x038 */ LEODiskID diskId;
-} struct_801C7A1C;
 
 // Checks diskId, sets B_801D9DC8 and returns true if diskId is correct
 s32 func_801C7A1C(struct_801C7A1C* arg0) {
@@ -228,6 +222,8 @@ void func_801C7C1C(void* arg0, s32 arg1, u32 arg2) {
 
 UNK_PTR func_800AD4C0(UNK_PTR);
 
+extern UNK_TYPE D_801D9D58;
+
 #ifdef NON_MATCHING
 s32 func_801C7E80(void) {
     int new_var;
@@ -240,12 +236,12 @@ s32 func_801C7E80(void) {
 
     s32 new_var2;
 
-    if (D_801D9D48.unk_00 != 0) {
+    if (B_801D9D48 != 0) {
         return -1;
     }
-    D_801D9D48.unk_00 = &D_801D9C30;
-    func_801C7C1C(&D_801D9C30, 0x1060, 0x118U);
-    temp_v0 = D_801D9D48.unk_00;
+    B_801D9D48 = &B_801D9C30;
+    func_801C7C1C(&B_801D9C30, 0x1060, 0x118U);
+    temp_v0 = B_801D9D48;
     //temp_a2 = temp_v0->unk_004 - temp_v0->unk_000;
     //new_var = temp_v0->unk_004 - temp_v0->unk_000;
     new_var2 = (u32)temp_v0->unk_000 & 0xFFFFFFFFFFFFFFFF;
@@ -257,7 +253,7 @@ s32 func_801C7E80(void) {
     if (sp18 && sp18){}
     func_801C7C1C(temp_v0->unk_008, temp_v0->unk_000, temp_a2);
     bzero(sp18, sp20 - temp_a2);
-    func_800AD4C0(D_801D9D48.unk_00->unk_010);
+    func_800AD4C0(&D_801D9D58);
     return 0;
 }
 #else
@@ -265,32 +261,31 @@ s32 func_801C7E80(void);
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C7E80.s")
 #endif
 
-void func_800AD51C(void);
-
 s32 func_801C7F24(void) {
     u32 temp_a0;
     struct_801D9C30* temp_v0;
 
-    if (D_801D9D48.unk_00 == 0) {
+    if (B_801D9D48 == 0) {
         return -1;
     }
 
     // Function from code
     func_800AD51C();
 
-    temp_v0 = D_801D9D48.unk_00;
+    temp_v0 = B_801D9D48;
     temp_a0 = temp_v0->unk_008;
     bzero(temp_a0, temp_v0->unk_00C - temp_a0);
-    bzero(D_801D9D48.unk_00, sizeof(struct_801D9C30));
-    D_801D9D48.unk_00 = NULL;
+    bzero(B_801D9D48, sizeof(struct_801D9C30));
+    B_801D9D48 = 0;
     return 0;
 }
+
 void n64dd_SetDiskVersion(s32 arg0) {
     if (arg0 != 0) {
-        if (D_801D9D48.unk_00 == 0) {
+        if (B_801D9D48 == 0) {
             func_801C7E80();
         }
-    } else if (D_801D9D48.unk_00 != 0) {
+    } else if (B_801D9D48 != 0) {
         func_801C7F24();
     }
 }

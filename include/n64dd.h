@@ -16,15 +16,6 @@ typedef struct {
 } struct_801D9C30; // size = 0x118
 
 typedef struct {
-    /* 0x00 */ struct_801D9C30* unk_00;
-    /* 0x00 */ char unk_004[0x10];
-} struct_801D9D48; // size = 0x14? maybe 0x38
-
-typedef struct {
-    /* 0x0000 */ char unk_0000[0x4D10];
-} struct_801DC000; // size = 0x4D10?
-
-typedef struct {
     /* 0x00 */ LEOCmd unk_00;
     /* 0x1C */ OSMesgQueue unk_1C; // mq
     /* 0x34 */ char unk_34[0x4];
@@ -40,6 +31,11 @@ typedef struct {
     /* 0x68 */ s32 unk_68; // OSMesg?
     /* 0x6C */ s32 unk_6C;
 } struct_801E0D18; // size >= 0x70
+
+typedef struct {
+    /* 0x00 */ char unk00[0x38];
+    /* 0x38 */ LEODiskID diskId;
+} struct_801C7A1C; // size >= 0x58
 
 extern struct_801E0D18 B_801E0D18;
 
