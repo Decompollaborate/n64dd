@@ -8,7 +8,7 @@ static s32 __leoQueuesCreated = false;
 
 // bss
 static OSMesgQueue LEOpost_que;
-static OSMesg LEOpost_que_buf;
+static OSMesg LEOpost_que_buf[1];
 
 void leoInitialize(OSPri compri, OSPri intpri, OSMesg* command_que_buf, u32 cmd_buff_size) {
     u32 savedMask;
