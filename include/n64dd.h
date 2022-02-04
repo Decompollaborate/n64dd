@@ -104,6 +104,10 @@ extern OSPiHandle* LEOPiInfo;
 // bss
 
 // other
+extern u32 osTvType;
+extern u32 osRomBase;
 extern u32 osResetType;
+extern u32 osMemSize;
+extern u8 osAppNmiBuffer[0x40];
 
 #endif
