@@ -72,3 +72,6 @@
 801D9AF0,rd_mseq_code,u32,0x40
 801D9B30,wt_mseq_code,u32,0x40
 801E0D18,B_801E0D18,struct_801E0D18,0x70
+80009DE0,__osEventStateTab,__OSEventState[16],0x80
+80006338,__osRunQueue,OSThread*,0x4
+80006360,__OSGlobalIntMask,OSHWIntr,0x4
