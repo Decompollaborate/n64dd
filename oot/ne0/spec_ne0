@@ -204,8 +204,8 @@ beginseg
     include "oot/ne0/build/src/libleo/api/readwrite.o"
 
     include "oot/ne0/build/src/libleo/leo/leofunc.o"
-    include "oot/ne0/build/asm/data/n64dd/leofunc.data.o"
-    include "oot/ne0/build/asm/data/n64dd/leofunc.bss.o"
+//    include "oot/ne0/build/asm/data/n64dd/leofunc.data.o"
+//    include "oot/ne0/build/asm/data/n64dd/leofunc.bss.o"
 
     include "oot/ne0/build/asm/data/n64dd/leoram.bss.o"
 
