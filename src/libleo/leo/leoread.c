@@ -11,8 +11,6 @@ void leoRead(void) {
     leoRead_common(0x18);
 }
 
-extern OSThread LEOinterruptThread;
-extern OSMesgQueue LEOcontrol_que;
 extern OSMesgQueue LEOc2ctrl_que;
 
 // Different from standard libleo version:

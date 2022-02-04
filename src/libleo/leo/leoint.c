@@ -2,19 +2,11 @@
 #include "n64dd_functions.h"
 #include "libleo_functions.h"
 
-extern u32 LEOasic_bm_ctl_shadow;
 extern vu16 LEOrw_flags;
 
 // extern ? LEOC2_Syndrome;
 extern OSIoMesg LEOPiDmaParam;
-// extern u32 LEOasic_bm_ctl_shadow;
-extern u32 LEOasic_seq_ctl_shadow;
 // extern ? LEOc2_param;
-extern OSMesgQueue LEOcontrol_que;
-extern OSMesgQueue LEOdma_que;
-extern OSThread LEOinterruptThread;
-// extern u16 LEOrw_flags;
-extern u8* LEOwrite_pointer;
 extern OSMesgQueue LEOc2ctrl_que;
 extern u8* LEOc2ctrl_que_buf;
 

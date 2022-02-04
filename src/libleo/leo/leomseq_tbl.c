@@ -3,8 +3,6 @@
 #include "libleo_functions.h"
 
 extern OSIoMesg LEOPiDmaParam;
-extern u32 LEOasic_seq_ctl_shadow;
-extern OSMesgQueue LEOdma_que;
 extern vu16 LEOrw_flags;
 
 // bss

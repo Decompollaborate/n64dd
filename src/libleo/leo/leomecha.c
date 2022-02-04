@@ -2,9 +2,7 @@
 #include "n64dd_functions.h"
 #include "libleo_functions.h"
 
-extern u8 LEOdrive_flag;
 extern s32 currentCommand;
-extern OSMesgQueue LEOevent_que;
 
 static u32 asic_cur_status;
 static u32 unit_atten;

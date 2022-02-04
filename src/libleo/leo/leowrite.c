@@ -2,11 +2,7 @@
 #include "n64dd_functions.h"
 #include "libleo_functions.h"
 
-extern OSMesgQueue LEOcontrol_que;
-extern OSThread LEOinterruptThread;
 extern u16 LEOrw_flags; // N.B. NOT volatile in this file!
-extern LEOCmd *LEOcur_command;
-extern u8 LEOdisk_type;
 
 void leoWrite(void) {
     u32 message;

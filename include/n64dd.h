@@ -48,8 +48,32 @@ extern struct_801E0D18 B_801E0D18;
 extern s32 gCurrentRegion;
 
 
-extern UNK_TYPE4 LEO_country_code;
+// leoram
+extern leo_sys_form LEO_sys_data;
+extern OSThread LEOcommandThread;
+extern OSThread LEOinterruptThread;
+extern u8 LEOcommandThreadStack[0x400];
+extern u8 LEOinterruptThreadStack[0x400];
+extern OSMesgQueue LEOcommand_que;
+extern OSMesgQueue LEOevent_que;
+extern OSMesgQueue LEOcontrol_que;
+extern OSMesgQueue LEOdma_que;
+extern OSMesgQueue LEOblock_que;
+extern OSMesg LEOevent_que_buf[1];
+extern OSMesg LEOcontrol_que_buf[1];
+extern OSMesg LEOdma_que_buf[2];
+extern OSMesg LEOblock_que_buf[1];
+extern u8* LEOwrite_pointer;
+extern LEOCmd* LEOcur_command;
+extern u32 LEOasic_bm_ctl_shadow;
+extern u32 LEOasic_seq_ctl_shadow;
+extern u8 LEOdrive_flag;
+extern vu8 LEOclr_que_flag;
+// needs to not be volatile in some files
+// extern vu16 LEOrw_flags;
 extern u8 LEOdisk_type;
+extern tgt_param_form LEOtgt_param;
+extern UNK_TYPE4 LEO_country_code;
 
 // leo_tbl
 extern const char LEOfirmware_rev[];
@@ -62,9 +86,6 @@ extern const u16 LEOZONE_OUTERCYL_TBL[];
 extern const u16 LEORAM_START_LBA[];
 extern const s32 LEORAM_BYTE[];
 
-extern leo_sys_form LEO_sys_data;
-extern tgt_param_form LEOtgt_param;
-
 extern s32 __leoActive;
 
 extern LEOVersion __leoVersion;
@@ -73,9 +94,6 @@ extern u8 leoDiskStack[];
 extern OSPiHandle* LEOPiInfo;
 
 // bss
-extern LEOCmd *LEOcur_command;
-
-extern OSMesgQueue LEOcommand_que;
 
 // other
 extern u32 osResetType;

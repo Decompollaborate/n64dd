@@ -2,21 +2,6 @@
 #include "n64dd_functions.h"
 #include "libleo_functions.h"
 
-extern OSMesgQueue LEOblock_que;
-extern OSMesg LEOblock_que_buf;
-extern vu8 LEOclr_que_flag;
-extern OSThread LEOcommandThread;
-extern OSMesgQueue LEOcontrol_que;
-extern OSMesg LEOcontrol_que_buf;
-extern OSMesg LEOdma_que_buf;
-extern OSMesgQueue LEOevent_que;
-extern OSMesg LEOevent_que_buf;
-extern OSThread LEOinterruptThread;
-extern u8 LEOinterruptThreadStack[0x400];
-extern OSMesgQueue LEOcommand_que;
-extern OSMesgQueue LEOdma_que;
-extern u8 LEOcommandThreadStack[0x400];
-
 // data
 static s32 __leoResetCalled = false;
 static s32 __leoQueuesCreated = false;
@@ -36,20 +21,24 @@ void leoInitialize(OSPri compri, OSPri intpri, OSMesg* command_que_buf, u32 cmd_
     } else {
         pri = intpri;
     }
+
     oldPri = -1;
+
     myPri = osGetThreadPri(NULL);
     if (myPri < pri) {
         oldPri = myPri;
         osSetThreadPri(NULL, pri);
     }
+
     savedMask = __osDisableInt();
+
     __leoQueuesCreated = true;
     osCreateMesgQueue(&LEOcommand_que, command_que_buf, cmd_buff_size);
-    osCreateMesgQueue(&LEOcontrol_que, &LEOcontrol_que_buf, 1);
-    osCreateMesgQueue(&LEOevent_que, &LEOevent_que_buf, 1);
-    osCreateMesgQueue(&LEOdma_que, &LEOdma_que_buf, 2);
-    osCreateMesgQueue(&LEOblock_que, &LEOblock_que_buf, 1);
-    osCreateMesgQueue(&LEOpost_que, &LEOpost_que_buf, 1);
+    osCreateMesgQueue(&LEOcontrol_que, LEOcontrol_que_buf, ARRAY_COUNT(LEOcontrol_que_buf));
+    osCreateMesgQueue(&LEOevent_que, LEOevent_que_buf, ARRAY_COUNT(LEOevent_que_buf));
+    osCreateMesgQueue(&LEOdma_que, LEOdma_que_buf, ARRAY_COUNT(LEOdma_que_buf));
+    osCreateMesgQueue(&LEOblock_que, LEOblock_que_buf, ARRAY_COUNT(LEOblock_que_buf));
+    osCreateMesgQueue(&LEOpost_que, LEOpost_que_buf, ARRAY_COUNT(LEOpost_que_buf));
     osCreateThread(&LEOcommandThread, 1, leomain, NULL, LEOcommandThreadStack + sizeof(LEOcommandThreadStack), compri);
     osStartThread(&LEOcommandThread);
     osCreateThread(&LEOinterruptThread, 1, leointerrupt, NULL,
@@ -58,6 +47,7 @@ void leoInitialize(OSPri compri, OSPri intpri, OSMesg* command_que_buf, u32 cmd_
     osSetEventMesg(2, &LEOevent_que, (OSMesg)0x30000);
     osSendMesg(&LEOblock_que, NULL, 0);
     __osRestoreInt(savedMask);
+
     if (oldPri != -1) {
         osSetThreadPri(NULL, oldPri);
     }
