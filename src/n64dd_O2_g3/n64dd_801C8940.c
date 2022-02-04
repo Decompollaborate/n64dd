@@ -88,7 +88,7 @@ s32 func_801C8DC0(UNK_PTR arg0);
 
 extern s32 (*D_801D2E54)(s32);
 
-s32 func_801C8F1C(UNK_TYPE arg0) {
+s32 func_801C8F1C(struct_801E0D18* arg0) {
     if (D_801D2E54 != 0) {
         return D_801D2E54(arg0);
     }
@@ -109,7 +109,7 @@ s32 func_801C8F1C(UNK_TYPE arg0) {
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8940/func_801C9260.s")
 
-s32 func_801C9334(UNK_PTR arg0) {
+s32 func_801C9334(struct_801E0D18* arg0) {
     while (true) {
         u32 temp_v0 = func_801C8DC0(arg0);
 
