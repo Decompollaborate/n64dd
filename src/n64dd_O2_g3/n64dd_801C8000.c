@@ -3,7 +3,7 @@
 #include "libleo_functions.h"
 
 // bss
-extern OSMesgQueue* B_801E0D10;
+extern OSMesgQueue* B_801E0D10[2];
 // B_801E0D14
 extern struct_801E0D18 B_801E0D18;
 extern OSMesg B_801E0D88[1];
@@ -44,15 +44,42 @@ void func_801C81EC(struct_801E0D18* arg0) {
     }
 }
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8000/func_801C8298.s")
+void func_801C8298(struct_801E0D18* arg0) {
+    LEOCmd sp1C;
+
+    LeoSeek(&sp1C, &arg0->unk_38, &arg0->unk_1C);
+    osRecvMesg(&arg0->unk_1C, (void** ) &arg0->unk_68, 1);
+}
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8000/func_801C82E0.s")
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8000/func_801C832C.s")
+void func_801C832C(struct_801E0D18* arg0) {
+    s32 sp34;
+    s32 startLBA = arg0->unk_5C;
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8000/func_801C83A0.s")
+    if (LeoByteToLBA(startLBA, arg0->unk_60, &sp34) == 0) {
+        OSMesgQueue* sp28 = &arg0->unk_1C;
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8000/func_801C8414.s")
+        LeoReadWrite(&arg0->unk_00, OS_READ, startLBA, arg0->unk_58, sp34, sp28);
+        osRecvMesg(sp28, (void** ) &arg0->unk_68, 1);
+    }
+}
+
+void func_801C83A0(struct_801E0D18* arg0) {
+    s32 sp34;
+    s32 startLBA = arg0->unk_58;
+
+    if (LeoByteToLBA(startLBA, arg0->unk_60, &sp34) == 0) {
+        OSMesgQueue* sp28 = &arg0->unk_1C;
+
+        LeoReadWrite(&arg0->unk_00, OS_WRITE, startLBA, arg0->unk_5C, sp34, sp28);
+        osRecvMesg(sp28, (void** ) &arg0->unk_68, 1);
+    }
+}
+
+void func_801C8414(struct_801E0D18* arg0) {
+    arg0->unk_68 = 9;
+}
 
 struct _struct_D_801D2E68_0x8 {
     /* 0x0 */ void (*unk_0)(struct_801E0D18*);      /* inferred */
@@ -85,9 +112,19 @@ void func_801C8424(struct_801E0D18* arg0) {
     }
 }
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8000/func_801C84D4.s")
+void func_801C84D4(void* arg) {
+    while (true) {
+        struct_801E0D18* sp24;
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8000/func_801C8554.s")
+        osRecvMesg(B_801E0D10[0], (void*)&sp24, 1);
+        func_801C8424(sp24);
+        osSendMesg(B_801E0D10[1], NULL, 1);
+    }
+}
+
+void func_801C8554(void) {
+    osDestroyThread(&B_801E0DB0);
+}
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8000/func_801C8578.s")
 
@@ -95,7 +132,7 @@ void func_801C85F0(struct_801E0D18* arg0, s32 arg1) {
     if (arg1 == 1) {
         func_801C8424(arg0);
     } else {
-        osSendMesg(B_801E0D10, arg0, 1);
+        osSendMesg(B_801E0D10[0], arg0, 1);
     }
 }
 
@@ -143,20 +180,61 @@ s8 func_801C8770(void) {
     return 1;
 }
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8000/func_801C87C0.s")
+s32 func_801C87C0(void) {
+    if (func_801C8844() == 0) {
+        if (B_801E0D18.unk_68 != 0) {
+            return B_801E0D18.unk_68;
+        }
+    }
 
+    return -1;
+}
+
+#ifdef NON_MATCHING
+s32 func_801C87FC(void) {
+    s32* new_var = &B_801E0D18.unk_68;
+
+    if (func_801C8844() == 0) {
+        s32 temp_v0 = B_801E0D18.unk_6C;
+
+        if ((temp_v0 == 3) || (temp_v0 == 4)) {
+            return *new_var;
+        }
+    }
+
+    return 0;
+}
+#else
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8000/func_801C87FC.s")
+#endif
 
 s32 func_801C8844(void) {
     return B_801E0D18.unk_66 == 1;
 }
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8000/func_801C885C.s")
+s32 func_801C885C(void) {
+    B_801E0D18.unk_64 = 3;
+    func_801C85F0(&B_801E0D18, 1);
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8000/func_801C88AC.s")
+    if ((B_801E0D18.unk_6C == 3) || (B_801E0D18.unk_6C == 4)) {
+        return -1;
+    }
+    return B_801E0D18.unk_6C == 0;
+}
 
-#ifdef NON_MATCHING
+s32 func_801C88AC(void) {
+    s32 phi_v0;
+
+    B_801E0D18.unk_64 = 4;
+    func_801C85F0(&B_801E0D18, 1);
+    if ((B_801E0D18.unk_6C == 3) || (B_801E0D18.unk_6C == 4)) {
+        return -1;
+    }
+    return B_801E0D18.unk_6C == 0;
+}
+
 s32 func_801C88FC(void) {
+    s32 temp = 0;
     s32 phi_v1;
 
     if (LeoDriveExist()) {
@@ -165,10 +243,9 @@ s32 func_801C88FC(void) {
         phi_v1 = 0;
     }
 
+    temp = phi_v1 == temp;
+
     B_801E0D18.unk_68 = phi_v1;
 
-    return phi_v1 == 0;
+    return temp;
 }
-#else
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8000/func_801C88FC.s")
-#endif

@@ -26,13 +26,18 @@ typedef struct {
 
 typedef struct {
     /* 0x00 */ LEOCmd unk_00;
-    /* 0x1C */ OSMesgQueue unk_1C;
-    /* 0x34 */ char unk_34[0x30];
+    /* 0x1C */ OSMesgQueue unk_1C; // mq
+    /* 0x34 */ char unk_34[0x4];
+    /* 0x38 */ u32 unk_38; // lba
+    /* 0x3C */ char unk_3C[0x1C];
+    /* 0x58 */ UNK_TYPE unk_58;
+    /* 0x5C */ UNK_TYPE unk_5C;
+    /* 0x60 */ u32 unk_60;
     /* 0x64 */ u8 unk_64;
     /* 0x65 */ u8 unk_65;
     /* 0x66 */ u8 unk_66;
     /* 0x67 */ char unk_67[1];
-    /* 0x68 */ s32 unk_68;
+    /* 0x68 */ s32 unk_68; // OSMesg?
     /* 0x6C */ s32 unk_6C;
 } struct_801E0D18; // size >= 0x70
 
@@ -46,6 +51,9 @@ extern struct_801E0D18 B_801E0D18;
 
 // Segment-external
 extern s32 gCurrentRegion;
+
+// bss
+extern OSMesgQueue* B_801E0D10[2];
 
 
 // leoram

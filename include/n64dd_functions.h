@@ -45,7 +45,7 @@
 // void func_801C81C4();
 // void func_801C81D4();
 void func_801C81EC(struct_801E0D18*);
-// void func_801C8298();
+void func_801C8298(struct_801E0D18* arg0);
 // void func_801C82E0();
 void func_801C832C(struct_801E0D18*);
 void func_801C83A0(struct_801E0D18*);
@@ -61,7 +61,7 @@ void func_801C8414(struct_801E0D18*);
 // void func_801C8770();
 // void func_801C87C0();
 // void func_801C87FC();
-// void func_801C8844();
+s32 func_801C8844(void);
 // void func_801C885C();
 // void func_801C88AC();
 s32 func_801C88FC(void);

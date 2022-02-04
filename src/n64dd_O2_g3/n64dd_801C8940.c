@@ -81,7 +81,7 @@ void func_801C8B90(void) {
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8940/func_801C8CEC.s")
 
-s32 func_801C8DC0(UNK_PTR arg0);
+s32 func_801C8DC0(struct_801E0D18* arg0);
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8940/func_801C8DC0.s")
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8940/func_801C8E70.s")
