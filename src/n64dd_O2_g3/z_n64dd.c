@@ -60,15 +60,26 @@ void func_801C7018(void) {
 extern u8 B_801D9D50;
 s32 func_801C8000(UNK_PTR);
 
-//#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C7064.s")
-void func_801C7064(void) {
+s32 func_801C7064(void) {
     s32 (*temp)(UNK_PTR) = func_801C8000;
 
     B_801D9D50 = 5;
-    temp(&B_801D9D50);
+    return temp(&B_801D9D50);
 }
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C7098.s")
+s32 func_801C7098(void) {
+    s32 phi_v1;
+    s32 (*temp)(UNK_PTR) = func_801C8000;
+
+    if (0) { }
+
+    B_801D9D50 = 0xA;
+    phi_v1 = temp(&B_801D9D50);
+    if (phi_v1 < 0) {
+        func_800D31A0_Freeze();
+    }
+    return phi_v1;
+}
 
 extern s32 B_801D9DC8; // 1 if disk gameName is correct, 2 otherwise
 
@@ -91,21 +102,78 @@ s32 func_801C70FC(void) {
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C75BC.s")
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C761C.s")
+extern UNK_TYPE B_801D9DCC;
+extern UNK_TYPE B_801D9DD0;
+extern UNK_TYPE B_801D9DD4;
 
+void func_801C761C(void) {
+    Sleep_Msec(100);
+    func_801C746C(B_801D9DCC, B_801D9DD0, B_801D9DD4);
+}
+
+s32 func_801C7658(void);
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C7658.s")
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C7818.s")
+extern u8 D_80121212;
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C78B8.s")
+s32 func_801C7818(void) {
+    s32 (*temp)(UNK_PTR) = func_801C8000;
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C78F0.s")
+    B_801D9D50 = 0xC;
+    temp(&B_801D9D50);
+
+    while (func_801C81C4() == 0) {
+        // the number 16666 sounds like it could be 1 frame (at 60 frames per second)
+        Sleep_Usec(1000000*1/60);
+    }
+
+    if (func_801C81C4() != 2) {
+        func_801C761C();
+        func_800D31A0_Freeze();
+        return -3;
+    }
+
+    func_801C7018();
+    D_80121212 = 1;
+    return 0;
+}
+
+s32 func_801C78B8(void) {
+    s32 phi_v1 = func_801C7658();
+
+    if (phi_v1 == 0) {
+        phi_v1 = func_801C7818();
+    }
+    return phi_v1;
+}
+
+s32 func_801C78F0(void) {
+    s32 (*temp)(UNK_PTR) = func_801C8000;
+
+    B_801D9D50 = 0;
+    return temp(&B_801D9D50);
+}
 
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C7920.s")
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C79CC.s")
+#if 0
+// TODO: convert B_801D9D50 into a struct
+void func_801C79CC(s32 arg0, s32 arg1, s32 arg2) {
+    s32 (*temp)(UNK_PTR) = func_801C8000;
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C7A10.s")
+    B_801D9D50.unk_18 = arg0;
+    B_801D9D50.unk_1C = arg1;
+    B_801D9D50.unk_20 = arg2;
+    B_801D9D50.unk_00 = 4;
+    temp(&B_801D9D50);
+}
+#else
+#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C79CC.s")
+#endif
+
+void func_801C7A10(LEODiskID* arg0) {
+}
+
 extern LEODiskID B_801DBFD0;
 extern s32 B_801DBFF0; // bool
 
@@ -114,7 +182,7 @@ s32 func_801C7A1C(struct_801C7A1C* arg0) {
     LEODiskID *diskId;
 
     diskId = &arg0->diskId;
-    func_801C7A10(diskId, arg0);
+    func_801C7A10(diskId);
     if (!B_801DBFF0) {
         if ((bcmp(&diskId->gameName, "EZLJ", 4) == 0) || (bcmp(&diskId->gameName, "EZLE", 4) == 0)) {
             B_801DBFD0 = *diskId;
@@ -218,7 +286,8 @@ void func_801C7C1C(void* arg0, s32 arg1, u32 arg2) {
 }
 #endif
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C7E78.s")
+void func_801C7E78(void) {
+}
 
 UNK_PTR func_800AD4C0(UNK_PTR);
 
