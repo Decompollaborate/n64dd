@@ -100,7 +100,7 @@ LDSCRIPT       := $(BASE_DIR)/build/ldscript_$(VERSION).txt
 $(shell mkdir -p $(BASE_DIR)/baserom/ $(BASE_DIR)/asm/text $(BASE_DIR)/asm/data)
 
 SRC_DIRS := $(shell find src -type d)
-ASM_DIRS       := $(shell find $(BASE_DIR)/asm/ -type d -not -path "$(BASE_DIR)/asm/functions*")
+ASM_DIRS       := $(shell find $(BASE_DIR)/asm -type d -not -path "$(BASE_DIR)/asm/functions*")
 
 C_FILES       := $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
 S_FILES        := $(foreach dir,$(ASM_DIRS),$(wildcard $(dir)/*.s))
