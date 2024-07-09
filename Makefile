@@ -67,10 +67,11 @@ CC_CHECK += -m32
 
 
 CPP             := cpp
-ELF2ROM         ?= ./tools/elf2rom
-MKLDSCRIPT      ?= ./tools/mkldscript
-DISASSEMBLER    ?= ./tools/py_mips_disasm/simpleDisasm.py
-ASM_PROCESSOR   ?= python3 tools/asm_processor/build.py
+PYTHON          := python3
+ELF2ROM         ?= tools/elf2rom
+MKLDSCRIPT      ?= tools/mkldscript
+DISASSEMBLER    ?= $(PYTHON) tools/py_mips_disasm/simpleDisasm.py
+ASM_PROCESSOR   ?= $(PYTHON) tools/asm_processor/build.py
 
 ASMPROCFLAGS := 
 OPTFLAGS := -O2
@@ -178,12 +179,12 @@ asmclean:
 ## Extraction step
 setup:
 	$(MAKE) -C tools
-	./decompress_baserom.py $(GAME) $(VERSION)
-	./extract_baserom.py $(GAME) $(VERSION)
+	$(PYTHON) decompress_baserom.py $(GAME) $(VERSION)
+	$(PYTHON) extract_baserom.py $(GAME) $(VERSION)
 
 ## Assembly generation
 disasm: splitcsvs $(DISASM_TARGETS)
-	./tools/automators/gen_undefined_syms.py --version $(VERSION) > $(BASE_DIR)/undefined_syms_$(VERSION).txt
+	$(PYTHON) tools/automators/gen_undefined_syms.py --version $(VERSION) > $(BASE_DIR)/undefined_syms_$(VERSION).txt
 	@echo "Disassembly done!"
 
 splitcsvs: $(CSV_FILES)
@@ -196,10 +197,10 @@ diff-init: uncompressed
 #### Various Recipes ####
 
 $(BASE_DIR)/tables/%.csv: $(GAME)/tables/%.csv
-	./tools/csvSplit.py $(GAME) $<
+	$(PYTHON) tools/csvSplit.py $(GAME) $<
 
 $(BASE_DIR)/tables/files_%.csv: $(GAME)/tables/%.*.csv
-	./tools/csvSplit.py $(GAME) $<
+	$(PYTHON) tools/csvSplit.py $(GAME) $<
 
 ## Linker Scripts
 $(BASE_DIR)/build/undefined_syms_$(VERSION).txt: $(BASE_DIR)/undefined_syms_$(VERSION).txt
