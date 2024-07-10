@@ -1,1 +1,2 @@
+libyaz0>=0.5
 sortedcontainers>=2.4.0

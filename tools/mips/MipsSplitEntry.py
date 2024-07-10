@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 from __future__ import annotations
 
 from py_mips_disasm.backend.common.Utils import *
