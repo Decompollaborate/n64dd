@@ -208,7 +208,6 @@ beginseg
     include "oot/ne0/build/src/libleo/leo/leoram.o"
 
     include "oot/ne0/build/src/libleo/leo/leoint.o"
-    include "oot/ne0/build/asm/data/n64dd/leoint.bss.o"
 
     pad_text
 

@@ -67,7 +67,7 @@ OSIntMask osSetIntMask(OSIntMask im);
 void osSetEventMesg(OSEvent e, OSMesgQueue* mq, OSMesg m);
 s32 osEPiStartDma(OSPiHandle* pihandle, OSIoMesg* mb, s32 direction);
 void osCreateMesgQueue(OSMesgQueue* mq, OSMesg* msq, s32 count);
-void osInvalDCache(void* vaddr, size_t nbytes);
+void osInvalDCache(void* vaddr, s32 nbytes);
 void osSetThreadPri(OSThread* t, OSPri pri);
 OSPri osGetThreadPri(OSThread* t);
 s32 __osEPiRawStartDma(OSPiHandle* handle, s32 direction, u32 cartAddr, void* dramAddr, size_t size);
