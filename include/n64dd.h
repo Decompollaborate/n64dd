@@ -42,7 +42,7 @@ typedef struct struct_801D9B90 {
     /* 0x78 */ OSMesgQueue unk78;
     /* 0x90 */ IrqMgrClient unk90;
     /* 0x98 */ IrqMgr* unk98;
-} struct_801D9B90;
+} struct_801D9B90; // size = 0x9C
 
 typedef struct struct_801D9D50 {
     /* 0x00 */ u8 unk0;
@@ -57,7 +57,7 @@ typedef struct struct_801D9D50 {
     /* 0x24 */ s32 unk24;
     /* 0x28 */ StackEntry* unk28;
     /* 0x2C */ s32 unk2C;
-} struct_801D9D50; // size >= 0x30
+} struct_801D9D50; // size = 0x30
 
 extern struct_801E0D18 B_801E0D18;
 

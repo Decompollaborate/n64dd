@@ -9,46 +9,35 @@ extern u8 D_80121212;
 extern vu8 D_80121213;
 extern vu8 D_80121214;
 
+extern u8 B_801DC000[];
+
 // data
-extern void* D_801D2E50;
-extern s32 (*D_801D2E54)(s32);
-// struct_801DC000* D_801D2E50 = &B_801DC000;
-// s32 (*D_801D2E54)(s32) = func_801C7A1C;
+void* D_801D2E50 = &B_801DC000;
+s32 (*D_801D2E54)(struct_801C7A1C*) = func_801C7A1C;
 
 // bss
-extern struct_801D9B90 B_801D9B90; // probably a struct
-
-extern struct_801D9C30 B_801D9C30;
-extern struct_801D9C30* B_801D9D48;
-
-extern struct_801D9D50 B_801D9D50;
-
-extern OSMesgQueue B_801D9D80;
-extern OSMesgQueue B_801D9D98;
-extern OSMesg B_801D9DB0[1];
-extern OSMesg B_801D9DB4[1];
-
-extern vu8 B_801D9DB8;
-
-extern volatile OSTime B_801D9DC0;
-extern s32 B_801D9DC8; // 1 if disk gameName is correct, 2 otherwise
-extern UNK_TYPE B_801D9DCC;
-extern UNK_TYPE B_801D9DD0;
-extern UNK_TYPE B_801D9DD4;
-extern OSThread B_801D9DD8;
-
-extern STACK(B_801D9F88, 0x1000);
-extern StackEntry B_801DAF88;
-extern STACK(B_801DAFA8, 0x1000);
-extern StackEntry B_801DBFA8;
-
-// in-function static
-extern void* B_801DBFC8;
-extern LEODiskID B_801DBFD0;
-extern s32 B_801DBFF0; // bool
+struct_801D9B90 B_801D9B90;
+struct_801D9C30 B_801D9C30;
+struct_801D9C30* B_801D9D48;
+struct_801D9D50 B_801D9D50;
+OSMesgQueue B_801D9D80;
+OSMesgQueue B_801D9D98;
+OSMesg B_801D9DB0[1];
+OSMesg B_801D9DB4[1];
+volatile u8 B_801D9DB8;
+volatile OSTime B_801D9DC0;
+s32 B_801D9DC8; // 1 if disk gameName is correct, 2 otherwise
+UNK_TYPE B_801D9DCC;
+UNK_TYPE B_801D9DD0;
+UNK_TYPE B_801D9DD4;
+OSThread B_801D9DD8;
+STACK(B_801D9F88, 0x1000);
+StackEntry B_801DAF88;
+STACK(B_801DAFA8, 0x1000);
+StackEntry B_801DBFA8;
+UNK_TYPE B_801DBFC4; // unused?
 
 // Might be u8, will need to examine code function
-
 u32 func_801C6E80(void) {
     return LeoDriveExist();
 }
@@ -80,7 +69,6 @@ void func_801C6F30(void) {
         Sleep_Usec(16666); // 100000 / 6
     }
 }
-
 
 void func_801C6F78(void) {
     if (D_80121214 != 0) {
@@ -140,7 +128,6 @@ s32 func_801C70FC(void) {
     return func_801C70E4();
 }
 
-#ifdef NON_MATCHING
 // Matches but needs in-function static
 void func_801C711C(void* arg) {
     static void* B_801DBFC8;
@@ -175,10 +162,6 @@ void func_801C711C(void* arg) {
     } while (var_s0 == 0);
     IrqMgr_RemoveClient(arg0->unk98, &arg0->unk90);
 }
-#else
-void func_801C711C(void* arg);
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/z_n64dd/func_801C711C.s")
-#endif
 
 void func_801C7268(void) {
     s32 pad;
@@ -373,6 +356,8 @@ void func_801C7A10(LEODiskID* arg0) {
 
 // Checks diskId, sets B_801D9DC8 and returns true if diskId is correct
 s32 func_801C7A1C(struct_801C7A1C* arg0) {
+    static LEODiskID B_801DBFD0;
+    static s32 B_801DBFF0; // bool
     LEODiskID *diskId;
 
     diskId = &arg0->diskId;

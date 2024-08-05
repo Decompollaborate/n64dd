@@ -9,7 +9,7 @@ u8* func_801C9FFC(void);
 u8* func_801CA030(s32 errorNum);
 u8* func_801CA070(void);
 
-extern s32 (*D_801D2E54)(s32);
+extern s32 (*D_801D2E54)(struct_801C7A1C*);
 
 extern u8* D_801D2EA4;
 extern s32 D_801D2EA8;
@@ -212,7 +212,7 @@ s32 func_801C8E70(struct_801E0D18* arg0) {
 }
 
 s32 func_801C8F1C(struct_801E0D18* arg0) {
-    if (D_801D2E54 != 0) {
+    if (D_801D2E54 != NULL) {
         return D_801D2E54(arg0);
     }
     return 1;
