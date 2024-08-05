@@ -2,128 +2,95 @@
 #include "n64dd_functions.h"
 #include "libleo_functions.h"
 
-#if 0
-u16 leoLba_to_phys(u32 lba);
-//{
-//    u16 vzone_num;
-//    u16 zone_slba;
-//    u16 zone_scyl;
-//    u16 zone_tk;
-//    u16 bad_tk_num;
-//    u32 counter;
-//    u16 def_offset;
-//    u16 defect;
-//    u8 def_zone_no;
-//}
-#endif
-
-#if 0
 u16 leoLba_to_phys(u32 lba) {
-    //s32 temp_t6;
-    u16 temp_v0_2;
-    //s32 temp_a0;
-    int new_var;
-    u16 phi_v1;
-    u16 phi_a1;
-    u16 phi_t1;
-    u16 phi_v1_2;
-    u16 phi_t2;
-    s16 temp_t7;
-    u16 aux;
+    u16 vzone_num;
+    u16 zone_slba;
+    u16 zone_scyl;
+    u16 zone_tk;
+    u16 bad_tk_num;
+    u32 counter;
+    u16 def_offset;
+    u16 defect;
+    u8 def_zone_no;
 
+    // A cylinder track is made of two blocks, so we may be able to only read one of it if the next block is on the next
+    // cylinder
     LEOtgt_param.rdwr_blocks = 2 - (lba & 1);
 
-    if (((lba & 3) != 0) && ((lba & 3) != 3)) {
-        LEOtgt_param.start_block = 1;
-    } else {
-        LEOtgt_param.start_block = 0;
+    // Blocks are interleaved between cylinders
+    switch (lba & 3) {
+        case 0:
+        case 3:
+            LEOtgt_param.start_block = 0;
+            break;
+        default:
+            LEOtgt_param.start_block = 1;
+            break;
     }
 
-    temp_v0_2 = leoLba_to_vzone(lba);
+    // Get Virtual & Physical Disk Zones from LBA
+    vzone_num = leoLba_to_vzone(lba);
 
-    phi_t2 = LEOVZONE_PZONEHD_TBL[LEOdisk_type][temp_v0_2];
-
-    LEOtgt_param.head =  0;
-    LEOtgt_param.zone = LEOVZONE_PZONEHD_TBL[LEOdisk_type][temp_v0_2];
-
-    if (((u8)phi_t2 > 7) ) 
-    {
-        temp_t7 = LEOVZONE_PZONEHD_TBL[LEOdisk_type][temp_v0_2] - 7;
-
-        //phi_t2 = LEOtgt_param.zone = phi_t2 - 7;
-        LEOtgt_param.zone = temp_t7 & 0xFF;
+    // Set Parameter Disk Head & Zone
+    LEOtgt_param.zone = def_zone_no = LEOVZONE_PZONEHD_TBL[LEOdisk_type][vzone_num];
+    LEOtgt_param.head = 0;
+    if (LEOtgt_param.zone > 7) {
+        LEOtgt_param.zone -= 7;
         LEOtgt_param.head = 1;
-
-
-        //if (1) {}
-        //if (phi_t2 && phi_t2) {}
-        phi_t2 = (u8)temp_t7;
     }
 
-    phi_t1 = LEOZONE_SCYL_TBL[phi_t2];
-    //if (temp_v0_2 != 0) {
-    //    //phi_v1 = *(D_801D9516 + ((LEOdisk_type << 5) + (temp_v0_2 * 2)));
-    //    //phi_v1 = LEOVZONE_TBL[((LEOdisk_type << 5) + (temp_v0_2 * 2))-1];
-    //    phi_v1 = LEOVZONE_TBL[LEOdisk_type][temp_v0_2-1];
-    //} else {
-    //    phi_v1 = 0;
-    //}
-    phi_v1 = (temp_v0_2 != 0) ? LEOVZONE_TBL[LEOdisk_type][temp_v0_2-1] : 0;
+    // Get the start cylinder from current zone
+    zone_scyl = LEOZONE_SCYL_TBL[def_zone_no];
 
-    new_var = 1;
-    if (LEOtgt_param.head != 0) {
-        LEOtgt_param.cylinder = phi_t1 - ((lba - phi_v1) >> new_var);
-        //phi_t1 = *(LEOVZONE_PZONEHD_TBL + 0x6E + (phi_t2 * 2));
-        phi_t1 = LEOZONE_OUTERCYL_TBL[phi_t2-new_var];
-        if (1) {}
+    // Get Virtual Zone LBA start, if Zone 0, it's LBA 0
+    if (vzone_num != 0) {
+        zone_slba = LEOVZONE_TBL[LEOdisk_type][vzone_num - 1];
     } else {
-        //*(s16* )0x801E0000 = phi_t1 + ((u32) (lba - phi_v1) >> 1);
-        LEOtgt_param.cylinder = phi_t1 + ((lba - phi_v1) >> new_var);
-        if (phi_t2) {}
+        zone_slba = 0;
+    }
+    // Get Cylinder relative of the current Zone
+    zone_tk = (lba - zone_slba) / 2;
+    // Calculate Physical Cylinder
+    if (LEOtgt_param.head != 0) {
+        LEOtgt_param.cylinder = zone_scyl - zone_tk;
+        zone_scyl = LEOZONE_OUTERCYL_TBL[LEOtgt_param.zone - 1];
+    } else {
+        LEOtgt_param.cylinder = zone_scyl + zone_tk;
     }
 
-    //if (phi_t2 != 0) {
-    //    phi_a1 = LEO_sys_data.param.defect_num[phi_t2-1];
-    //} else {
-    //    phi_a1 = 0;
-    //}
+    // Get the relative offset to defect tracks for the current zone (if Zone 0, then it's 0)
+    if ((u32)def_zone_no != 0) {
+        def_offset = LEO_sys_data.param.defect_num[def_zone_no - 1];
+    } else {
+        def_offset = 0;
+    }
+    // Get amount of defect tracks for the current zone
+    bad_tk_num = LEO_sys_data.param.defect_num[def_zone_no] - def_offset;
 
-    phi_a1 = (phi_t2 != 0) ? LEO_sys_data.param.defect_num[phi_t2-1] : 0;
-
-    //temp_t6 = ((&LEO_sys_data + phi_t2)->unk_8 - phi_a1) & 0xFFFF;
-    phi_v1_2 = (LEO_sys_data.param.defect_num[phi_t2] - phi_a1);
-    //phi_v1_2 = LEO_sys_data.param.defect_num[phi_t2];
-    //phi_v1_2 -= phi_a1;
-
-    while (phi_v1_2 != 0) {
-        aux = LEO_sys_data.param.defect_data[phi_a1] + phi_t1;
-
-        //if (LEOtgt_param.cylinder < aux) 
-        if (((((LEOtgt_param.cylinder & 0xFFFF) & 0xFFFF) & 0xFFFF) & 0xFFFF) < aux)
-        {
+    // Skip defective cylinders
+    while (bad_tk_num != 0) {
+        defect = zone_scyl + LEO_sys_data.param.defect_data[def_offset];
+        if (LEOtgt_param.cylinder < defect) {
             break;
         }
 
         LEOtgt_param.cylinder++;
-        phi_a1++;
-        phi_v1_2--;
+        def_offset++;
+        bad_tk_num--;
     }
 
-    LEOtgt_param.sec_bytes = LEOBYTE_TBL1[phi_t2];
-    //LEOtgt_param.blk_bytes = LEOBYTE_TBL2[phi_t2];
-    phi_t1 = LEOBYTE_TBL2[phi_t2 & 0xFFFFFFFF];
-    LEOtgt_param.blk_bytes = phi_t1;
+    // Set sector and block size info
+    LEOtgt_param.sec_bytes = LEOBYTE_TBL1[LEOtgt_param.zone];
+    LEOtgt_param.blk_bytes = LEOBYTE_TBL2[LEOtgt_param.zone];
 
-    if ((LEO_country_code == 0) && (lba < 0xC)) {
+    // For development disks
+    if (LEO_country_code == 0 && lba < 12) {
         LEOtgt_param.sec_bytes = 0xC0;
         LEOtgt_param.blk_bytes = 0x3FC0;
     }
 
     return 0;
 }
-#else
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/leoutil/leoLba_to_phys.s")
-#endif
 
 u16 leoLba_to_vzone(u32 lba) {
     u16 i;

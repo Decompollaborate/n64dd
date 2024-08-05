@@ -49,4 +49,4 @@ u8 LEOdisk_type;
 
 tgt_param_form LEOtgt_param;
 
-UNK_TYPE4 LEO_country_code;
+u32 LEO_country_code;

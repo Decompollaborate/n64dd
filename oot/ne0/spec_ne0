@@ -208,13 +208,10 @@ beginseg
     include "oot/ne0/build/src/libleo/leo/leoram.o"
 
     include "oot/ne0/build/src/libleo/leo/leoint.o"
-    include "oot/ne0/build/asm/data/n64dd/leoint.bss.o"
 
     pad_text
 
     include "oot/ne0/build/src/libleo/leo/leocmdex.o"
-    include "oot/ne0/build/asm/data/n64dd/leocmdex.data.o"
-    include "oot/ne0/build/asm/data/n64dd/leocmdex.bss.o"
 
     include "oot/ne0/build/asm/text/n64dd/getaadr2.text.o" // Handwritten
 
@@ -228,7 +225,6 @@ beginseg
     include "oot/ne0/build/src/libleo/api/seek.o"
 
     include "oot/ne0/build/src/libleo/leo/leord_diskid.o"
-    include "oot/ne0/build/asm/data/n64dd/leord_diskid.data.o"
 
     include "oot/ne0/build/src/libleo/leo/leomecha.o"
 
@@ -240,7 +236,6 @@ beginseg
     include "oot/ne0/build/asm/data/n64dd/leoc2_syndrome.bss.o"
 
     include "oot/ne0/build/src/libleo/leo/leoc2ecc.o"
-    include "oot/ne0/build/asm/data/n64dd/leoc2ecc.bss.o"
 
     include "oot/ne0/build/src/libleo/leo/leomseq_tbl.o"
 

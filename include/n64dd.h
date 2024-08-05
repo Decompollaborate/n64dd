@@ -77,7 +77,7 @@ extern vu8 LEOclr_que_flag;
 // extern vu16 LEOrw_flags;
 extern u8 LEOdisk_type;
 extern tgt_param_form LEOtgt_param;
-extern UNK_TYPE4 LEO_country_code;
+extern u32 LEO_country_code;
 
 // leo_tbl
 extern const char LEOfirmware_rev[];
