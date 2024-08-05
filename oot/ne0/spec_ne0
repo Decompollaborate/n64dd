@@ -209,8 +209,6 @@ beginseg
 
     include "oot/ne0/build/src/libleo/leo/leoint.o"
 
-    pad_text
-
     include "oot/ne0/build/src/libleo/leo/leocmdex.o"
 
     include "oot/ne0/build/asm/text/n64dd/getaadr2.text.o" // Handwritten
