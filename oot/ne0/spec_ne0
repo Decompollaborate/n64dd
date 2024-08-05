@@ -218,7 +218,6 @@ beginseg
     include "oot/ne0/build/src/libleo/leo/leoinquiry.o"
 
     include "oot/ne0/build/src/libleo/leo/leodiskinit.o"
-    include "oot/ne0/build/asm/data/n64dd/leodiskinit.bss.o"
 
     include "oot/ne0/build/src/libleo/api/seek.o"
 
@@ -230,8 +229,8 @@ beginseg
 
     include "oot/ne0/build/src/libleo/leo/leo_tbl.o"
 
-    include "oot/ne0/build/asm/data/n64dd/leotempbuffer.bss.o"
-    include "oot/ne0/build/asm/data/n64dd/leoc2_syndrome.bss.o"
+    include "oot/ne0/build/src/libleo/leo/leotempbuffer.o"
+    include "oot/ne0/build/src/libleo/leo/leoc2_syndrome.o"
 
     include "oot/ne0/build/src/libleo/leo/leoc2ecc.o"
 
@@ -261,7 +260,6 @@ beginseg
     include "oot/ne0/build/src/libleo/api/cjcreateleomanager.o"
 
     include "oot/ne0/build/src/libleo/leo/leointerrupt.o"
-    include "oot/ne0/build/asm/data/n64dd/leointerrupt.bss.o"
 
     include "oot/ne0/build/src/libleo/api/cacreateleomanager.o"
     include "oot/ne0/build/src/libleo/api/testunitready.o"

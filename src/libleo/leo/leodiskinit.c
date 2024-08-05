@@ -2,9 +2,10 @@
 #include "n64dd_functions.h"
 #include "libleo_functions.h"
 
-extern OSPiHandle __LeoDiskHandle;
-extern OSPiHandle* __osDiskHandle;
 extern OSPiHandle* __osPiTable;
+
+OSPiHandle __LeoDiskHandle;
+OSPiHandle* __osDiskHandle;
 
 OSPiHandle* osLeoDiskInit(void) {
     u32 prevInt;

@@ -93,7 +93,7 @@ extern const s32 LEORAM_BYTE[];
 extern s32 __leoActive;
 
 extern LEOVersion __leoVersion;
-extern u8 leoDiskStack[];
+extern STACK(leoDiskStack, 0xFF0);
 
 extern OSPiHandle* LEOPiInfo;
 

@@ -8,6 +8,8 @@ extern OSHWIntr __OSGlobalIntMask;
 void __osLeoAbnormalResume(void);
 void __osLeoResume(void);
 
+STACK(leoDiskStack, 0xFF0);
+
 s32 __osLeoInterrupt(void) {
     u32 stat = 0;
     volatile u32 pi_stat;
