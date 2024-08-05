@@ -50,7 +50,12 @@ void func_801C8298(struct_801E0D18* arg0) {
     osRecvMesg(&arg0->unk_1C, (void** ) &arg0->unk_68, 1);
 }
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8000/func_801C82E0.s")
+void func_801C82E0(struct_801E0D18* arg0) {
+    LEOCmd sp1C;
+
+    LeoSpdlMotor(&sp1C, 4, &arg0->unk_1C);
+    osRecvMesg(&arg0->unk_1C, (void** ) &arg0->unk_68, 1);
+}
 
 void func_801C832C(struct_801E0D18* arg0) {
     s32 sp34;
@@ -125,7 +130,12 @@ void func_801C8554(void) {
     osDestroyThread(&B_801E0DB0);
 }
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8000/func_801C8578.s")
+void func_801C8578(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
+    B_801E0D10[0] = arg0;
+    B_801E0D10[1] = arg1;
+    osCreateThread(&B_801E0DB0, arg2, &func_801C84D4, NULL, arg3, arg4);
+    osStartThread(&B_801E0DB0);
+}
 
 void func_801C85F0(struct_801E0D18* arg0, s32 arg1) {
     if (arg1 == 1) {
@@ -189,12 +199,12 @@ s32 func_801C87C0(void) {
     return -1;
 }
 
-#ifdef NON_MATCHING
 s32 func_801C87FC(void) {
     s32* new_var = &B_801E0D18.unk_68;
+    s32 temp_v0;
 
     if (func_801C8844() == 0) {
-        s32 temp_v0 = B_801E0D18.unk_6C;
+        temp_v0 = B_801E0D18.unk_6C;
 
         if ((temp_v0 == 3) || (temp_v0 == 4)) {
             return *new_var;
@@ -203,9 +213,6 @@ s32 func_801C87FC(void) {
 
     return 0;
 }
-#else
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8000/func_801C87FC.s")
-#endif
 
 s32 func_801C8844(void) {
     return B_801E0D18.unk_66 == 1;

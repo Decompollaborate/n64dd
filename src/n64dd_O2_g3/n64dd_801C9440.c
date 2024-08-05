@@ -78,7 +78,6 @@ u16 func_801C9534(u16 jisCodepoint) {
     return (hiByte << 8) + loByte;
 }
 
-// #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9440/func_801C95C0.s")
 void func_801C95C0(s32 arg0, s32 arg1, UNK_TYPE arg2) {
     if (D_801D2EC0 != NULL) {
         D_801D2EC0(arg0, arg1, arg2);
@@ -143,87 +142,55 @@ s32 func_801C9778(s32 arg0, s32* arg1, s32 arg2) {
     return arg0;
 }
 
+#ifdef NON_MATCHING
+s32 func_801C97C4(s32* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u8* arg5, s32 arg6, s32 arg7, s32 arg8) {
+    s32 var_fp;
+    s32 var_s0;
+    s32 var_s1;
+    s32 var_s3;
+    s32 sp4C;
+    s32 var_s4;
+    s32 sp44;
+
+    sp4C = arg2;
+    sp44 = arg6 + arg3 + arg4;
+    var_s4 = 1;
+    var_fp = func_801C9778(*arg0, &sp4C, arg3);
+    arg1 >>= 1;
+    var_fp += ((11 - arg8) * arg1);
+    if (arg6 & 1) {
+        arg6++;
+    }
+    if (arg7 != 0) {
+        arg7--;
+        do {
+            var_s0 = var_fp;
+            var_s1 = sp4C;
+            for (var_s3 = 0; var_s3 < arg6; var_s3++) {
+                if (var_s4 == 1) {
+                    if (func_801C9740(var_s0, var_s1, *arg5 >> 4) != 0) {
+                        var_s0 += 1;
+                    }
+                } else {
+                    if (func_801C9740(var_s0, var_s1, *arg5 & 0xF) != 0) {
+                        var_s0 += 1;
+                    }
+                    arg5 += 1;
+                }
+                var_s4 ^= 1;
+                var_s1 ^= 1;
+            }
+            var_fp += arg1;
+            arg7--;
+        } while (arg7 != 0);
+    }
+    *arg0 = func_801C9778(*arg0, &arg2, sp44);
+    return arg2;
+}
+#else
+s32 func_801C97C4(s32 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u8 *arg5, s32 arg6, s32 arg7, s32 arg8);
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9440/func_801C97C4.s")
-
-// s32 func_801C97C4(s32 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u8 *arg5, s32 arg6, s32 arg7, s32 arg8) {
-//     s32 sp4C;
-//     s32 sp44;
-//     s32 temp_lo;
-//     s32 temp_s3;
-//     s32 temp_s4;
-//     s32 temp_t2;
-//     s32 temp_v0;
-//     u8 *temp_s2;
-//     s32 phi_s6;
-//     s32 phi_s4;
-//     u8 *phi_s0;
-//     s32 phi_s1;
-//     u8 *phi_s2;
-//     s32 phi_s3;
-//     s32 phi_s7;
-//     u8 *phi_s2_2;
-//     s32 phi_s4_2;
-//     u8 *phi_fp;
-//     u8 *phi_s2_3;
-//     u8 *phi_s2_4;
-
-//     sp44 = arg6 + arg3 + arg4;
-//     sp4C = arg2;
-//     temp_v0 = func_801C9778(*arg0, &sp4C, arg3);
-//     temp_t2 = arg1 >> 1;
-//     temp_lo = (0xB - arg8) * temp_t2;
-//     arg1 = temp_t2;
-//     phi_s6 = arg6;
-//     phi_s4_2 = 1;
-//     phi_fp = temp_v0 + temp_lo;
-//     phi_s2_3 = arg5;
-//     if ((arg6 & 1) != 0) {
-//         phi_s6 = arg6 + 1;
-//     }
-//     phi_s7 = arg7 - 1;
-//     if (arg7 != 0) {
-//         do {
-//             phi_s4 = phi_s4_2;
-//             phi_s0 = phi_fp;
-//             phi_s1 = sp4C;
-//             phi_s2 = phi_s2_3;
-//             phi_s3 = 0;
-//             phi_s2_2 = phi_s2_3;
-//             if (phi_s6 > 0) {
-//                 do {
-//                     phi_s2_4 = phi_s2;
-//                     phi_s2_4 = phi_s2;
-//                     if (phi_s4 == 1) {
-//                         if (func_801C9740(phi_s0, phi_s1, (*phi_s2 >> 4))) {
-//                             phi_s0++;
-//                         }
-//                     } else {
-//                         temp_s2 = phi_s2 + 1;
-//                         phi_s2_4 = temp_s2;
-//                         phi_s2_4 = temp_s2;
-//                         if (func_801C9740(phi_s0, phi_s1, *phi_s2 & 0xF)) {
-//                             phi_s0++;
-//                         }
-//                     }
-//                     temp_s3 = phi_s3 + 1;
-//                     temp_s4 = phi_s4 ^ 1;
-//                     phi_s4 = temp_s4;
-//                     phi_s1 ^= 1;
-//                     phi_s2 = phi_s2_4;
-//                     phi_s3 = temp_s3;
-//                     phi_s2_2 = phi_s2_4;
-//                     phi_s4_2 = temp_s4;
-//                 } while (temp_s3 != phi_s6);
-//             }
-//             phi_s7 += -1;
-//             phi_fp += arg1;
-//             phi_s2_3 = phi_s2_2;
-//         } while (phi_s7 != 0);
-//         arg5 = phi_s2_2;
-//     }
-//     *arg0 = func_801C9778(*arg0, &arg2, sp44);
-//     return arg2;
-// }
+#endif
 
 void func_801C9954(u8* bytes, s32* arg1, s32* arg2) {
     u8 prevCh;
@@ -269,8 +236,34 @@ void func_801C9954(u8* bytes, s32* arg1, s32* arg2) {
     }
 }
 
-void func_801C9A10(u8*, s32, char*);
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9440/func_801C9A10.s")
+void func_801C9A10(s32 arg0, s32 arg1, u8* arg2) {
+    u8 sp80[0xA0];
+    s32 temp_s1;
+    s32 sp78;
+    s32 sp74;
+    s32 sp70;
+    s32 var_s2;
+    s32 sp68;
+    s32 sp64;
+    s32 temp_v1;
+
+    temp_s1 = (((u32)&sp80 + 0xF) / 0x10) * 0x10;
+    var_s2 = 1;
+    if (arg2 != NULL) {
+        while (*arg2 != 0) {
+            func_801C9954(arg2, &sp68, &sp64);
+            temp_v1 = func_801C969C(temp_s1, &sp78, &sp74, &sp70, arg2);
+            if (sp78 & 1) {
+                sp78++;
+            }
+            var_s2 = func_801C97C4(&arg0, arg1, var_s2, sp68, sp64, temp_s1 + temp_v1, sp78, sp74, sp70);
+            if (func_801C9440(arg2) != 0) {
+                arg2++;
+            }
+            arg2++;
+        }
+    }
+}
 
 void func_801C9B50(s32 arg0, void (*arg1)(s32, s32, s32)) {
     B_801E0F70 = arg0;

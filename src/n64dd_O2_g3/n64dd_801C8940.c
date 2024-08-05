@@ -103,10 +103,35 @@ s32 func_801C8BC0(struct_801E0D18* arg0) {
     return 4;
 }
 
-s32 func_801C8C1C(struct_801E0D18* arg0);
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8940/func_801C8C1C.s")
+s32 func_801C8C1C(struct_801E0D18* arg0) {
+    s32 var_s0;
 
-#ifdef NON_MATCHING
+    do {
+        var_s0 = 0;
+        Sleep_Msec(60);
+        func_801C82E0(arg0);
+
+        switch (arg0->unk_68) {
+            case 0x2A:
+                func_801C8A64();
+                return 0;
+            case 0x22:
+                func_801C8A64();
+                LeoClearQueue();
+                return 3;
+            case 0:
+                func_801C8A30(6);
+                /* fallthrough */
+            case 0x23:
+                var_s0 = 1;
+                break;
+        }
+    } while (var_s0 != 0);
+
+    func_801C8A64();
+    return func_801C8BC0(arg0);
+}
+
 s32 func_801C8CEC(struct_801E0D18* arg0) {
     switch (arg0->unk_68) {
     case 0x22:
@@ -116,7 +141,6 @@ s32 func_801C8CEC(struct_801E0D18* arg0) {
     case 0x2:
         func_801C8940(arg0->unk_68);
         func_801C8A30(5);
-    case 0x23:
         return 9;
     case 0x0:
         func_801C8B90();
@@ -127,19 +151,63 @@ s32 func_801C8CEC(struct_801E0D18* arg0) {
             arg0->unk_65 = 2;
             return 1;
         }
+        /* fallthrough */
+    default:
+        func_801C8B90();
+        return func_801C8BC0(arg0);
+    case 0x23:
+        return 9;
     }
-    func_801C8B90();
-    return func_801C8BC0(arg0);
 }
-#else
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8940/func_801C8CEC.s")
-#endif
 
-s32 func_801C8DC0(struct_801E0D18* arg0);
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8940/func_801C8DC0.s")
+s32 func_801C8DC0(struct_801E0D18* arg0) {
+    s32 temp_v0;
 
-s32 func_801C8E70(struct_801E0D18* arg0);
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8940/func_801C8E70.s")
+    while (true) {
+        func_801C8298(arg0);
+        switch (arg0->unk_68) {
+            case 0x31:
+                func_801C8940(arg0->unk_68);
+                func_801C89B8(2);
+                return 5;
+            case 0x2A:
+                func_801C8B90();
+                return 5;
+        }
+        temp_v0 = func_801C8CEC(arg0);
+        if (temp_v0 != 9) {
+            return temp_v0;
+        }
+        Sleep_Msec(60);
+    }
+}
+
+s32 func_801C8E70(struct_801E0D18* arg0) {
+    s32 temp_a0;
+    s32 temp_v0;
+
+    while (true) {
+        Sleep_Msec(60);
+        func_801C8298(arg0);
+
+        switch (arg0->unk_68) {
+            case 0x23:
+                continue;
+            case 0x31:
+                func_801C8940(arg0->unk_68);
+                func_801C89B8(2);
+                /* fallthrough */
+            case 0x2A:
+                func_801C8A30(4);
+                continue;
+        }
+
+        temp_v0 = func_801C8CEC(arg0);
+        if (temp_v0 != 9) {
+            return temp_v0;
+        }
+    }
+}
 
 extern s32 (*D_801D2E54)(s32);
 

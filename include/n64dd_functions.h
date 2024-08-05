@@ -46,7 +46,7 @@ s32 func_801C81C4(void);
 s32 func_801C81D4(void);
 void func_801C81EC(struct_801E0D18*);
 void func_801C8298(struct_801E0D18* arg0);
-// void func_801C82E0();
+void func_801C82E0(struct_801E0D18* arg0);
 void func_801C832C(struct_801E0D18*);
 void func_801C83A0(struct_801E0D18*);
 void func_801C8414(struct_801E0D18*);
