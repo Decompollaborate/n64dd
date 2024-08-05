@@ -9,7 +9,58 @@ extern OSMesg B_801E0D88[1];
 extern OSMesg B_801E0D90[8];
 extern OSThread B_801E0DB0;
 
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8000/func_801C8000.s")
+extern s32 D_801D2EA0;
+s32 func_801C8000(struct_801D9D50* arg0) {
+    switch (arg0->unk0) {
+    case 0:
+        if (func_801C8844() != 0) {
+            return 1;
+        }
+        func_801C8554();
+        break;
+    case 1:
+        func_801C8578(arg0->unk1C, arg0->unk20, arg0->unk24, arg0->unk28, arg0->unk2C);
+        break;
+    case 2:
+        func_801C8638(arg0->unkC, arg0->unk10, arg0->unk14);
+        break;
+    case 3:
+        if (func_801C8844() != 0) {
+            return 1;
+        }
+        func_801C868C(arg0->unk18, arg0->unk1C, arg0->unk20, 1);
+        break;
+    case 4:
+        if (func_801C8844() != 0) {
+            return 1;
+        }
+        func_801C868C(arg0->unk18, arg0->unk1C, arg0->unk20, 2);
+        break;
+    case 5:
+        arg0->unk8 = func_801C8770();
+        return arg0->unk8;
+    case 7:
+        return func_801C87FC();
+    case 6:
+        return func_801C8844();
+    case 8:
+        arg0->unk4 = func_801C87C0();
+        return arg0->unk4;
+    case 9:
+        return func_801C885C();
+    case 10:
+        return func_801C88AC();
+    case 11:
+        return func_801C88FC();
+    case 12:
+        D_801D2EA0 = 0;
+        break;
+    case 13:
+        D_801D2EA0 = 1;
+        break;
+    }
+    return 0;
+}
 
 extern s32 D_801D2E60;
 extern s32 D_801D2E64;
@@ -151,7 +202,7 @@ extern s32 D_801D2EB4;
 //extern u8 B_801E0D7D;
 
 #if 0
-void func_801C8638(s32 arg0, s32 arg1, void (*arg2)(s32, s32, s32)) {
+void func_801C8638(s32 arg0, s32 arg1, void (*arg2)(void*, uintptr_t, size_t)) {
     func_801C9B50(arg1, arg2);
     D_801D2EB4 = arg0;
     //B_801E0D7C = 0;
@@ -161,11 +212,31 @@ void func_801C8638(s32 arg0, s32 arg1, void (*arg2)(s32, s32, s32)) {
     func_801C85F0(&B_801E0D18, 0);
 }
 #else
-void func_801C8638(s32 arg0, s32 arg1, void (*arg2)(s32, s32, s32));
+void func_801C8638(s32 arg0, s32 arg1, void (*arg2)(void*, uintptr_t, size_t));
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8000/func_801C8638.s")
 #endif
 
+#if 0
+extern s32 D_801D2E90;
+void func_801C868C(s32 arg0, s32 arg1, s32 arg2, u8 arg3) {
+    if (D_801D2E90 == 1) {
+        D_801D2E90 = 0;
+        B_801E0D18.unk_64 = 4;
+        func_801C85F0(&B_801E0D18, 1);
+        if (B_801E0D18.unk_6C == 3 || B_801E0D18.unk_6C == 4) {
+            return;
+        }
+    }
+
+    B_801E0D18.unk_58 = arg0;
+    B_801E0D18.unk_5C = arg1;
+    B_801E0D18.unk_60 = arg2;
+    B_801E0D18.unk_64 = arg3;
+    func_801C85F0(&B_801E0D18, 0);
+}
+#else
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8000/func_801C868C.s")
+#endif
 
 s32 func_801C873C(struct_801E0D18* arg0) {
     u8 sp1F;

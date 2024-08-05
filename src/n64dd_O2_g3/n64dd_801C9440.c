@@ -3,7 +3,7 @@
 #include "libleo_functions.h"
 
 // data
-void (*D_801D2EC0)(s32, s32, s32) = NULL;
+void (*D_801D2EC0)(void*, uintptr_t, size_t) = NULL;
 
 // bss
 extern s32 B_801E0F70;
@@ -78,7 +78,7 @@ u16 func_801C9534(u16 jisCodepoint) {
     return (hiByte << 8) + loByte;
 }
 
-void func_801C95C0(s32 arg0, s32 arg1, UNK_TYPE arg2) {
+void func_801C95C0(void* arg0, uintptr_t arg1, size_t arg2) {
     if (D_801D2EC0 != NULL) {
         D_801D2EC0(arg0, arg1, arg2);
     }
@@ -101,7 +101,7 @@ s32 func_801C963C(s32* arg0, s32* arg1, s32* arg2, s32* arg3, u8 arg4) {
     return temp_v1;
 }
 
-s32 func_801C969C(UNK_TYPE arg0, s32* arg1, s32* arg2, s32* arg3, u8* arg4) {
+s32 func_801C969C(void* arg0, s32* arg1, s32* arg2, s32* arg3, u8* arg4) {
     s32 sp24;
     s32 phi_v1;
 
@@ -120,9 +120,9 @@ s32 func_801C969C(UNK_TYPE arg0, s32* arg1, s32* arg2, s32* arg3, u8* arg4) {
 }
 
 // return boolean
-s32 func_801C9740(u8* arg0, UNK_TYPE4 arg1, u8 arg2) {
+s32 func_801C9740(u8* arg0, s32 arg1, u8 arg2) {
     if (arg1 == 1) {
-        *arg0 = arg2 * 0x10;
+        *arg0 = arg2 << 4;
         return false;
     } else {
         *arg0 |= arg2;
@@ -130,7 +130,7 @@ s32 func_801C9740(u8* arg0, UNK_TYPE4 arg1, u8 arg2) {
     }
 }
 
-s32 func_801C9778(s32 arg0, s32* arg1, s32 arg2) {
+u8* func_801C9778(u8* arg0, s32* arg1, s32 arg2) {
     arg0 += (arg2 >> 1);
 
     if (((*arg1 == 1) && !(arg2 & 1)) || ((*arg1 == 0) && (arg2 & 1))) {
@@ -142,10 +142,10 @@ s32 func_801C9778(s32 arg0, s32* arg1, s32 arg2) {
     return arg0;
 }
 
-#ifdef NON_MATCHING
-s32 func_801C97C4(s32* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u8* arg5, s32 arg6, s32 arg7, s32 arg8) {
-    s32 var_fp;
-    s32 var_s0;
+#if NON_MATCHING
+s32 func_801C97C4(u8** arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u8* arg5, s32 arg6, s32 arg7, s32 arg8) {
+    u8* var_fp;
+    u8* var_s0;
     s32 var_s1;
     s32 var_s3;
     s32 sp4C;
@@ -188,7 +188,7 @@ s32 func_801C97C4(s32* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u8* arg5, s
     return arg2;
 }
 #else
-s32 func_801C97C4(s32 *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u8 *arg5, s32 arg6, s32 arg7, s32 arg8);
+s32 func_801C97C4(u8** arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, u8* arg5, s32 arg6, s32 arg7, s32 arg8);
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C9440/func_801C97C4.s")
 #endif
 
@@ -236,7 +236,7 @@ void func_801C9954(u8* bytes, s32* arg1, s32* arg2) {
     }
 }
 
-void func_801C9A10(s32 arg0, s32 arg1, u8* arg2) {
+void func_801C9A10(u8* arg0, s32 arg1, u8* arg2) {
     u8 sp80[0xA0];
     s32 temp_s1;
     s32 sp78;
@@ -265,7 +265,7 @@ void func_801C9A10(s32 arg0, s32 arg1, u8* arg2) {
     }
 }
 
-void func_801C9B50(s32 arg0, void (*arg1)(s32, s32, s32)) {
+void func_801C9B50(s32 arg0, void (*arg1)(void*, uintptr_t, size_t)) {
     B_801E0F70 = arg0;
     D_801D2EC0 = arg1;
 }

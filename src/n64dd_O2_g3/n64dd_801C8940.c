@@ -9,6 +9,8 @@ u8* func_801C9FFC(void);
 u8* func_801CA030(s32 errorNum);
 u8* func_801CA070(void);
 
+extern s32 (*D_801D2E54)(s32);
+
 extern u8* D_801D2EA4;
 extern s32 D_801D2EA8;
 extern u8* D_801D2EAC;
@@ -208,8 +210,6 @@ s32 func_801C8E70(struct_801E0D18* arg0) {
         }
     }
 }
-
-extern s32 (*D_801D2E54)(s32);
 
 s32 func_801C8F1C(struct_801E0D18* arg0) {
     if (D_801D2E54 != 0) {
