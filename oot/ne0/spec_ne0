@@ -181,13 +181,10 @@ beginseg
     include "oot/ne0/build/src/n64dd_O2_g3/n64dd_buffer.o"
 
     include "oot/ne0/build/src/n64dd_O2_g3/n64dd_801C8000.o"
-    include "oot/ne0/build/asm/data/n64dd/n64dd_801C8000.data.o"
 
     include "oot/ne0/build/src/n64dd_O2_g3/n64dd_801C8940.o"
-    include "oot/ne0/build/asm/data/n64dd/n64dd_801C8940.bss.o"
 
     include "oot/ne0/build/src/n64dd_O2_g3/n64dd_801C9440.o"
-    include "oot/ne0/build/asm/data/n64dd/n64dd_801C9440.bss.o"
 
     include "oot/ne0/build/src/n64dd_O2_g3/n64dd_801C9B70.o"
 

@@ -16,8 +16,9 @@ extern s32 D_801D2EA8;
 extern u8* D_801D2EAC;
 extern u8* D_801D2EB0;
 
-extern s32 B_801E0F60;
-extern s32 B_801E0F64;
+// bss
+s32 B_801E0F60;
+s32 B_801E0F64;
 
 // Set error message title texture?
 void func_801C8940(s32 errorNum) {

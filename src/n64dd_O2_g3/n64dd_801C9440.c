@@ -6,7 +6,7 @@
 void (*D_801D2EC0)(void*, uintptr_t, size_t) = NULL;
 
 // bss
-extern s32 B_801E0F70;
+s32 B_801E0F70;
 
 /**
  * Seems to work out if a pair of bytes is a valid EUC-JP character, although there may be additions to the font that

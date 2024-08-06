@@ -128,7 +128,6 @@ s32 func_801C70FC(void) {
     return func_801C70E4();
 }
 
-// Matches but needs in-function static
 void func_801C711C(void* arg) {
     static void* B_801DBFC8;
     struct_801D9B90* arg0 = (struct_801D9B90*) arg;

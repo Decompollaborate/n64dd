@@ -2,7 +2,31 @@
 #include "n64dd_functions.h"
 #include "libleo_functions.h"
 
-extern void (*D_801D2EB4)(void*, void*, void*);
+// data
+s32 D_801D2E60 = 0;
+s32 D_801D2E64 = 0;
+
+typedef struct {
+    /* 0x0 */ void (*unk_0)(struct_801E0D18*);
+    /* 0x4 */ s32 (*unk_4)(struct_801E0D18*);
+} _struct_D_801D2E68_0x8; // size = 0x8
+
+_struct_D_801D2E68_0x8 D_801D2E68[5] = {
+    { func_801C81EC, func_801C91E0 },
+    { func_801C832C, func_801C9260 },
+    { func_801C83A0, func_801C9260 },
+    { func_801C8414, func_801C9334 },
+    { func_801C8414, func_801C93C4 },
+};
+
+s32 D_801D2E90 = 0;
+char D_801D2E94[0xC] = {0}; // TOOD: file padding?
+s32 D_801D2EA0 = 0;
+u8* D_801D2EA4 = NULL;
+s32 D_801D2EA8 = 0;
+u8* D_801D2EAC = NULL;
+u8* D_801D2EB0 = NULL;
+void (*D_801D2EB4)(void*, void*, void*) = NULL;
 
 // bss
 OSMesgQueue* B_801E0D10[2];
@@ -11,7 +35,6 @@ OSMesg B_801E0D88[1];
 OSMesg B_801E0D90[8];
 OSThread B_801E0DB0;
 
-extern s32 D_801D2EA0;
 s32 func_801C8000(struct_801D9D50* arg0) {
     switch (arg0->unk0) {
     case 0:
@@ -64,8 +87,6 @@ s32 func_801C8000(struct_801D9D50* arg0) {
     return 0;
 }
 
-extern s32 D_801D2E60;
-extern s32 D_801D2E64;
 void func_801C819C(UNK_TYPE arg0) {
     if (arg0 != 0) {
         D_801D2E60 = 1;
@@ -138,15 +159,8 @@ void func_801C8414(struct_801E0D18* arg0) {
     arg0->unk_68 = 9;
 }
 
-struct _struct_D_801D2E68_0x8 {
-    /* 0x0 */ void (*unk_0)(struct_801E0D18*);      /* inferred */
-    /* 0x4 */ s32 (*unk_4)(struct_801E0D18*);     /* inferred */
-};                                                  /* size = 0x8 */
-
-extern struct _struct_D_801D2E68_0x8 D_801D2E68[5];
-
 void func_801C8424(struct_801E0D18* arg0) {
-    struct _struct_D_801D2E68_0x8* temp_v0;
+    _struct_D_801D2E68_0x8* temp_v0;
     s32 (*temp_s2)(struct_801E0D18*);
     void (*aux)(struct_801E0D18*);
     s32 temp_v0_2;
@@ -208,7 +222,6 @@ void func_801C8638(void (*arg0)(void*, void*, void*), s32 arg1, void (*arg2)(voi
     func_801C85F0(&B_801E0D18, 0);
 }
 
-extern s32 D_801D2E90;
 void func_801C868C(s32 arg0, s32 arg1, s32 arg2, u8 arg3) {
     s32 var0 = arg0;
     s32 var1 = arg1;
