@@ -2,6 +2,9 @@
 #include "n64dd_functions.h"
 #include "libleo_functions.h"
 
+extern s32 D_801D2EA0;
+extern void (*D_801D2EB4)(void*, void*, void*);
+
 // data
 s32 D_801D2E60 = 0;
 s32 D_801D2E64 = 0;
@@ -20,13 +23,6 @@ _struct_D_801D2E68_0x8 D_801D2E68[5] = {
 };
 
 s32 D_801D2E90 = 0;
-char D_801D2E94[0xC] = {0}; // TOOD: file padding?
-s32 D_801D2EA0 = 0;
-u8* D_801D2EA4 = NULL;
-s32 D_801D2EA8 = 0;
-u8* D_801D2EAC = NULL;
-u8* D_801D2EB0 = NULL;
-void (*D_801D2EB4)(void*, void*, void*) = NULL;
 
 // bss
 OSMesgQueue* B_801E0D10[2];
