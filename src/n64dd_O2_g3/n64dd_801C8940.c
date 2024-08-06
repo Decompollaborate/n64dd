@@ -291,36 +291,30 @@ s32 func_801C90FC(struct_801E0D18* arg0) {
     return func_801C9000(arg0);
 }
 
-s32 func_801C912C(struct_801E0D18* arg0);
-#ifdef NON_MATCHING
-// looks equivalent, but I'm not completely sure
 s32 func_801C912C(struct_801E0D18* arg0) {
-    s32 i;
+    s32 i = 0;
+    s32 temp_v0;
 
-    for (i = 0; i < 30; i++) {
-        s32 temp_v0;
-
+    do {
         LeoResetClear();
 
         temp_v0 = func_801C8DC0(arg0);
-        if ((temp_v0 == 3) || (temp_v0 == 4)) {
+        if (temp_v0 == 3 || temp_v0 == 4) {
             return temp_v0;
         }
         if (temp_v0 != 1) {
             if (temp_v0 == 0) {
                 return temp_v0;
+            } else {
+                return temp_v0;
             }
-            return temp_v0;
         }
 
         Sleep_Msec(250);
-    }
+    } while (i++ < 30);
 
     return func_801C8BC0(arg0);
 }
-#else
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8940/func_801C912C.s")
-#endif
 
 extern s32 D_801D2E90;
 
