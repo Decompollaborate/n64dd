@@ -13,7 +13,7 @@ extern u8 B_801DC000[];
 
 // data
 void* D_801D2E50 = &B_801DC000;
-s32 (*D_801D2E54)(struct_801C7A1C*) = func_801C7A1C;
+s32 (*D_801D2E54)(struct_801E0D18*) = func_801C7A1C;
 
 // bss
 struct_801D9B90 B_801D9B90;
@@ -27,9 +27,9 @@ OSMesg B_801D9DB4[1];
 volatile u8 B_801D9DB8;
 volatile OSTime B_801D9DC0;
 s32 B_801D9DC8; // 1 if disk gameName is correct, 2 otherwise
-UNK_TYPE B_801D9DCC;
-UNK_TYPE B_801D9DD0;
-UNK_TYPE B_801D9DD4;
+void* B_801D9DCC;
+void* B_801D9DD0;
+void* B_801D9DD4;
 OSThread B_801D9DD8;
 STACK(B_801D9F88, 0x1000);
 StackEntry B_801DAF88;
@@ -196,18 +196,19 @@ void func_801C7268(void) {
     }
 }
 
+// Clears framebuffer
 void func_801C7438(void* arg0) {
     u16* var_v0;
 
-    for (var_v0 = (u16*)arg0; var_v0 < (u16*)((u8*)arg0 + 0x25800); var_v0++) {
+    for (var_v0 = (u16*)arg0; var_v0 < (u16*)arg0 + SCREEN_WIDTH * SCREEN_HEIGHT; var_v0++) {
         *var_v0 = 1;
     }
 }
 
-void func_801C746C(s32 arg0, s32 arg1, s32 arg2) {
-    s32 sp2C;
+void func_801C746C(void* arg0, void* arg1, void* arg2) {
+    void* sp2C;
 
-    if (arg0 != 0 || arg1 != 0 || arg2 != 0) {
+    if (arg0 != NULL || arg1 != NULL || arg2 != NULL) {
         sp2C = (u8*)osViGetNextFramebuffer() + 0x20000000;
         if ((u32)sp2C & 0xFFFFFF) {
             if (B_801D9DB8 != 0) {
@@ -215,24 +216,24 @@ void func_801C746C(s32 arg0, s32 arg1, s32 arg2) {
                 func_801C7438(sp2C);
                 B_801D9DC0 = osGetTime();
             }
-            if (arg0 != 0) {
-                func_801CA1F0(arg0, 0x60, 0x20, 0xC0, 0x10, 0xB, sp2C, 0x140);
+            if (arg0 != NULL) {
+                func_801CA1F0(arg0, 96, 32, 192, 16, 11, sp2C, SCREEN_WIDTH);
             }
-            if (arg1 != 0) {
-                func_801CA1F0(arg1, 0, 0x50, 0x140, 0x40, 0xB, sp2C, 0x140);
+            if (arg1 != NULL) {
+                func_801CA1F0(arg1, 0, 80, SCREEN_WIDTH, 64, 11, sp2C, SCREEN_WIDTH);
             }
-            if (arg2 != 0) {
-                func_801CA1F0(arg2, 0, 0xB0, 0x140, 0x20, 0xB, sp2C, 0x140);
+            if (arg2 != NULL) {
+                func_801CA1F0(arg2, 0, 176, SCREEN_WIDTH, 32, 11, sp2C, SCREEN_WIDTH);
             }
             osViBlack(0);
         }
     }
 }
 
-void func_801C75BC(s32 arg0, s32 arg1, s32 arg2) {
+void func_801C75BC(void* arg0, void* arg1, void* arg2) {
     s32 temp;
 
-    if (arg0 == 0 && arg1 == 0 && arg2 == 0) {
+    if (arg0 == NULL && arg1 == NULL && arg2 == NULL) {
         return;
     }
 
@@ -355,7 +356,7 @@ void func_801C7A10(LEODiskID* arg0) {
 }
 
 // Checks diskId, sets B_801D9DC8 and returns true if diskId is correct
-s32 func_801C7A1C(struct_801C7A1C* arg0) {
+s32 func_801C7A1C(struct_801E0D18* arg0) {
     static LEODiskID B_801DBFD0;
     static s32 B_801DBFF0; // bool
     LEODiskID *diskId;

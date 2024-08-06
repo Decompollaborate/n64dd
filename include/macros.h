@@ -12,4 +12,7 @@
 #define STACK_TOP(stack) \
     ((u8*)(stack) + sizeof(stack))
 
+#define SCREEN_WIDTH 320
+#define SCREEN_HEIGHT 240
+
 #endif

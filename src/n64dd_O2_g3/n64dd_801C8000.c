@@ -97,7 +97,7 @@ void func_801C81EC(struct_801E0D18* arg0) {
 void func_801C8298(struct_801E0D18* arg0) {
     LEOCmd sp1C;
 
-    LeoSeek(&sp1C, &arg0->unk_38, &arg0->unk_1C);
+    LeoSeek(&sp1C, &arg0->diskId, &arg0->unk_1C);
     osRecvMesg(&arg0->unk_1C, (void** ) &arg0->unk_68, 1);
 }
 
@@ -196,42 +196,48 @@ void func_801C85F0(struct_801E0D18* arg0, s32 arg1) {
     }
 }
 
-extern s32 D_801D2EB4;
+extern void (*D_801D2EB4)(void*, void*, void*);
 
 //extern u8 B_801E0D7C;
 //extern u8 B_801E0D7D;
 
 #if 0
-void func_801C8638(s32 arg0, s32 arg1, void (*arg2)(void*, uintptr_t, size_t)) {
+void func_801C8638(void (*arg0)(void*, void*, void*), s32 arg1, void (*arg2)(void*, uintptr_t, size_t)) {
+    s32 var1 = 0;
+
     func_801C9B50(arg1, arg2);
     D_801D2EB4 = arg0;
-    //B_801E0D7C = 0;
-    //B_801E0D7D = 0;
-    B_801E0D18.unk_64 = 0;
-    B_801E0D18.unk_65 = 0;
+    B_801E0D18.unk_64 = var1;
+    B_801E0D18.unk_65 = var1;
     func_801C85F0(&B_801E0D18, 0);
 }
 #else
-void func_801C8638(s32 arg0, s32 arg1, void (*arg2)(void*, uintptr_t, size_t));
+void func_801C8638(void (*arg0)(void*, void*, void*), s32 arg1, void (*arg2)(void*, uintptr_t, size_t));
 #pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8000/func_801C8638.s")
 #endif
 
 #if 0
 extern s32 D_801D2E90;
 void func_801C868C(s32 arg0, s32 arg1, s32 arg2, u8 arg3) {
+    s32 var0 = arg0;
+    s32 var1 = arg1;
+    s32 var2 = arg2;
+    s32 var3 = arg3;
+    s32 var4 = 4;
+
     if (D_801D2E90 == 1) {
         D_801D2E90 = 0;
-        B_801E0D18.unk_64 = 4;
+        B_801E0D18.unk_64 = var4;
         func_801C85F0(&B_801E0D18, 1);
         if (B_801E0D18.unk_6C == 3 || B_801E0D18.unk_6C == 4) {
             return;
         }
     }
 
-    B_801E0D18.unk_58 = arg0;
-    B_801E0D18.unk_5C = arg1;
-    B_801E0D18.unk_60 = arg2;
-    B_801E0D18.unk_64 = arg3;
+    B_801E0D18.unk_58 = var0;
+    B_801E0D18.unk_5C = var1;
+    B_801E0D18.unk_60 = var2;
+    B_801E0D18.unk_64 = var3;
     func_801C85F0(&B_801E0D18, 0);
 }
 #else

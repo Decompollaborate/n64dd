@@ -9,7 +9,7 @@ u8* func_801C9FFC(void);
 u8* func_801CA030(s32 errorNum);
 u8* func_801CA070(void);
 
-extern s32 (*D_801D2E54)(struct_801C7A1C*);
+extern s32 (*D_801D2E54)(struct_801E0D18*);
 
 extern u8* D_801D2EA4;
 extern s32 D_801D2EA8;
@@ -63,16 +63,16 @@ void func_801C8A64(void) {
 
 extern s32 D_801D2EA0;
 
-extern UNK_TYPE (*D_801D2EB4)(u8*, u8*, u8*);
+extern void (*D_801D2EB4)(void*, void*, void*);
 
 void func_801C8AA8(void) {
     osRecvMesg(B_801E0D10[1], NULL, 0);
 
     if ((D_801D2EB4 != NULL) && (D_801D2EA0 == 0)) {
         u32 temp_v0 = osSetIntMask(1U);
-        u8* sp20 = D_801D2EA4;
-        u8* sp1C = D_801D2EAC;
-        u8* sp18 = D_801D2EB0;
+        void* sp20 = D_801D2EA4;
+        void* sp1C = D_801D2EAC;
+        void* sp18 = D_801D2EB0;
 
         D_801D2EA4 = NULL;
         D_801D2EAC = NULL;
@@ -250,7 +250,7 @@ s32 func_801C9000(struct_801E0D18* arg0) {
 
     while (true) {
         phi_s0 = func_801C8E70(arg0);
-        if ((phi_s0 == 3) || (phi_s0 == 4)) {
+        if (phi_s0 == 3 || phi_s0 == 4) {
             return phi_s0;
         }
         if (phi_s0 == 0) {
@@ -288,7 +288,7 @@ s32 func_801C90FC(struct_801E0D18* arg0) {
 }
 
 s32 func_801C912C(struct_801E0D18* arg0);
-#ifdef NON_EQUIVALENT
+#ifdef NON_MATCHING
 // looks equivalent, but I'm not completely sure
 s32 func_801C912C(struct_801E0D18* arg0) {
     s32 i;

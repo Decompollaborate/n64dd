@@ -19,8 +19,7 @@ typedef struct {
     /* 0x00 */ LEOCmd unk_00;
     /* 0x1C */ OSMesgQueue unk_1C; // mq
     /* 0x34 */ char unk_34[0x4];
-    /* 0x38 */ u32 unk_38; // lba
-    /* 0x3C */ char unk_3C[0x1C];
+    /* 0x38 */ LEODiskID diskId;
     /* 0x58 */ UNK_TYPE unk_58;
     /* 0x5C */ UNK_TYPE unk_5C;
     /* 0x60 */ u32 unk_60;
@@ -33,22 +32,17 @@ typedef struct {
 } struct_801E0D18; // size >= 0x70
 
 typedef struct {
-    /* 0x00 */ char unk00[0x38];
-    /* 0x38 */ LEODiskID diskId;
-} struct_801C7A1C; // size >= 0x58
-
-typedef struct struct_801D9B90 {
     /* 0x00 */ char unk0[0x78];
     /* 0x78 */ OSMesgQueue unk78;
     /* 0x90 */ IrqMgrClient unk90;
     /* 0x98 */ IrqMgr* unk98;
 } struct_801D9B90; // size = 0x9C
 
-typedef struct struct_801D9D50 {
+typedef struct {
     /* 0x00 */ u8 unk0;
     /* 0x04 */ s32 unk4;
     /* 0x08 */ u8 unk8;
-    /* 0x0C */ void (*unkC)(s32, s32, s32);
+    /* 0x0C */ void (*unkC)(void*, void*, void*);
     /* 0x10 */ s32 unk10;
     /* 0x14 */ void (*unk14)(void*, uintptr_t, size_t);
     /* 0x18 */ s32 unk18;
