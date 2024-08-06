@@ -20,9 +20,9 @@ extern u8 D_801D2FE0[2][192 * 16 / 2]; // i4 textures, 192*16. Error 41
 extern u8 D_801D3BE0[2][0x2800];       // Texture array
 
 // bss
-extern u8 B_801E0F80[];
-extern u8 B_801E1580[];
-extern u8 B_801E3D80[];
+u8 B_801E0F80[0x600];
+u8 B_801E1580[0x2800];
+u8 B_801E3D80[0x1400];
 
 /**
  * @brief Converts a number in decimal to a hexadecimal number with the same digits, e.g. 1234 -> 0x1234.
