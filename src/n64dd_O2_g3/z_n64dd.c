@@ -220,10 +220,10 @@ void func_801C746C(void* arg0, void* arg1, void* arg2) {
                 func_801CA1F0(arg0, 96, 32, 192, 16, 11, sp2C, SCREEN_WIDTH);
             }
             if (arg1 != NULL) {
-                func_801CA1F0(arg1, 0, 80, SCREEN_WIDTH, 64, 11, sp2C, SCREEN_WIDTH);
+                func_801CA1F0(arg1, 0, 80, 320, 64, 11, sp2C, SCREEN_WIDTH);
             }
             if (arg2 != NULL) {
-                func_801CA1F0(arg2, 0, 176, SCREEN_WIDTH, 32, 11, sp2C, SCREEN_WIDTH);
+                func_801CA1F0(arg2, 0, 176, 320, 32, 11, sp2C, SCREEN_WIDTH);
             }
             osViBlack(0);
         }
