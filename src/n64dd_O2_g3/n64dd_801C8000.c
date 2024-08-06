@@ -2,12 +2,14 @@
 #include "n64dd_functions.h"
 #include "libleo_functions.h"
 
+extern void (*D_801D2EB4)(void*, void*, void*);
+
 // bss
-extern OSMesgQueue* B_801E0D10[2];
-extern struct_801E0D18 B_801E0D18;
-extern OSMesg B_801E0D88[1];
-extern OSMesg B_801E0D90[8];
-extern OSThread B_801E0DB0;
+OSMesgQueue* B_801E0D10[2];
+struct_801E0D18 B_801E0D18;
+OSMesg B_801E0D88[1];
+OSMesg B_801E0D90[8];
+OSThread B_801E0DB0;
 
 extern s32 D_801D2EA0;
 s32 func_801C8000(struct_801D9D50* arg0) {
@@ -196,27 +198,16 @@ void func_801C85F0(struct_801E0D18* arg0, s32 arg1) {
     }
 }
 
-extern void (*D_801D2EB4)(void*, void*, void*);
-
-//extern u8 B_801E0D7C;
-//extern u8 B_801E0D7D;
-
-#if 0
 void func_801C8638(void (*arg0)(void*, void*, void*), s32 arg1, void (*arg2)(void*, uintptr_t, size_t)) {
-    s32 var1 = 0;
+    s32 var0 = 0;
 
     func_801C9B50(arg1, arg2);
     D_801D2EB4 = arg0;
-    B_801E0D18.unk_64 = var1;
-    B_801E0D18.unk_65 = var1;
+    B_801E0D18.unk_64 = var0;
+    B_801E0D18.unk_65 = var0;
     func_801C85F0(&B_801E0D18, 0);
 }
-#else
-void func_801C8638(void (*arg0)(void*, void*, void*), s32 arg1, void (*arg2)(void*, uintptr_t, size_t));
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8000/func_801C8638.s")
-#endif
 
-#if 0
 extern s32 D_801D2E90;
 void func_801C868C(s32 arg0, s32 arg1, s32 arg2, u8 arg3) {
     s32 var0 = arg0;
@@ -240,9 +231,6 @@ void func_801C868C(s32 arg0, s32 arg1, s32 arg2, u8 arg3) {
     B_801E0D18.unk_64 = var3;
     func_801C85F0(&B_801E0D18, 0);
 }
-#else
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8000/func_801C868C.s")
-#endif
 
 s32 func_801C873C(struct_801E0D18* arg0) {
     u8 sp1F;

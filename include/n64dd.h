@@ -29,7 +29,7 @@ typedef struct {
     /* 0x67 */ char unk_67[1];
     /* 0x68 */ s32 unk_68; // OSMesg?
     /* 0x6C */ s32 unk_6C;
-} struct_801E0D18; // size >= 0x70
+} struct_801E0D18; // size = 0x70
 
 typedef struct {
     /* 0x00 */ char unk0[0x78];
@@ -52,9 +52,6 @@ typedef struct {
     /* 0x28 */ StackEntry* unk28;
     /* 0x2C */ s32 unk2C;
 } struct_801D9D50; // size = 0x30
-
-extern struct_801E0D18 B_801E0D18;
-
 
 #define LANGUAGE_JP 0
 #define LANGUAGE_EN 1
