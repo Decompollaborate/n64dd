@@ -21,8 +21,8 @@ void leoRezero(void) {
             break;
         }
     } while (retry_cntr--);
-    
+
     LEOcur_command->header.sense = sense_code;
     LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
-    return;     
+    return;
 }

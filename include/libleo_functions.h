@@ -17,7 +17,7 @@ void leointerrupt(void* arg);
 void leomain(void* arg);
 u8 leoRead_system_area(void);
 
-int LeoGetAAdr2(u32 ccode,int *dx,int *dy, int *cy);
+int LeoGetAAdr2(u32 ccode, int* dx, int* dy, int* cy);
 
 void leoRead(void);
 void leoRead_common(unsigned int offset);
@@ -90,7 +90,7 @@ void leoSetTimer(void);
 int LeoGetKAdr(int sjis);
 
 // Handwritten function, looks up glyphs in a table.
-int LeoGetAAdr(int code,int *dx,int *dy, int *cy);
+int LeoGetAAdr(int code, int* dx, int* dy, int* cy);
 
 void leoWrite(void);
 

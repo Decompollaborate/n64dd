@@ -5,11 +5,10 @@
 extern vu16 LEOrw_flags;
 extern u8 LEO_TempBuffer[0xE8];
 
-const u8 leo_disk_id_lba[] = {14, 15};
+const u8 leo_disk_id_lba[] = { 14, 15 };
 
 LEOCmdRead read_id_cmd = {
-    {LEO_COMMAND_READ, 0, 0, 0, 0, 0, 0, 0, 0},
-    14, 1, LEO_TempBuffer, 0,
+    { LEO_COMMAND_READ, 0, 0, 0, 0, 0, 0, 0, 0 }, 14, 1, LEO_TempBuffer, 0,
 };
 
 void leoReadDiskId(void) {

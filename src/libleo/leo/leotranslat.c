@@ -2,59 +2,6 @@
 #include "n64dd_functions.h"
 #include "libleo_functions.h"
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 void leoTranslate(void) {
     u32 lba;
     u32 calc_bytes;
@@ -64,7 +11,6 @@ void leoTranslate(void) {
     u16 vzone;
     u8 flag; // boolean
     if (LEOcur_command->data.readWrite.lba >= NUM_LBAS) {
-
 
         LEOcur_command->header.sense = LEO_SENSE_LBA_OUT_OF_RANGE;
         LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
@@ -77,7 +23,6 @@ void leoTranslate(void) {
 
     if (LEOcur_command->header.control & LEO_CONTROL_TBL) {
 
-
         calc_bytes = LEOcur_command->data.readWrite.transferBlks;
 
         while (calc_bytes != 0) {
@@ -86,7 +31,7 @@ void leoTranslate(void) {
 
                 vzone = leoLba_to_vzone(lba);
                 zone = LEOVZONE_PZONEHD_TBL[LEOdisk_type][vzone];
-                if (zone >= 8) 
+                if (zone >= 8)
                     zone -= 7;
                 byte_p_blk = LEOBYTE_TBL2[zone];
             }
@@ -109,8 +54,6 @@ void leoTranslate(void) {
         }
         LEOcur_command->data.readWrite.buffPtr = calc_blks;
     } else {
-
-
 
         calc_blks = LEOcur_command->data.readWrite.transferBlks;
 
@@ -140,11 +83,5 @@ void leoTranslate(void) {
         LEOcur_command->data.readWrite.buffPtr = calc_bytes;
     }
 
-
-
-
-
-
     LEOcur_command->header.status = LEO_STATUS_GOOD;
-
 }

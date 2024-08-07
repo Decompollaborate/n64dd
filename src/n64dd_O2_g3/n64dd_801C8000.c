@@ -15,11 +15,8 @@ typedef struct {
 } _struct_D_801D2E68_0x8; // size = 0x8
 
 _struct_D_801D2E68_0x8 D_801D2E68[5] = {
-    { func_801C81EC, func_801C91E0 },
-    { func_801C832C, func_801C9260 },
-    { func_801C83A0, func_801C9260 },
-    { func_801C8414, func_801C9334 },
-    { func_801C8414, func_801C93C4 },
+    { func_801C81EC, func_801C91E0 }, { func_801C832C, func_801C9260 }, { func_801C83A0, func_801C9260 },
+    { func_801C8414, func_801C9334 }, { func_801C8414, func_801C93C4 },
 };
 
 s32 D_801D2E90 = 0;
@@ -33,52 +30,52 @@ OSThread B_801E0DB0;
 
 s32 func_801C8000(struct_801D9D50* arg0) {
     switch (arg0->unk0) {
-    case 0:
-        if (func_801C8844() != 0) {
-            return 1;
-        }
-        func_801C8554();
-        break;
-    case 1:
-        func_801C8578(arg0->unk1C, arg0->unk20, arg0->unk24, arg0->unk28, arg0->unk2C);
-        break;
-    case 2:
-        func_801C8638(arg0->unkC, arg0->unk10, arg0->unk14);
-        break;
-    case 3:
-        if (func_801C8844() != 0) {
-            return 1;
-        }
-        func_801C868C(arg0->unk18, arg0->unk1C, arg0->unk20, 1);
-        break;
-    case 4:
-        if (func_801C8844() != 0) {
-            return 1;
-        }
-        func_801C868C(arg0->unk18, arg0->unk1C, arg0->unk20, 2);
-        break;
-    case 5:
-        arg0->unk8 = func_801C8770();
-        return arg0->unk8;
-    case 7:
-        return func_801C87FC();
-    case 6:
-        return func_801C8844();
-    case 8:
-        arg0->unk4 = func_801C87C0();
-        return arg0->unk4;
-    case 9:
-        return func_801C885C();
-    case 10:
-        return func_801C88AC();
-    case 11:
-        return func_801C88FC();
-    case 12:
-        D_801D2EA0 = 0;
-        break;
-    case 13:
-        D_801D2EA0 = 1;
-        break;
+        case 0:
+            if (func_801C8844() != 0) {
+                return 1;
+            }
+            func_801C8554();
+            break;
+        case 1:
+            func_801C8578(arg0->unk1C, arg0->unk20, arg0->unk24, arg0->unk28, arg0->unk2C);
+            break;
+        case 2:
+            func_801C8638(arg0->unkC, arg0->unk10, arg0->unk14);
+            break;
+        case 3:
+            if (func_801C8844() != 0) {
+                return 1;
+            }
+            func_801C868C(arg0->unk18, arg0->unk1C, arg0->unk20, 1);
+            break;
+        case 4:
+            if (func_801C8844() != 0) {
+                return 1;
+            }
+            func_801C868C(arg0->unk18, arg0->unk1C, arg0->unk20, 2);
+            break;
+        case 5:
+            arg0->unk8 = func_801C8770();
+            return arg0->unk8;
+        case 7:
+            return func_801C87FC();
+        case 6:
+            return func_801C8844();
+        case 8:
+            arg0->unk4 = func_801C87C0();
+            return arg0->unk4;
+        case 9:
+            return func_801C885C();
+        case 10:
+            return func_801C88AC();
+        case 11:
+            return func_801C88FC();
+        case 12:
+            D_801D2EA0 = 0;
+            break;
+        case 13:
+            D_801D2EA0 = 1;
+            break;
     }
     return 0;
 }
@@ -117,14 +114,14 @@ void func_801C8298(struct_801E0D18* arg0) {
     LEOCmd sp1C;
 
     LeoSeek(&sp1C, &arg0->diskId, &arg0->unk_1C);
-    osRecvMesg(&arg0->unk_1C, (void** ) &arg0->unk_68, 1);
+    osRecvMesg(&arg0->unk_1C, (void**)&arg0->unk_68, 1);
 }
 
 void func_801C82E0(struct_801E0D18* arg0) {
     LEOCmd sp1C;
 
     LeoSpdlMotor(&sp1C, 4, &arg0->unk_1C);
-    osRecvMesg(&arg0->unk_1C, (void** ) &arg0->unk_68, 1);
+    osRecvMesg(&arg0->unk_1C, (void**)&arg0->unk_68, 1);
 }
 
 void func_801C832C(struct_801E0D18* arg0) {
@@ -135,7 +132,7 @@ void func_801C832C(struct_801E0D18* arg0) {
         OSMesgQueue* sp28 = &arg0->unk_1C;
 
         LeoReadWrite(&arg0->unk_00, OS_READ, startLBA, arg0->unk_58, sp34, sp28);
-        osRecvMesg(sp28, (void** ) &arg0->unk_68, 1);
+        osRecvMesg(sp28, (void**)&arg0->unk_68, 1);
     }
 }
 
@@ -147,7 +144,7 @@ void func_801C83A0(struct_801E0D18* arg0) {
         OSMesgQueue* sp28 = &arg0->unk_1C;
 
         LeoReadWrite(&arg0->unk_00, OS_WRITE, startLBA, arg0->unk_5C, sp34, sp28);
-        osRecvMesg(sp28, (void** ) &arg0->unk_68, 1);
+        osRecvMesg(sp28, (void**)&arg0->unk_68, 1);
     }
 }
 

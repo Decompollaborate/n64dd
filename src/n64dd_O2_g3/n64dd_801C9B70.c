@@ -2,7 +2,6 @@
 #include "n64dd_functions.h"
 #include "libleo_functions.h"
 
-
 // From other files
 void func_801C94F8(char*, u16);
 void func_801C9A10(u8*, s32, char*);

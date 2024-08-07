@@ -16,9 +16,8 @@ typedef struct StackEntry {
 typedef enum {
     STACK_STATUS_OK = 0,
     STACK_STATUS_WARNING = 1,
-    STACK_STATUS_OVERFLOW = 2
+    STACK_STATUS_OVERFLOW = 2,
 } StackStatus;
-
 
 // void bootproc(void);
 // void osSyncPrintf(const char* fmt, ...);
@@ -26,7 +25,8 @@ typedef enum {
 // void osSyncPrintfFPCR(u32 value);
 // void osSyncPrintfThreadContext(OSThread* t);
 // void osSyncPrintfStackTrace(OSThread* t, u32 flags);
-void StackCheck_Init(StackEntry* entry, void* stackTop, void* stackBottom, u32 initValue, s32 minSpace, const char* name);
+void StackCheck_Init(StackEntry* entry, void* stackTop, void* stackBottom, u32 initValue, s32 minSpace,
+                     const char* name);
 void Sleep_Cycles(OSTime time);
 void Sleep_Nsec(u32 nsec);
 void Sleep_Usec(u32 usec);
@@ -38,20 +38,6 @@ void __osPiRelAccess(void);
 s32 osSendMesg(OSMesgQueue* mq, OSMesg msg, s32 flags);
 void osStopThread(OSThread* t);
 s32 osRecvMesg(OSMesgQueue* mq, OSMesg* msg, s32 flags);
-// long long __ull_rshift(unsigned long long left, unsigned long long right);
-// unsigned long long __ull_rem(unsigned long long left, unsigned long long right);
-unsigned long long __ull_div(unsigned long long left, unsigned long long right);
-// void __ull_divremi(unsigned long long* quotient, unsigned long long* remainder, unsigned long long dividend, unsigned short divisor);
-// long long __ll_lshift(long long left, long long right);
-// long long __ll_rem(long long left, unsigned long long right);
-long long __ll_div(long long left, long long right);
-long long __ll_mul(long long left, long long right);
-// void __ull_divremi(unsigned long long* quotient, unsigned long long* remainder, unsigned long long dividend, unsigned short divisor);
-// long long __ll_mod(long long left, long long right);
-// long long __ll_rshift(long long left, long long right);
-// void __osExceptionPreamble(void);
-// void __osExceptionPreamble(void);
-// void __osException(void);
 void __osEnqueueThread(OSThread** arg0, OSThread* arg1);
 OSThread* __osPopThread(OSThread** arg0);
 void osDestroyThread(OSThread* arg0);

@@ -140,29 +140,29 @@ s32 func_801C8C1C(struct_801E0D18* arg0) {
 
 s32 func_801C8CEC(struct_801E0D18* arg0) {
     switch (arg0->unk_68) {
-    case 0x22:
-        func_801C8B90();
-        LeoClearQueue();
-        return 3;
-    case 0x2:
-        func_801C8940(arg0->unk_68);
-        func_801C8A30(5);
-        return 9;
-    case 0x0:
-        func_801C8B90();
-        return 0;
-    case 0x2B:
-        if (arg0->unk_65 == 0) {
+        case 0x22:
             func_801C8B90();
-            arg0->unk_65 = 2;
-            return 1;
-        }
-        /* fallthrough */
-    default:
-        func_801C8B90();
-        return func_801C8BC0(arg0);
-    case 0x23:
-        return 9;
+            LeoClearQueue();
+            return 3;
+        case 0x2:
+            func_801C8940(arg0->unk_68);
+            func_801C8A30(5);
+            return 9;
+        case 0x0:
+            func_801C8B90();
+            return 0;
+        case 0x2B:
+            if (arg0->unk_65 == 0) {
+                func_801C8B90();
+                arg0->unk_65 = 2;
+                return 1;
+            }
+            /* fallthrough */
+        default:
+            func_801C8B90();
+            return func_801C8BC0(arg0);
+        case 0x23:
+            return 9;
     }
 }
 

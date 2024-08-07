@@ -13,11 +13,11 @@ s32 LeoLBAToByte(s32 startlba, u32 nlbas, s32* bytes) {
         return -1;
     }
 
-    #ifdef _DEBUG
+#ifdef _DEBUG
     if ((u32)startlba >= NUM_LBAS) {
         return LEO_ERROR_LBA_OUT_OF_RANGE;
     }
-    #endif
+#endif
 
     resbytes = 0;
     flag = vzone = 1;
@@ -34,7 +34,7 @@ s32 LeoLBAToByte(s32 startlba, u32 nlbas, s32* bytes) {
         resbytes += byte_p_blk;
         nlbas--;
         startlba++;
-        if ((nlbas > 0) && ((u32)startlba >= NUM_LBAS+0x18)) {
+        if ((nlbas > 0) && ((u32)startlba >= NUM_LBAS + 0x18)) {
             return LEO_ERROR_LBA_OUT_OF_RANGE;
         }
         flag = 0;

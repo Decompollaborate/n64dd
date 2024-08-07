@@ -38,14 +38,15 @@ s32 LeoCJCreateLeoManager(s32 comPri, s32 intPri, OSMesg* cmdBuf, s32 cmdMsgCnt)
     leoCommand((void*)&cmdBlockInq);
 
     {
-        volatile s32 dummy = (uintptr_t) &cmdBlockInq & 0xFFFFFF;
+        volatile s32 dummy = (uintptr_t)&cmdBlockInq & 0xFFFFFF;
 
         while (dummy > 0) {
-            dummy -= ((uintptr_t) __leoSetReset & 0xFFFFFF) | 0x403DF4;
+            dummy -= ((uintptr_t)__leoSetReset & 0xFFFFFF) | 0x403DF4;
         }
     }
 
-    while (cmdBlockInq.header.status == 8);
+    while (cmdBlockInq.header.status == 8)
+        ;
 
     if (cmdBlockInq.header.status != 0) {
         return cmdBlockInq.header.sense;

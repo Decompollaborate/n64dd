@@ -2,7 +2,6 @@
 #include "n64dd_functions.h"
 #include "libleo_functions.h"
 
-
 extern vu16 LEOrw_flags;
 void leoRead_common(unsigned int offset);
 
@@ -34,7 +33,7 @@ void leoRead_common(unsigned int offset) {
 
     tg_lba += offset;
     if ((tg_lba + tg_blocks) > 0x10DC) { // Unclear what this number represents
-        invalid_lba:
+    invalid_lba:
         LEOcur_command->header.sense = LEO_SENSE_LBA_OUT_OF_RANGE;
         LEOcur_command->header.status = LEO_STATUS_CHECK_CONDITION;
         return;
@@ -73,7 +72,6 @@ void leoRead_common(unsigned int offset) {
                 LEOcur_command->header.sense = LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION;
                 LEOcur_command->header.status = LEO_STATUS_GOOD;
                 return;
-
         }
     }
 }

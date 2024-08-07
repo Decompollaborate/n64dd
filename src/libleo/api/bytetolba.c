@@ -13,11 +13,11 @@ s32 LeoByteToLBA(s32 startlba, u32 nbytes, s32* lba) {
         return -1;
     }
 
-    #ifdef _DEBUG
-    if ((u32) startlba >= NUM_LBAS) {
+#ifdef _DEBUG
+    if ((u32)startlba >= NUM_LBAS) {
         return 0x20;
     }
-    #endif
+#endif
 
     reslba = 0;
     flag = vzone = 1;
@@ -38,7 +38,7 @@ s32 LeoByteToLBA(s32 startlba, u32 nbytes, s32* lba) {
         }
         reslba++;
         startlba++;
-        if ((nbytes != 0) && ((u32) startlba >= NUM_LBAS+0x18)) {
+        if ((nbytes != 0) && ((u32)startlba >= NUM_LBAS + 0x18)) {
             return 0x20;
         }
         flag = 0;

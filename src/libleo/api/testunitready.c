@@ -20,8 +20,7 @@ s32 LeoTestUnitReady(u8* status) {
 
     leoCommand(&cmdBlock);
 
-    while (cmdBlock.header.status == 8) {
-    }
+    while (cmdBlock.header.status == 8) {}
 
     *status = cmdBlock.test;
     return cmdBlock.header.sense;

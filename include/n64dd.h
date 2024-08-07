@@ -11,7 +11,7 @@ typedef struct {
     /* 0x004 */ UNK_TYPE unk_004;
     /* 0x008 */ UNK_TYPE unk_008; // maybe uintptr_t?
     /* 0x00C */ UNK_TYPE unk_00C; // maybe uintptr_t?
-    /* 0x010 */ UNK_PTR unk_010; // function ptr
+    /* 0x010 */ UNK_PTR unk_010;  // function ptr
     /* 0x014 */ char unk_014[0x104];
 } struct_801D9C30; // size = 0x118
 
@@ -56,14 +56,11 @@ typedef struct {
 #define LANGUAGE_JP 0
 #define LANGUAGE_EN 1
 
-
-
 // Segment-external
 extern s32 gCurrentRegion;
 
 // bss
 extern OSMesgQueue* B_801E0D10[2];
-
 
 // leoram
 extern leo_sys_form LEO_sys_data;

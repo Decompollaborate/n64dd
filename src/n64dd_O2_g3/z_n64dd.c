@@ -109,7 +109,7 @@ s32 func_801C7064(void) {
 s32 func_801C7098(void) {
     s32 phi_v1;
 
-    if (0) { }
+    if (0) {}
 
     B_801D9D50.unk0 = 10;
     phi_v1 = (&func_801C8000)(&B_801D9D50);
@@ -130,7 +130,7 @@ s32 func_801C70FC(void) {
 
 void func_801C711C(void* arg) {
     static void* B_801DBFC8;
-    struct_801D9B90* arg0 = (struct_801D9B90*) arg;
+    struct_801D9B90* arg0 = (struct_801D9B90*)arg;
     s16* sp58;
     s32 var_s0;
     void* temp_v0;
@@ -143,20 +143,20 @@ void func_801C711C(void* arg) {
     do {
         osRecvMesg(&arg0->unk78, (OSMesg*)&sp58, 1);
         switch (*sp58) {
-        case 1:
-            temp_v0 = osViGetNextFramebuffer();
-            if (B_801DBFC8 != temp_v0) {
-                B_801DBFC8 = temp_v0;
-                B_801D9DB8 = 1;
-            }
-            func_801C8AA8();
-            break;
-        case 4:
-            LeoReset();
-            break;
-        case 3:
-            var_s0 = 1;
-            break;
+            case 1:
+                temp_v0 = osViGetNextFramebuffer();
+                if (B_801DBFC8 != temp_v0) {
+                    B_801DBFC8 = temp_v0;
+                    B_801D9DB8 = 1;
+                }
+                func_801C8AA8();
+                break;
+            case 4:
+                LeoReset();
+                break;
+            case 3:
+                var_s0 = 1;
+                break;
         }
     } while (var_s0 == 0);
     IrqMgr_RemoveClient(arg0->unk98, &arg0->unk90);
@@ -298,7 +298,7 @@ s32 func_801C7818(void) {
 
     while (func_801C81C4() == 0) {
         // the number 16666 sounds like it could be 1 frame (at 60 frames per second)
-        Sleep_Usec(1000000*1/60);
+        Sleep_Usec(1000000 * 1 / 60);
     }
 
     if (func_801C81C4() != 2) {
@@ -358,7 +358,7 @@ void func_801C7A10(LEODiskID* arg0) {
 s32 func_801C7A1C(struct_801E0D18* arg0) {
     static LEODiskID B_801DBFD0;
     static s32 B_801DBFF0; // bool
-    LEODiskID *diskId;
+    LEODiskID* diskId;
 
     diskId = &arg0->diskId;
     func_801C7A10(diskId);

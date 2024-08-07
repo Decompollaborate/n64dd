@@ -28,6 +28,7 @@ typedef struct struct_801CA704 {
     /* 0x26 */ u16 screenHeight;
 } struct_801CA704;
 
+// clang-format off
 u32 D_801D8B60[0x7F] = {
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,
@@ -46,6 +47,7 @@ u32 D_801D8B60[0x7F] = {
     0x066B9B10, 0x06899B10, 0x06A74810, 0x06B06810, 0x06BE5A14, 0x06CF770E, 0x06DF870E, 0x06EFB70E,
     0x0707670E, 0x07138A0E, 0x0729670E, 0x07356D14, 0x074A1F16, 0x07526D14, 0x07675216,
 };
+// clang-format on
 
 // Loads character texture to buffer
 s32 func_801CA0B0(s32 charCode, void* charTexBuf, s32* dx, s32* dy, s32* cy) {
@@ -56,9 +58,9 @@ s32 func_801CA0B0(s32 charCode, void* charTexBuf, s32* dx, s32* dy, s32* cy) {
     OSIoMesg mesg;
 
     handle = osDriveRomInit();
-    if (charCode >= 0x20 && charCode < 0x7F) {  // ASCII
+    if (charCode >= 0x20 && charCode < 0x7F) { // ASCII
         offset = LeoGetAAdr2(D_801D8B60[charCode], dx, dy, cy);
-    } else if (charCode >= 0x8140) {  // Shift-JIS
+    } else if (charCode >= 0x8140) { // Shift-JIS
         offset = LeoGetKAdr(charCode);
         *dx = 16;
         *dy = 16;
@@ -85,22 +87,8 @@ s32 func_801CA0B0(s32 charCode, void* charTexBuf, s32* dx, s32* dy, s32* cy) {
 }
 
 const u16 D_801D9390[16] = {
-    0x0001,
-    0x1085,
-    0x2109,
-    0x318D,
-    0x4211,
-    0x5295,
-    0x6319,
-    0x739D,
-    0x8C63,
-    0x9CE7,
-    0xAD6B,
-    0xBDEF,
-    0xCE73,
-    0xDEF7,
-    0xEF7B,
-    0xFFFF,
+    0x0001, 0x1085, 0x2109, 0x318D, 0x4211, 0x5295, 0x6319, 0x739D,
+    0x8C63, 0x9CE7, 0xAD6B, 0xBDEF, 0xCE73, 0xDEF7, 0xEF7B, 0xFFFF,
 };
 
 // Maps 4-bit intensity to a 16-bit color
@@ -199,19 +187,19 @@ void func_801CA4F4(struct_801CA704* arg0, char c) {
         return;
     } else {
         switch (c) {
-        case '\n':
-            arg0->posY += 32;
-            /* fallthrough */
-        case '\r':
-            arg0->posX = arg0->baseX;
-            break;
-        case '\t':
-            do {
-                func_801CA3CC(arg0, ' ');
-            } while ((arg0->posX - arg0->baseX) % 256);
-            break;
-        case '\0':
-            break;
+            case '\n':
+                arg0->posY += 32;
+                /* fallthrough */
+            case '\r':
+                arg0->posX = arg0->baseX;
+                break;
+            case '\t':
+                do {
+                    func_801CA3CC(arg0, ' ');
+                } while ((arg0->posX - arg0->baseX) % 256);
+                break;
+            case '\0':
+                break;
         }
     }
 }
@@ -250,7 +238,8 @@ void func_801CA6A0(struct_801CA704* arg0) {
     arg0->charTexBuf = NULL;
 }
 
-void func_801CA6D8(struct_801CA704* arg0) {}
+void func_801CA6D8(struct_801CA704* arg0) {
+}
 
 s32 func_801CA6E4(struct_801CA704* arg0, const char* fmt, va_list args) {
     return PrintUtils_VPrintf(&arg0->callback, fmt, args);

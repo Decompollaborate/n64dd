@@ -5,27 +5,13 @@
 extern vu16 LEOrw_flags;
 
 static void (*cmd_tbl[16])(void) = {
-    NULL,
-    leoClr_queue,
-    leoInquiry,
-    leoTest_unit_rdy,
-    leoRezero,
-    leoRead,
-    leoWrite,
-    leoSeek,
-    leoStart_stop,
-    leoRd_capacity,
-    leoTranslate,
-    leoMode_sel,
-    leoReadDiskId,
-    leoReadTimer,
-    leoSetTimer,
-    leoClr_reset,
+    NULL,          leoClr_queue, leoInquiry,    leoTest_unit_rdy, leoRezero,    leoRead,
+    leoWrite,      leoSeek,      leoStart_stop, leoRd_capacity,   leoTranslate, leoMode_sel,
+    leoReadDiskId, leoReadTimer, leoSetTimer,   leoClr_reset,
 };
 
 static LEOCmdRead system_read_cmd = {
-    {LEO_COMMAND_READ, 0, 0, 0, 0, 0, 0, 0, 0},
-    12, 1, 0, 0,
+    { LEO_COMMAND_READ, 0, 0, 0, 0, 0, 0, 0, 0 }, 12, 1, 0, 0,
 };
 
 static const u8 system_lba[8] = { 0, 1, 8, 9, 0, 0, 0, 0 };
@@ -34,7 +20,7 @@ OSPiHandle* LEOPiInfo;
 OSIoMesg LEOPiDmaParam;
 s32 currentCommand;
 
-void leomain(void *arg0) {
+void leomain(void* arg0) {
     u32 cur_status;
     u32 sense_code;
     u8 disktype_bak;
@@ -92,46 +78,46 @@ void leomain(void *arg0) {
         }
 
         switch (sense_code) {
-        case 47:
-            switch (LEOcur_command->header.command) {
-            case 2:
-            case 8:
-            case 11:
-            case 12:
-            case 13:
-            case 14:
-            case 15:
-                goto fake_label_2;
-            default:
-                goto fake_label_1;
-            }
-        case 49:
-            switch (LEOcur_command->header.command) {
-            case 2:
-            case 11:
-            case 13:
-            case 14:
-            case 15:
-                goto fake_label_2;
-            default:
-                sense_code = 42;
-                goto fake_label_1;
-            }
-        case 43:
-            switch (LEOcur_command->header.command) {
-            case 15:
-                leoClrUA_RESET();
-                /* fallthrough */
-            case 2:
-            case 13:
-            case 14:
-                goto fake_label_2;
-            default:
-                goto fake_label_1;
-            }
+            case 47:
+                switch (LEOcur_command->header.command) {
+                    case 2:
+                    case 8:
+                    case 11:
+                    case 12:
+                    case 13:
+                    case 14:
+                    case 15:
+                        goto fake_label_2;
+                    default:
+                        goto fake_label_1;
+                }
+            case 49:
+                switch (LEOcur_command->header.command) {
+                    case 2:
+                    case 11:
+                    case 13:
+                    case 14:
+                    case 15:
+                        goto fake_label_2;
+                    default:
+                        sense_code = 42;
+                        goto fake_label_1;
+                }
+            case 43:
+                switch (LEOcur_command->header.command) {
+                    case 15:
+                        leoClrUA_RESET();
+                        /* fallthrough */
+                    case 2:
+                    case 13:
+                    case 14:
+                        goto fake_label_2;
+                    default:
+                        goto fake_label_1;
+                }
         }
 
-fake_label_1:
+    fake_label_1:
         if (LEOcur_command->header.command == 3) {
             LEOcur_command->data.modeSelect.reserve1 = leoChk_cur_drvmode();
         }
@@ -139,56 +125,57 @@ fake_label_1:
         LEOcur_command->header.status = 2;
         goto post_exe;
 
-fake_label_2:
+    fake_label_2:
         if (LEOdrive_flag == 0) {
             switch (LEOcur_command->header.command) {
-            case 2:
-            case 3:
-            case 8:
-            case 11:
-            case 13:
-            case 14:
-            case 15:
-                break;
-            default:
-                if (LEO_country_code == 0) {
-                    osEPiReadIo(LEOPiInfo, 0x05000540, &cur_status);
-                    if ((cur_status & 0x70000) != 0x40000) {
-                        while (1) {}
+                case 2:
+                case 3:
+                case 8:
+                case 11:
+                case 13:
+                case 14:
+                case 15:
+                    break;
+                default:
+                    if (LEO_country_code == 0) {
+                        osEPiReadIo(LEOPiInfo, 0x05000540, &cur_status);
+                        if ((cur_status & 0x70000) != 0x40000) {
+                            while (1) {}
+                        }
                     }
-                }
 
-                if (leoRead_system_area() != 0) {
-                    LEOcur_command->header.status = 2;
-                    goto post_exe;
-                }
+                    if (leoRead_system_area() != 0) {
+                        LEOcur_command->header.status = 2;
+                        goto post_exe;
+                    }
 
-                if ((LEOcur_command->header.sense = leoSend_asic_cmd_w(0xB0001, LEO_sys_data.param.disk_type << 16)) != 0) {
-                    LEOcur_command->header.status = 2;
-                    goto post_exe;
-                }
+                    if ((LEOcur_command->header.sense =
+                             leoSend_asic_cmd_w(0xB0001, LEO_sys_data.param.disk_type << 16)) != 0) {
+                        LEOcur_command->header.status = 2;
+                        goto post_exe;
+                    }
 
-                if ((LEO_sys_data.param.disk_type & 0xF0) != 0x10) {
-                    goto invalid_disktype;
-                }
+                    if ((LEO_sys_data.param.disk_type & 0xF0) != 0x10) {
+                        goto invalid_disktype;
+                    }
 
-                LEOdisk_type = (LEO_sys_data.param.disk_type & 0xF);
-                if (LEOdisk_type >= 7) {
-invalid_disktype:
-                    LEOcur_command->header.sense = 0xBU;
-                    LEOcur_command->header.status = 2;
-                    goto post_exe;
-                }
+                    LEOdisk_type = (LEO_sys_data.param.disk_type & 0xF);
+                    if (LEOdisk_type >= 7) {
+                    invalid_disktype:
+                        LEOcur_command->header.sense = 0xBU;
+                        LEOcur_command->header.status = 2;
+                        goto post_exe;
+                    }
 
-                LEOdrive_flag = -1;
+                    LEOdrive_flag = -1;
             }
         }
 
         cmd_tbl[LEOcur_command->header.command]();
 
-post_exe:
+    post_exe:
         if (LEOcur_command->header.control & 0x80) {
-            osSendMesg(LEOcur_command->header.post, (void* )LEOcur_command->header.sense, 1);
+            osSendMesg(LEOcur_command->header.post, (void*)LEOcur_command->header.sense, 1);
         }
         if (LEOclr_que_flag != 0) {
             leoClr_queue();
@@ -250,7 +237,7 @@ u8 leoRead_system_area(void) {
             }
         }
 
-system_retry:
+    system_retry:
         if (leoChk_err_retry(dummy_cmd.header.sense) != LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION) {
             break;
         }
@@ -259,8 +246,7 @@ system_retry:
         }
         if ((retry_cntr & 7) == 0) {
             // Recalibrate drive every 8th tries
-            if ((dummy_cmd.header.sense = leoSend_asic_cmd_w(0x30001, 0)) ==
-                LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION) {
+            if ((dummy_cmd.header.sense = leoSend_asic_cmd_w(0x30001, 0)) == LEO_SENSE_NO_ADDITIONAL_SENSE_INFOMATION) {
                 continue;
             }
             goto system_retry;
