@@ -196,12 +196,6 @@ diff-init: uncompressed
 
 #### Various Recipes ####
 
-$(BASE_DIR)/tables/%.csv: $(GAME)/tables/%.csv
-	$(PYTHON) tools/csvSplit.py $(GAME) $<
-
-$(BASE_DIR)/tables/files_%.csv: $(GAME)/tables/%.*.csv
-	$(PYTHON) tools/csvSplit.py $(GAME) $<
-
 ## Linker Scripts
 $(BASE_DIR)/build/undefined_syms_$(VERSION).txt: $(BASE_DIR)/undefined_syms_$(VERSION).txt
 	$(CPP) $(CPPFLAGS) $< > $@
