@@ -1,6 +1,10 @@
 #ifndef MACROS_H
 #define MACROS_H
 
+#define VERSION_ne0 0
+#define VERSION_ne1 1
+#define VERSION_ne2 2
+
 #define ARRAY_COUNT(arr) (s32)(sizeof(arr) / sizeof(arr[0]))
 #define ARRAY_COUNTU(arr) (u32)(sizeof(arr) / sizeof(arr[0]))
 

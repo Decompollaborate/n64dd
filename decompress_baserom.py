@@ -7,13 +7,15 @@ from libyaz0 import decompress
 
 # UNCOMPRESSED_SIZE = 0x2F00000
 
+version = sys.argv[2]
+
 from extract_baserom import FILE_TABLE_OFFSET as FILE_TABLE_OFFSETS
 from fixbaserom import VERSIONS_MD5S
-FILE_TABLE_OFFSET = FILE_TABLE_OFFSETS["OOT"]["NE0"]
+FILE_TABLE_OFFSET = FILE_TABLE_OFFSETS["OOT"][version.upper()]
 # 0x1A500 # 0x1C110 for JP1.0, 0x1C050 for JP1.1, 0x24F60 for debug
-correct_str_hash = VERSIONS_MD5S["OOT"]["NE0"]
-BASEROM_PATH = path.join("oot", "baserom_oot_ne0.z64")
-UNCOMPRESSED_PATH = path.join("oot", "baserom_oot_ne0_uncompressed.z64")
+correct_str_hash = VERSIONS_MD5S["OOT"][version.upper()]
+BASEROM_PATH = path.join("oot", f"baserom_oot_{version}.z64")
+UNCOMPRESSED_PATH = path.join("oot", f"baserom_oot_{version}_uncompressed.z64")
 
 
 def round_up(n,shift):
