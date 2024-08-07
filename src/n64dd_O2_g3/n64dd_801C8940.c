@@ -227,12 +227,11 @@ s32 func_801C8F58(struct_801E0D18* arg0) {
 
     while (true) {
         temp_v0 = func_801C8E70(arg0);
-
-        if ((temp_v0 == 3) || (temp_v0 == 4)) {
+        if (temp_v0 == 3 || temp_v0 == 4) {
             return temp_v0;
         }
 
-        // fake match?
+        // Fake match?
         if ((temp_v0 & 0xFFFFFFFF) == 0) {
             if (func_801C8F1C(arg0) != 0) {
                 return 2;
@@ -247,7 +246,6 @@ s32 func_801C8F58(struct_801E0D18* arg0) {
     }
 }
 
-#ifdef NON_MATCHING
 s32 func_801C9000(struct_801E0D18* arg0) {
     s32 phi_s0;
     s32 temp_s4;
@@ -257,17 +255,25 @@ s32 func_801C9000(struct_801E0D18* arg0) {
         if (phi_s0 == 3 || phi_s0 == 4) {
             return phi_s0;
         }
-        if (phi_s0 == 0) {
+
+        // Fake match?
+        if ((phi_s0 & 0xFFFFFFFF) == 0) {
             func_801C8B90();
+
             temp_s4 = func_801C8F1C(arg0);
+            if (temp_s4 == 3 || temp_s4 == 4) {}
             if (temp_s4 != 0) {
                 return 2;
             }
+
             func_801C89B8(1);
+
             phi_s0 = func_801C8C1C(arg0);
+            if (phi_s0 == 3 || phi_s0 == 4) {}
             if (phi_s0 != 0) {
                 return phi_s0;
             }
+
             func_801C89EC();
             if (temp_s4 != 0) {
                 return phi_s0;
@@ -275,10 +281,6 @@ s32 func_801C9000(struct_801E0D18* arg0) {
         }
     }
 }
-#else
-s32 func_801C9000(struct_801E0D18* arg0);
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801C8940/func_801C9000.s")
-#endif
 
 s32 func_801C90C4(struct_801E0D18* arg0) {
     func_801C8940(arg0->unk_68);
@@ -378,16 +380,18 @@ s32 func_801C9334(struct_801E0D18* arg0) {
     while (true) {
         u32 temp_v0 = func_801C8DC0(arg0);
 
-        if ((temp_v0 == 3) || (temp_v0 == 4) || (temp_v0 == 5)) {
+        if (temp_v0 == 3 || temp_v0 == 4 || temp_v0 == 5) {
             return temp_v0;
         }
-        // Fake match
-        if ((temp_v0  & 0xFFFFFFFFu) == 0) {
+
+        // Fake match?
+        if ((temp_v0 & 0xFFFFFFFF) == 0) {
             if (func_801C8F1C(arg0) != 0) {
                 return 0;
             }
             return 7;
         }
+
         if (1) {}
     }
 }
