@@ -11,6 +11,10 @@ extern vu8 D_80121214;
 
 extern u8 B_801DC000[];
 
+extern s32 D_801D2EA8;
+extern s32 B_801E0F60;
+extern s32 B_801E0F64;
+
 // data
 void* D_801D2E50 = &B_801DC000;
 s32 (*D_801D2E54)(struct_801E0D18*) = func_801C7A1C;
@@ -96,7 +100,13 @@ void func_801C6FD8(void) {
 // Adds a HungupAndCrash
 void func_801C7018(void) {
     if (D_80121213 != 0) {
+#if VERSION == VERSION_ne0
         Fault_AddHungupAndCrash("../z_n64dd.c", 503);
+#elif VERSION == VERSION_ne2
+        Fault_AddHungupAndCrash("../z_n64dd.c", 573);
+#else
+#error "Unsupported version"
+#endif
     }
     D_80121213 = 1;
 }
@@ -109,7 +119,9 @@ s32 func_801C7064(void) {
 s32 func_801C7098(void) {
     s32 phi_v1;
 
+#if VERSION == VERSION_ne0
     if (0) {}
+#endif
 
     B_801D9D50.unk0 = 10;
     phi_v1 = (&func_801C8000)(&B_801D9D50);
@@ -162,6 +174,19 @@ void func_801C711C(void* arg) {
     IrqMgr_RemoveClient(arg0->unk98, &arg0->unk90);
 }
 
+#if VERSION != VERSION_ne0
+void func_801C7B28_ne2(void) {
+    s32 temp;
+
+    if (B_801D9DC0 != 0) {
+        temp = (osGetTime() - B_801D9DC0) * 64 / 3000;
+        if (1000000 - temp > 0) {
+            Sleep_Usec(1000000 - temp);
+        }
+    }
+}
+#endif
+
 void func_801C7268(void) {
     s32 pad;
     s32 sp20;
@@ -178,6 +203,7 @@ void func_801C7268(void) {
     } else if (B_801D9DC8 != 0) {
         B_801D9DC8 = 0;
     }
+#if VERSION == VERSION_ne0
     if (B_801D9DC0 != 0) {
         sp1C = (osGetTime() - B_801D9DC0) * 64 / 3000;
 
@@ -190,6 +216,12 @@ void func_801C7268(void) {
             Sleep_Usec(1000000 - sp1C);
         }
     }
+#else
+    if (D_801D2EA8 == 1 || B_801E0F60 == 1 || B_801E0F64 == 1) {
+        B_801D9DC0 = osGetTime();
+    }
+    func_801C7B28_ne2();
+#endif
     if (sp20 == 0) {
         func_801C6F78();
     }
@@ -224,7 +256,9 @@ void func_801C746C(void* arg0, void* arg1, void* arg2) {
             if (arg2 != NULL) {
                 func_801CA1F0(arg2, 0, 176, 320, 32, 11, sp2C, SCREEN_WIDTH);
             }
+#if VERSION == VERSION_ne0
             osViBlack(0);
+#endif
         }
     }
 }
@@ -260,9 +294,11 @@ s32 func_801C7658(void) {
         return 0;
     }
 
+#if VERSION == VERSION_ne0
     StackCheck_Init(&B_801DAF88, B_801D9F88, STACK_TOP(B_801D9F88), 0, 0x100, "ddmsg");
     osCreateThread(&B_801D9DD8, 9, &func_801C711C, &B_801D9B90, STACK_TOP(B_801D9F88), 13);
     osStartThread(&B_801D9DD8);
+#endif
 
     osCreateMesgQueue(&B_801D9D80, B_801D9DB0, ARRAY_COUNT(B_801D9DB0));
     osCreateMesgQueue(&B_801D9D98, B_801D9DB4, ARRAY_COUNT(B_801D9DB4));
@@ -289,10 +325,22 @@ s32 func_801C7658(void) {
 
     B_801D9D50.unk0 = 13;
     (&func_801C8000)(&B_801D9D50);
+
+#if VERSION != VERSION_ne0
+    StackCheck_Init(&B_801DAF88, B_801D9F88, STACK_TOP(B_801D9F88), 0, 0x100, "ddmsg");
+    osCreateThread(&B_801D9DD8, 9, &func_801C711C, &B_801D9B90, STACK_TOP(B_801D9F88), 13);
+    osStartThread(&B_801D9DD8);
+#endif
+
     return 0;
 }
 
 s32 func_801C7818(void) {
+#if VERSION != VERSION_ne0
+    B_801D9DB8 = 1;
+    B_801D9DC0 = 0;
+#endif
+
     B_801D9D50.unk0 = 12;
     (&func_801C8000)(&B_801D9D50);
 
@@ -300,6 +348,13 @@ s32 func_801C7818(void) {
         // the number 16666 sounds like it could be 1 frame (at 60 frames per second)
         Sleep_Usec(1000000 * 1 / 60);
     }
+
+#if VERSION != VERSION_ne0
+    if (D_801D2EA8 == 1 || B_801E0F60 == 1 || B_801E0F64 == 1) {
+        B_801D9DC0 = osGetTime();
+    }
+    func_801C7B28_ne2();
+#endif
 
     if (func_801C81C4() != 2) {
         func_801C761C();
@@ -447,12 +502,16 @@ void func_801C7C1C(void* arg0, s32 arg1, s32 arg2) {
             bcopy((u8*)sp4C, (u8*)arg0 + func_801C7BEC(sp5C) - sp54 + var_s1, sp50);
         }
     }
+#if VERSION == VERSION_ne0
     if (B_801D9DC0 != 0) {
         temp_v1_2 = (osGetTime() - B_801D9DC0) * 64 / 3000;
         if (1000000 - temp_v1_2 > 0) {
             Sleep_Usec(1000000 - temp_v1_2);
         }
     }
+#else
+    func_801C7B28_ne2();
+#endif
     func_801C7018();
     func_801C6F78();
 }

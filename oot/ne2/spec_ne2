@@ -165,13 +165,97 @@ endseg
 beginseg
     name "code"
     compress
+    address 0x800116E0
     include "oot/ne2/build/baserom/code.o"
 endseg
 
 beginseg
     name "n64dd"
     compress
-    include "oot/ne2/build/baserom/n64dd.o"
+    address 0x801C7740
+
+    include "oot/ne2/build/src/n64dd_O2_g3/z_n64dd.o"
+
+    include "oot/ne2/build/src/n64dd_O2_g3/n64dd_buffer.o"
+
+    include "oot/ne2/build/src/n64dd_O2_g3/n64dd_801C8000.o"
+
+    include "oot/ne2/build/src/n64dd_O2_g3/n64dd_801C8940.o"
+
+    include "oot/ne2/build/src/n64dd_O2_g3/n64dd_801C9440.o"
+
+    include "oot/ne2/build/src/n64dd_O2_g3/n64dd_801C9B70.o"
+
+    include "oot/ne2/build/src/n64dd_O2_g3/n64dd_error_headers.o" // padding in rodata seems to force all of these to be separate
+    include "oot/ne2/build/src/n64dd_O2_g3/n64dd_error_bodies.o"
+    include "oot/ne2/build/asm/data/n64dd/n64dd_801D2FE0.data.o" // Error message textures
+
+    include "oot/ne2/build/src/n64dd_O2_g3/n64dd_801CA0B0.o"
+
+    include "oot/ne2/build/src/libleo/api/readwrite.o"
+
+    include "oot/ne2/build/src/libleo/leo/leofunc.o"
+
+    include "oot/ne2/build/src/libleo/leo/leoram.o"
+
+    include "oot/ne2/build/src/libleo/leo/leoint.o"
+
+    include "oot/ne2/build/src/libleo/leo/leocmdex.o"
+
+    include "oot/ne2/build/asm/text/n64dd/getaadr2.text.o" // Handwritten
+
+    include "oot/ne2/build/src/libleo/leo/leoread.o"
+    include "oot/ne2/build/src/libleo/api/lbatobyte.o"
+    include "oot/ne2/build/src/libleo/leo/leoinquiry.o"
+
+    include "oot/ne2/build/src/libleo/leo/leodiskinit.o"
+
+    include "oot/ne2/build/src/libleo/api/seek.o"
+
+    include "oot/ne2/build/src/libleo/leo/leord_diskid.o"
+
+    include "oot/ne2/build/src/libleo/leo/leomecha.o"
+
+    include "oot/ne2/build/src/libleo/api/spdlmotor.o"
+
+    include "oot/ne2/build/src/libleo/leo/leo_tbl.o"
+
+    include "oot/ne2/build/src/libleo/leo/leotempbuffer.o"
+    include "oot/ne2/build/src/libleo/leo/leoc2_syndrome.o"
+
+    include "oot/ne2/build/src/libleo/leo/leoc2ecc.o"
+
+    include "oot/ne2/build/src/libleo/leo/leomseq_tbl.o"
+
+    include "oot/ne2/build/src/libleo/leo/leomotor.o"
+    include "oot/ne2/build/src/libleo/api/driveexist.o"
+    include "oot/ne2/build/src/libleo/leo/leomode_sel.o"
+    include "oot/ne2/build/src/libleo/leo/leord_capa.o"
+
+    include "oot/ne2/build/src/libleo/leo/leoutil.o"
+
+    include "oot/ne2/build/src/libleo/leo/leorezero.o"
+    include "oot/ne2/build/src/libleo/api/clearqueue.o"
+    include "oot/ne2/build/src/libleo/api/bytetolba.o"
+    include "oot/ne2/build/src/libleo/leo/leoreset.o"
+    include "oot/ne2/build/src/libleo/leo/leotranslat.o"
+
+    include "oot/ne2/build/src/libleo/leo/leotimer.o"
+
+    include "oot/ne2/build/asm/text/n64dd/getkadr.text.o" // Handwritten
+    include "oot/ne2/build/asm/text/n64dd/getaadr.text.o" // Handwritten
+
+    include "oot/ne2/build/src/libleo/leo/leoglobals.o"
+
+    include "oot/ne2/build/src/libleo/leo/leowrite.o"
+    include "oot/ne2/build/src/libleo/api/cjcreateleomanager.o"
+
+    include "oot/ne2/build/src/libleo/leo/leointerrupt.o"
+
+    include "oot/ne2/build/src/libleo/api/cacreateleomanager.o"
+    include "oot/ne2/build/src/libleo/api/testunitready.o"
+    include "oot/ne2/build/src/libleo/leo/leotestunit.o"
+    include "oot/ne2/build/src/libleo/leo/leoseek.o"
 endseg
 
 beginseg

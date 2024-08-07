@@ -293,6 +293,10 @@ s32 func_801C885C(void) {
     B_801E0D18.unk_64 = 3;
     func_801C85F0(&B_801E0D18, 1);
 
+#if VERSION != VERSION_ne0
+    D_801D2E90 = 0;
+#endif
+
     if ((B_801E0D18.unk_6C == 3) || (B_801E0D18.unk_6C == 4)) {
         return -1;
     }
@@ -304,6 +308,11 @@ s32 func_801C88AC(void) {
 
     B_801E0D18.unk_64 = 4;
     func_801C85F0(&B_801E0D18, 1);
+
+#if VERSION != VERSION_ne0
+    D_801D2E90 = 0;
+#endif
+
     if ((B_801E0D18.unk_6C == 3) || (B_801E0D18.unk_6C == 4)) {
         return -1;
     }
