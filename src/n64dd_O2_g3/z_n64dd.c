@@ -205,9 +205,9 @@ void func_801C7268(void) {
         sp1C = (osGetTime() - B_801D9DC0) * 64 / 3000;
 
         // Remnants from debug statements?
-        osGetTime() - B_801D9DC0;
-        (osGetTime() - B_801D9DC0) * 64 / 3000;
-        (osGetTime() - B_801D9DC0) * 64 / 3000;
+        (void)(osGetTime() - B_801D9DC0);
+        (void)((osGetTime() - B_801D9DC0) * 64 / 3000);
+        (void)((osGetTime() - B_801D9DC0) * 64 / 3000);
 
         if (1000000 - sp1C > 0) {
             Sleep_Usec(1000000 - sp1C);

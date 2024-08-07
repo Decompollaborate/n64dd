@@ -41,7 +41,7 @@ s32 func_801C9494(u8* bytes) {
 }
 
 // Extracts 2 bytes from a bytepacked big-endian short.
-void func_801C94F8(char* arg0, u16 arg1) {
+void func_801C94F8(u8* arg0, u16 arg1) {
     arg0[0] = arg1 >> 8;
     arg0[1] = arg1 & 0xFF;
 }
@@ -84,7 +84,7 @@ void func_801C95C0(void* arg0, uintptr_t arg1, size_t arg2) {
     }
 }
 
-s32 func_801C95F0(char* arg0) {
+s32 func_801C95F0(u8* arg0) {
     return LeoGetKAdr(func_801C9534(func_801C9514((arg0[0] << 8) | arg0[1]))) + DDROM_FONT_START;
 }
 
@@ -230,7 +230,7 @@ void func_801C9954(u8* bytes, s32* arg1, s32* arg2) {
     *arg2 = 1;
 }
 
-void func_801C9A10(u8* arg0, s32 arg1, char* str) {
+void func_801C9A10(u8* arg0, s32 arg1, u8* str) {
     u8 sp80[0xA0];
     u8* temp_s1;
     s32 dx;

@@ -45,8 +45,7 @@ s32 LeoCJCreateLeoManager(s32 comPri, s32 intPri, OSMesg* cmdBuf, s32 cmdMsgCnt)
         }
     }
 
-    while (cmdBlockInq.header.status == 8)
-        ;
+    while (cmdBlockInq.header.status == 8) {}
 
     if (cmdBlockInq.header.status != 0) {
         return cmdBlockInq.header.sense;
@@ -64,7 +63,7 @@ s32 LeoCJCreateLeoManager(s32 comPri, s32 intPri, OSMesg* cmdBuf, s32 cmdMsgCnt)
         volatile u32 dummy;
 
         osEPiReadIo(driveRomHandle, 0x9FF00, &data);
-        data = ((data & 0xFF000000) >> 0x18);
+        data = (data & 0xFF000000) >> 24;
         dummy = 0x3ED98F23;
         if (data != 0xC3) {
             while (true) {}

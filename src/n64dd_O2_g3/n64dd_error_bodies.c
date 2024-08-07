@@ -2,7 +2,7 @@
 #include "n64dd_functions.h"
 #include "libleo_functions.h"
 
-char* D_801D2EE0[2][8][4] = {
+const char* D_801D2EE0[2][8][4] = {
     {
         { "　　メモリー拡張パックが正しく差し込", "　　んでありますか？　　　　　　　　", NULL, NULL },
         { "　　間違ったディスクが差し込まれてい", "　　る可能性があります。正しいディス",

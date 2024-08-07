@@ -175,7 +175,7 @@ void leomain(void* arg0) {
 
     post_exe:
         if (LEOcur_command->header.control & 0x80) {
-            osSendMesg(LEOcur_command->header.post, (void*)LEOcur_command->header.sense, 1);
+            osSendMesg(LEOcur_command->header.post, (void*)(s32)LEOcur_command->header.sense, 1);
         }
         if (LEOclr_que_flag != 0) {
             leoClr_queue();

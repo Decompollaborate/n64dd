@@ -93,18 +93,18 @@ s32 func_801C93C4(struct_801E0D18*);
 
 s32 func_801C9440(u8* bytes);
 s32 func_801C9494(u8* bytes);
-void func_801C94F8(char* arg0, u16 arg1);
+void func_801C94F8(u8* bytes, u16 arg1);
 u16 func_801C9514(u16 eucjpCh);
 u16 func_801C9534(u16 jisCodepoint);
 void func_801C95C0(void* arg0, uintptr_t arg1, size_t arg2);
-s32 func_801C95F0(char* arg0);
+s32 func_801C95F0(u8* arg0);
 s32 func_801C963C(s32* arg0, s32* dx, s32* dy, s32* cy, u8 arg4);
 s32 func_801C969C(void* arg0, s32* dx, s32* dy, s32* cy, u8* arg4);
 s32 func_801C9740(u8* arg0, UNK_TYPE4 arg1, u8 arg2);
 // void func_801C9778();
 // void func_801C97C4();
 void func_801C9954(u8* bytes, s32* arg1, s32* arg2);
-// void func_801C9A10();
+void func_801C9A10(u8* arg0, s32 arg1, u8* str);
 void func_801C9B50(s32 arg0, void (*arg1)(void*, uintptr_t, size_t));
 
 // void func_801C9B70();

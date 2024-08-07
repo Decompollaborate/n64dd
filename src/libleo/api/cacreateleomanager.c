@@ -20,8 +20,6 @@ s32 LeoCACreateLeoManager(s32 comPri, s32 intPri, OSMesg* cmdBuf, s32 cmdMsgCnt)
         return LEO_ERROR_DEVICE_COMMUNICATION_FAILURE;
     }
 
-    if (data && data) {}
-
     leoDiskHandle = osLeoDiskInit();
     driveRomHandle = osDriveRomInit();
     __leoActive = true;
@@ -65,7 +63,8 @@ s32 LeoCACreateLeoManager(s32 comPri, s32 intPri, OSMesg* cmdBuf, s32 cmdMsgCnt)
         volatile u32 dummy;
 
         osEPiReadIo(driveRomHandle, 0x9FF00, &data);
-        if (((data & 0xFF000000) >> 0x18) != 4) {
+        data = (data & 0xFF000000) >> 24;
+        if (data != 4) {
             while (true) {}
         }
 

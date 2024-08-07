@@ -182,9 +182,8 @@ void func_801CA3CC(struct_801CA704* arg0, char c) {
 }
 
 void func_801CA4F4(struct_801CA704* arg0, char c) {
-    if (c >= 0x20 && c <= 0xFF) {
+    if (c >= ' ' && c <= 0xFF) {
         func_801CA3CC(arg0, c);
-        return;
     } else {
         switch (c) {
             case '\n':

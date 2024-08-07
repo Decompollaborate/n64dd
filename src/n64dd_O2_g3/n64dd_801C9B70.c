@@ -2,17 +2,13 @@
 #include "n64dd_functions.h"
 #include "libleo_functions.h"
 
-// From other files
-void func_801C94F8(char*, u16);
-void func_801C9A10(u8*, s32, char*);
-
 // File-internal
 // All 3 of these are also used in another file
 u8* func_801C9EC0(void);
 u8* func_801C9FFC(void);
 u8* func_801CA070(void);
 
-extern char* D_801D2ED0[];              // "Error Number    " array
+extern const char* D_801D2ED0[];        // "Error Number    " array
 extern const char* D_801D2EE0[2][8][4]; // Array of error message strings
 
 extern u8 D_801D2FE0[2][192 * 16 / 2]; // i4 textures, 192*16. Error 41
@@ -77,14 +73,14 @@ void func_801C9C74(u8* dest, u8 value, u32 count) {
 }
 
 // n64ddError_GetErrorHeader
-char* func_801C9CA4(void) {
+const char* func_801C9CA4(void) {
     return D_801D2ED0[func_801C9C48()];
 }
 
 // n64ddError_WriteNumberJP
 // Writes a 2-digit number to the char buffer provided
 // Character indices for numbers in the error code (EUC-JP)
-void func_801C9CD4(char* buf, s32 number) {
+void func_801C9CD4(u8* buf, s32 number) {
     s32 temp_v0 = func_801C9B70(number);
     u16 character;
 
@@ -102,7 +98,7 @@ void func_801C9CD4(char* buf, s32 number) {
 // n64ddError_WriteNumberEN
 // Writes a 2-digit number to the char buffer provided
 // Character indices for numbers in the error code (ASCII)
-void func_801C9D54(char* buf, s32 number) {
+void func_801C9D54(u8* buf, s32 number) {
     s32 temp_v0 = func_801C9B70(number);
 
     if (number >= 10) {
@@ -115,9 +111,9 @@ void func_801C9D54(char* buf, s32 number) {
 }
 
 void func_801C9DB8(u8* arg0, s32 errorNum) {
-    char* errorHeader = func_801C9CA4();
+    u8* errorHeader = (u8*)func_801C9CA4();
 
-    //! @bug: both of these functions will write to the pointer target, but errorString points to a string literal,
+    //! @bug: both of these functions will write to the pointer target, but errorHeader points to a string literal,
     //! which is meant to be const.
     if (gCurrentRegion == 1) {
         func_801C9CD4(&errorHeader[12], errorNum);
@@ -154,7 +150,7 @@ void func_801C9EF4(u8* arg0, s32 errorNum, s32 lineCount) {
     s32 i;
 
     for (i = 0; i < lineCount; i++, arg0 += 0xA00) {
-        char* line = D_801D2EE0[func_801C9C48()][errorNum][i];
+        u8* line = (u8*)D_801D2EE0[func_801C9C48()][errorNum][i];
         if (1) {}
         func_801C9A10(arg0, 320, line);
     }

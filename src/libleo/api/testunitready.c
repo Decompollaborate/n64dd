@@ -18,7 +18,7 @@ s32 LeoTestUnitReady(u8* status) {
     cmdBlock.header.control = 0;
     cmdBlock.header.reserve3 = 0;
 
-    leoCommand(&cmdBlock);
+    leoCommand((void*)&cmdBlock);
 
     while (cmdBlock.header.status == 8) {}
 
