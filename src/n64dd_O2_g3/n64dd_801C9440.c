@@ -189,37 +189,45 @@ void func_801C9954(u8* bytes, s32* arg1, s32* arg2) {
 
     if (func_801C9440(bytes)) {
         *arg1 = *arg2 = 0;
-    } else {
-        *arg1 = *arg2 = 0;
-
-        prevCh = bytes[-1];
-        nextCh = bytes[1];
-
-        switch (bytes[0]) {
-            case ' ':
-                *arg1 = *arg2 = 0;
-                break;
-
-            case 'I':
-            case 'i':
-                *arg1 = *arg2 = 2;
-                if (1) {}
-                *arg2 = 2;
-                if (prevCh == ' ') {
-                    *arg1 = 0;
-                }
-                if (nextCh == ' ') {
-                    *arg2 = 0;
-                }
-                break;
-
-            default:
-                *arg1 = *arg2 = 1;
-                if (1) {}
-                *arg2 = 1;
-                break;
-        }
+        return;
     }
+
+    *arg1 = *arg2 = 0;
+
+    prevCh = bytes[-1];
+    nextCh = bytes[1];
+
+    switch (bytes[0]) {
+        case ' ':
+            *arg1 = *arg2 = 0;
+            return;
+
+        case 'I':
+        case 'i':
+#if VERSION == VERSION_ne0 || VERSION == VERSION_ne1 || VERSION == VERSION_ne2
+            *arg2 = 2;
+            if (1) {}
+#endif
+
+            *arg1 = 2;
+            *arg2 = 2;
+
+            if (prevCh == ' ') {
+                *arg1 = 0;
+            }
+            if (nextCh == ' ') {
+                *arg2 = 0;
+            }
+            return;
+    }
+
+#if VERSION == VERSION_ne0 || VERSION == VERSION_ne1 || VERSION == VERSION_ne2
+    *arg2 = 1;
+    if (1) {}
+#endif
+
+    *arg1 = 1;
+    *arg2 = 1;
 }
 
 void func_801C9A10(u8* arg0, s32 arg1, char* str) {

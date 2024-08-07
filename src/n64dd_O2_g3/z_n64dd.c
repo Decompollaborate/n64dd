@@ -43,7 +43,11 @@ UNK_TYPE B_801DBFC4; // unused?
 
 // Might be u8, will need to examine code function
 u32 func_801C6E80(void) {
+#if VERSION == VERSION_ne0 || VERSION == VERSION_ne1 || VERSION == VERSION_ne2
     return LeoDriveExist();
+#else
+    return 0;
+#endif
 }
 
 void func_801C6EA0(UNK_TYPE arg0) {
@@ -119,7 +123,7 @@ s32 func_801C7064(void) {
 s32 func_801C7098(void) {
     s32 phi_v1;
 
-#if VERSION != VERSION_ne2
+#if VERSION <= VERSION_ne1
     if (0) {}
 #endif
 
@@ -256,7 +260,7 @@ void func_801C746C(void* arg0, void* arg1, void* arg2) {
             if (arg2 != NULL) {
                 func_801CA1F0(arg2, 0, 176, 320, 32, 11, sp2C, SCREEN_WIDTH);
             }
-#if VERSION != VERSION_ne2
+#if VERSION <= VERSION_ne1
             osViBlack(0);
 #endif
         }
@@ -294,7 +298,7 @@ s32 func_801C7658(void) {
         return 0;
     }
 
-#if VERSION != VERSION_ne2
+#if VERSION <= VERSION_ne1
     StackCheck_Init(&B_801DAF88, B_801D9F88, STACK_TOP(B_801D9F88), 0, 0x100, "ddmsg");
     osCreateThread(&B_801D9DD8, 9, &func_801C711C, &B_801D9B90, STACK_TOP(B_801D9F88), 13);
     osStartThread(&B_801D9DD8);
@@ -326,7 +330,7 @@ s32 func_801C7658(void) {
     B_801D9D50.unk0 = 13;
     (&func_801C8000)(&B_801D9D50);
 
-#if VERSION == VERSION_ne2
+#if VERSION > VERSION_ne1
     StackCheck_Init(&B_801DAF88, B_801D9F88, STACK_TOP(B_801D9F88), 0, 0x100, "ddmsg");
     osCreateThread(&B_801D9DD8, 9, &func_801C711C, &B_801D9B90, STACK_TOP(B_801D9F88), 13);
     osStartThread(&B_801D9DD8);
@@ -413,19 +417,23 @@ void func_801C7A10(LEODiskID* arg0) {
 s32 func_801C7A1C(struct_801E0D18* arg0) {
     static LEODiskID B_801DBFD0;
     static s32 B_801DBFF0; // bool
-    LEODiskID* diskId;
 
-    diskId = &arg0->diskId;
-    func_801C7A10(diskId);
+    func_801C7A10(&arg0->diskId);
     if (!B_801DBFF0) {
-        if ((bcmp(&diskId->gameName, "EZLJ", 4) == 0) || (bcmp(&diskId->gameName, "EZLE", 4) == 0)) {
-            B_801DBFD0 = *diskId;
+        if (
+#if VERSION == VERSION_ne0 || VERSION == VERSION_ne1 || VERSION == VERSION_ne2
+            bcmp(arg0->diskId.gameName, "EZLJ", 4) == 0 || bcmp(arg0->diskId.gameName, "EZLE", 4) == 0
+#else
+            bcmp(arg0->diskId.gameName, "EZLP", 4) == 0
+#endif
+        ) {
+            B_801DBFD0 = arg0->diskId;
             B_801DBFF0 = true;
             B_801D9DC8 = 1;
         } else {
             B_801D9DC8 = 2;
         }
-    } else if (bcmp(&B_801DBFD0, diskId, 0x20) == 0) {
+    } else if (bcmp(&B_801DBFD0, &arg0->diskId, 0x20) == 0) {
         B_801D9DC8 = 1;
     } else {
         B_801D9DC8 = 2;
