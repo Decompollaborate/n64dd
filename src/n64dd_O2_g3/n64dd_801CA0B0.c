@@ -47,7 +47,6 @@ u32 D_801D8B60[0x7F] = {
     0x0707670E, 0x07138A0E, 0x0729670E, 0x07356D14, 0x074A1F16, 0x07526D14, 0x07675216,
 };
 
-#ifdef NON_MATCHING
 // Loads character texture to buffer
 s32 func_801CA0B0(s32 charCode, void* charTexBuf, s32* dx, s32* dy, s32* cy) {
     s32 offset;
@@ -70,11 +69,13 @@ s32 func_801CA0B0(s32 charCode, void* charTexBuf, s32* dx, s32* dy, s32* cy) {
 
     osCreateMesgQueue(&queue, msgBuf, ARRAY_COUNT(msgBuf));
 
-    mesg.size = 0x80;
-    mesg.hdr.retQueue = &queue;
-    mesg.devAddr = offset + DDROM_FONT_START;
-    mesg.dramAddr = charTexBuf;
+    // clang-format off
+    mesg.hdr.retQueue = &queue; \
+    mesg.devAddr = offset + DDROM_FONT_START; \
+    mesg.dramAddr = charTexBuf; \
+    mesg.size = 0x80; \
     mesg.hdr.pri = 0;
+    // clang-format on
 
     handle->transferInfo.cmdType = 2;
     osEPiStartDma(handle, &mesg, 0);
@@ -82,10 +83,6 @@ s32 func_801CA0B0(s32 charCode, void* charTexBuf, s32* dx, s32* dy, s32* cy) {
 
     return 0;
 }
-#else
-s32 func_801CA0B0(s32 charCode, void* charTexBuf, s32* dx, s32* dy, s32* cy);
-#pragma GLOBAL_ASM("oot/ne0/asm/functions/n64dd/n64dd_801CA0B0/func_801CA0B0.s")
-#endif
 
 const u16 D_801D9390[16] = {
     0x0001,
