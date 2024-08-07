@@ -28,8 +28,14 @@ typedef struct {
     /* 0x278 */ OSTime retraceTime;
 } IrqMgr; // size = 0x280
 
-// DmaMgr_DmaFromDriveRom
-void D_80000A54(void* ram, uintptr_t rom, size_t size);
+// N64 only
+extern u8 D_80121212;
+extern vu8 D_80121213;
+extern vu8 D_80121214;
+
+extern IrqMgr gIrqMgr;
+
+void DmaMgr_DmaFromDriveRom(void* ram, uintptr_t rom, size_t size);
 
 void Fault_AddHungupAndCrash(const char* filename, u32 line);
 
@@ -38,6 +44,13 @@ void IrqMgr_RemoveClient(IrqMgr* irqMgr, IrqMgrClient* client);
 
 s32 PrintUtils_VPrintf(PrintCallback* pfn, const char* fmt, va_list args);
 
+void func_800D31A0(void);
+
+void func_800F6B3C(void);
+void func_800F6BDC(void);
+
+// N64 only
+UNK_PTR func_800AD4C0(UNK_PTR);
 void func_800AD51C(void);
 
 #endif

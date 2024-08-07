@@ -1,5 +1,6 @@
 80000460,cleararena
 80000498,bootproc
+80000A54,DmaMgr_DmaFromDriveRom
 80000E6C,DmaMgr_Init
 80000DF0,DmaMgr_SendRequest1
 800015BC,osSyncPrintf
@@ -126,10 +127,12 @@
 80005800,osEPiWriteIo
 80006010,__osSetHWIntrRoutine
 800AF734,Fault_AddHungupAndCrash
+800C785C,func_800F6B3C
+800C78FC,func_800F6BDC
 800CE810,PrintUtils_VPrintf
 800CE844,PrintUtils_Printf
 800D1D00,_Printf
-800ACE60,func_800D31A0_Freeze
+800ACE60,func_800D31A0
 80051B50,GameInfo_Init
 80001310,Locale_ResetRegion
 800D4390,bcmp

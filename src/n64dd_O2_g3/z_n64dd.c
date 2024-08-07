@@ -2,13 +2,6 @@
 #include "n64dd_functions.h"
 #include "libleo_functions.h"
 
-UNK_PTR func_800AD4C0(UNK_PTR);
-
-extern IrqMgr D_8011D968;
-extern u8 D_80121212;
-extern vu8 D_80121213;
-extern vu8 D_80121214;
-
 extern u8 B_801DC000[];
 
 extern s32 D_801D2EA8;
@@ -55,7 +48,7 @@ void func_801C6EA0(UNK_TYPE arg0) {
 
 void func_801C6EAC(void) {
     if (D_80121214 == 0) {
-        func_800C78FC();
+        func_800F6BDC();
         D_80121214 = 1;
     }
 }
@@ -81,7 +74,7 @@ void func_801C6F30(void) {
 void func_801C6F78(void) {
     if (D_80121214 != 0) {
         D_80121214 = 0;
-        func_800C785C();
+        func_800F6B3C();
     }
 }
 
@@ -130,7 +123,7 @@ s32 func_801C7098(void) {
     B_801D9D50.unk0 = 10;
     phi_v1 = (&func_801C8000)(&B_801D9D50);
     if (phi_v1 < 0) {
-        func_800D31A0_Freeze();
+        func_800D31A0();
     }
     return phi_v1;
 }
@@ -152,7 +145,7 @@ void func_801C711C(void* arg) {
     void* temp_v0;
 
     sp58 = NULL;
-    arg0->unk98 = &D_8011D968;
+    arg0->unk98 = &gIrqMgr;
     osCreateMesgQueue(&arg0->unk78, (void*)arg0, 30);
     IrqMgr_AddClient(arg0->unk98, &arg0->unk90, &arg0->unk78);
     var_s0 = 0;
@@ -323,7 +316,7 @@ s32 func_801C7658(void) {
 
     B_801D9D50.unk0 = 2;
     B_801D9D50.unk10 = 6;
-    B_801D9D50.unk14 = &D_80000A54;
+    B_801D9D50.unk14 = &DmaMgr_DmaFromDriveRom;
     B_801D9D50.unkC = &func_801C75BC;
     (&func_801C8000)(&B_801D9D50);
 
@@ -362,7 +355,7 @@ s32 func_801C7818(void) {
 
     if (func_801C81C4() != 2) {
         func_801C761C();
-        func_800D31A0_Freeze();
+        func_800D31A0();
         return -3;
     }
 
@@ -398,7 +391,7 @@ void func_801C7920(s32 arg0, s32 arg1, s32 arg2) {
     }
     B_801D9D50.unk0 = 7;
     if ((&func_801C8000)(&B_801D9D50) != 0) {
-        func_800D31A0_Freeze();
+        func_800D31A0();
     }
 }
 
