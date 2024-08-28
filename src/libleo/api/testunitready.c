@@ -9,7 +9,7 @@ s32 LeoTestUnitReady(u8* status) {
         return -1;
     }
 
-    if ((HW_REG(PI_STATUS_REG, u32) & 1) != 0) {
+    if ((IO_READ(PI_STATUS_REG) & 1) != 0) {
         return 8;
     }
 

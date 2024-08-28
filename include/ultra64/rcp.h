@@ -1,8 +1,6 @@
 #ifndef ULTRA64_RCP_H
 #define ULTRA64_RCP_H
 
-#define HW_REG(reg, type) *(volatile type*)((reg) | 0xA0000000)
-
 #define AI_DRAM_ADDR_REG    0x04500000
 #define AI_LEN_REG          0x04500004
 #define AI_CONTROL_REG      0x04500008
@@ -97,5 +95,8 @@
 #define VI_NTSC_CLOCK           48681812    /* Hz = 48.681812 MHz */
 #define VI_PAL_CLOCK            49656530    /* Hz = 49.656530 MHz */
 #define VI_MPAL_CLOCK           48628316    /* Hz = 48.628316 MHz */
+
+#define IO_READ(addr)       (*(vu32*)PHYS_TO_K1(addr))
+#define IO_WRITE(addr,data) (*(vu32*)PHYS_TO_K1(addr)=(u32)(data))
 
 #endif
