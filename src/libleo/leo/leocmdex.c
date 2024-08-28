@@ -56,76 +56,77 @@ void leomain(void* arg0) {
 
         sense_code = leoChk_asic_ready(0x10001);
         cur_status = leoChkUnit_atten();
-        if (cur_status == 0) {
-            if (sense_code == 0) {
-                goto fake_label_2;
+
+        do {
+            if (cur_status == 0) {
+                if (sense_code == 0) {
+                    continue;
+                }
+            } else {
+                switch (sense_code) {
+                    case 3:
+                    case 37:
+                    case 41:
+                    case 43:
+                        break;
+                    case 49:
+                        if (leoRetUnit_atten() == 43) {
+                            sense_code = 43;
+                        }
+                        break;
+                    default:
+                        sense_code = leoRetUnit_atten();
+                }
             }
-        } else {
+
             switch (sense_code) {
-                case 3:
-                case 37:
-                case 41:
-                case 43:
+                case 47:
+                    switch (LEOcur_command->header.command) {
+                        case 2:
+                        case 8:
+                        case 11:
+                        case 12:
+                        case 13:
+                        case 14:
+                        case 15:
+                            continue;
+                    }
                     break;
                 case 49:
-                    if (leoRetUnit_atten() == 43) {
-                        sense_code = 43;
+                    switch (LEOcur_command->header.command) {
+                        case 2:
+                        case 11:
+                        case 13:
+                        case 14:
+                        case 15:
+                            continue;
+                        default:
+                            sense_code = 42;
+                    }
+                    break;
+                case 43:
+                    switch (LEOcur_command->header.command) {
+                        case 15:
+                            leoClrUA_RESET();
+                            FALLTHROUGH;
+                        case 2:
+                        case 13:
+                        case 14:
+                            continue;
                     }
                     break;
                 default:
-                    sense_code = leoRetUnit_atten();
+                    /* empty */;
             }
-        }
 
-        switch (sense_code) {
-            case 47:
-                switch (LEOcur_command->header.command) {
-                    case 2:
-                    case 8:
-                    case 11:
-                    case 12:
-                    case 13:
-                    case 14:
-                    case 15:
-                        goto fake_label_2;
-                    default:
-                        goto fake_label_1;
-                }
-            case 49:
-                switch (LEOcur_command->header.command) {
-                    case 2:
-                    case 11:
-                    case 13:
-                    case 14:
-                    case 15:
-                        goto fake_label_2;
-                    default:
-                        sense_code = 42;
-                        goto fake_label_1;
-                }
-            case 43:
-                switch (LEOcur_command->header.command) {
-                    case 15:
-                        leoClrUA_RESET();
-                        FALLTHROUGH;
-                    case 2:
-                    case 13:
-                    case 14:
-                        goto fake_label_2;
-                    default:
-                        goto fake_label_1;
-                }
-        }
+            if (LEOcur_command->header.command == 3) {
+                LEOcur_command->data.modeSelect.reserve1 = leoChk_cur_drvmode();
+            }
+            LEOcur_command->header.sense = sense_code;
+            LEOcur_command->header.status = 2;
+            goto post_exe;
+        } while (0);
 
-    fake_label_1:
-        if (LEOcur_command->header.command == 3) {
-            LEOcur_command->data.modeSelect.reserve1 = leoChk_cur_drvmode();
-        }
-        LEOcur_command->header.sense = sense_code;
-        LEOcur_command->header.status = 2;
-        goto post_exe;
-
-    fake_label_2:
         if (LEOdrive_flag == 0) {
             switch (LEOcur_command->header.command) {
                 case 2:
