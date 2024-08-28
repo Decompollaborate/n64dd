@@ -4,23 +4,35 @@
 #include "ultra64.h"
 #include "n64dd.h"
 
-s32 __leoSetReset(void);
-
+void leomain(void* arg);
 void leointerrupt(void* arg);
 
-void leomain(void* arg);
-
-void leoRead(void);
-void leoRead_common(unsigned int offset);
-
-void leoInquiry(void);
-
 OSPiHandle* osLeoDiskInit(void);
+s32 __osLeoInterrupt(void);
 
+void leoClr_queue(void);
+void leoInquiry(void);
+void leoTest_unit_rdy(void);
+void leoRezero(void);
+void leoRead(void);
+void leoWrite(void);
+void leoSeek(void);
+void leoStart_stop(void);
+void leoRd_capacity(void);
+void leoTranslate();
+void leoMode_sel(void);
 void leoReadDiskId(void);
+void leoReadTimer(void);
+void leoSetTimer(void);
+void leoClr_reset(void);
+
+u16 leoLba_to_phys(u32 lba);
+u16 leoLba_to_vzone(u32 lba);
 
 u8 leoAnalize_asic_status(void);
 u8 leoChk_asic_ready(u32 asic_cmd);
+u8 leoChk_done_status(u32 asic_cmd);
+u8 leoSend_asic_cmd_i(u32 asic_cmd, u32 asic_data);
 u8 leoWait_mecha_cmd_done(u32 asic_cmd);
 u8 leoSend_asic_cmd_w(u32 asic_cmd, u32 asic_data);
 u8 leoSend_asic_cmd_w_nochkDiskChange(u32 asic_cmd, u32 asic_data);
@@ -40,35 +52,12 @@ void leoClrUA_MEDIUM_CHANGED(void);
 void leoSetUA_MEDIUM_CHANGED(void);
 void leoInitUnit_atten(void);
 
+s32 __leoSetReset(void);
+
+void leoRead_common(unsigned int offset);
+
 int leoC2_Correction(void);
 
 void leoSet_mseq(u16 rwmode);
-
-void leoStart_stop(void);
-
-void leoMode_sel(void);
-
-void leoRd_capacity(void);
-
-u16 leoLba_to_phys(u32 lba);
-u16 leoLba_to_vzone(u32 lba);
-
-void leoRezero(void);
-
-void leoClr_queue(void);
-void leoClr_reset(void);
-
-void leoTranslate();
-
-void leoReadTimer(void);
-void leoSetTimer(void);
-
-void leoWrite(void);
-
-s32 __osLeoInterrupt(void);
-
-void leoTest_unit_rdy(void);
-
-void leoSeek(void);
 
 #endif
