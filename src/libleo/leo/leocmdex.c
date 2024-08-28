@@ -20,6 +20,8 @@ OSPiHandle* LEOPiInfo;
 OSIoMesg LEOPiDmaParam;
 s32 currentCommand;
 
+u8 leoRead_system_area(void);
+
 void leomain(void* arg0) {
     u32 cur_status;
     u32 sense_code;

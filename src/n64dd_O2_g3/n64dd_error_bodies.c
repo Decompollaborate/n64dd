@@ -1,6 +1,5 @@
 #include "n64dd.h"
 #include "n64dd_functions.h"
-#include "libleo_functions.h"
 
 const char* D_801D2EE0[2][8][4] = {
     {

@@ -1,6 +1,5 @@
 #include "n64dd.h"
 #include "n64dd_functions.h"
-#include "libleo_functions.h"
 
 // File-internal
 // All 3 of these are also used in another file

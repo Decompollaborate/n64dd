@@ -1,6 +1,5 @@
 #include "n64dd.h"
 #include "n64dd_functions.h"
-#include "libleo_functions.h"
 
 extern u8 B_801DC000[];
 

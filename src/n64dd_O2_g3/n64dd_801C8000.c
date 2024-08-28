@@ -1,6 +1,5 @@
 #include "n64dd.h"
 #include "n64dd_functions.h"
-#include "libleo_functions.h"
 
 extern s32 D_801D2EA0;
 extern void (*D_801D2EB4)(void*, void*, void*);
