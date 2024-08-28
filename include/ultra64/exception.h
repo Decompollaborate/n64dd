@@ -24,6 +24,9 @@
 #define RCP_IMASK       0x003F0000
 #define RCP_IMASKSHIFT  16
 
+// OSHWIntr values
+#define OS_INTR_CART    1
+
 typedef u32 OSIntMask;
 typedef u32 OSHWIntr;
 

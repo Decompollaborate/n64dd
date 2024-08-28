@@ -114,8 +114,8 @@ void leoC2_single_ecc(void) {
 
 // static
 void leoC2_double_ecc(void) {
-    register u32 s0;
-    register u32 error_k;
+    u32 s0;
+    u32 error_k;
     u8* pointer1;
     u8* pointer2;
     u32 k;
@@ -167,10 +167,10 @@ c2_2_1:
 
 // static
 void leoC2_3_ecc(void) {
-    register u32 s0;
-    register u32 error_i;
-    register u32 error_j;
-    register u32 error_k;
+    u32 s0;
+    u32 error_i;
+    u32 error_j;
+    u32 error_k;
     u8* pointer1;
     u8* pointer2;
     u8* pointer3;
@@ -283,11 +283,11 @@ c2_3_1:
 
 // static
 void leoC2_4_ecc(void) {
-    register u32 s0;
-    register u32 R0;
-    register u32 R1;
-    register u32 R2;
-    register u32 R3;
+    u32 s0;
+    u32 R0;
+    u32 R1;
+    u32 R2;
+    u32 R3;
     u8* pointer1;
     u8* pointer2;
     u8* pointer3;

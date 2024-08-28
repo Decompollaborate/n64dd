@@ -150,7 +150,7 @@ void func_801C711C(void* arg) {
     IrqMgr_AddClient(arg0->unk98, &arg0->unk90, &arg0->unk78);
     var_s0 = 0;
     do {
-        osRecvMesg(&arg0->unk78, (OSMesg*)&sp58, 1);
+        osRecvMesg(&arg0->unk78, (OSMesg*)&sp58, OS_MESG_BLOCK);
         switch (*sp58) {
             case 1:
                 temp_v0 = osViGetNextFramebuffer();

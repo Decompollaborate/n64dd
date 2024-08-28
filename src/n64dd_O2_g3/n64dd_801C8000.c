@@ -114,14 +114,14 @@ void func_801C8298(struct_801E0D18* arg0) {
     LEOCmd sp1C;
 
     LeoSeek(&sp1C, &arg0->diskId, &arg0->unk_1C);
-    osRecvMesg(&arg0->unk_1C, (void**)&arg0->unk_68, 1);
+    osRecvMesg(&arg0->unk_1C, (void**)&arg0->unk_68, OS_MESG_BLOCK);
 }
 
 void func_801C82E0(struct_801E0D18* arg0) {
     LEOCmd sp1C;
 
     LeoSpdlMotor(&sp1C, 4, &arg0->unk_1C);
-    osRecvMesg(&arg0->unk_1C, (void**)&arg0->unk_68, 1);
+    osRecvMesg(&arg0->unk_1C, (void**)&arg0->unk_68, OS_MESG_BLOCK);
 }
 
 void func_801C832C(struct_801E0D18* arg0) {
@@ -132,7 +132,7 @@ void func_801C832C(struct_801E0D18* arg0) {
         OSMesgQueue* sp28 = &arg0->unk_1C;
 
         LeoReadWrite(&arg0->unk_00, OS_READ, startLBA, arg0->unk_58, sp34, sp28);
-        osRecvMesg(sp28, (void**)&arg0->unk_68, 1);
+        osRecvMesg(sp28, (void**)&arg0->unk_68, OS_MESG_BLOCK);
     }
 }
 
@@ -144,7 +144,7 @@ void func_801C83A0(struct_801E0D18* arg0) {
         OSMesgQueue* sp28 = &arg0->unk_1C;
 
         LeoReadWrite(&arg0->unk_00, OS_WRITE, startLBA, arg0->unk_5C, sp34, sp28);
-        osRecvMesg(sp28, (void**)&arg0->unk_68, 1);
+        osRecvMesg(sp28, (void**)&arg0->unk_68, OS_MESG_BLOCK);
     }
 }
 
@@ -180,9 +180,9 @@ void func_801C84D4(void* arg) {
     while (true) {
         struct_801E0D18* sp24;
 
-        osRecvMesg(B_801E0D10[0], (void*)&sp24, 1);
+        osRecvMesg(B_801E0D10[0], (void*)&sp24, OS_MESG_BLOCK);
         func_801C8424(sp24);
-        osSendMesg(B_801E0D10[1], NULL, 1);
+        osSendMesg(B_801E0D10[1], NULL, OS_MESG_BLOCK);
     }
 }
 
@@ -201,7 +201,7 @@ void func_801C85F0(struct_801E0D18* arg0, s32 arg1) {
     if (arg1 == 1) {
         func_801C8424(arg0);
     } else {
-        osSendMesg(B_801E0D10[0], arg0, 1);
+        osSendMesg(B_801E0D10[0], arg0, OS_MESG_BLOCK);
     }
 }
 

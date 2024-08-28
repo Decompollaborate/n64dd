@@ -13,12 +13,6 @@ s32 LeoByteToLBA(s32 startlba, u32 nbytes, s32* lba) {
         return -1;
     }
 
-#ifdef _DEBUG
-    if ((u32)startlba >= NUM_LBAS) {
-        return 0x20;
-    }
-#endif
-
     reslba = 0;
     flag = vzone = 1;
     startlba += 0x18;
@@ -27,7 +21,7 @@ s32 LeoByteToLBA(s32 startlba, u32 nbytes, s32* lba) {
             vzone = leoLba_to_vzone(startlba);
             zone = LEOVZONE_PZONEHD_TBL[LEOdisk_type][vzone];
             if (zone >= 8) {
-                zone += -7;
+                zone -= 7;
             }
             byte_p_blk = LEOBYTE_TBL2[zone];
         }
@@ -39,11 +33,11 @@ s32 LeoByteToLBA(s32 startlba, u32 nbytes, s32* lba) {
         reslba++;
         startlba++;
         if ((nbytes != 0) && ((u32)startlba >= NUM_LBAS + 0x18)) {
-            return 0x20;
+            return LEO_ERROR_LBA_OUT_OF_RANGE;
         }
         flag = 0;
     }
 
     *lba = reslba;
-    return 0;
+    return LEO_ERROR_GOOD;
 }

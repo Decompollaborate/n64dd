@@ -70,7 +70,7 @@ extern s32 D_801D2EA0;
 extern void (*D_801D2EB4)(void*, void*, void*);
 
 void func_801C8AA8(void) {
-    osRecvMesg(B_801E0D10[1], NULL, 0);
+    osRecvMesg(B_801E0D10[1], NULL, OS_MESG_NOBLOCK);
 
     if ((D_801D2EB4 != NULL) && (D_801D2EA0 == 0)) {
         u32 temp_v0 = osSetIntMask(1U);
@@ -127,7 +127,7 @@ s32 func_801C8C1C(struct_801E0D18* arg0) {
                 return 3;
             case 0:
                 func_801C8A30(6);
-                /* fallthrough */
+                FALLTHROUGH;
             case 0x23:
                 var_s0 = 1;
                 break;
@@ -157,7 +157,7 @@ s32 func_801C8CEC(struct_801E0D18* arg0) {
                 arg0->unk_65 = 2;
                 return 1;
             }
-            /* fallthrough */
+            FALLTHROUGH;
         default:
             func_801C8B90();
             return func_801C8BC0(arg0);
@@ -202,7 +202,7 @@ s32 func_801C8E70(struct_801E0D18* arg0) {
             case 0x31:
                 func_801C8940(arg0->unk_68);
                 func_801C89B8(2);
-                /* fallthrough */
+                FALLTHROUGH;
             case 0x2A:
                 func_801C8A30(4);
                 continue;

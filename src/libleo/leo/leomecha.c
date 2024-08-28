@@ -56,11 +56,11 @@ u8 leoChk_asic_ready(u32 asic_cmd) {
                 if (asic_cmd == 0x90000) {
                     return 0;
                 }
-                if (leoRecv_event_mesg(0) != 0) {
+                if (leoRecv_event_mesg(OS_MESG_NOBLOCK) != 0) {
                     return 37;
                 }
                 osEPiWriteIo(LEOPiInfo, 0x5000508, 0x90000);
-                if (leoRecv_event_mesg(1) != 0) {
+                if (leoRecv_event_mesg(OS_MESG_BLOCK) != 0) {
                     return 37;
                 }
             }
@@ -295,6 +295,7 @@ u32 leoChk_err_retry(u32 sense) {
 
 u8 leoChk_cur_drvmode(void) {
     u8 devstat = 0;
+
     if (!(asic_cur_status & 0x1000000)) {
         devstat |= 1;
     }

@@ -25,10 +25,10 @@ void leomain(void* arg0) {
     u32 sense_code;
     u8 disktype_bak;
 
-    ((u8*)&LEO_country_code)[0] = *(vu8*)0xA0000010;
-    ((u8*)&LEO_country_code)[1] = *(vu8*)0xA0000090;
-    ((u8*)&LEO_country_code)[2] = *(vu8*)0xA0000110;
-    ((u8*)&LEO_country_code)[3] = *(vu8*)0xA0000190;
+    ((u8*)&LEO_country_code)[0] = *(vu8*)OS_PHYSICAL_TO_K1(0x10);
+    ((u8*)&LEO_country_code)[1] = *(vu8*)OS_PHYSICAL_TO_K1(0x90);
+    ((u8*)&LEO_country_code)[2] = *(vu8*)OS_PHYSICAL_TO_K1(0x110);
+    ((u8*)&LEO_country_code)[3] = *(vu8*)OS_PHYSICAL_TO_K1(0x190);
 
     LEOasic_seq_ctl_shadow = 0;
     LEOasic_bm_ctl_shadow = 0;
@@ -38,19 +38,19 @@ void leomain(void* arg0) {
     LEOPiInfo = osLeoDiskInit();
     LEOPiDmaParam.hdr.pri = 1;
     LEOPiDmaParam.hdr.retQueue = &LEOdma_que;
-    osEPiReadIo(LEOPiInfo, 0x05000508U, &cur_status);
+    osEPiReadIo(LEOPiInfo, 0x05000508, &cur_status);
     if (!(cur_status & 0x400000)) {
         if ((cur_status & 0x06800000)) {
             leoDrive_reset();
         }
     }
 
-    while (1) {
-        osRecvMesg(&LEOcommand_que, (OSMesg*)&LEOcur_command, 1);
+    while (true) {
+        osRecvMesg(&LEOcommand_que, (OSMesg*)&LEOcur_command, OS_MESG_BLOCK);
         currentCommand = LEOcur_command->header.command;
         if (LEOcur_command->header.command == 0) {
             leoDrive_reset();
-            osRecvMesg(&LEOevent_que, NULL, 0);
+            osRecvMesg(&LEOevent_que, NULL, OS_MESG_NOBLOCK);
             continue;
         }
 
@@ -107,7 +107,7 @@ void leomain(void* arg0) {
                 switch (LEOcur_command->header.command) {
                     case 15:
                         leoClrUA_RESET();
-                        /* fallthrough */
+                        FALLTHROUGH;
                     case 2:
                     case 13:
                     case 14:
@@ -140,7 +140,7 @@ void leomain(void* arg0) {
                     if (LEO_country_code == 0) {
                         osEPiReadIo(LEOPiInfo, 0x05000540, &cur_status);
                         if ((cur_status & 0x70000) != 0x40000) {
-                            while (1) {}
+                            while (true) {}
                         }
                     }
 
@@ -175,7 +175,7 @@ void leomain(void* arg0) {
 
     post_exe:
         if (LEOcur_command->header.control & 0x80) {
-            osSendMesg(LEOcur_command->header.post, (void*)(s32)LEOcur_command->header.sense, 1);
+            osSendMesg(LEOcur_command->header.post, (void*)(s32)LEOcur_command->header.sense, OS_MESG_BLOCK);
         }
         if (LEOclr_que_flag != 0) {
             leoClr_queue();
@@ -194,7 +194,7 @@ u8 leoRead_system_area(void) {
     read_mode = 0;
     retry_cntr = 0;
 
-    while (1) {
+    while (true) {
         LEOdisk_type = 0;
         // For lba_to_phys to avoid dealing with alternative tracks on the disk
         LEO_sys_data.param.defect_num[0] = 0;

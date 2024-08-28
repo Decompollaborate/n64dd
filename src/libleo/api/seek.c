@@ -19,6 +19,5 @@ s32 LeoSeek(LEOCmd* cmdBlock, u32 lba, OSMesgQueue* mq) {
     }
 
     leoCommand(cmdBlock);
-
     return 0;
 }

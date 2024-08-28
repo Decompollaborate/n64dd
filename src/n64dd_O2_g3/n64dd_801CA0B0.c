@@ -81,7 +81,7 @@ s32 func_801CA0B0(s32 charCode, void* charTexBuf, s32* dx, s32* dy, s32* cy) {
 
     handle->transferInfo.cmdType = 2;
     osEPiStartDma(handle, &mesg, 0);
-    osRecvMesg(&queue, NULL, 1);
+    osRecvMesg(&queue, NULL, OS_MESG_BLOCK);
 
     return 0;
 }
@@ -188,7 +188,7 @@ void func_801CA4F4(struct_801CA704* arg0, char c) {
         switch (c) {
             case '\n':
                 arg0->posY += 32;
-                /* fallthrough */
+                FALLTHROUGH;
             case '\r':
                 arg0->posX = arg0->baseX;
                 break;

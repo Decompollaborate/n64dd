@@ -19,4 +19,10 @@
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 240
 
+#if !defined(__GNUC__) && !defined(__attribute__)
+#define __attribute__(x)
+#endif
+
+#define FALLTHROUGH  __attribute__((fallthrough))
+
 #endif

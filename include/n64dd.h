@@ -6,6 +6,10 @@
 #include "libultra_functions.h"
 #include "code_functions.h"
 
+// TODO: share with src/code/z_prenmi_buff.c?
+#define COLD_RESET 0
+#define NMI 1
+
 typedef struct {
     /* 0x000 */ UNK_TYPE unk_000;
     /* 0x004 */ UNK_TYPE unk_004;
