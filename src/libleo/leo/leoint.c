@@ -150,7 +150,7 @@ u32 read_write_track(void) {
                             u32 c2datasize;
 
                             if (LEOtgt_param.rdwr_blocks == 1) {
-                                osEPiReadIo(LEOPiInfo, 0x05000514, &message);
+                                osEPiReadIo(LEOPiInfo, ASIC_ERR_SECTOR, &message);
                                 if (message & 0x10000000) {
                                     message = 4;
                                     goto track_end;
@@ -230,7 +230,7 @@ u32 leoChk_mecha_int(void) {
     u32 index_stat;
 
     if (stat == 0) {
-        osEPiReadIo(LEOPiInfo, 0x0500050C, &index_stat);
+        osEPiReadIo(LEOPiInfo, ASIC_CUR_TK, &index_stat);
         if ((index_stat & 0x60000000) != 0x60000000) {
             stat = 0x18;
         }
@@ -240,8 +240,8 @@ u32 leoChk_mecha_int(void) {
 
 // static
 void leosetup_BM(void) {
-    osEPiWriteIo(LEOPiInfo, 0x05000510, LEOasic_bm_ctl_shadow | 0x10000000);
-    osEPiWriteIo(LEOPiInfo, 0x05000510, LEOasic_bm_ctl_shadow);
+    osEPiWriteIo(LEOPiInfo, ASIC_BM_CTL, LEOasic_bm_ctl_shadow | 0x10000000);
+    osEPiWriteIo(LEOPiInfo, ASIC_BM_CTL, LEOasic_bm_ctl_shadow);
 
     if (LEOtgt_param.start_block != 0) {
         LEOasic_bm_ctl_shadow = 0x5A0000;
@@ -257,7 +257,7 @@ void leosetup_BM(void) {
         LEOasic_bm_ctl_shadow |= 0x02000000;
     }
 
-    osEPiWriteIo(LEOPiInfo, 0x05000510, LEOasic_bm_ctl_shadow);
+    osEPiWriteIo(LEOPiInfo, ASIC_BM_CTL, LEOasic_bm_ctl_shadow);
 }
 
 // static
@@ -265,9 +265,9 @@ u32 leochk_err_reg(void) {
     u32 sense;
     u32 index_status;
 
-    osEPiReadIo(LEOPiInfo, 0x05000514, &sense);
-    osEPiWriteIo(LEOPiInfo, 0x05000510, LEOasic_bm_ctl_shadow | 0x10000000);
-    osEPiWriteIo(LEOPiInfo, 0x05000510, LEOasic_bm_ctl_shadow);
+    osEPiReadIo(LEOPiInfo, ASIC_ERR_SECTOR, &sense);
+    osEPiWriteIo(LEOPiInfo, ASIC_BM_CTL, LEOasic_bm_ctl_shadow | 0x10000000);
+    osEPiWriteIo(LEOPiInfo, ASIC_BM_CTL, LEOasic_bm_ctl_shadow);
 
     if (sense & 0x04000000) {
         return 0x31;
@@ -288,7 +288,7 @@ u32 leochk_err_reg(void) {
         return 0x18;
     }
 
-    osEPiReadIo(LEOPiInfo, 0x0500050C, &index_status);
+    osEPiReadIo(LEOPiInfo, ASIC_CUR_TK, &index_status);
     if ((index_status & 0x60000000) == 0x60000000) {
         return 0x19;
     }

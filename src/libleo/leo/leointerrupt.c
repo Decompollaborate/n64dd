@@ -30,14 +30,14 @@ s32 __osLeoInterrupt(void) {
         pi_stat = HW_REG(PI_STATUS_REG, u32);
     }
 
-    stat = HW_REG(0x5000508, u32);
+    stat = HW_REG(ASIC_STATUS, u32);
     if (stat & 0x2000000) {
         pi_stat = HW_REG(PI_STATUS_REG, u32);
         while (pi_stat & (PI_STATUS_BUSY | PI_STATUS_IOBUSY)) {
             pi_stat = HW_REG(PI_STATUS_REG, u32);
         }
 
-        HW_REG(0x5000510, u32) = info->bmCtlShadow | 0x1000000;
+        HW_REG(ASIC_BM_CTL, u32) = info->bmCtlShadow | 0x1000000;
         blockInfo->errStatus = 0;
         return 0;
     }
@@ -50,7 +50,7 @@ s32 __osLeoInterrupt(void) {
             pi_stat = HW_REG(PI_STATUS_REG, u32);
         }
 
-        stat = HW_REG(0x5000508, u32);
+        stat = HW_REG(ASIC_STATUS, u32);
         blockInfo->errStatus = 0x16;
         __osLeoResume();
         HW_REG(PI_STATUS_REG, u32) = 2;
@@ -72,7 +72,7 @@ s32 __osLeoInterrupt(void) {
         } else {
             blockInfo->dramAddr = (u8*)(blockInfo->dramAddr) + blockInfo->sectorSize;
             info->sectorNum++;
-            __osEPiRawStartDma(__osDiskHandle, 1, 0x5000400, blockInfo->dramAddr, blockInfo->sectorSize);
+            __osEPiRawStartDma(__osDiskHandle, 1, ASIC_SECTOR_BUFF, blockInfo->dramAddr, blockInfo->sectorSize);
             return 1;
         }
     } else if (info->cmdType == 0) {
@@ -91,7 +91,7 @@ s32 __osLeoInterrupt(void) {
             blockInfo->dramAddr = (u8*)(blockInfo->dramAddr) + blockInfo->sectorSize;
         }
 
-        bm_stat = HW_REG(0x5000510, u32);
+        bm_stat = HW_REG(ASIC_BM_STATUS, u32);
         if (((bm_stat & 0x200000) && (bm_stat & 0x400000)) || (bm_stat & 0x2000000)) {
             if (blockInfo->C1ErrNum >= 4) {
                 if ((info->transferMode != 3) || (info->sectorNum >= 0x53)) {
@@ -124,7 +124,7 @@ s32 __osLeoInterrupt(void) {
                 info->cmdType = 2;
                 blockInfo->errStatus = 0;
             }
-            __osEPiRawStartDma(__osDiskHandle, 0, 0x5000000U, blockInfo->C2Addr, blockInfo->sectorSize * 4);
+            __osEPiRawStartDma(__osDiskHandle, 0, ASIC_C2_BUFF, blockInfo->C2Addr, blockInfo->sectorSize * 4);
             return 1;
         }
         if ((info->sectorNum == -1) && (info->transferMode == 2) && (info->blockNum == 1)) {
@@ -148,7 +148,7 @@ s32 __osLeoInterrupt(void) {
                 __osLeoAbnormalResume();
                 return 1;
             }
-            __osEPiRawStartDma(__osDiskHandle, 0, 0x5000400, blockInfo->dramAddr, blockInfo->sectorSize);
+            __osEPiRawStartDma(__osDiskHandle, 0, ASIC_SECTOR_BUFF, blockInfo->dramAddr, blockInfo->sectorSize);
             blockInfo->errStatus = 0;
             return 1;
         } else if (info->sectorNum < 0x55) {
@@ -175,13 +175,13 @@ void __osLeoAbnormalResume(void) {
         pi_stat = HW_REG(PI_STATUS_REG, u32);
     }
 
-    HW_REG(0x5000510, u32) = info->bmCtlShadow | 0x10000000;
+    HW_REG(ASIC_BM_CTL, u32) = info->bmCtlShadow | 0x10000000;
     pi_stat = HW_REG(PI_STATUS_REG, u32);
     while (pi_stat & (PI_STATUS_BUSY | PI_STATUS_IOBUSY)) {
         pi_stat = HW_REG(PI_STATUS_REG, u32);
     }
 
-    HW_REG(0x5000510, u32) = info->bmCtlShadow;
+    HW_REG(ASIC_BM_CTL, u32) = info->bmCtlShadow;
     __osLeoResume();
     HW_REG(PI_STATUS_REG, u32) = 2;
     __OSGlobalIntMask |= 0x100401;

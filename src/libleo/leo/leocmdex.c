@@ -40,7 +40,7 @@ void leomain(void* arg0) {
     LEOPiInfo = osLeoDiskInit();
     LEOPiDmaParam.hdr.pri = 1;
     LEOPiDmaParam.hdr.retQueue = &LEOdma_que;
-    osEPiReadIo(LEOPiInfo, 0x05000508, &cur_status);
+    osEPiReadIo(LEOPiInfo, ASIC_STATUS, &cur_status);
     if (!(cur_status & 0x400000)) {
         if ((cur_status & 0x06800000)) {
             leoDrive_reset();
@@ -141,7 +141,7 @@ void leomain(void* arg0) {
                     break;
                 default:
                     if (LEO_country_code == 0) {
-                        osEPiReadIo(LEOPiInfo, 0x05000540, &cur_status);
+                        osEPiReadIo(LEOPiInfo, ASIC_ID_REG, &cur_status);
                         if ((cur_status & 0x70000) != 0x40000) {
                             while (true) {}
                         }

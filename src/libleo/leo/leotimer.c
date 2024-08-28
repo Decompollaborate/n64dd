@@ -142,7 +142,7 @@ u8 __locReadTimer(__LOCTime* time) {
     if (sense_code != 0) {
         return sense_code;
     }
-    osEPiReadIo(LEOPiInfo, 0x05000500, &data);
+    osEPiReadIo(LEOPiInfo, ASIC_DATA, &data);
     time->minute = (u8)((u32)(data & 0xFF000000) >> 0x18);
     time->second = (s8)((u32)(data & 0xFF0000) >> 0x10);
     sense_code = leoSend_asic_cmd_w_nochkDiskChange(0x130000, 0U);
@@ -150,7 +150,7 @@ u8 __locReadTimer(__LOCTime* time) {
         time->minute = (u8)(time->minute & 0xFF7F);
         return sense_code;
     }
-    osEPiReadIo(LEOPiInfo, 0x05000500, &data);
+    osEPiReadIo(LEOPiInfo, ASIC_DATA, &data);
     time->day = (s8)((u32)(data & 0xFF000000) >> 0x18);
     time->hour = (s8)((u32)(data & 0xFF0000) >> 0x10);
     sense_code = leoSend_asic_cmd_w_nochkDiskChange(0x120000, 0U);
@@ -158,7 +158,7 @@ u8 __locReadTimer(__LOCTime* time) {
         time->minute = (u8)(time->minute & 0xFF7F);
         return sense_code;
     }
-    osEPiReadIo(LEOPiInfo, 0x05000500, &data);
+    osEPiReadIo(LEOPiInfo, ASIC_DATA, &data);
     sense_code = time->minute;
     time->year = (s8)((u32)(data & 0xFF000000) >> 0x18);
     time->month = (s8)((u32)(data & 0xFF0000) >> 0x10);
