@@ -27,7 +27,7 @@ s32 LeoCJCreateLeoManager(s32 comPri, s32 intPri, OSMesg* cmdBuf, s32 cmdMsgCnt)
     __osSetHWIntrRoutine(OS_INTR_CART, __osLeoInterrupt, STACK_TOP(leoDiskStack));
     leoInitialize(comPri, intPri, cmdBuf, cmdMsgCnt);
 
-    if (osResetType == NMI) {
+    if (osResetType == 1) { // NMI
         __leoSetReset();
     }
 
