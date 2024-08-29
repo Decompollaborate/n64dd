@@ -5,7 +5,7 @@
 typedef struct struct_801CA704 {
     /* 0x00 */ PrintCallback callback;
     /* 0x04 */ void* charTexBuf;
-    /* 0x08 */ u16 unk8;
+    /* 0x08 */ u16 unk_08;
     /* 0x0A */ u16 posX;
     /* 0x0C */ u16 posY;
     /* 0x10 */ Color_RGBA8_u32 color;
@@ -138,7 +138,7 @@ void func_801CA350(struct_801CA704* arg0, void* frameBuf, s32 screenWidth, s32 s
 
 void func_801CA3B4(struct_801CA704* arg0, void* charTexBuf, s32 arg2) {
     arg0->charTexBuf = (u8*)charTexBuf + 0x20000000;
-    arg0->unk8 = arg2;
+    arg0->unk_08 = arg2;
 }
 
 void func_801CA3CC(struct_801CA704* arg0, char c) {

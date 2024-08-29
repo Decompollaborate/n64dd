@@ -35,7 +35,7 @@ OSMesg B_801E0D90[8];
 OSThread B_801E0DB0;
 
 s32 func_801C8000(struct_801D9D50* arg0) {
-    switch (arg0->unk0) {
+    switch (arg0->unk_00) {
         case 0:
             if (func_801C8844() != 0) {
                 return 1;
@@ -43,33 +43,33 @@ s32 func_801C8000(struct_801D9D50* arg0) {
             func_801C8554();
             break;
         case 1:
-            func_801C8578(arg0->unk1C, arg0->unk20, arg0->unk24, arg0->unk28, arg0->unk2C);
+            func_801C8578(arg0->unk_1C, arg0->unk_20, arg0->unk_24, arg0->unk_28, arg0->unk_2C);
             break;
         case 2:
-            func_801C8638(arg0->unkC, arg0->unk10, arg0->unk14);
+            func_801C8638(arg0->unk_0C, arg0->unk_10, arg0->unk_14);
             break;
         case 3:
             if (func_801C8844() != 0) {
                 return 1;
             }
-            func_801C868C(arg0->unk18, arg0->unk1C, arg0->unk20, 1);
+            func_801C868C(arg0->unk_18, arg0->unk_1C, arg0->unk_20, 1);
             break;
         case 4:
             if (func_801C8844() != 0) {
                 return 1;
             }
-            func_801C868C(arg0->unk18, arg0->unk1C, arg0->unk20, 2);
+            func_801C868C(arg0->unk_18, arg0->unk_1C, arg0->unk_20, 2);
             break;
         case 5:
-            arg0->unk8 = func_801C8770();
-            return arg0->unk8;
+            arg0->unk_08 = func_801C8770();
+            return arg0->unk_08;
         case 7:
             return func_801C87FC();
         case 6:
             return func_801C8844();
         case 8:
-            arg0->unk4 = func_801C87C0();
-            return arg0->unk4;
+            arg0->unk_04 = func_801C87C0();
+            return arg0->unk_04;
         case 9:
             return func_801C885C();
         case 10:

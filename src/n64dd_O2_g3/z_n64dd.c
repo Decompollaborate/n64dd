@@ -101,7 +101,7 @@ void func_801C7018(void) {
 }
 
 s32 func_801C7064(void) {
-    B_801D9D50.unk0 = 5;
+    B_801D9D50.unk_00 = 5;
     return (&func_801C8000)(&B_801D9D50);
 }
 
@@ -112,7 +112,7 @@ s32 func_801C7098(void) {
     if (0) {}
 #endif
 
-    B_801D9D50.unk0 = 10;
+    B_801D9D50.unk_00 = 10;
     phi_v1 = (&func_801C8000)(&B_801D9D50);
     if (phi_v1 < 0) {
         func_800D31A0();
@@ -137,12 +137,12 @@ void func_801C711C(void* arg) {
     void* temp_v0;
 
     sp58 = NULL;
-    arg0->unk98 = &gIrqMgr;
-    osCreateMesgQueue(&arg0->unk78, (void*)arg0, 30);
-    IrqMgr_AddClient(arg0->unk98, &arg0->unk90, &arg0->unk78);
+    arg0->unk_98 = &gIrqMgr;
+    osCreateMesgQueue(&arg0->unk_78, arg0->unk_00, ARRAY_COUNT(arg0->unk_00));
+    IrqMgr_AddClient(arg0->unk_98, &arg0->unk_90, &arg0->unk_78);
     var_s0 = 0;
     do {
-        osRecvMesg(&arg0->unk78, (OSMesg*)&sp58, OS_MESG_BLOCK);
+        osRecvMesg(&arg0->unk_78, (OSMesg*)&sp58, OS_MESG_BLOCK);
         switch (*sp58) {
             case 1:
                 temp_v0 = osViGetNextFramebuffer();
@@ -160,7 +160,7 @@ void func_801C711C(void* arg) {
                 break;
         }
     } while (var_s0 == 0);
-    IrqMgr_RemoveClient(arg0->unk98, &arg0->unk90);
+    IrqMgr_RemoveClient(arg0->unk_98, &arg0->unk_90);
 }
 
 #if OOT_VERSION > NTSC_1_0
@@ -294,25 +294,25 @@ s32 func_801C7658(void) {
 
     StackCheck_Init(&B_801DBFA8, B_801DAFA8, STACK_TOP(B_801DAFA8), 0, 0x100, "n64dd");
 
-    B_801D9D50.unk1C = &B_801D9D80;
-    B_801D9D50.unk20 = &B_801D9D98;
-    B_801D9D50.unk24 = 8;
-    B_801D9D50.unk28 = &B_801DBFA8;
-    B_801D9D50.unk2C = 13;
-    B_801D9D50.unk0 = 1;
+    B_801D9D50.unk_1C = &B_801D9D80;
+    B_801D9D50.unk_20 = &B_801D9D98;
+    B_801D9D50.unk_24 = 8;
+    B_801D9D50.unk_28 = &B_801DBFA8;
+    B_801D9D50.unk_2C = 13;
+    B_801D9D50.unk_00 = 1;
 
     (&func_801C8000)(&B_801D9D50);
 
     D_80121213 = 1;
     func_801C6FD8();
 
-    B_801D9D50.unk0 = 2;
-    B_801D9D50.unk10 = 6;
-    B_801D9D50.unk14 = &DmaMgr_DmaFromDriveRom;
-    B_801D9D50.unkC = &func_801C75BC;
+    B_801D9D50.unk_00 = 2;
+    B_801D9D50.unk_10 = 6;
+    B_801D9D50.unk_14 = &DmaMgr_DmaFromDriveRom;
+    B_801D9D50.unk_0C = &func_801C75BC;
     (&func_801C8000)(&B_801D9D50);
 
-    B_801D9D50.unk0 = 13;
+    B_801D9D50.unk_00 = 13;
     (&func_801C8000)(&B_801D9D50);
 
 #if OOT_VERSION > NTSC_1_1
@@ -330,7 +330,7 @@ s32 func_801C7818(void) {
     B_801D9DC0 = 0;
 #endif
 
-    B_801D9D50.unk0 = 12;
+    B_801D9D50.unk_00 = 12;
     (&func_801C8000)(&B_801D9D50);
 
     while (func_801C81C4() == 0) {
@@ -366,32 +366,32 @@ s32 func_801C78B8(void) {
 }
 
 s32 func_801C78F0(void) {
-    B_801D9D50.unk0 = 0;
+    B_801D9D50.unk_00 = 0;
     return (&func_801C8000)(&B_801D9D50);
 }
 
 void func_801C7920(s32 arg0, s32 arg1, s32 arg2) {
-    B_801D9D50.unk18 = arg1;
-    B_801D9D50.unk1C = arg0;
-    B_801D9D50.unk20 = arg2;
-    B_801D9D50.unk0 = 3;
+    B_801D9D50.unk_18 = arg1;
+    B_801D9D50.unk_1C = arg0;
+    B_801D9D50.unk_20 = arg2;
+    B_801D9D50.unk_00 = 3;
     (&func_801C8000)(&B_801D9D50);
     osGetTime();
-    B_801D9D50.unk0 = 6;
+    B_801D9D50.unk_00 = 6;
     while ((&func_801C8000)(&B_801D9D50) != 0) {
         Sleep_Usec(16666); // 100000 / 6
     }
-    B_801D9D50.unk0 = 7;
+    B_801D9D50.unk_00 = 7;
     if ((&func_801C8000)(&B_801D9D50) != 0) {
         func_800D31A0();
     }
 }
 
 void func_801C79CC(s32 arg0, s32 arg1, s32 arg2) {
-    B_801D9D50.unk18 = arg0;
-    B_801D9D50.unk1C = arg1;
-    B_801D9D50.unk20 = arg2;
-    B_801D9D50.unk0 = 4;
+    B_801D9D50.unk_18 = arg0;
+    B_801D9D50.unk_1C = arg1;
+    B_801D9D50.unk_20 = arg2;
+    B_801D9D50.unk_00 = 4;
     (&func_801C8000)(&B_801D9D50);
 }
 
