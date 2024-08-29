@@ -183,7 +183,7 @@ beginseg
 
     include "oot/np0/build/src/n64dd_O2_g3/z_n64dd.o"
 
-    include "oot/np0/build/src/n64dd_O2_g3/n64dd_buffer.o"
+    include "oot/np0/build/src/n64dd_O2_g3/n64dd_data_buffer.o"
 
     include "oot/np0/build/src/n64dd_O2_g3/n64dd_801C8000.o"
 
