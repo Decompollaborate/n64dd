@@ -33,7 +33,7 @@ UNK_TYPE B_801DBFC4; // unused?
 
 // Might be u8, will need to examine code function
 u32 func_801C6E80(void) {
-#if VERSION == VERSION_ne0 || VERSION == VERSION_ne1 || VERSION == VERSION_ne2
+#if OOT_NTSC
     return LeoDriveExist();
 #else
     return 0;
@@ -94,9 +94,9 @@ void func_801C6FD8(void) {
 // Adds a HungupAndCrash
 void func_801C7018(void) {
     if (D_80121213 != 0) {
-#if VERSION == VERSION_ne0
+#if OOT_VERSION == NTSC_1_0
         Fault_AddHungupAndCrash("../z_n64dd.c", 503);
-#elif VERSION == VERSION_ne1
+#elif OOT_VERSION == NTSC_1_1
         Fault_AddHungupAndCrash("../z_n64dd.c", 551);
 #else
         Fault_AddHungupAndCrash("../z_n64dd.c", 573);
@@ -113,7 +113,7 @@ s32 func_801C7064(void) {
 s32 func_801C7098(void) {
     s32 phi_v1;
 
-#if VERSION <= VERSION_ne1
+#if OOT_VERSION <= NTSC_1_1
     if (0) {}
 #endif
 
@@ -168,7 +168,7 @@ void func_801C711C(void* arg) {
     IrqMgr_RemoveClient(arg0->unk98, &arg0->unk90);
 }
 
-#if VERSION != VERSION_ne0
+#if OOT_VERSION > NTSC_1_0
 void func_801C7B28_ne2(void) {
     s32 temp;
 
@@ -197,7 +197,7 @@ void func_801C7268(void) {
     } else if (B_801D9DC8 != 0) {
         B_801D9DC8 = 0;
     }
-#if VERSION == VERSION_ne0
+#if OOT_VERSION == NTSC_1_0
     if (B_801D9DC0 != 0) {
         sp1C = (osGetTime() - B_801D9DC0) * 64 / 3000;
 
@@ -250,7 +250,7 @@ void func_801C746C(void* arg0, void* arg1, void* arg2) {
             if (arg2 != NULL) {
                 func_801CA1F0(arg2, 0, 176, 320, 32, 11, sp2C, SCREEN_WIDTH);
             }
-#if VERSION <= VERSION_ne1
+#if OOT_VERSION <= NTSC_1_1
             osViBlack(0);
 #endif
         }
@@ -288,7 +288,7 @@ s32 func_801C7658(void) {
         return 0;
     }
 
-#if VERSION <= VERSION_ne1
+#if OOT_VERSION <= NTSC_1_1
     StackCheck_Init(&B_801DAF88, B_801D9F88, STACK_TOP(B_801D9F88), 0, 0x100, "ddmsg");
     osCreateThread(&B_801D9DD8, 9, &func_801C711C, &B_801D9B90, STACK_TOP(B_801D9F88), 13);
     osStartThread(&B_801D9DD8);
@@ -320,7 +320,7 @@ s32 func_801C7658(void) {
     B_801D9D50.unk0 = 13;
     (&func_801C8000)(&B_801D9D50);
 
-#if VERSION > VERSION_ne1
+#if OOT_VERSION > NTSC_1_1
     StackCheck_Init(&B_801DAF88, B_801D9F88, STACK_TOP(B_801D9F88), 0, 0x100, "ddmsg");
     osCreateThread(&B_801D9DD8, 9, &func_801C711C, &B_801D9B90, STACK_TOP(B_801D9F88), 13);
     osStartThread(&B_801D9DD8);
@@ -330,7 +330,7 @@ s32 func_801C7658(void) {
 }
 
 s32 func_801C7818(void) {
-#if VERSION != VERSION_ne0
+#if OOT_VERSION > NTSC_1_0
     B_801D9DB8 = 1;
     B_801D9DC0 = 0;
 #endif
@@ -343,7 +343,7 @@ s32 func_801C7818(void) {
         Sleep_Usec(1000000 * 1 / 60);
     }
 
-#if VERSION != VERSION_ne0
+#if OOT_VERSION > NTSC_1_0
     if (D_801D2EA8 == 1 || B_801E0F60 == 1 || B_801E0F64 == 1) {
         B_801D9DC0 = osGetTime();
     }
@@ -411,7 +411,7 @@ s32 func_801C7A1C(struct_801E0D18* arg0) {
     func_801C7A10(&arg0->diskId);
     if (!B_801DBFF0) {
         if (
-#if VERSION == VERSION_ne0 || VERSION == VERSION_ne1 || VERSION == VERSION_ne2
+#if OOT_NTSC
             bcmp(arg0->diskId.gameName, "EZLJ", 4) == 0 || bcmp(arg0->diskId.gameName, "EZLE", 4) == 0
 #else
             bcmp(arg0->diskId.gameName, "EZLP", 4) == 0
@@ -500,7 +500,7 @@ void func_801C7C1C(void* arg0, s32 arg1, s32 arg2) {
             bcopy((u8*)sp4C, (u8*)arg0 + func_801C7BEC(sp5C) - sp54 + var_s1, sp50);
         }
     }
-#if VERSION == VERSION_ne0
+#if OOT_VERSION == NTSC_1_0
     if (B_801D9DC0 != 0) {
         temp_v1_2 = (osGetTime() - B_801D9DC0) * 64 / 3000;
         if (1000000 - temp_v1_2 > 0) {

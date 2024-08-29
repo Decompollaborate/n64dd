@@ -60,9 +60,21 @@ else
   RM_MDEBUG = @:
 endif
 
+ifeq ($(VERSION),ne0)
+  VERSION_DEFINE := NTSC_1_0
+else ifeq ($(VERSION),ne1)
+  VERSION_DEFINE := NTSC_1_1
+else ifeq ($(VERSION),ne2)
+  VERSION_DEFINE := NTSC_1_2
+else ifeq ($(VERSION),np0)
+  VERSION_DEFINE := PAL_1_0
+else ifeq ($(VERSION),np1)
+  VERSION_DEFINE := PAL_1_1
+endif
+
 # Check code syntax with host compiler
 CHECK_WARNINGS := -Wall -Wextra -Wno-format-security -Wno-unknown-pragmas -Wno-unused-parameter -Wno-unused-variable -Wno-missing-braces -Wno-int-conversion -Wno-unused-but-set-variable -Wno-unused-label -Wno-multichar -Wno-type-limits
-CC_CHECK   := gcc -fno-builtin -fsyntax-only -funsigned-char -fdiagnostics-color -std=gnu89 -D _LANGUAGE_C -D NON_MATCHING -DVERSION=VERSION_$(VERSION) $(IINC) -nostdinc $(CHECK_WARNINGS)
+CC_CHECK   := gcc -fno-builtin -fsyntax-only -funsigned-char -fdiagnostics-color -std=gnu89 -D _LANGUAGE_C -D NON_MATCHING -DOOT_VERSION=$(VERSION_DEFINE) $(IINC) -nostdinc $(CHECK_WARNINGS)
 CC_CHECK += -m32
 
 
@@ -79,7 +91,7 @@ ASFLAGS := -march=vr4300 -32 -Iinclude
 MIPS_VERSION := -mips2
 
 # we support Microsoft extensions such as anonymous structs, which the compiler does support but warns for their usage. Surpress the warnings with -woff.
-CFLAGS += -DVERSION=VERSION_$(VERSION) -G 0 -non_shared -Xfullwarn -Xcpluscomm $(IINC) -nostdinc -Wab,-r4300_mul -woff 624,649,838,712
+CFLAGS += -DOOT_VERSION=$(VERSION_DEFINE) -G 0 -non_shared -Xfullwarn -Xcpluscomm $(IINC) -nostdinc -Wab,-r4300_mul -woff 624,649,838,712
 
 ifneq ($(WERROR), 0)
   CC_CHECK += -Werror

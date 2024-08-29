@@ -201,7 +201,7 @@ void func_801C9954(u8* bytes, s32* arg1, s32* arg2) {
 
         case 'I':
         case 'i':
-#if VERSION == VERSION_ne0 || VERSION == VERSION_ne1 || VERSION == VERSION_ne2
+#if OOT_NTSC
             *arg2 = 2;
             if (1) {}
 #endif
@@ -218,7 +218,7 @@ void func_801C9954(u8* bytes, s32* arg1, s32* arg2) {
             return;
     }
 
-#if VERSION == VERSION_ne0 || VERSION == VERSION_ne1 || VERSION == VERSION_ne2
+#if OOT_NTSC
     *arg2 = 1;
     if (1) {}
 #endif
