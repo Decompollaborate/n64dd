@@ -2,9 +2,9 @@
 #include "n64dd_functions.h"
 
 void func_801C8554(void);
-void func_801C8578(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+void func_801C8578(void* arg0, void* arg1, OSId id, void* sp, OSPri pri);
 void func_801C8638(void (*arg0)(void*, void*, void*), s32 arg1, void (*arg2)(void*, uintptr_t, size_t));
-void func_801C868C(s32 arg0, s32 arg1, s32 arg2, u8 arg3);
+void func_801C868C(void* arg0, void* arg1, void* arg2, u8 arg3);
 s8 func_801C8770(void);
 s32 func_801C87C0(void);
 s32 func_801C87FC(void);
@@ -119,7 +119,8 @@ void func_801C81EC(struct_801E0D18* arg0) {
 void func_801C8298(struct_801E0D18* arg0) {
     LEOCmd sp1C;
 
-    LeoSeek(&sp1C, &arg0->diskId, &arg0->unk_1C);
+    // TODO: passing a pointer as a logical block address?
+    LeoSeek(&sp1C, (u32)&arg0->diskId, &arg0->unk_1C);
     osRecvMesg(&arg0->unk_1C, (OSMesg*)&arg0->unk_68, OS_MESG_BLOCK);
 }
 
@@ -137,7 +138,7 @@ void func_801C832C(struct_801E0D18* arg0) {
     if (LeoByteToLBA(startLBA, arg0->unk_60, &sp34) == LEO_ERROR_GOOD) {
         OSMesgQueue* sp28 = &arg0->unk_1C;
 
-        LeoReadWrite(&arg0->unk_00, OS_READ, startLBA, arg0->unk_58, sp34, sp28);
+        LeoReadWrite(&arg0->unk_00, OS_READ, startLBA, (void*)arg0->unk_58, sp34, sp28);
         osRecvMesg(sp28, (OSMesg*)&arg0->unk_68, OS_MESG_BLOCK);
     }
 }
@@ -149,7 +150,7 @@ void func_801C83A0(struct_801E0D18* arg0) {
     if (LeoByteToLBA(startLBA, arg0->unk_60, &sp34) == LEO_ERROR_GOOD) {
         OSMesgQueue* sp28 = &arg0->unk_1C;
 
-        LeoReadWrite(&arg0->unk_00, OS_WRITE, startLBA, arg0->unk_5C, sp34, sp28);
+        LeoReadWrite(&arg0->unk_00, OS_WRITE, startLBA, (void*)arg0->unk_5C, sp34, sp28);
         osRecvMesg(sp28, (OSMesg*)&arg0->unk_68, OS_MESG_BLOCK);
     }
 }
@@ -196,10 +197,10 @@ void func_801C8554(void) {
     osDestroyThread(&B_801E0DB0);
 }
 
-void func_801C8578(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
-    B_801E0D10[0] = arg0;
-    B_801E0D10[1] = arg1;
-    osCreateThread(&B_801E0DB0, arg2, &func_801C84D4, NULL, arg3, arg4);
+void func_801C8578(void* arg0, void* arg1, OSId id, void* sp, OSPri pri) {
+    B_801E0D10[0] = (OSMesgQueue*)arg0;
+    B_801E0D10[1] = (OSMesgQueue*)arg1;
+    osCreateThread(&B_801E0DB0, id, &func_801C84D4, NULL, sp, pri);
     osStartThread(&B_801E0DB0);
 }
 
@@ -221,10 +222,10 @@ void func_801C8638(void (*arg0)(void*, void*, void*), s32 arg1, void (*arg2)(voi
     func_801C85F0(&B_801E0D18, 0);
 }
 
-void func_801C868C(s32 arg0, s32 arg1, s32 arg2, u8 arg3) {
-    s32 var0 = arg0;
-    s32 var1 = arg1;
-    s32 var2 = arg2;
+void func_801C868C(void* arg0, void* arg1, void* arg2, u8 arg3) {
+    s32 var0 = (s32)arg0;
+    s32 var1 = (s32)arg1;
+    s32 var2 = (s32)arg2;
     s32 var3 = arg3;
     s32 var4 = 4;
 

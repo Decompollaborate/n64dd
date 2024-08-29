@@ -238,7 +238,7 @@ void func_801C9A10(u8* arg0, s32 arg1, u8* str) {
     s32 sp64;
     s32 temp_v1;
 
-    temp_s1 = (((u32)&sp80 + 0xF) / 0x10) * 0x10;
+    temp_s1 = (u8*)((((uintptr_t)&sp80 + 0xF) / 0x10) * 0x10);
     var_s2 = 1;
     if (str != NULL) {
         while (*str != '\0') {

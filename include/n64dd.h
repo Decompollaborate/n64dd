@@ -6,9 +6,15 @@
 #include "libultra_functions.h"
 #include "code_functions.h"
 
+#define THREAD_ID_N64DD 8
+#define THREAD_ID_DDMSG 9
+
+#define THREAD_PRI_N64DD 13
+#define THREAD_PRI_DDMSG 13
+
 typedef struct struct_801E0D18 {
     /* 0x00 */ LEOCmd unk_00;
-    /* 0x1C */ OSMesgQueue unk_1C; // mq
+    /* 0x1C */ OSMesgQueue unk_1C;
     /* 0x38 */ LEODiskID diskId;
     /* 0x58 */ UNK_TYPE unk_58;
     /* 0x5C */ UNK_TYPE unk_5C;
@@ -21,18 +27,18 @@ typedef struct struct_801E0D18 {
 } struct_801E0D18; // size = 0x70
 
 typedef struct struct_801D9D50 {
-    /* 0x00 */ u8 unk_00;
+    /* 0x00 */ u8 unk_00; // command enum
     /* 0x04 */ s32 unk_04;
     /* 0x08 */ u8 unk_08;
     /* 0x0C */ void (*unk_0C)(void*, void*, void*);
     /* 0x10 */ s32 unk_10;
     /* 0x14 */ void (*unk_14)(void*, uintptr_t, size_t);
-    /* 0x18 */ s32 unk_18;
-    /* 0x1C */ OSMesgQueue* unk_1C;
-    /* 0x20 */ OSMesgQueue* unk_20;
-    /* 0x24 */ s32 unk_24;
-    /* 0x28 */ StackEntry* unk_28;
-    /* 0x2C */ s32 unk_2C;
+    /* 0x18 */ void* unk_18;
+    /* 0x1C */ void* unk_1C; // either OSMesgQueue* (command 0) or integer LBA (commands 2 and 3)
+    /* 0x20 */ void* unk_20; // either OSMesgQueue* (command 0) or integer byte size (commands 3 and 4)
+    /* 0x24 */ OSId unk_24;
+    /* 0x28 */ void* unk_28;
+    /* 0x2C */ OSPri unk_2C;
 } struct_801D9D50; // size = 0x30
 
 #define LANGUAGE_JP 0

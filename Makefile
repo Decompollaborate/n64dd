@@ -73,7 +73,8 @@ else ifeq ($(VERSION),np1)
 endif
 
 # Check code syntax with host compiler
-CHECK_WARNINGS := -Wall -Wextra -Wno-format-security -Wno-unknown-pragmas -Wno-unused-parameter -Wno-unused-variable -Wno-missing-braces -Wno-int-conversion -Wno-unused-but-set-variable -Wno-unused-label -Wno-multichar -Wno-type-limits
+CHECK_WARNINGS := -Wall -Wextra -Wno-format-security -Wno-unknown-pragmas -Wno-unused-parameter -Wno-unused-variable -Wno-missing-braces
+CHECK_WARNINGS += -Werror=implicit-int -Werror=implicit-function-declaration -Werror=int-conversion -Werror=incompatible-pointer-types
 CC_CHECK   := gcc -fno-builtin -fsyntax-only -funsigned-char -fdiagnostics-color -std=gnu89 -D _LANGUAGE_C -D NON_MATCHING -DOOT_VERSION=$(VERSION_DEFINE) $(IINC) -nostdinc $(CHECK_WARNINGS)
 CC_CHECK += -m32
 

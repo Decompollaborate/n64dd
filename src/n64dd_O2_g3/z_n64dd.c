@@ -2,10 +2,10 @@
 #include "n64dd_functions.h"
 
 typedef struct struct_801D9C30 {
-    /* 0x000 */ UNK_TYPE unk_000;
-    /* 0x004 */ UNK_TYPE unk_004;
-    /* 0x008 */ UNK_TYPE unk_008; // maybe uintptr_t?
-    /* 0x00C */ UNK_TYPE unk_00C; // maybe uintptr_t?
+    /* 0x000 */ s32 unk_000;  // disk start
+    /* 0x004 */ s32 unk_004;  // disk end
+    /* 0x008 */ uintptr_t unk_008;  // ram start
+    /* 0x00C */ uintptr_t unk_00C;  // ram end
     /* 0x010 */ UNK_PTR unk_010;
     /* 0x014 */ char unk_014[0x104];
 } struct_801D9C30; // size = 0x118
@@ -301,7 +301,7 @@ s32 func_801C7658(void) {
 
 #if OOT_VERSION <= NTSC_1_1
     StackCheck_Init(&B_801DAF88, B_801D9F88, STACK_TOP(B_801D9F88), 0, 0x100, "ddmsg");
-    osCreateThread(&B_801D9DD8, 9, &func_801C711C, &B_801D9B90, STACK_TOP(B_801D9F88), 13);
+    osCreateThread(&B_801D9DD8, THREAD_ID_DDMSG, &func_801C711C, &B_801D9B90, STACK_TOP(B_801D9F88), THREAD_PRI_DDMSG);
     osStartThread(&B_801D9DD8);
 #endif
 
@@ -312,9 +312,9 @@ s32 func_801C7658(void) {
 
     B_801D9D50.unk_1C = &B_801D9D80;
     B_801D9D50.unk_20 = &B_801D9D98;
-    B_801D9D50.unk_24 = 8;
-    B_801D9D50.unk_28 = &B_801DBFA8;
-    B_801D9D50.unk_2C = 13;
+    B_801D9D50.unk_24 = THREAD_ID_N64DD;
+    B_801D9D50.unk_28 = STACK_TOP(B_801DAFA8);
+    B_801D9D50.unk_2C = THREAD_PRI_N64DD;
     B_801D9D50.unk_00 = 1;
 
     (&func_801C8000)(&B_801D9D50);
@@ -333,7 +333,7 @@ s32 func_801C7658(void) {
 
 #if OOT_VERSION > NTSC_1_1
     StackCheck_Init(&B_801DAF88, B_801D9F88, STACK_TOP(B_801D9F88), 0, 0x100, "ddmsg");
-    osCreateThread(&B_801D9DD8, 9, &func_801C711C, &B_801D9B90, STACK_TOP(B_801D9F88), 13);
+    osCreateThread(&B_801D9DD8, THREAD_ID_DDMSG, &func_801C711C, &B_801D9B90, STACK_TOP(B_801D9F88), THREAD_PRI_DDMSG);
     osStartThread(&B_801D9DD8);
 #endif
 
@@ -386,10 +386,10 @@ s32 func_801C78F0(void) {
     return (&func_801C8000)(&B_801D9D50);
 }
 
-void func_801C7920(s32 arg0, s32 arg1, s32 arg2) {
+void func_801C7920(s32 arg0, void* arg1, s32 arg2) {
     B_801D9D50.unk_18 = arg1;
-    B_801D9D50.unk_1C = arg0;
-    B_801D9D50.unk_20 = arg2;
+    B_801D9D50.unk_1C = (void*)arg0;
+    B_801D9D50.unk_20 = (void*)arg2;
     B_801D9D50.unk_00 = 3;
     (&func_801C8000)(&B_801D9D50);
     osGetTime();
@@ -403,10 +403,10 @@ void func_801C7920(s32 arg0, s32 arg1, s32 arg2) {
     }
 }
 
-void func_801C79CC(s32 arg0, s32 arg1, s32 arg2) {
+void func_801C79CC(void* arg0, s32 arg1, s32 arg2) {
     B_801D9D50.unk_18 = arg0;
-    B_801D9D50.unk_1C = arg1;
-    B_801D9D50.unk_20 = arg2;
+    B_801D9D50.unk_1C = (void*)arg1;
+    B_801D9D50.unk_20 = (void*)arg2;
     B_801D9D50.unk_00 = 4;
     (&func_801C8000)(&B_801D9D50);
 }
@@ -434,7 +434,7 @@ s32 func_801C7A1C(struct_801E0D18* arg0) {
         } else {
             B_801D9DC8 = 2;
         }
-    } else if (bcmp(&B_801DBFD0, &arg0->diskId, 0x20) == 0) {
+    } else if (bcmp(&B_801DBFD0, &arg0->diskId, sizeof(LEODiskID)) == 0) {
         B_801D9DC8 = 1;
     } else {
         B_801D9DC8 = 2;
@@ -534,7 +534,7 @@ s32 func_801C7E80(void) {
     s32 sp24;
     s32 sp20;
     s32 sp1C;
-    s32 sp18;
+    uintptr_t sp18;
 
     if (B_801D9D48 != NULL) {
         return -1;
@@ -544,14 +544,14 @@ s32 func_801C7E80(void) {
     sp24 = B_801D9D48->unk_004 - B_801D9D48->unk_000;
     sp20 = B_801D9D48->unk_00C - B_801D9D48->unk_008;
     sp18 = B_801D9D48->unk_008 + sp24;
-    func_801C7C1C(B_801D9D48->unk_008, B_801D9D48->unk_000, sp24);
-    bzero(sp18, sp20 - sp24);
+    func_801C7C1C((void*)B_801D9D48->unk_008, B_801D9D48->unk_000, sp24);
+    bzero((void*)sp18, sp20 - sp24);
     func_800AD4C0(B_801D9D48->unk_010);
     return 0;
 }
 
 s32 func_801C7F24(void) {
-    u32 temp_a0;
+    uintptr_t temp_a0;
     struct_801D9C30* temp_v0;
 
     if (B_801D9D48 == 0) {
@@ -563,7 +563,7 @@ s32 func_801C7F24(void) {
 
     temp_v0 = B_801D9D48;
     temp_a0 = temp_v0->unk_008;
-    bzero(temp_a0, temp_v0->unk_00C - temp_a0);
+    bzero((void*)temp_a0, temp_v0->unk_00C - temp_a0);
     bzero(B_801D9D48, sizeof(struct_801D9C30));
     B_801D9D48 = 0;
     return 0;
