@@ -56,7 +56,7 @@ void leointerrupt(void* arg) {
         result = 0x90000; // Inaccessible?
 
     complete:
-        osSendMesg(&LEOcontrol_que, result, OS_MESG_BLOCK);
+        osSendMesg(&LEOcontrol_que, (OSMesg)result, OS_MESG_BLOCK);
     }
 }
 
