@@ -50,7 +50,7 @@ void leoTranslate(void) {
             }
             flag = false;
         }
-        LEOcur_command->data.readWrite.buffPtr = calc_blks;
+        LEOcur_command->data.readWrite.buffPtr = (void*)calc_blks;
     } else {
         calc_blks = LEOcur_command->data.readWrite.transferBlks;
 
@@ -75,7 +75,7 @@ void leoTranslate(void) {
             }
             flag = false;
         }
-        LEOcur_command->data.readWrite.buffPtr = calc_bytes;
+        LEOcur_command->data.readWrite.buffPtr = (void*)calc_bytes;
     }
 
     LEOcur_command->header.status = LEO_STATUS_GOOD;

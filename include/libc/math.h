@@ -11,6 +11,7 @@
 #define SHT_MINV (1.0f / SHT_MAX)
 #define DEGTORAD(x) ((x) * (M_PI / 180.0f))
 
+#if 0  // Removed as a hack for bss ordering
 typedef union {
     f64 d;
     struct {
@@ -23,6 +24,7 @@ typedef union {
     u32 i;
     f32 f;
 } fu;
+#endif
 
 extern f32 __libm_qnan_f;
 
