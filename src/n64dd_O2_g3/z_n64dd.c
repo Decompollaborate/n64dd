@@ -426,12 +426,13 @@ s32 func_801C7A1C(struct_801E0D18* arg0) {
     return B_801D9DC8 == 1;
 }
 
+// Translates byte position to LBA and byte offset
 s32 func_801C7B48(s32 arg0, s32* arg1, s32* arg2) {
     s32 sp2C;
-    s32 temp_v0;
+    s32 temp_v0_2;
     s32 sp24;
     s32 sp20;
-    s32 temp_v0_2;
+    s32 temp_v0;
 
     temp_v0_2 = LeoByteToLBA(1, arg0 + 1, &sp2C);
     if (temp_v0_2 != LEO_ERROR_GOOD) {
@@ -460,7 +461,8 @@ s32 func_801C7BEC(s32 startLBA) {
     return 0;
 }
 
-void func_801C7C1C(void* arg0, s32 arg1, s32 arg2) {
+// Copies bytes from disk to arg0
+void func_801C7C1C(void* dest, s32 offset, s32 size) {
     s32 sp5C;
     s32 sp58;
     s32 sp54;
@@ -474,25 +476,25 @@ void func_801C7C1C(void* arg0, s32 arg1, s32 arg2) {
     func_801C6F30();
     B_801D9DB8 = 1;
     B_801D9DC0 = 0;
-    func_801C7B48(arg1, &sp5C, &sp54);
-    func_801C7B48(arg1 + arg2, &sp58, &sp50);
+    func_801C7B48(offset, &sp5C, &sp54);
+    func_801C7B48(offset + size, &sp58, &sp50);
     sp4C = D_801D2E50;
     if (sp5C == sp58) {
         func_801C7920(sp5C, sp4C, func_801C7BEC(sp5C));
-        bcopy((u8*)sp4C + sp54, arg0, arg2);
+        bcopy((u8*)sp4C + sp54, dest, size);
     } else {
         var_s1 = 0;
         func_801C7920(sp5C, sp4C, func_801C7BEC(sp5C));
-        bcopy((u8*)sp4C + sp54, arg0, func_801C7BEC(sp5C) - sp54);
+        bcopy((u8*)sp4C + sp54, dest, func_801C7BEC(sp5C) - sp54);
         if (sp5C + 1 < sp58) {
             for (var_s0 = sp5C + 1; var_s0 < sp58; var_s0++) {
                 var_s1 += func_801C7BEC(var_s0);
             }
-            func_801C7920(sp5C + 1, (u8*)arg0 + func_801C7BEC(sp5C) - sp54, var_s1);
+            func_801C7920(sp5C + 1, (u8*)dest + func_801C7BEC(sp5C) - sp54, var_s1);
         }
         if (sp50 > 0) {
             func_801C7920(sp58, sp4C, func_801C7BEC(sp58));
-            bcopy((u8*)sp4C, (u8*)arg0 + func_801C7BEC(sp5C) - sp54 + var_s1, sp50);
+            bcopy((u8*)sp4C, (u8*)dest + func_801C7BEC(sp5C) - sp54 + var_s1, sp50);
         }
     }
 #if OOT_VERSION == NTSC_1_0
