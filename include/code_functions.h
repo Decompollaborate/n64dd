@@ -4,6 +4,13 @@
 #include "ultra64.h"
 #include "libc/stdint.h"
 
+typedef union Color_RGBA8_u32 {
+    struct {
+        u8 r, g, b, a;
+    };
+    u32 rgba;
+} Color_RGBA8_u32;
+
 typedef struct {
     /* 0x00 */ s16 type;
     /* 0x02 */ char misc[0x1E];
@@ -27,13 +34,6 @@ typedef struct {
     /* 0x258 */ OSTimer timer;
     /* 0x278 */ OSTime retraceTime;
 } IrqMgr; // size = 0x280
-
-// N64 only
-extern u8 D_80121212;
-extern vu8 D_80121213;
-extern vu8 D_80121214;
-
-extern IrqMgr gIrqMgr;
 
 void DmaMgr_DmaFromDriveRom(void* ram, uintptr_t rom, size_t size);
 

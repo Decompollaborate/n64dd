@@ -6,15 +6,7 @@
 #include "libultra_functions.h"
 #include "code_functions.h"
 
-// From color.h
-typedef union Color_RGBA8_u32 {
-    struct {
-        u8 r, g, b, a;
-    };
-    u32 rgba;
-} Color_RGBA8_u32;
-
-typedef struct {
+typedef struct struct_801D9C30 {
     /* 0x000 */ UNK_TYPE unk_000;
     /* 0x004 */ UNK_TYPE unk_004;
     /* 0x008 */ UNK_TYPE unk_008; // maybe uintptr_t?
@@ -23,7 +15,7 @@ typedef struct {
     /* 0x014 */ char unk_014[0x104];
 } struct_801D9C30; // size = 0x118
 
-typedef struct {
+typedef struct struct_801E0D18 {
     /* 0x00 */ LEOCmd unk_00;
     /* 0x1C */ OSMesgQueue unk_1C; // mq
     /* 0x38 */ LEODiskID diskId;
@@ -37,14 +29,14 @@ typedef struct {
     /* 0x6C */ s32 unk_6C;
 } struct_801E0D18; // size = 0x70
 
-typedef struct {
+typedef struct struct_801D9B90 {
     /* 0x00 */ char unk0[0x78];
     /* 0x78 */ OSMesgQueue unk78;
     /* 0x90 */ IrqMgrClient unk90;
     /* 0x98 */ IrqMgr* unk98;
 } struct_801D9B90; // size = 0x9C
 
-typedef struct {
+typedef struct struct_801D9D50 {
     /* 0x00 */ u8 unk0;
     /* 0x04 */ s32 unk4;
     /* 0x08 */ u8 unk8;
@@ -64,17 +56,39 @@ typedef struct {
 
 // Segment-external
 extern s32 gCurrentRegion;
+extern IrqMgr gIrqMgr;
 
-// bss
-extern OSMesgQueue* B_801E0D10[2];
+extern u8 D_80121212;
+extern vu8 D_80121213;
+extern vu8 D_80121214;
 
-// other
 extern u32 osTvType;
 extern u32 osRomBase;
 extern u32 osResetType;
 extern u32 osMemSize;
 extern u8 osAppNmiBuffer[0x40];
 
+// n64dd
+extern s32 (*D_801D2E54)(struct_801E0D18*);
+
+extern u8 B_801DC000[];
+
+extern s32 D_801D2E90;
+extern OSMesgQueue* B_801E0D10[2];
+
+extern s32 D_801D2EA0;
+extern s32 D_801D2EA8;
+extern s32 B_801E0F60;
+extern s32 B_801E0F64;
+extern void (*D_801D2EB4)(void*, void*, void*);
+
+extern const char* D_801D2ED0[];        // "Error Number    " array
+extern const char* D_801D2EE0[2][8][4]; // Array of error message strings
+
+extern u8 D_801D2FE0[2][192 * 16 / 2]; // i4 textures, 192*16. Error 41
+extern u8 D_801D3BE0[2][0x2800];       // Texture array
+
+// libleo
 extern leo_sys_form LEO_sys_data;
 extern OSThread LEOcommandThread;
 extern OSThread LEOinterruptThread;

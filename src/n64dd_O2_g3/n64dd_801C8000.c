@@ -1,8 +1,17 @@
 #include "n64dd.h"
 #include "n64dd_functions.h"
 
-extern s32 D_801D2EA0;
-extern void (*D_801D2EB4)(void*, void*, void*);
+void func_801C8554(void);
+void func_801C8578(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+void func_801C8638(void (*arg0)(void*, void*, void*), s32 arg1, void (*arg2)(void*, uintptr_t, size_t));
+void func_801C868C(s32 arg0, s32 arg1, s32 arg2, u8 arg3);
+s8 func_801C8770(void);
+s32 func_801C87C0(void);
+s32 func_801C87FC(void);
+s32 func_801C8844(void);
+s32 func_801C885C(void);
+s32 func_801C88AC(void);
+s32 func_801C88FC(void);
 
 s32 D_801D2E60 = 0;
 s32 D_801D2E64 = 0;

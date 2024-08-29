@@ -1,11 +1,7 @@
 #include "n64dd.h"
 #include "n64dd_functions.h"
 
-extern u8 B_801DC000[];
-
-extern s32 D_801D2EA8;
-extern s32 B_801E0F60;
-extern s32 B_801E0F64;
+s32 func_801C7A1C(struct_801E0D18* arg0);
 
 void* D_801D2E50 = &B_801DC000;
 s32 (*D_801D2E54)(struct_801E0D18*) = func_801C7A1C;
@@ -31,7 +27,6 @@ STACK(B_801DAFA8, 0x1000);
 StackEntry B_801DBFA8;
 UNK_TYPE B_801DBFC4; // unused?
 
-// Might be u8, will need to examine code function
 u32 func_801C6E80(void) {
 #if OOT_NTSC
     return LeoDriveExist();

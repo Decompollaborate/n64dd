@@ -1,15 +1,6 @@
 #include "n64dd.h"
 #include "n64dd_functions.h"
 
-u8* func_801C9E28(s32 errorNum);
-u8* func_801C9EC0(void);
-u8* func_801C9F90(s32 errorNum);
-u8* func_801C9FFC(void);
-u8* func_801CA030(s32 errorNum);
-u8* func_801CA070(void);
-
-extern s32 (*D_801D2E54)(struct_801E0D18*);
-
 s32 D_801D2EA0 = 0;
 u8* D_801D2EA4 = NULL;
 s32 D_801D2EA8 = 0;
@@ -61,10 +52,6 @@ void func_801C8A64(void) {
         B_801E0F64 = 0;
     }
 }
-
-extern s32 D_801D2EA0;
-
-extern void (*D_801D2EB4)(void*, void*, void*);
 
 void func_801C8AA8(void) {
     osRecvMesg(B_801E0D10[1], NULL, OS_MESG_NOBLOCK);
@@ -314,8 +301,6 @@ s32 func_801C912C(struct_801E0D18* arg0) {
 
     return func_801C8BC0(arg0);
 }
-
-extern s32 D_801D2E90;
 
 s32 func_801C91E0(struct_801E0D18* arg0) {
     if (arg0->unk_68 == 0x29) {
