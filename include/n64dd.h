@@ -6,15 +6,6 @@
 #include "libultra_functions.h"
 #include "code_functions.h"
 
-typedef struct struct_801D9C30 {
-    /* 0x000 */ UNK_TYPE unk_000;
-    /* 0x004 */ UNK_TYPE unk_004;
-    /* 0x008 */ UNK_TYPE unk_008; // maybe uintptr_t?
-    /* 0x00C */ UNK_TYPE unk_00C; // maybe uintptr_t?
-    /* 0x010 */ UNK_PTR unk_010;
-    /* 0x014 */ char unk_014[0x104];
-} struct_801D9C30; // size = 0x118
-
 typedef struct struct_801E0D18 {
     /* 0x00 */ LEOCmd unk_00;
     /* 0x1C */ OSMesgQueue unk_1C; // mq
@@ -28,13 +19,6 @@ typedef struct struct_801E0D18 {
     /* 0x68 */ s32 unk_68;
     /* 0x6C */ s32 unk_6C;
 } struct_801E0D18; // size = 0x70
-
-typedef struct struct_801D9B90 {
-    /* 0x00 */ OSMesg unk_00[30];
-    /* 0x78 */ OSMesgQueue unk_78;
-    /* 0x90 */ IrqMgrClient unk_90;
-    /* 0x98 */ IrqMgr* unk_98;
-} struct_801D9B90; // size = 0x9C
 
 typedef struct struct_801D9D50 {
     /* 0x00 */ u8 unk_00;
