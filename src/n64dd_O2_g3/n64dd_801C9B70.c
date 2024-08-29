@@ -13,7 +13,6 @@ extern const char* D_801D2EE0[2][8][4]; // Array of error message strings
 extern u8 D_801D2FE0[2][192 * 16 / 2]; // i4 textures, 192*16. Error 41
 extern u8 D_801D3BE0[2][0x2800];       // Texture array
 
-// bss
 u8 B_801E0F80[0x600];
 u8 B_801E1580[0x2800];
 u8 B_801E3D80[0x1400];
@@ -150,6 +149,7 @@ void func_801C9EF4(u8* arg0, s32 errorNum, s32 lineCount) {
 
     for (i = 0; i < lineCount; i++, arg0 += 0xA00) {
         u8* line = (u8*)D_801D2EE0[func_801C9C48()][errorNum][i];
+
         if (1) {}
         func_801C9A10(arg0, 320, line);
     }

@@ -1,15 +1,7 @@
 #include "n64dd.h"
 #include "n64dd_functions.h"
 
-// from color.h
-typedef union Color_RGBA8_u32 {
-    struct {
-        u8 r, g, b, a;
-    };
-    u32 rgba;
-} Color_RGBA8_u32;
-
-// Similar to GfxPrint
+// Draws text to framebuffer
 typedef struct struct_801CA704 {
     /* 0x00 */ PrintCallback callback;
     /* 0x04 */ void* charTexBuf;

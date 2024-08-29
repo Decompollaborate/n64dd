@@ -6,6 +6,14 @@
 #include "libultra_functions.h"
 #include "code_functions.h"
 
+// From color.h
+typedef union Color_RGBA8_u32 {
+    struct {
+        u8 r, g, b, a;
+    };
+    u32 rgba;
+} Color_RGBA8_u32;
+
 typedef struct {
     /* 0x000 */ UNK_TYPE unk_000;
     /* 0x004 */ UNK_TYPE unk_004;
@@ -18,7 +26,6 @@ typedef struct {
 typedef struct {
     /* 0x00 */ LEOCmd unk_00;
     /* 0x1C */ OSMesgQueue unk_1C; // mq
-    /* 0x34 */ char unk_34[0x4];
     /* 0x38 */ LEODiskID diskId;
     /* 0x58 */ UNK_TYPE unk_58;
     /* 0x5C */ UNK_TYPE unk_5C;
@@ -26,8 +33,7 @@ typedef struct {
     /* 0x64 */ u8 unk_64;
     /* 0x65 */ u8 unk_65;
     /* 0x66 */ u8 unk_66;
-    /* 0x67 */ char unk_67[1];
-    /* 0x68 */ s32 unk_68; // OSMesg?
+    /* 0x68 */ s32 unk_68;
     /* 0x6C */ s32 unk_6C;
 } struct_801E0D18; // size = 0x70
 

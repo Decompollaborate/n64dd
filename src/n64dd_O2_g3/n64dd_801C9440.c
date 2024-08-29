@@ -1,10 +1,8 @@
 #include "n64dd.h"
 #include "n64dd_functions.h"
 
-// data
 void (*D_801D2EC0)(void*, uintptr_t, size_t) = NULL;
 
-// bss
 s32 B_801E0F70;
 
 /**

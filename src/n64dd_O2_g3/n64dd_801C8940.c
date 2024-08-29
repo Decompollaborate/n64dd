@@ -10,7 +10,6 @@ u8* func_801CA070(void);
 
 extern s32 (*D_801D2E54)(struct_801E0D18*);
 
-// data
 s32 D_801D2EA0 = 0;
 u8* D_801D2EA4 = NULL;
 s32 D_801D2EA8 = 0;
@@ -18,7 +17,6 @@ u8* D_801D2EAC = NULL;
 u8* D_801D2EB0 = NULL;
 void (*D_801D2EB4)(void*, void*, void*) = NULL;
 
-// bss
 s32 B_801E0F60;
 s32 B_801E0F64;
 

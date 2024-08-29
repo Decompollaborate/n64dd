@@ -7,11 +7,9 @@ extern s32 D_801D2EA8;
 extern s32 B_801E0F60;
 extern s32 B_801E0F64;
 
-// data
 void* D_801D2E50 = &B_801DC000;
 s32 (*D_801D2E54)(struct_801E0D18*) = func_801C7A1C;
 
-// bss
 struct_801D9B90 B_801D9B90;
 struct_801D9C30 B_801D9C30;
 struct_801D9C30* B_801D9D48;
@@ -441,7 +439,7 @@ s32 func_801C7B48(s32 arg0, s32* arg1, s32* arg2) {
     s32 temp_v0_2;
 
     temp_v0_2 = LeoByteToLBA(1, arg0 + 1, &sp2C);
-    if (temp_v0_2 != 0) {
+    if (temp_v0_2 != LEO_ERROR_GOOD) {
         return temp_v0_2;
     }
     sp24 = sp2C - 1;
@@ -449,19 +447,19 @@ s32 func_801C7B48(s32 arg0, s32* arg1, s32* arg2) {
         sp20 = 0;
     } else {
         temp_v0 = LeoLBAToByte(1, sp24, &sp20);
-        if (temp_v0 != 0) {
+        if (temp_v0 != LEO_ERROR_GOOD) {
             return temp_v0;
         }
     }
     *arg1 = sp24 + 1;
     *arg2 = arg0 - sp20;
-    return 0;
+    return LEO_ERROR_GOOD;
 }
 
 s32 func_801C7BEC(s32 startLBA) {
     s32 bytes;
 
-    if (LeoLBAToByte(startLBA, 1, &bytes) == 0) {
+    if (LeoLBAToByte(startLBA, 1, &bytes) == LEO_ERROR_GOOD) {
         return bytes;
     }
     return 0;
