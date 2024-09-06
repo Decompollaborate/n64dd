@@ -2,6 +2,7 @@
 #include "n64dd_functions.h"
 #include "libleo_functions.h"
 #include "libc/stdint.h"
+#include "ultra64/asm.h"
 
 s32 LeoCACreateLeoManager(s32 comPri, s32 intPri, OSMesg* cmdBuf, s32 cmdMsgCnt) {
     OSPiHandle* driveRomHandle;
@@ -24,7 +25,7 @@ s32 LeoCACreateLeoManager(s32 comPri, s32 intPri, OSMesg* cmdBuf, s32 cmdMsgCnt)
     driveRomHandle = osDriveRomInit();
     __leoActive = true;
 
-    __osSetHWIntrRoutine(OS_INTR_CART, __osLeoInterrupt, STACK_TOP(leoDiskStack));
+    __osSetHWIntrRoutine(OS_INTR_CART, __osLeoInterrupt, (u8*)STACK_TOP(leoDiskStack) - FRAMESZ(SZREG * NARGSAVE));
     leoInitialize(comPri, intPri, cmdBuf, cmdMsgCnt);
 
     if (osResetType == 1) { // NMI
