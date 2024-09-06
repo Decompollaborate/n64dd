@@ -2,10 +2,10 @@
 #include "n64dd_functions.h"
 
 typedef struct struct_801D9C30 {
-    /* 0x000 */ s32 unk_000;  // disk start
-    /* 0x004 */ s32 unk_004;  // disk end
-    /* 0x008 */ uintptr_t unk_008;  // ram start
-    /* 0x00C */ uintptr_t unk_00C;  // ram end
+    /* 0x000 */ s32 unk_000;       // disk start
+    /* 0x004 */ s32 unk_004;       // disk end
+    /* 0x008 */ uintptr_t unk_008; // ram start
+    /* 0x00C */ uintptr_t unk_00C; // ram end
     /* 0x010 */ UNK_PTR unk_010;
     /* 0x014 */ char unk_014[0x104];
 } struct_801D9C30; // size = 0x118
