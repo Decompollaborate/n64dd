@@ -12,7 +12,7 @@ s32 B_801E0F70;
  * @param bytes Array 2 bytes to test
  * @return boolean
  */
-s32 func_801C9440(u8* bytes) {
+int func_801C9440(u8* bytes) {
     // This is every possible first byte. May make more sense what was intended with the font files?
     if (((*bytes >= 0x8E) && (*bytes <= 0xFE)) || ((*bytes != 0x8F) && (*bytes != 0xA0))) {
         bytes++;
@@ -27,7 +27,7 @@ s32 func_801C9440(u8* bytes) {
  * @param bytes Array containing a pair of bytes to test
  * @return boolean
  */
-s32 func_801C9494(u8* bytes) {
+int func_801C9494(u8* bytes) {
     // Allowable first bytes.
     if (((*bytes >= 0x81) && (*bytes <= 0x9F)) || ((*bytes >= 0xE0) && (*bytes <= 0xFC))) {
         bytes++;
@@ -85,7 +85,7 @@ s32 func_801C95F0(u8* arg0) {
     return LeoGetKAdr(func_801C9534(func_801C9514((arg0[0] << 8) | arg0[1]))) + DDROM_FONT_START;
 }
 
-s32 func_801C963C(s32* arg0, s32* dx, s32* dy, s32* cy, u8 arg4) {
+s32 func_801C963C(s32* arg0, int* dx, int* dy, int* cy, u8 arg4) {
     s32 temp_v0;
     s32 temp_v1;
 
@@ -98,7 +98,7 @@ s32 func_801C963C(s32* arg0, s32* dx, s32* dy, s32* cy, u8 arg4) {
     return temp_v1;
 }
 
-s32 func_801C969C(void* arg0, s32* dx, s32* dy, s32* cy, u8* arg4) {
+s32 func_801C969C(void* arg0, int* dx, int* dy, int* cy, u8* arg4) {
     s32 sp24;
     s32 phi_v1;
 
@@ -230,9 +230,9 @@ void func_801C9954(u8* bytes, s32* arg1, s32* arg2) {
 void func_801C9A10(u8* arg0, s32 arg1, u8* str) {
     u8 sp80[0xA0];
     u8* temp_s1;
-    s32 dx;
-    s32 dy;
-    s32 cy;
+    int dx;
+    int dy;
+    int cy;
     s32 var_s2;
     s32 sp68;
     s32 sp64;

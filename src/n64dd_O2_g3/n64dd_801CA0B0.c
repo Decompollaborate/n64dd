@@ -37,7 +37,7 @@ u32 D_801D8BE0[0x5F] = {
 // clang-format on
 
 // Loads character texture to buffer
-s32 func_801CA0B0(s32 charCode, void* charTexBuf, s32* dx, s32* dy, s32* cy) {
+s32 func_801CA0B0(s32 charCode, void* charTexBuf, int* dx, int* dy, int* cy) {
     s32 offset;
     OSPiHandle* handle;
     OSMesgQueue queue;
@@ -139,9 +139,9 @@ void func_801CA3B4(struct_801CA704* arg0, void* charTexBuf, s32 arg2) {
 
 void func_801CA3CC(struct_801CA704* arg0, char c) {
     s32 charCode;
-    s32 dx;
-    s32 dy;
-    s32 cy;
+    int dx;
+    int dy;
+    int cy;
 
     if (arg0->sjisPrevByte != 0) {
         charCode = (arg0->sjisPrevByte << 8) | c;

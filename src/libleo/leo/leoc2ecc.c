@@ -73,7 +73,7 @@ const u8 glog[512] = {
 
 block_param_form LEOc2_param;
 
-s32 leoC2_Correction(void) {
+int leoC2_Correction(void) {
     switch (LEOc2_param.err_num) {
         case 0:
             break;
